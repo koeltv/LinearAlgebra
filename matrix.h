@@ -14,9 +14,9 @@
  * Structure representing a matrix of any size
  */
 typedef struct {
-    double **values; ///Elements of the matrix
-    int rows; ///Number of rows
-    int columns; ///Number of columns
+    double **values; ///Elements of the matrix contained in a 2 dimensional array
+    int rows; ///Number of rows of the matrix
+    int columns; ///Number of columns matrix
 } Matrix;
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -66,55 +66,55 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue);
 /**
  * Free an existing matrix
  * This function free an existing matrix and change its pointer to NULL if it worked successfully
- * @param matrix - The matrix to free
+ * @param M - The matrix to free
  */
-void freeMatrix(Matrix *matrix);
+void freeMatrix(Matrix *M);
 
 /**
  * Remove a row in a matrix
  * This function return a matrix created by removing a row of a given matrix
- * @param matrix - The original matrix
+ * @param M - The original matrix
  * @param rowIndex - The index of the row to remove
- * @return matrix created by removing a row
+ * @return M created by removing a row
  */
-Matrix *removeRow(Matrix *matrix, int rowIndex);
+Matrix *removeRow(Matrix *M, int rowIndex);
 
 /**
  * Remove a column in a matrix
  * This function return a matrix created by removing a column of a given matrix
- * @param matrix - The original matrix
+ * @param M - The original matrix
  * @param columnIndex - The index of the column to remove
  * @return matrix created by removing a column
  */
-Matrix *removeColumn(Matrix *matrix, int columnIndex);
+Matrix *removeColumn(Matrix *M, int columnIndex);
 
 /**
  * Add a column to a matrix
  * This function return a matrix created by adding a column in the last position of a given matrix
- * @param matrix - The original matrix
+ * @param M - The original matrix
  * @return matrix created by adding a column
  */
-Matrix *addColumn(Matrix *matrix);
+Matrix *addColumn(Matrix *M);
 
 /**
  * Create a subMatrix
  * This function create a subMatrix of a given matrix
- * @param matrix - The original matrix
+ * @param M - The original matrix
  * @param r1 - The index of the first row to take
  * @param r2 - The index of the last row to take
  * @param c1 - The index of the first column to take
  * @param c2 - The index of the last column to take
  * @return subMatrix created
  */
-Matrix *subMat(Matrix* matrix, int r1, int r2, int c1, int c2);
+Matrix *subMat(Matrix *M, int r1, int r2, int c1, int c2);
 
 /**
- * Copy a matrix
- * This function creates an exact copy of a given matrix
- * @param matrix - The matrix to copy
+ * Copy a M
+ * This function creates an exact copy of a given M
+ * @param M - The M to copy
  * @return copy created
  */
-Matrix* copy(Matrix *matrix);
+Matrix *copy(Matrix *M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -127,7 +127,7 @@ Matrix* copy(Matrix *matrix);
  * @param B - second matrix
  * @return sum of the matrices
  */
-Matrix* sum(Matrix *A, Matrix *B);
+Matrix *sum(Matrix *A, Matrix *B);
 
 /**
  * Subtract 2 matrices
@@ -137,7 +137,7 @@ Matrix* sum(Matrix *A, Matrix *B);
  * @param B - second matrix
  * @return subtraction of the matrices
  */
-Matrix* minus(Matrix *A, Matrix *B);
+Matrix *minus(Matrix *A, Matrix *B);
 
 /**
  * Inner multiplication of 2 matrices
@@ -148,16 +148,16 @@ Matrix* minus(Matrix *A, Matrix *B);
  * @param B - second matrix
  * @return inner multiplication of the matrices
  */
-Matrix* innerMultiply(Matrix *A, Matrix *B);
+Matrix *innerMultiply(Matrix *A, Matrix *B);
 
 /**
  * Multiply a matrix by a scalar
  * This function multiply a matrix by a real scalar
- * @param A - matrix
+ * @param M - matrix
  * @param scalar - real scalar
  * @return matrix multiplied by the scalar
  */
-Matrix* scalarMultiply(Matrix* A, double scalar);
+Matrix *scalarMultiply(Matrix *M, double scalar);
 
 /**
  * Standard matrix multiplication
@@ -167,15 +167,15 @@ Matrix* scalarMultiply(Matrix* A, double scalar);
  * @param B - the second matrix
  * @return multiplication of the matrices
  */
-Matrix* multiply(Matrix *A, Matrix *B);
+Matrix *multiply(Matrix *A, Matrix *B);
 
 /**
  * Transpose of a matrix
  * This function return the transpose of a given matrix
- * @param matrix - The original matrix
- * @return matrix^T
+ * @param M - The original matrix
+ * @return M^T
  */
-Matrix *transpose(Matrix *matrix);
+Matrix *transpose(Matrix *M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Advanced operator functions
@@ -183,10 +183,10 @@ Matrix *transpose(Matrix *matrix);
 /**
  * Trace of a matrix
  * This function return the trace of a given matrix
- * @param matrix - the given matrix
- * @return trace(matrix)
+ * @param M - the given matrix
+ * @return trace(M)
  */
-double trace(Matrix *matrix);
+double trace(Matrix *M);
 
 /**
  * Determinant of a matrix
@@ -199,19 +199,19 @@ double det(Matrix *M);
 /**
  * Adjugate of a matrix
  * This function return the adjugate of a given matrix
- * @param matrix - the given matrix
+ * @param M - the given matrix
  * @return adj(M)
  */
-Matrix *adjugate(Matrix *matrix);
+Matrix *adjugate(Matrix *M);
 
 /**
  * Inverse of a matrix
- * This function return the inverse matrix of a given matrix if it exists
+ * This function return the inverse M of a given M if it exists
  * @warning If the given matrix is not reversible, the function return NULL
- * @param matrix - the given matrix
- * @return matrix^-1
+ * @param M - the given matrix
+ * @return M^-1
  */
-Matrix *inverse(Matrix *matrix);
+Matrix *inverse(Matrix *M);
 
 /**
  * (WIP) Resolution of an augmented matrix
@@ -224,16 +224,16 @@ Matrix *solveAugmentedMatrix(Matrix *M);
 /**
  * Triangularise a matrix
  * This function triangularise (or diagonalise) a given matrix
- * @param matrix - the given matrix
- * @return triangularised matrix
+ * @param M - the given matrix
+ * @return triangularised M
  */
-Matrix *triangularise(Matrix *matrix);
+Matrix *triangularise(Matrix *M);
 
 /**
  * print matrix
  * This function print a given matrix in the terminal
- * @param matrix - the given matrix
+ * @param M - the given matrix
  */
-void printMatrix(Matrix *matrix);
+void printMatrix(Matrix *M);
 
 #endif //LINEARALGEBRA_MATRIX_H

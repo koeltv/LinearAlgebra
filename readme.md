@@ -1,4 +1,4 @@
-@mainpage Manuel Linear Algebra Solver 
+@mainpage Manuel Linear Algebra Solver  
 **Members** : Valentin Koeltgen  
 **License** : MIT  
 

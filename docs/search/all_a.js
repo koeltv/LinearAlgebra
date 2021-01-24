@@ -6,7 +6,7 @@ var searchData=
   ['readmatrixwip_36',['readMatrixWIP',['../matrix_8c.html#a308febcad4d0156caf38eda75918a65d',1,'readMatrixWIP():&#160;matrix.c'],['../matrix_8h.html#a308febcad4d0156caf38eda75918a65d',1,'readMatrixWIP():&#160;matrix.c']]],
   ['readme_2emd_37',['readme.md',['../readme_8md.html',1,'']]],
   ['readstring_38',['readString',['../matrix_8c.html#ae4472dee32965298f6ad1f25f58061db',1,'readString(FILE *current):&#160;matrix.c'],['../matrix_8h.html#ae4472dee32965298f6ad1f25f58061db',1,'readString(FILE *current):&#160;matrix.c']]],
-  ['removecolumn_39',['removeColumn',['../matrix_8c.html#ae6bd8a6c22c931456b79dd1242af82b6',1,'removeColumn(Matrix *matrix, int columnIndex):&#160;matrix.c'],['../matrix_8h.html#ae6bd8a6c22c931456b79dd1242af82b6',1,'removeColumn(Matrix *matrix, int columnIndex):&#160;matrix.c']]],
-  ['removerow_40',['removeRow',['../matrix_8c.html#a2b1a163951f554455a3afed1cc1a2ec5',1,'removeRow(Matrix *matrix, int rowIndex):&#160;matrix.c'],['../matrix_8h.html#a2b1a163951f554455a3afed1cc1a2ec5',1,'removeRow(Matrix *matrix, int rowIndex):&#160;matrix.c']]],
+  ['removecolumn_39',['removeColumn',['../matrix_8c.html#a710603d3739261b8b2b8102768c125d3',1,'removeColumn(Matrix *M, int columnIndex):&#160;matrix.c'],['../matrix_8h.html#a710603d3739261b8b2b8102768c125d3',1,'removeColumn(Matrix *M, int columnIndex):&#160;matrix.c']]],
+  ['removerow_40',['removeRow',['../matrix_8c.html#a904afae327a47071595fa68b0ea0660c',1,'removeRow(Matrix *M, int rowIndex):&#160;matrix.c'],['../matrix_8h.html#a904afae327a47071595fa68b0ea0660c',1,'removeRow(Matrix *M, int rowIndex):&#160;matrix.c']]],
   ['rows_41',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix']]]
 ];
