@@ -1,0 +1,27 @@
+var matrix_8c =
+[
+    [ "addColumn", "matrix_8c.html#a23b44149efbdbf8897ba45361b64c8cd", null ],
+    [ "adjugate", "matrix_8c.html#a7dd341957a3be0ef30bf58236765ec1c", null ],
+    [ "copy", "matrix_8c.html#a2dca83f92a03dee6a4035507a7b5ac0b", null ],
+    [ "det", "matrix_8c.html#ae0df367fbdf5be60a91d3d7b54dc78a4", null ],
+    [ "freeMatrix", "matrix_8c.html#aee4541cf7942641ba3946e5e00cf1039", null ],
+    [ "innerMultiply", "matrix_8c.html#a9989ef26362bb4165e6f737983ec4544", null ],
+    [ "inverse", "matrix_8c.html#aa4c2bd5c86299bb2670e55cd31c6fb66", null ],
+    [ "minus", "matrix_8c.html#accee8b0b2fe112f89b81844316ff1bac", null ],
+    [ "multiply", "matrix_8c.html#a8d65c668b4f9b40a5c8d63d93bada733", null ],
+    [ "newMatrix", "matrix_8c.html#a43a9b0a75747c361b92ef5b28afc0db6", null ],
+    [ "printMatrix", "matrix_8c.html#a6be48c1e90d50db14c9f06c1ebac8a87", null ],
+    [ "readDoubleInFile", "matrix_8c.html#a9582bed6c820b9e2ffd0c2feacb28f56", null ],
+    [ "readMatrixInFile", "matrix_8c.html#a50b7176cde2ad94612e201eec38e4180", null ],
+    [ "readMatrixWIP", "matrix_8c.html#a308febcad4d0156caf38eda75918a65d", null ],
+    [ "readString", "matrix_8c.html#ae4472dee32965298f6ad1f25f58061db", null ],
+    [ "removeColumn", "matrix_8c.html#ae6bd8a6c22c931456b79dd1242af82b6", null ],
+    [ "removeRow", "matrix_8c.html#a2b1a163951f554455a3afed1cc1a2ec5", null ],
+    [ "scalarMultiply", "matrix_8c.html#ac68af7acb5c257ede250acb1875eef4c", null ],
+    [ "solveAugmentedMatrix", "matrix_8c.html#aa85b732ed77437c85578bdcb38245c28", null ],
+    [ "subMat", "matrix_8c.html#a970167a519af6c341fa11f06313a485c", null ],
+    [ "sum", "matrix_8c.html#ae71d6bb7c079a119cc30f60ec6316bc8", null ],
+    [ "trace", "matrix_8c.html#a9062de9b2271e8f9c864052d1c4131b2", null ],
+    [ "transpose", "matrix_8c.html#adcc0342a0a35e83eb23edf84e427c6e4", null ],
+    [ "triangularise", "matrix_8c.html#adc5e961a6450e9542892dd5576186fd7", null ]
+];
