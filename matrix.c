@@ -5,112 +5,7 @@
  * This file contain all operations on matrix
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "matrix.h"
-
-double readDoubleInFile(FILE *currentFile, char *temp){
-    double result = 0;
-    fscanf(currentFile, " %c", temp);
-    if (*temp == '-') {
-        fscanf(currentFile, "%c", temp);
-        result -= (double)(*temp - '0');
-    } else result += (double)(*temp - '0');
-    do {
-        fscanf(currentFile, "%c", temp);
-        if (*temp >= '0' && *temp <= '9') result = result * 10 + *temp - '0';
-        else if (*temp == '.'){
-            double decimal = 0.1;
-            fscanf(currentFile, "%c", temp);
-            do {
-                result += (*temp - '0') * decimal;
-                decimal /= 10;
-                fscanf(currentFile, "%c", temp);
-            } while (*temp >= '0' && *temp <= '9');
-        }
-    } while (*temp == '.' || (*temp >= '0' && *temp <= '9'));
-    return result;
-}
-
-Matrix *readMatrixWIP(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-
-    //Creation of the matrix object
-    Matrix *matrix = (Matrix*) malloc(sizeof(Matrix));
-
-    //Initialisation
-    char temp = ' ';
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-    matrix->values = (double**) malloc(sizeof(double*));
-
-    double first; //TODO Solve problem with values[0][0]
-
-    //First Row
-    double *holder = (double*) malloc(10 * sizeof(double));
-    for (matrix->columns = 0; temp == '[' || temp == ','; matrix->columns++) {
-        holder[matrix->columns] = readDoubleInFile(currentFile, &temp);
-        //if (matrix->columns == 0) first = holder[0];
-        if (matrix->columns > 0 && matrix->columns % 10 == 0) holder = realloc(holder, matrix->columns + 10);
-    }
-    matrix->values[0] = (double*) malloc(matrix->columns * sizeof(double));
-    for (int i = 0; i < matrix->columns; i++) matrix->values[0][i] = holder[i];
-    free(holder);
-
-    //Other rows
-    if (matrix->columns > 0 && temp == ';') {
-        for (matrix->rows = 1; temp == ';'; matrix->rows++) {
-            matrix->values[matrix->rows] = (double*) malloc(matrix->columns * sizeof(double));
-            matrix->values[matrix->rows][0] = readDoubleInFile(currentFile, &temp);
-            for (int j = 1; j < matrix->columns && temp == ','; j++) {
-                matrix->values[matrix->rows][j] = readDoubleInFile(currentFile, &temp);
-            }
-        }
-    }
-
-    //matrix->values[0][0] = first;
-    fclose(currentFile);
-    return matrix;
-}
-
-char *readString(FILE *current){
-    int i = 0;
-    char temp, *string = (char*) malloc(20 * sizeof(char)); //On part d'une chaîne de 20 caractères
-    fscanf(current, " %c", &temp);
-    while (temp >= ' ' && temp <= '~'){
-        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //Si on dépasse 20 caractères, on ajoute un espace de 20 caractères à la chaîne
-        string[i] = temp;
-        fscanf(current, "%c", &temp);
-        i++;
-    } string[i] = '\0';
-    return string;
-}
-
-Matrix *readMatrixInFile(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-    char *firstLine = readString(currentFile);
-
-    //Creation of the matrix
-    Matrix *matrix = malloc(sizeof(Matrix));
-    matrix->columns = matrix->rows = 1;
-    for (int i = 0; firstLine[i] != ']' && firstLine[i] != '\0'; i++) {
-        if (matrix->rows == 1 && firstLine[i] == ',') matrix->columns++;
-        else if (firstLine[i] == ';') matrix->rows++;
-    }
-
-    //Initialisation of the matrix
-    char temp = ' ';
-    rewind(currentFile);
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-
-    matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
-    for (int k = 0; k < matrix->rows; k++) {
-        matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
-        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInFile(currentFile, &temp);
-    }
-    return matrix;
-}
 
 Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
@@ -333,9 +228,31 @@ Matrix *solveAugmentedMatrix(Matrix *M){
     return augmented;
 }
 
+double *eigenValues(Matrix *M){ //TODO Modify it to output an equation to stringToPolynomial()
+    if (M != NULL){
+        return solve(stringToPolynomial(detToString(toStringMatrix(M))));
+    } else return NULL;
+}
+
+Matrix *eigenVectors(Matrix *M, const double *eigenvalues){
+    Matrix *eigenMatrix = malloc(sizeof(Matrix));
+    eigenMatrix->rows = M->rows;
+    int nbVectors;
+    for (nbVectors = 0; nbVectors < 3; nbVectors++) { //TODO change condition
+        Matrix *toSolve = copy(M);
+        for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigenvalues[j];
+        Matrix *vector = solveAugmentedMatrix(toSolve); //TODO Adapt function
+        for (int j = 0; j < M->rows; j++) eigenMatrix->values[nbVectors][j] = vector->values[nbVectors][j];
+    }
+    for (int i = nbVectors; i < M->columns; i++) {
+        //Complete the eigen matrix
+    }
+    return eigenMatrix;
+}
+
 Matrix *triangularise(Matrix *M){
     if (M != NULL) {
-        Matrix *PInverse, *P = solveAugmentedMatrix(M); //TODO P should be eigenvectors
+        Matrix *PInverse, *P = eigenVectors(M, eigenValues(M));
         if ((PInverse = inverse(P)) != NULL) return multiply(multiply(PInverse, M), P);
     }
     return NULL;

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrix.h"
-#include "polynomial.h"
+//#include "polynomial.h"
 
 /**
  * Main function
@@ -27,7 +27,20 @@ int main() {
     printPolynomial(f);
     double *roots = solve(f);
     for (int i = 0; i < f->highestDegree; i++) printf("x%d = %1.2lf, ", i, roots[i]); printf("\n");
+
+    int size = 2;
+    Matrix *test = newMatrix(size, size, 2);
+
+    int k = 1;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) test->values[i][j] = k++;
+    }
+    printMatrix(test);
+    //eigenValues(test);
     //printPolynomial(f);
     //printPolynomial(syntheticDivision(f, 1));
+
+    printf("Associated polynomial :\n");
+    printf("%s\n", detToString(detPForm(toStringMatrix(test))));
     return EXIT_SUCCESS;
 }

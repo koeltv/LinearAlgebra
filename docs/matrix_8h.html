@@ -104,7 +104,9 @@ $(document).ready(function(){initNavTree('matrix_8h.html',''); initResizable(); 
 
 <p>Header file of <a class="el" href="matrix_8c.html" title="Functions on matrix.">matrix.c</a>.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="string_interactions_8h_source.html">stringInteractions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="polynomial_8h_source.html">polynomial.h</a>&quot;</code><br />
+</div>
 <p><a href="matrix_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -115,18 +117,6 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">readDoubleInFile</a> (FILE *currentFile, char *temp)</td></tr>
-<tr class="memdesc:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value.  <a href="matrix_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">More...</a><br /></td></tr>
-<tr class="separator:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a308febcad4d0156caf38eda75918a65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a308febcad4d0156caf38eda75918a65d">readMatrixWIP</a> ()</td></tr>
-<tr class="memdesc:a308febcad4d0156caf38eda75918a65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it  <a href="matrix_8h.html#a308febcad4d0156caf38eda75918a65d">More...</a><br /></td></tr>
-<tr class="separator:a308febcad4d0156caf38eda75918a65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4472dee32965298f6ad1f25f58061db"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae4472dee32965298f6ad1f25f58061db">readString</a> (FILE *current)</td></tr>
-<tr class="memdesc:ae4472dee32965298f6ad1f25f58061db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a string in a file stream This function read a string of any size in a given file stream.  <a href="matrix_8h.html#ae4472dee32965298f6ad1f25f58061db">More...</a><br /></td></tr>
-<tr class="separator:ae4472dee32965298f6ad1f25f58061db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50b7176cde2ad94612e201eec38e4180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a50b7176cde2ad94612e201eec38e4180">readMatrixInFile</a> ()</td></tr>
-<tr class="memdesc:a50b7176cde2ad94612e201eec38e4180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it.  <a href="matrix_8h.html#a50b7176cde2ad94612e201eec38e4180">More...</a><br /></td></tr>
-<tr class="separator:a50b7176cde2ad94612e201eec38e4180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43a9b0a75747c361b92ef5b28afc0db6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">newMatrix</a> (int nbRows, int nbColumns, double initialValue)</td></tr>
 <tr class="memdesc:a43a9b0a75747c361b92ef5b28afc0db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple matrix This function create a simple matrix with the given number of columns and rows and with it's values initialized with the given value.  <a href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">More...</a><br /></td></tr>
 <tr class="separator:a43a9b0a75747c361b92ef5b28afc0db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,6 +177,8 @@ Functions</h2></td></tr>
 <tr class="memitem:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7">printMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
 <tr class="memdesc:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">print matrix This function print a given matrix in the terminal  <a href="matrix_8h.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7">More...</a><br /></td></tr>
 <tr class="separator:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ca6613043c94120a205b47435c4c76"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a91ca6613043c94120a205b47435c4c76">eigenValues</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="separator:a91ca6613043c94120a205b47435c4c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file of <a class="el" href="matrix_8c.html" title="Functions on matrix.">matrix.c</a>. </p>
@@ -297,6 +289,24 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>det(M) </dd></dl>
+
+</div>
+</div>
+<a id="a91ca6613043c94120a205b47435c4c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ca6613043c94120a205b47435c4c76">&#9670;&nbsp;</a></span>eigenValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* eigenValues </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -540,111 +550,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a9582bed6c820b9e2ffd0c2feacb28f56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9582bed6c820b9e2ffd0c2feacb28f56">&#9670;&nbsp;</a></span>readDoubleInFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double readDoubleInFile </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>currentFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>temp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">currentFile</td><td>- The file stream where the double will be read </td></tr>
-    <tr><td class="paramname">temp</td><td>- the pointer </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>double read </dd></dl>
-
-</div>
-</div>
-<a id="a50b7176cde2ad94612e201eec38e4180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50b7176cde2ad94612e201eec38e4180">&#9670;&nbsp;</a></span>readMatrixInFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixInFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it. </p>
-<dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
-
-</div>
-</div>
-<a id="a308febcad4d0156caf38eda75918a65d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a308febcad4d0156caf38eda75918a65d">&#9670;&nbsp;</a></span>readMatrixWIP()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixWIP </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it </p>
-<dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
-
-</div>
-</div>
-<a id="ae4472dee32965298f6ad1f25f58061db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4472dee32965298f6ad1f25f58061db">&#9670;&nbsp;</a></span>readString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* readString </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>current</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a string in a file stream This function read a string of any size in a given file stream. </p>
-<p>It will get all visible characters in the ASCII table </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">current</td><td>- The file stream where the string will be read </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>string formed from the file stream </dd></dl>
 
 </div>
 </div>

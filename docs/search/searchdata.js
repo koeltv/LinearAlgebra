@@ -1,9 +1,9 @@
 var indexSectionsWithContent =
 {
-  0: "abcdfhimnprstv",
-  1: "bmp",
-  2: "cmprt",
-  3: "acdfimnprst",
+  0: "abcdefhilmnprstv",
+  1: "bmps",
+  2: "cmprst",
+  3: "acdefilmnprst",
   4: "chmrv",
   5: "b",
   6: "ft",

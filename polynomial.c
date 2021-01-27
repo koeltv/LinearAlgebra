@@ -5,37 +5,7 @@
  * This file contain all operations on polynomial
  */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "polynomial.h"
-
-double readDoubleInString(const char *string, int *position){
-    double result = 0;
-    while (string[*position] == ' ') (*position)++;
-
-    //Read the sign
-    int sign = 1;
-    if (string[*position] == '-') sign = -1;
-    while (string[*position] == ' ' || string[*position] == '+' || string[*position] == '-') (*position)++;
-
-    //Read the value
-    do {
-        if (string[*position] >= '0' && string[*position] <= '9') {
-            result = result * 10 + string[*position] - '0';
-            (*position)++;
-        }
-        else if (string[*position] == '.'){
-            double decimal = 0.1;
-            (*position)++;
-            do {
-                result += (string[*position] - '0') * decimal;
-                decimal /= 10;
-                (*position)++;
-            } while (string[*position] >= '0' && string[*position] <= '9');
-        }
-    } while (string[*position] == '.' || (string[*position] >= '0' && string[*position] <= '9'));
-    return result * sign;
-}
 
 void printPolynomial(Polynomial *F){
     if (F != NULL) {

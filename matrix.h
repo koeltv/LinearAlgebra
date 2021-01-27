@@ -6,6 +6,9 @@
 #ifndef LINEARALGEBRA_MATRIX_H
 #define LINEARALGEBRA_MATRIX_H
 
+#include "stringInteractions.h"
+#include "polynomial.h"
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -22,36 +25,6 @@ typedef struct {
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * Read a double in a file stream
- * The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value
- * @param currentFile - The file stream where the double will be read
- * @param temp - the pointer
- * @return double read
- */
-double readDoubleInFile(FILE *currentFile, char *temp);
-
-/**
- * (WIP) Read a matrix in a file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
- * @return matrix formed from the file
- */
-Matrix *readMatrixWIP();
-
-/**
- * Read a string in a file stream
- * This function read a string of any size in a given file stream. It will get all visible characters in the ASCII table
- * @param current - The file stream where the string will be read
- * @return string formed from the file stream
- */
-char *readString(FILE *current);
-
-/**
- * Current read a matrix in file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
- * @return matrix formed from the file
- */
-Matrix *readMatrixInFile();
 
 /**
  * Create a simple matrix
@@ -235,5 +208,7 @@ Matrix *triangularise(Matrix *M);
  * @param M - the given matrix
  */
 void printMatrix(Matrix *M);
+
+double *eigenValues(Matrix *M);
 
 #endif //LINEARALGEBRA_MATRIX_H

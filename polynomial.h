@@ -6,6 +6,8 @@
 #ifndef LINEARALGEBRA_POLYNOMIAL_H
 #define LINEARALGEBRA_POLYNOMIAL_H
 
+#include "stringInteractions.h"
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -27,15 +29,6 @@ typedef struct {
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * Read a double in a string
- * This function return a double read from a string
- * @param string - The given string
- * @param position - The position of the string where we start to read
- * @return double read
- */
-double readDoubleInString(const char *string, int *position);
-
 /**
  * Print a polynomial
  * Print a given polynomial in the terminal
