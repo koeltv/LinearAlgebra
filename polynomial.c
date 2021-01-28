@@ -35,18 +35,60 @@ void freePolynomial(Polynomial *F){
     }
 }
 
-Polynomial *stringToPolynomial(char *string){
+//rules if multiplication, parenthesis, else OK
+int degreeOfString(const char *string, int start, int end){
+    int degree = 0;
+    for (int i = start; string[i] != '\0' && i <= end; i++) {
+        //Count in parenthesis
+        if (string[i] == '(') {
+            //Search for end of parenthesis
+            int partialEnd = i, counter = 1;
+            do {
+                partialEnd++;
+                if (string[partialEnd] == '(') counter++;
+                else if (string[partialEnd] == ')') counter--;
+            } while (counter > 0);
+            //degree of the parenthesis
+            int localdegree = degreeOfString(string, i + 1, partialEnd - 1);
+            if (localdegree > degree) degree = localdegree;
+            i = partialEnd;
+        } else if (string[i] == '*'){
+            //Case of multiplication
+            while (string[i] != '(') i++;
+                //Search for end of parenthesis
+                int partialEnd = i, counter = 1;
+                do {
+                    partialEnd++;
+                    if (string[partialEnd] == '(') counter++;
+                    else if (string[partialEnd] == ')') counter--;
+                } while (counter > 0);
+                //degree of the parenthesis
+                degree += degreeOfString(string, i + 1, partialEnd - 1);
+                i = partialEnd;
+        } else {
+            //If power > actual change for the new
+            if (string[i] == 'X'){
+                if (string[i+1] == '^') {
+                    if (string[i+2] >= '1' && string[i+2] <= '9' && string[i+2] - '0' > degree) {
+                        degree = string[i+2] - '0';
+                        i += 2;
+                    }
+                } else if (degree < 1) {
+                    degree = 1;
+                    i++;
+                }
+            }
+        }
+    }
+    return degree;
+}
+
+Polynomial *stringToPolynomial(char *string){ //TODO Adapt to multiplication and parenthesis
     if (string != NULL) {
         Polynomial *F = malloc(sizeof(Polynomial));
 
         //Research of the highest degree
-        for (int i = 0; string[i] != '\0'; i++) {
-            if (string[i] == '^') {
-                if (string[i + 1] >= '1' && string[i + 1] <= '9' && string[i + 1] - '0' > F->highestDegree) {
-                    F->highestDegree = string[i + 1] - '0';
-                }
-            }
-        }
+        F->highestDegree = degreeOfString(string, 0, length(string) + 1);
 
         //Recuperation of the coefficients
         F->coefficient = calloc(F->highestDegree + 1, sizeof(double));

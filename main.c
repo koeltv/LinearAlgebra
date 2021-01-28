@@ -13,6 +13,9 @@
  * @return an integer confirming the success or failure of program end
  */
 int main() {
+    char F[100] = "(1 + 2X) + ((X^2) * (X^2) * (X))";
+    printf("%s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
+    printf("%s\n", detToString(toStringMatrix(newMatrix(2, 2, 1))));
     char *command = NULL;
     do {
         if (command != NULL) free(command);

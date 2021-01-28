@@ -103,7 +103,6 @@ $(document).ready(function(){initNavTree('string_interactions_8h.html',''); init
 <div class="contents">
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="matrix_8h_source.html">matrix.h</a>&quot;</code><br />
 </div>
 <p><a href="string_interactions_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,21 +120,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a5e6c13b6b96060a3c07e87c3cd623fa6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a5e6c13b6b96060a3c07e87c3cd623fa6">length</a> (const char *string)</td></tr>
 <tr class="memdesc:a5e6c13b6b96060a3c07e87c3cd623fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">String length This function output the length of a string.  <a href="string_interactions_8h.html#a5e6c13b6b96060a3c07e87c3cd623fa6">More...</a><br /></td></tr>
 <tr class="separator:a5e6c13b6b96060a3c07e87c3cd623fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9a3953034b1fcdee16a97a0c702dda8"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ad9a3953034b1fcdee16a97a0c702dda8">shorterString</a> (const char *string1, const char *string2)</td></tr>
+<tr class="separator:ad9a3953034b1fcdee16a97a0c702dda8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6306f696850d2f27a45cc5f8caefd1dc"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a6306f696850d2f27a45cc5f8caefd1dc">containString</a> (const char *mainString, const char *toSearch)</td></tr>
+<tr class="separator:a6306f696850d2f27a45cc5f8caefd1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81441345d450a38905b001d12832bf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">readDoubleInString</a> (const char *string, int *position)</td></tr>
 <tr class="memdesc:ae81441345d450a38905b001d12832bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a string This function return a double read from a string.  <a href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">More...</a><br /></td></tr>
 <tr class="separator:ae81441345d450a38905b001d12832bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">readDoubleInFile</a> (FILE *currentFile, char *temp)</td></tr>
 <tr class="memdesc:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value.  <a href="string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">More...</a><br /></td></tr>
 <tr class="separator:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a308febcad4d0156caf38eda75918a65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a308febcad4d0156caf38eda75918a65d">readMatrixWIP</a> ()</td></tr>
-<tr class="memdesc:a308febcad4d0156caf38eda75918a65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it  <a href="string_interactions_8h.html#a308febcad4d0156caf38eda75918a65d">More...</a><br /></td></tr>
-<tr class="separator:a308febcad4d0156caf38eda75918a65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50b7176cde2ad94612e201eec38e4180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a50b7176cde2ad94612e201eec38e4180">readMatrixInFile</a> ()</td></tr>
-<tr class="memdesc:a50b7176cde2ad94612e201eec38e4180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it.  <a href="string_interactions_8h.html#a50b7176cde2ad94612e201eec38e4180">More...</a><br /></td></tr>
-<tr class="separator:a50b7176cde2ad94612e201eec38e4180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfba50a3145edadcd0551b9387fa3d33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#abfba50a3145edadcd0551b9387fa3d33">toStringMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
-<tr class="memdesc:abfba50a3145edadcd0551b9387fa3d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a matrix to a string matrix This function take a given matrix and create a matrix with value in string format to enable the use of variables.  <a href="string_interactions_8h.html#abfba50a3145edadcd0551b9387fa3d33">More...</a><br /></td></tr>
-<tr class="separator:abfba50a3145edadcd0551b9387fa3d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22ada272d4935acc766aa103861289fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a22ada272d4935acc766aa103861289fc">detPForm</a> (<a class="el" href="struct_string_matrix.html">StringMatrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
 <tr class="memdesc:a22ada272d4935acc766aa103861289fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implement a variable This function add the variable in the diagonal to be used for P(lambda)  <a href="string_interactions_8h.html#a22ada272d4935acc766aa103861289fc">More...</a><br /></td></tr>
 <tr class="separator:a22ada272d4935acc766aa103861289fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +138,34 @@ Functions</h2></td></tr>
 <tr class="separator:aa1980e25971d1bcaa1c1ae8c2d51a15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a6306f696850d2f27a45cc5f8caefd1dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6306f696850d2f27a45cc5f8caefd1dc">&#9670;&nbsp;</a></span>containString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">short containString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>mainString</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>toSearch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a22ada272d4935acc766aa103861289fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22ada272d4935acc766aa103861289fc">&#9670;&nbsp;</a></span>detPForm()</h2>
 
@@ -302,46 +324,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a50b7176cde2ad94612e201eec38e4180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50b7176cde2ad94612e201eec38e4180">&#9670;&nbsp;</a></span>readMatrixInFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixInFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it. </p>
-<dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
-
-</div>
-</div>
-<a id="a308febcad4d0156caf38eda75918a65d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a308febcad4d0156caf38eda75918a65d">&#9670;&nbsp;</a></span>readMatrixWIP()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixWIP </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it </p>
-<dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
-
-</div>
-</div>
 <a id="ae4472dee32965298f6ad1f25f58061db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae4472dee32965298f6ad1f25f58061db">&#9670;&nbsp;</a></span>readString()</h2>
 
@@ -369,30 +351,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abfba50a3145edadcd0551b9387fa3d33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfba50a3145edadcd0551b9387fa3d33">&#9670;&nbsp;</a></span>toStringMatrix()</h2>
+<a id="ad9a3953034b1fcdee16a97a0c702dda8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9a3953034b1fcdee16a97a0c702dda8">&#9670;&nbsp;</a></span>shorterString()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_string_matrix.html">StringMatrix</a>* toStringMatrix </td>
+          <td class="memname">short shorterString </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>M</em></td><td>)</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Transform a matrix to a string matrix This function take a given matrix and create a matrix with value in string format to enable the use of variables. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">M</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
