@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "matrix.h"
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
@@ -43,6 +42,10 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+short shorterString(const char *string1, const char *string2);
+
+short containString(const char *mainString, const char *toSearch);
+
 /**
  * Read a double in a string
  * This function return a double read from a string
@@ -64,28 +67,6 @@ double readDoubleInFile(FILE *currentFile, char *temp);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Matrix interactions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-/**
- * (WIP) Read a matrix in a file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
- * @return matrix formed from the file
- */
-Matrix *readMatrixWIP();
-
-/**
- * Current read a matrix in file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
- * @return matrix formed from the file
- */
-Matrix *readMatrixInFile();
-
-/**
- * Transform a matrix to a string matrix
- * This function take a given matrix and create a matrix with value in string format to enable the use of variables
- * @param M
- * @return
- */
-StringMatrix *toStringMatrix(Matrix *M);
 
 /**
  * Implement a variable

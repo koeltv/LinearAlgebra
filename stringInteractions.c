@@ -58,45 +58,27 @@ double readDoubleInFile(FILE *currentFile, char *temp){
     return result;
 }
 
-Matrix *readMatrixWIP(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-
-    //Creation of the matrix object
-    Matrix *matrix = (Matrix*) malloc(sizeof(Matrix));
-
-    //Initialisation
-    char temp = ' ';
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-    matrix->values = (double**) malloc(sizeof(double*));
-
-    double first; //TODO Solve problem with values[0][0]
-
-    //First Row
-    double *holder = (double*) malloc(10 * sizeof(double));
-    for (matrix->columns = 0; temp == '[' || temp == ','; matrix->columns++) {
-        holder[matrix->columns] = readDoubleInFile(currentFile, &temp);
-        //if (matrix->columns == 0) first = holder[0];
-        if (matrix->columns > 0 && matrix->columns % 10 == 0) holder = realloc(holder, matrix->columns + 10);
+short shorterString(const char *string1, const char *string2){
+    int i;
+    for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
+        if (string1[i] < string2[i]) return 1;
+        else if (string1[i] > string2[i]) return 2;
     }
-    matrix->values[0] = (double*) malloc(matrix->columns * sizeof(double));
-    for (int i = 0; i < matrix->columns; i++) matrix->values[0][i] = holder[i];
-    free(holder);
+    if (string1[i] == '\0') return 1;
+    else if (string2[i] == '\0') return 2;
+    else return 0;
+}
 
-    //Other rows
-    if (matrix->columns > 0 && temp == ';') {
-        for (matrix->rows = 1; temp == ';'; matrix->rows++) {
-            matrix->values[matrix->rows] = (double*) malloc(matrix->columns * sizeof(double));
-            matrix->values[matrix->rows][0] = readDoubleInFile(currentFile, &temp);
-            for (int j = 1; j < matrix->columns && temp == ','; j++) {
-                matrix->values[matrix->rows][j] = readDoubleInFile(currentFile, &temp);
-            }
+short containString(const char *mainString, const char *toSearch){
+    int i = 0, j;
+    while (mainString[i] != '\0' && mainString[i] != toSearch[0]) i++;
+    if (mainString[i] != '\0'){
+        for (j = 0; mainString[i+j] != '\0' && toSearch[j] != '\0'; j++) {
+            if (mainString[i+j] != toSearch[j]) return 0;
         }
+        if (toSearch[j] == '\0') return 1;
     }
-
-    //matrix->values[0][0] = first;
-    fclose(currentFile);
-    return matrix;
+    return 0;
 }
 
 char *readString(FILE *current){
@@ -110,47 +92,6 @@ char *readString(FILE *current){
         i++;
     } string[i] = '\0';
     return string;
-}
-
-Matrix *readMatrixInFile(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-    char *firstLine = readString(currentFile);
-
-    //Creation of the matrix
-    Matrix *matrix = malloc(sizeof(Matrix));
-    matrix->columns = matrix->rows = 1;
-    for (int i = 0; firstLine[i] != ']' && firstLine[i] != '\0'; i++) {
-        if (matrix->rows == 1 && firstLine[i] == ',') matrix->columns++;
-        else if (firstLine[i] == ';') matrix->rows++;
-    }
-
-    //Initialisation of the matrix
-    char temp = ' ';
-    rewind(currentFile);
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-
-    matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
-    for (int k = 0; k < matrix->rows; k++) {
-        matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
-        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInFile(currentFile, &temp);
-    }
-    return matrix;
-}
-
-StringMatrix *toStringMatrix(Matrix *M){
-    StringMatrix *toString = malloc(sizeof(StringMatrix));
-    toString->columns = M->columns;
-    toString->rows = M->rows;
-    toString->values = malloc(toString->rows * sizeof(char***));
-    for (int i = 0; i < M->rows; i++) {
-        toString->values[i] = malloc(toString->columns * sizeof(char**));
-        for (int j = 0; j < M->columns; j++) {
-            toString->values[i][j] = malloc(20 * sizeof(char));
-            snprintf(toString->values[i][j], 2000 * sizeof(char), "%lf", M->values[i][j]);
-        }
-    }
-    return toString;
 }
 
 StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue){

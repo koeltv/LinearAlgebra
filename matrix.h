@@ -25,6 +25,19 @@ typedef struct {
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * (WIP) Read a matrix in a file
+ * This function read a matrix in a file given a specific format and return a Matrix structure made from it
+ * @return matrix formed from the file
+ */
+Matrix *readMatrixWIP(); //TODO Problem pointer
+
+/**
+ * Current read a matrix in file
+ * This function read a matrix in a file given a specific format and return a Matrix structure made from it
+ * @return matrix formed from the file
+ */
+Matrix *readMatrixInFile();
 
 /**
  * Create a simple matrix
@@ -88,6 +101,14 @@ Matrix *subMat(Matrix *M, int r1, int r2, int c1, int c2);
  * @return copy created
  */
 Matrix *copy(Matrix *M);
+
+/**
+ * Transform a matrix to a string matrix
+ * This function take a given matrix and create a matrix with value in string format to enable the use of variables
+ * @param M
+ * @return
+ */
+StringMatrix *toStringMatrix(Matrix *M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
