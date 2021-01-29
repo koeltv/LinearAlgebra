@@ -7,9 +7,53 @@
 
 #include "stringInteractions.h"
 
+char *readString(FILE *current){
+    int i = 0;
+    char temp, *string = (char*) malloc(20 * sizeof(char)); //We start from a chain of 20 characters
+    fscanf(current, " %c", &temp);
+    while (temp >= ' ' && temp <= '~'){
+        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //If we go over 20, we add 20 more to the chain
+        string[i] = temp;
+        fscanf(current, "%c", &temp);
+        i++;
+    } string[i] = '\0';
+    return string;
+}
+
+int length(const char *string){
+    int length = 0;
+    while (string[length] != '\0') length++;
+    return length;
+}
+
+short shorterString(const char *string1, const char *string2){
+    int i;
+    for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
+        if (string1[i] < string2[i]) return 1;
+        else if (string1[i] > string2[i]) return 2;
+    }
+    if (string1[i] == '\0') return 1;
+    else if (string2[i] == '\0') return 2;
+    else return 0;
+}
+
+short containString(const char *mainString, const char *toSearch){
+    int i = 0, j;
+    while (mainString[i] != '\0' && mainString[i] != toSearch[0]) i++;
+    if (mainString[i] != '\0'){
+        for (j = 0; mainString[i+j] != '\0' && toSearch[j] != '\0'; j++) {
+            if (mainString[i+j] != toSearch[j]) return 0;
+        }
+        if (toSearch[j] == '\0') return 1;
+    }
+    return 0;
+}
+
 double readDoubleInString(const char *string, int *position){
-    double result = 0;
-    while (string[*position] == ' ') (*position)++;
+
+    //Search for the sign
+    while (*position >= 0 && string[*position] == ' ') (*position)--;
+    while (string[*position] != '\0' && (string[*position] < '0' || string[*position] > '9') && string[*position] != '-') (*position)++;
 
     //Read the sign
     int sign = 1;
@@ -17,19 +61,17 @@ double readDoubleInString(const char *string, int *position){
     while (string[*position] == ' ' || string[*position] == '+' || string[*position] == '-') (*position)++;
 
     //Read the value
+    double result = 0;
     do {
         if (string[*position] >= '0' && string[*position] <= '9') {
-            result = result * 10 + string[*position] - '0';
-            (*position)++;
+            result = result * 10 + string[(*position)++] - '0';
         }
-        else if (string[*position] == '.'){
+        else if (string[(*position)++] == '.'){
             double decimal = 0.1;
-            (*position)++;
             do {
-                result += (string[*position] - '0') * decimal;
+                result += (string[(*position)++] - '0') * decimal;
                 decimal /= 10;
-                (*position)++;
-            } while (string[*position] >= '0' && string[*position] <= '9');
+            } while (string[(*position)] >= '0' && string[(*position)] <= '9');
         }
     } while (string[*position] == '.' || (string[*position] >= '0' && string[*position] <= '9'));
     return result * sign;
@@ -45,7 +87,7 @@ double readDoubleInFile(FILE *currentFile, char *temp){
     do {
         fscanf(currentFile, "%c", temp);
         if (*temp >= '0' && *temp <= '9') result = result * 10 + *temp - '0';
-        else if (*temp == '.'){
+        else if (*temp == '.') {
             double decimal = 0.1;
             fscanf(currentFile, "%c", temp);
             do {
@@ -56,101 +98,6 @@ double readDoubleInFile(FILE *currentFile, char *temp){
         }
     } while (*temp == '.' || (*temp >= '0' && *temp <= '9'));
     return result;
-}
-
-Matrix *readMatrixWIP(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-
-    //Creation of the matrix object
-    Matrix *matrix = (Matrix*) malloc(sizeof(Matrix));
-
-    //Initialisation
-    char temp = ' ';
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-    matrix->values = (double**) malloc(sizeof(double*));
-
-    double first; //TODO Solve problem with values[0][0]
-
-    //First Row
-    double *holder = (double*) malloc(10 * sizeof(double));
-    for (matrix->columns = 0; temp == '[' || temp == ','; matrix->columns++) {
-        holder[matrix->columns] = readDoubleInFile(currentFile, &temp);
-        //if (matrix->columns == 0) first = holder[0];
-        if (matrix->columns > 0 && matrix->columns % 10 == 0) holder = realloc(holder, matrix->columns + 10);
-    }
-    matrix->values[0] = (double*) malloc(matrix->columns * sizeof(double));
-    for (int i = 0; i < matrix->columns; i++) matrix->values[0][i] = holder[i];
-    free(holder);
-
-    //Other rows
-    if (matrix->columns > 0 && temp == ';') {
-        for (matrix->rows = 1; temp == ';'; matrix->rows++) {
-            matrix->values[matrix->rows] = (double*) malloc(matrix->columns * sizeof(double));
-            matrix->values[matrix->rows][0] = readDoubleInFile(currentFile, &temp);
-            for (int j = 1; j < matrix->columns && temp == ','; j++) {
-                matrix->values[matrix->rows][j] = readDoubleInFile(currentFile, &temp);
-            }
-        }
-    }
-
-    //matrix->values[0][0] = first;
-    fclose(currentFile);
-    return matrix;
-}
-
-char *readString(FILE *current){
-    int i = 0;
-    char temp, *string = (char*) malloc(20 * sizeof(char)); //On part d'une chaîne de 20 caractères
-    fscanf(current, " %c", &temp);
-    while (temp >= ' ' && temp <= '~'){
-        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //Si on dépasse 20 caractères, on ajoute un espace de 20 caractères à la chaîne
-        string[i] = temp;
-        fscanf(current, "%c", &temp);
-        i++;
-    } string[i] = '\0';
-    return string;
-}
-
-Matrix *readMatrixInFile(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-    char *firstLine = readString(currentFile);
-
-    //Creation of the matrix
-    Matrix *matrix = malloc(sizeof(Matrix));
-    matrix->columns = matrix->rows = 1;
-    for (int i = 0; firstLine[i] != ']' && firstLine[i] != '\0'; i++) {
-        if (matrix->rows == 1 && firstLine[i] == ',') matrix->columns++;
-        else if (firstLine[i] == ';') matrix->rows++;
-    }
-
-    //Initialisation of the matrix
-    char temp = ' ';
-    rewind(currentFile);
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-
-    matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
-    for (int k = 0; k < matrix->rows; k++) {
-        matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
-        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInFile(currentFile, &temp);
-    }
-    return matrix;
-}
-
-StringMatrix *toStringMatrix(Matrix *M){
-    StringMatrix *toString = malloc(sizeof(StringMatrix));
-    toString->columns = M->columns;
-    toString->rows = M->rows;
-    toString->values = malloc(toString->rows * sizeof(char***));
-    for (int i = 0; i < M->rows; i++) {
-        toString->values[i] = malloc(toString->columns * sizeof(char**));
-        for (int j = 0; j < M->columns; j++) {
-            toString->values[i][j] = malloc(20 * sizeof(char));
-            snprintf(toString->values[i][j], 2000 * sizeof(char), "%lf", M->values[i][j]);
-        }
-    }
-    return toString;
 }
 
 StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue){
@@ -199,27 +146,20 @@ StringMatrix *removeSColumn(StringMatrix *M, int columnIndex){
     } else return NULL;
 }
 
-int length(const char *string){
-    int length = 0;
-    while (string[length] != '\0') length++;
-    return length;
-}
-
-StringMatrix *detPForm(StringMatrix *M){
+StringMatrix *changeToPLambdaForm(StringMatrix *M){
     for (int i = 0; i < M->columns; i++) {
-        snprintf(M->values[i][i], (length(M->values[i][i]) + 5) * sizeof(char), "%s - X", M->values[i][i]);
+        snprintf(M->values[i][i], (length(M->values[i][i]) + 6) * sizeof(char), "%s - 1X", M->values[i][i]);
     }
     return M;
 }
 
-char *detToString(StringMatrix *M){
+char *detOfStringMatrix(StringMatrix *M){
     if (M->rows == 1 && M->columns == 1) return M->values[0][0];
     else {
-        //char *result = calloc(200, sizeof(char));
         char *result = calloc(1, sizeof(char));
         for (int i = 0, sign = 1; i < M->rows; i++, sign*=-1) {
             StringMatrix *subDet = removeSRow(removeSColumn(M, 0), i);
-            char *detOfSubDet = detToString(subDet);
+            char *detOfSubDet = detOfStringMatrix(subDet);
             int totalSize = length(M->values[i][0]) + length(detOfSubDet);
 
             if (sign == -1) {

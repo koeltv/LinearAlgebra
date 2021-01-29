@@ -7,6 +7,73 @@
 
 #include "matrix.h"
 
+Matrix *readMatrixWIP(){
+    FILE *currentFile;
+    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
+
+    //Creation of the matrix object
+    Matrix *matrix = (Matrix*) malloc(sizeof(Matrix));
+
+    //Initialisation
+    char temp = ' ';
+    while (temp != '[') fscanf(currentFile, "%c", &temp);
+    matrix->values = (double**) malloc(sizeof(double*));
+
+    double first; //TODO Solve problem with values[0][0]
+
+    //First Row
+    double *holder = (double*) malloc(10 * sizeof(double));
+    for (matrix->columns = 0; temp == '[' || temp == ','; matrix->columns++) {
+        holder[matrix->columns] = readDoubleInFile(currentFile, &temp);
+        //if (matrix->columns == 0) first = holder[0];
+        if (matrix->columns > 0 && matrix->columns % 10 == 0) holder = realloc(holder, matrix->columns + 10);
+    }
+    matrix->values[0] = (double*) malloc(matrix->columns * sizeof(double));
+    for (int i = 0; i < matrix->columns; i++) matrix->values[0][i] = holder[i];
+    free(holder);
+
+    //Other rows
+    if (matrix->columns > 0 && temp == ';') {
+        for (matrix->rows = 1; temp == ';'; matrix->rows++) {
+            matrix->values[matrix->rows] = (double*) malloc(matrix->columns * sizeof(double));
+            matrix->values[matrix->rows][0] = readDoubleInFile(currentFile, &temp);
+            for (int j = 1; j < matrix->columns && temp == ','; j++) {
+                matrix->values[matrix->rows][j] = readDoubleInFile(currentFile, &temp);
+            }
+        }
+    }
+
+    //matrix->values[0][0] = first;
+    fclose(currentFile);
+    return matrix;
+}
+
+Matrix *readMatrixInFile(char *link){
+    FILE *currentFile;
+    if ((currentFile = fopen(link, "rb")) == NULL) exit(EXIT_FAILURE);
+    char *firstLine = readString(currentFile);
+
+    //Creation of the matrix
+    Matrix *matrix = malloc(sizeof(Matrix));
+    matrix->columns = matrix->rows = 1;
+    for (int i = 0; firstLine[i] != ']' && firstLine[i] != '\0'; i++) {
+        if (matrix->rows == 1 && firstLine[i] == ',') matrix->columns++;
+        else if (firstLine[i] == ';') matrix->rows++;
+    }
+
+    //Initialisation of the matrix
+    char temp = ' ';
+    rewind(currentFile);
+    while (temp != '[') fscanf(currentFile, "%c", &temp);
+
+    matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
+    for (int k = 0; k < matrix->rows; k++) {
+        matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
+        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInFile(currentFile, &temp);
+    }
+    return matrix;
+}
+
 Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
     M->rows = nbRows; M->columns = nbColumns;
@@ -145,6 +212,17 @@ Matrix *transpose(Matrix *M){
     } else return NULL;
 }
 
+void printMatrix(Matrix *M){
+    printf("=====================================\n");
+    if (M != NULL) {
+        for (int i = 0; i < M->rows; i++) {
+            for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
+            printf("\n");
+        }
+    } else printf("No matrix\n");
+    printf("=====================================\n");
+}
+
 double trace(Matrix *M){
     if (M != NULL) {
         double trace = 0;
@@ -228,9 +306,10 @@ Matrix *solveAugmentedMatrix(Matrix *M){
     return augmented;
 }
 
-double *eigenValues(Matrix *M){ //TODO Modify it to output an equation to stringToPolynomial()
+double *eigenValues(Matrix *M){
     if (M != NULL){
-        return solve(stringToPolynomial(detToString(toStringMatrix(M))));
+        char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
+        return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
     } else return NULL;
 }
 
@@ -258,13 +337,17 @@ Matrix *triangularise(Matrix *M){
     return NULL;
 }
 
-void printMatrix(Matrix *M){
-    printf("=====================================\n");
-    if (M != NULL) {
-        for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
-            printf("\n");
+StringMatrix *toStringMatrix(Matrix *M){
+    StringMatrix *toString = malloc(sizeof(StringMatrix));
+    toString->columns = M->columns;
+    toString->rows = M->rows;
+    toString->values = malloc(toString->rows * sizeof(char***));
+    for (int i = 0; i < M->rows; i++) {
+        toString->values[i] = malloc(toString->columns * sizeof(char**));
+        for (int j = 0; j < M->columns; j++) {
+            toString->values[i][j] = malloc(20 * sizeof(char));
+            snprintf(toString->values[i][j], 2000 * sizeof(char), "%lf", M->values[i][j]);
         }
-    } else printf("No matrix\n");
-    printf("=====================================\n");
+    }
+    return toString;
 }

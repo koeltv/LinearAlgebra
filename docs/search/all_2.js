@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['cmakelists_2etxt_4',['CMakeLists.txt',['../_c_make_lists_8txt.html',1,'']]],
-  ['coefficient_5',['coefficient',['../struct_polynomial.html#a79344dd1582f301ada9dace88c583b87',1,'Polynomial']]],
-  ['columns_6',['columns',['../struct_matrix.html#a341d2f00089fffc71eb6dbfd29f56c89',1,'Matrix::columns()'],['../struct_string_matrix.html#a341d2f00089fffc71eb6dbfd29f56c89',1,'StringMatrix::columns()']]],
-  ['copy_7',['copy',['../matrix_8c.html#a6414f3996aaf4386b25ef9d33824f05d',1,'copy(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#a6414f3996aaf4386b25ef9d33824f05d',1,'copy(Matrix *M):&#160;matrix.c']]],
-  ['copypolynomial_8',['copyPolynomial',['../polynomial_8c.html#aeb42774cebe51ce8f107566297a4f772',1,'copyPolynomial(Polynomial *F):&#160;polynomial.c'],['../polynomial_8h.html#aeb42774cebe51ce8f107566297a4f772',1,'copyPolynomial(Polynomial *F):&#160;polynomial.c']]]
+  ['degreeofstring_10',['degreeOfString',['../polynomial_8c.html#a616af06563603812e1b7b0a9ec7599aa',1,'degreeOfString(const char *string, int start, int end):&#160;polynomial.c'],['../polynomial_8h.html#a616af06563603812e1b7b0a9ec7599aa',1,'degreeOfString(const char *string, int start, int end):&#160;polynomial.c']]],
+  ['derive_11',['derive',['../polynomial_8c.html#ac9cf3e2f18565382be13c8e23d5a9d09',1,'derive(Polynomial *F):&#160;polynomial.c'],['../polynomial_8h.html#ac9cf3e2f18565382be13c8e23d5a9d09',1,'derive(Polynomial *F):&#160;polynomial.c']]],
+  ['det_12',['det',['../matrix_8c.html#ae0df367fbdf5be60a91d3d7b54dc78a4',1,'det(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#ae0df367fbdf5be60a91d3d7b54dc78a4',1,'det(Matrix *M):&#160;matrix.c']]],
+  ['detofstringmatrix_13',['detOfStringMatrix',['../string_interactions_8c.html#ae0642f00c8e67f79d64890f45665b714',1,'detOfStringMatrix(StringMatrix *M):&#160;stringInteractions.c'],['../string_interactions_8h.html#ae0642f00c8e67f79d64890f45665b714',1,'detOfStringMatrix(StringMatrix *M):&#160;stringInteractions.c']]]
 ];

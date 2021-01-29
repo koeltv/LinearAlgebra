@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['newmatrix_32',['newMatrix',['../matrix_8c.html#a43a9b0a75747c361b92ef5b28afc0db6',1,'newMatrix(int nbRows, int nbColumns, double initialValue):&#160;matrix.c'],['../matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6',1,'newMatrix(int nbRows, int nbColumns, double initialValue):&#160;matrix.c']]],
-  ['newstringmatrix_33',['newStringMatrix',['../string_interactions_8c.html#a3e6e0bb3b3c97497ce1b1cb210757783',1,'stringInteractions.c']]],
-  ['newtonmethod_34',['newtonMethod',['../polynomial_8c.html#a539b8af1dce4daf3af784254c7da6a4d',1,'newtonMethod(Polynomial *F):&#160;polynomial.c'],['../polynomial_8h.html#a539b8af1dce4daf3af784254c7da6a4d',1,'newtonMethod(Polynomial *F):&#160;polynomial.c']]]
+  ['padd_36',['pAdd',['../polynomial_8c.html#a5198c88027c5c1cacb50543cd824d20b',1,'polynomial.c']]],
+  ['pmultiply_37',['pMultiply',['../polynomial_8c.html#ad820bf3ce3501baaf5cc700bca7cea17',1,'polynomial.c']]],
+  ['polynomial_38',['Polynomial',['../struct_polynomial.html',1,'']]],
+  ['polynomial_2ec_39',['polynomial.c',['../polynomial_8c.html',1,'']]],
+  ['polynomial_2eh_40',['polynomial.h',['../polynomial_8h.html',1,'']]],
+  ['printmatrix_41',['printMatrix',['../matrix_8c.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7',1,'printMatrix(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7',1,'printMatrix(Matrix *M):&#160;matrix.c']]],
+  ['printpolynomial_42',['printPolynomial',['../polynomial_8c.html#a9b7148ba196736454dd459ca695a9ab5',1,'printPolynomial(Polynomial *F):&#160;polynomial.c'],['../polynomial_8h.html#a9b7148ba196736454dd459ca695a9ab5',1,'printPolynomial(Polynomial *F):&#160;polynomial.c']]]
 ];
