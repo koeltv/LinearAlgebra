@@ -20,6 +20,15 @@ typedef struct {
     int highestDegree; ///Highest degree of the polynomial
 } Polynomial;
 
+/**
+ * @struct Solutions
+ * Structure representing solutions linked to an equation
+ */
+typedef struct {
+    double *values; ///Values contained in array
+    int size; ///Number of values contained
+} Solutions;
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -105,6 +114,6 @@ double newtonMethod(Polynomial *F);
  * @param F - The polynomial to solve
  * @return roots of the polynomial
  */
-double *solve(Polynomial *F);
+Solutions *solve(Polynomial *F);
 
 #endif //LINEARALGEBRA_POLYNOMIAL_H

@@ -221,7 +221,7 @@ Matrix *inverse(Matrix *M);
  * @param M - the given augmented matrix
  * @return solvable augmented matrix
  */
-Matrix *solveAugmentedMatrix(Matrix *M);
+Solutions *solveAugmentedMatrix(Matrix *M);
 
 /**
  * Eigen values of a matrix
@@ -229,16 +229,15 @@ Matrix *solveAugmentedMatrix(Matrix *M);
  * @param M  - the given matrix
  * @return eigen values of M
  */
-double *eigenValues(Matrix *M);
+Solutions *eigenValues(Matrix *M);
 
 /**
  * Eigen vectors of a matrix
  * This function return the eigen vectors of a given matrix in a matrix form
  * @param M - the given matrix
- * @param eigenvalues - the eigenvalues of M
  * @return eigen vectors in matrix form
  */
-Matrix *eigenVectors(Matrix *M, const double *eigenvalues);
+Matrix *eigenVectors(Matrix *M);
 
 /**
  * Triangularise a matrix

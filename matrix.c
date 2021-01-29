@@ -272,12 +272,16 @@ Matrix *inverse(Matrix *M){
     } return NULL;
 }
 
-Matrix *solveAugmentedMatrix(Matrix *M){
+Solutions *solveAugmentedMatrix(Matrix *M){
+    //TODO If not square, make into one (!!! case = 0)
+
     //Normalise first row
     Matrix *augmented = addColumn(M);
-    for (int i = 0; i < augmented->columns; i++) augmented->values[0][i] /= augmented->values[0][0]; //TODO Case = 0
+    for (int i = 0; i < augmented->columns; i++) {
+        augmented->values[0][i] /= M->values[0][0];
+    }
 
-    //Change matrix to echelon form TODO Adapt to different forms (not square)
+    //Change matrix to echelon form
     for (int i = 0; i < augmented->columns - 1; i++) { //Column by column for echelon form
         for (int j = i+1; j < augmented->rows; j++) { //Row by row for first = 0
             double coefficient = augmented->values[j][0] >= 0 ? -1 * augmented->values[0][0] * augmented->values[j][0] : augmented->values[0][0] * augmented->values[j][0];
@@ -286,52 +290,108 @@ Matrix *solveAugmentedMatrix(Matrix *M){
             }
         }
     }
-    augmented->values[M->rows-1][M->columns] /= augmented->values[M->rows-1][M->columns-1];
+    if (augmented->values[M->rows-1][M->columns] != 0) {
+        augmented->values[M->rows-1][M->columns] /= augmented->values[M->rows-1][M->columns-1];
+    }
     if (augmented->values[M->rows-1][M->columns] == -0) augmented->values[M->rows-1][M->columns] = 0;
 
-    augmented->values[M->rows-1][M->columns-1] /= augmented->values[M->rows-1][M->columns-1];
+    if (augmented->values[M->rows-1][M->columns-1] != 0) {
+        augmented->values[M->rows-1][M->columns-1] /= augmented->values[M->rows-1][M->columns-1];
+    }
 
-    //Solve the linear system
-    double *solution = malloc(M->rows * sizeof(double));
-    for (int i = M->rows-1; i >= 0; i--) {
-        solution[M->rows - i-1] = augmented->values[i][M->columns];
+    //Solve the linear system TODO Handle more than 1 vector
+    Solutions *solution = malloc(sizeof(Solutions));
+    solution->size = M->columns;
+    solution->values = calloc(M->columns, sizeof(double));
+//    for (int i = M->rows-1; i >= 0; i--) {
+//        solution->values[M->rows - i-1] = augmented->values[i][M->columns];
+//        for (int j = i; j < M->rows-1; j++) {
+//            solution->values[M->rows - i-1] -= augmented->values[i][j] * solution->values[M->rows - j-1];
+//        }
+//    }
+
+    if (augmented->values[M->rows-1][M->columns-1] == 0) {
+        solution->values[M->rows - 1] = 1;
+    } else {
+        solution->values[M->rows - 1] = 0;
+    }
+
+    for (int i = M->rows-2; i >= 0; i--) {
         for (int j = i; j < M->rows-1; j++) {
-            solution[M->rows - i-1] -= augmented->values[i][j] * solution[M->rows - j-1];
+            solution->values[M->rows - i-2] -= augmented->values[i][j] * solution->values[M->rows - j-1];
         }
+        solution->values[M->rows - i-2] /= augmented->values[i][M->columns-1];
     }
 
     printf("Solutions :\n");
-    for (int i = M->rows-1; i >= 0; i--) printf("x%d = %1.2lf\n", M->rows-1 - i, solution[i]);
+    for (int i = M->rows-1; i >= 0; i--) printf("x%d = %1.2lf\n", M->rows-1 - i, solution->values[i]);
 
-    return augmented;
+    return solution;
 }
 
-double *eigenValues(Matrix *M){
+Solutions *eigenValues(Matrix *M){
     if (M != NULL){
         char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
         return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
     } else return NULL;
 }
 
-Matrix *eigenVectors(Matrix *M, const double *eigenvalues){
-    Matrix *eigenMatrix = malloc(sizeof(Matrix));
-    eigenMatrix->rows = M->rows;
-    int nbVectors;
-    for (nbVectors = 0; nbVectors < 3; nbVectors++) { //TODO change condition
+short orthogonal(Matrix *M1, Matrix *M2){
+    if (M1->rows == M2->rows){
+        Matrix *toSolve = M1;
+        for (int i = 0; i < M2->columns; i++) {
+            toSolve = addColumn(toSolve);
+            for (int j = 0; j < M2->rows; j++) toSolve->values[M1->columns + i][j] = M2->values[i][j];
+        }
+        Solutions *result = solveAugmentedMatrix(toSolve);
+        for (int i = 0; i < result->size; i++) if (result->values[i] != 0) return 0;
+        return 1;
+    } else return -1;
+}
+
+Matrix *completeOrthogonal(Matrix *M){
+    if (M->columns == M->rows) return M;
+    else {
+        Matrix *completed = M;
+        for (int i = M->columns; i < M->rows; i++) {
+            completed = addColumn(completed);
+            for (int j = 0; j < M->rows; j++) {
+                //Create basic vector
+                Matrix *orthogonalVector = newMatrix(M->rows, 1, 0);
+                orthogonalVector->values[j][0] = 1;
+                //Check if orthogonal with the other vectors
+                if (orthogonal(M, orthogonalVector) == 1) {
+                    for (int k = 0; k < M->rows; k++) M->values[k][M->columns] = orthogonalVector->values[k][0];
+                    break;
+                }
+            }
+        }
+        return completed;
+    }
+}
+
+Matrix *eigenVectors(Matrix *M){
+    //Solutions *eigValues = eigenValues(M);
+    Solutions *eigValues = malloc(sizeof(Solutions));
+    eigValues->values = malloc(2 * sizeof(double));
+    eigValues->values[0] = 2;
+    eigValues->values[1] = 4;
+    eigValues->size = 2;
+
+    Matrix *eigenMatrix = newMatrix(M->rows, eigValues->size, 0);
+    for (int nbVectors = 0; nbVectors < eigenMatrix->columns; nbVectors++) {
         Matrix *toSolve = copy(M);
-        for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigenvalues[j];
-        Matrix *vector = solveAugmentedMatrix(toSolve); //TODO Adapt function
-        for (int j = 0; j < M->rows; j++) eigenMatrix->values[nbVectors][j] = vector->values[nbVectors][j];
+        for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[nbVectors];
+        Solutions *vector = solveAugmentedMatrix(toSolve);
+        freeMatrix(toSolve);
+        for (int j = 0; j < M->rows; j++) eigenMatrix->values[j][nbVectors] = vector->values[j];
     }
-    for (int i = nbVectors; i < M->columns; i++) {
-        //Complete the eigen matrix
-    }
-    return eigenMatrix;
+    return completeOrthogonal(eigenMatrix);
 }
 
 Matrix *triangularise(Matrix *M){
     if (M != NULL) {
-        Matrix *PInverse, *P = eigenVectors(M, eigenValues(M));
+        Matrix *PInverse, *P = eigenVectors(M);
         if ((PInverse = inverse(P)) != NULL) return multiply(multiply(PInverse, M), P);
     }
     return NULL;
