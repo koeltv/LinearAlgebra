@@ -252,16 +252,18 @@ double newtonMethod(Polynomial *F) {
     } else exit(EXIT_FAILURE);
 }
 
-double *solve(Polynomial *F) {
+Solutions *solve(Polynomial *F) { //TODO Search for problems with roots
     if (F != NULL) {
-        double *root = malloc(F->highestDegree * sizeof(double));
+        Solutions *x = malloc(sizeof(Solutions));
+        x->size = F->highestDegree;
+        x->values = malloc(x->size * sizeof(double));
         printf("roots :\n");
         Polynomial *temp = copyPolynomial(F);
-        for (int i = 0; i < F->highestDegree; i++) {
-            root[i] = newtonMethod(temp);
-            temp = syntheticDivision(temp, root[i]);
-            printf("%lf\n", root[i]);
+        for (int i = 0; i < x->size; i++) {
+            x->values[i] = newtonMethod(temp);
+            temp = syntheticDivision(temp, x->values[i]);
+            printf("%lf\n", x->values[i]);
         }
-        return root;
+        return x;
     } else return NULL;
 }

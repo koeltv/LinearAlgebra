@@ -18,9 +18,11 @@ int main() {
     //printf("Polynomial form : ");
     //printPolynomial(stringToPolynomial(F, 0, length(F) + 1));
 
-    Matrix *chat = newMatrix(2, 2, 0);
-    chat->values[0][0] = 2; chat->values[1][1] = 2;
-    eigenValues(chat);
+    Matrix *chat = newMatrix(2, 2, 1);
+    chat->values[0][0] = 3; chat->values[1][1] = 3;
+    //eigenValues(chat);
+    printMatrix(eigenVectors(chat));
+    printMatrix(triangularise(chat));
 //    char *result = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(chat)));
 //    printf("Result : %s\n", result);
 //    solve(stringToPolynomial(result, 0, length(result) + 1));
