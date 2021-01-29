@@ -13,7 +13,7 @@ var matrix_8c =
     [ "multiply", "matrix_8c.html#a8d65c668b4f9b40a5c8d63d93bada733", null ],
     [ "newMatrix", "matrix_8c.html#a43a9b0a75747c361b92ef5b28afc0db6", null ],
     [ "printMatrix", "matrix_8c.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7", null ],
-    [ "readMatrixInFile", "matrix_8c.html#a50b7176cde2ad94612e201eec38e4180", null ],
+    [ "readMatrixInFile", "matrix_8c.html#af9c4c40307189cce64b23320040dea8f", null ],
     [ "readMatrixWIP", "matrix_8c.html#a308febcad4d0156caf38eda75918a65d", null ],
     [ "removeColumn", "matrix_8c.html#a710603d3739261b8b2b8102768c125d3", null ],
     [ "removeRow", "matrix_8c.html#a904afae327a47071595fa68b0ea0660c", null ],

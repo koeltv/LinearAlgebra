@@ -7,27 +7,6 @@
 
 #include "polynomial.h"
 
-void printPolynomial(Polynomial *F){
-    if (F != NULL) {
-        printf("F(X) = %1.1lfX^%d", F->coefficient[F->highestDegree], F->highestDegree);
-        for (int i = F->highestDegree - 1; i >= 0; i--) {
-            if (F->coefficient[i] != 0) {
-                //Choose the sign
-                int sign = 1;
-                if (F->coefficient[i] < 0) {
-                    printf(" - ");
-                    sign = -1;
-                } else printf(" + ");
-                //Print the value with the power of X
-                if (i == 1) printf("%1.1lfX", F->coefficient[i] * sign);
-                else if (i == 0) printf("%1.1lf", F->coefficient[i] * sign);
-                else printf("%1.1lfX^%d", F->coefficient[i] * sign, i);
-            }
-        }
-        printf("\n");
-    } else printf("No F\n");
-}
-
 void freePolynomial(Polynomial *F){
     if (F != NULL){
         free(F->coefficient); free(F);
@@ -35,84 +14,13 @@ void freePolynomial(Polynomial *F){
     }
 }
 
-//rules if multiplication, parenthesis, else OK
-int degreeOfString(const char *string, int start, int end){
-    int degree = 0;
-    for (int i = start; string[i] != '\0' && i <= end; i++) {
-        //Count in parenthesis
-        if (string[i] == '(') {
-            //Search for end of parenthesis
-            int partialEnd = i, counter = 1;
-            do {
-                partialEnd++;
-                if (string[partialEnd] == '(') counter++;
-                else if (string[partialEnd] == ')') counter--;
-            } while (counter > 0);
-            //degree of the parenthesis
-            int localdegree = degreeOfString(string, i + 1, partialEnd - 1);
-            if (localdegree > degree) degree = localdegree;
-            i = partialEnd;
-        } else if (string[i] == '*'){
-            //Case of multiplication
-            while (string[i] != '(') i++;
-                //Search for end of parenthesis
-                int partialEnd = i, counter = 1;
-                do {
-                    partialEnd++;
-                    if (string[partialEnd] == '(') counter++;
-                    else if (string[partialEnd] == ')') counter--;
-                } while (counter > 0);
-                //degree of the parenthesis
-                degree += degreeOfString(string, i + 1, partialEnd - 1);
-                i = partialEnd;
-        } else {
-            //If power > actual change for the new
-            if (string[i] == 'X'){
-                if (string[i+1] == '^') {
-                    if (string[i+2] >= '1' && string[i+2] <= '9' && string[i+2] - '0' > degree) {
-                        degree = string[i+2] - '0';
-                        i += 2;
-                    }
-                } else if (degree < 1) {
-                    degree = 1;
-                    i++;
-                }
-            }
-        }
-    }
-    return degree;
-}
-
-Polynomial *stringToPolynomial(char *string){ //TODO Adapt to multiplication and parenthesis
-    if (string != NULL) {
-        Polynomial *F = malloc(sizeof(Polynomial));
-
-        //Research of the highest degree
-        F->highestDegree = degreeOfString(string, 0, length(string) + 1);
-
-        //Recuperation of the coefficients
-        F->coefficient = calloc(F->highestDegree + 1, sizeof(double));
-        for (int i = 0; string[i] != '\0'; i++) {
-            double temp = readDoubleInString(string, &i);
-            do {
-                //If there is no X after the value
-                if (string[i] != 'X') {
-                    F->coefficient[0] += temp;
-                } else {
-                    //If there is no power after the X
-                    if (string[i + 1] == ' ' || string[i + 1] == '+' || string[i + 1] == '-') {
-                        F->coefficient[1] += temp;
-                        i++;
-                        //If there is a power after the X
-                    } else if (string[i + 1] == '^' && string[i + 2] >= '0' && string[i + 2] <= '9') {
-                        i += 2;
-                        int index = (int) readDoubleInString(string, &i);
-                        F->coefficient[index] += temp;
-                    }
-                }
-            } while (string[i] != '+' && string[i] != '-' && string[i] != ' ' && string[i] != '\0');
-        }
-        return F;
+Polynomial *copyPolynomial(Polynomial *F) {
+    if (F != NULL) {
+        Polynomial *copy = malloc(sizeof(Polynomial));
+        copy->highestDegree = F->highestDegree;
+        copy->coefficient = malloc((F->highestDegree + 1) * sizeof(double));
+        for (int i = 0; i <= F->highestDegree; i++) copy->coefficient[i] = F->coefficient[i];
+        return copy;
     } else return NULL;
 }
 
@@ -134,6 +42,164 @@ Polynomial *derive(Polynomial *F){
         FPrime->highestDegree = F->highestDegree - 1;
         for (int i = 0; i < F->highestDegree; i++) FPrime->coefficient[i] = F->coefficient[i + 1] * (i + 1);
         return FPrime;
+    } else return NULL;
+}
+
+void printPolynomial(Polynomial *F){
+    if (F != NULL) {
+        printf("F(X) = %1.1lfX^%d", F->coefficient[F->highestDegree], F->highestDegree);
+        for (int i = F->highestDegree - 1; i >= 0; i--) {
+            if (F->coefficient[i] != 0) {
+                //Choose the sign
+                int sign = 1;
+                if (F->coefficient[i] < 0) {
+                    printf(" - ");
+                    sign = -1;
+                } else printf(" + ");
+                //Print the value with the power of X
+                if (i == 1) printf("%1.1lfX", F->coefficient[i] * sign);
+                else if (i == 0) printf("%1.1lf", F->coefficient[i] * sign);
+                else printf("%1.1lfX^%d", F->coefficient[i] * sign, i);
+            }
+        }
+        printf("\n");
+    } else printf("No F\n");
+}
+
+int degreeOfString(const char *string, int start, int end){
+    int degree = 0;
+    for (int i = start; string[i] != '\0' && i <= end; i++) {
+        //Count in parenthesis
+        if (string[i] == '(') {
+            //Search for end of parenthesis
+            int partialEnd = i, counter = 1;
+            do {
+                partialEnd++;
+                if (string[partialEnd] == '(') counter++;
+                else if (string[partialEnd] == ')') counter--;
+            } while (counter > 0);
+            //degree of the parenthesis
+            int localdegree = degreeOfString(string, i + 1, partialEnd - 1);
+            if (localdegree > degree) degree = localdegree;
+            i = partialEnd;
+        } else if (string[i] == '*'){
+            //Case of multiplication
+            while (string[i] != '(') i++;
+            //Search for end of parenthesis
+            int partialEnd = i, counter = 1;
+            do {
+                partialEnd++;
+                if (string[partialEnd] == '(') counter++;
+                else if (string[partialEnd] == ')') counter--;
+            } while (counter > 0);
+            //degree of the parenthesis
+            degree += degreeOfString(string, i + 1, partialEnd - 1);
+            i = partialEnd;
+        } else {
+            //If power > actual change for the new
+            if (string[i] == 'X'){
+                if (string[i+1] == '^') {
+                    if (string[i+2] >= '1' && string[i+2] <= '9' && string[i+2] - '0' > degree) {
+                        degree = string[i+2] - '0';
+                        i += 2;
+                    }
+                } else if (degree < 1) {
+                    degree = 1;
+                    i++;
+                }
+            }
+        }
+    }
+    return degree;
+}
+
+Polynomial *pAdd(Polynomial *F, Polynomial *G){
+    Polynomial *output = malloc(sizeof(Polynomial));
+    Polynomial *lowerPolynomial, *higherPolynomial;
+    if (F->highestDegree < G->highestDegree) {
+        lowerPolynomial = F;
+        higherPolynomial = G;
+    } else {
+        lowerPolynomial = G;
+        higherPolynomial = F;
+    }
+
+    output->highestDegree = higherPolynomial->highestDegree;
+    output->coefficient = malloc((higherPolynomial->highestDegree + 1) * sizeof(double));
+    for (int i = 0; i <= lowerPolynomial->highestDegree; i++) {
+        output->coefficient[i] = lowerPolynomial->coefficient[i] + higherPolynomial->coefficient[i];
+    }
+    for (int i = lowerPolynomial->highestDegree + 1; i <= higherPolynomial->highestDegree; i++) {
+        output->coefficient[i] = higherPolynomial->coefficient[i];
+    }
+    return output;
+}
+
+Polynomial *pMultiply(Polynomial *F, Polynomial *G){
+    Polynomial *output = malloc(sizeof(Polynomial));
+    output->highestDegree = F->highestDegree + G->highestDegree;
+    output->coefficient = calloc(output->highestDegree + 1, sizeof(double));
+
+    for (int i = 0; i <= F->highestDegree; i++) {
+        for (int j = 0; j <= G->highestDegree; j++) {
+            output->coefficient[i + j] += F->coefficient[i] * G->coefficient[j];
+        }
+    }
+    return output;
+}
+
+Polynomial *next(const char *string, int *start) {
+    int firstPosition = *start, nbOfParenthesis = 0;
+    while (string[*start] != '\0' && nbOfParenthesis >= 0 && ((string[*start] != '-' && string[*start] != '+') || nbOfParenthesis >= 1)) {
+        if (string[*start] == '(') nbOfParenthesis++;
+        else if (string[*start] == ')') nbOfParenthesis--;
+        (*start)++;
+    }
+    return stringToPolynomial(string, firstPosition, *start - 1);
+}
+
+Polynomial *readFirstCoefficient(const char *string, int *start){
+    Polynomial *output = malloc(sizeof(Polynomial));
+    double value = readDoubleInString(string, start);
+    int index = -1;
+    //If there is no X after the value
+    if (string[*start] != 'X') index = 0;
+    else {
+        //If there is no power after the X
+        if (string[*start + 1] != '^') {
+            index = 1;
+            (*start)++;
+        }
+        //If there is a power after the X
+        else if (string[*start + 1] == '^' && string[*start + 2] >= '0' && string[*start + 2] <= '9') {
+            index = (int) readDoubleInString(string, start);
+            (*start) += 2;
+        }
+    }
+    output->highestDegree = index;
+    output->coefficient = calloc(index + 1, sizeof(double));
+    output->coefficient[index] += value;
+    return output;
+}
+
+Polynomial *stringToPolynomial(const char *string, int start, int end){
+    if (string != NULL) {
+        //Recuperation of the first coefficient
+        Polynomial *F = readFirstCoefficient(string, &start);
+
+        //Recuperation of the rest
+        for (int currentSign = start; string[currentSign] != '\0' && currentSign < end;) {
+            while (string[currentSign] != '\0' && string[currentSign] != '-' && string[currentSign] != '+' && string[currentSign] != '*') currentSign++;
+            currentSign++;
+            if (string[currentSign-1] != '\0' && string[currentSign-1] != ')') {
+                if (string[currentSign-1] == '-' || string[currentSign-1] == '+') {
+                    F = pAdd(F, next(string, &currentSign));
+                } else {
+                    F = pMultiply(F, next(string, &currentSign));
+                }
+            }
+        }
+        return F;
     } else return NULL;
 }
 
@@ -167,42 +233,34 @@ double newtonMethod(Polynomial *F) {
             Polynomial *fPrime = derive(F);
             double tolerance = 1e-7, epsilon = 1e-14;
             int maxIterations = 100;
-            Boolean solutionFound = false;
+            short solutionFound = 0;
             //Application of the method until precision or number of iterations is reached
             for (int i = 1; i < maxIterations; i++) {
                 double y = apply(F, x0), yPrime = apply(fPrime, x0);
                 if ((yPrime < 0 ? -yPrime : yPrime) < epsilon) break;
                 x1 = x0 - y / yPrime;
                 if ((x1 - x0 < 0 ? -(x1 - x0) : x1 - x0) <= tolerance) {
-                    solutionFound = true; break;
+                    solutionFound = 1; break;
                 }
                 x0 = x1;
             }
             //End of the method, free temporary values and return output
             freePolynomial(fPrime);
-            if (solutionFound == false) printf("Didn't converge\n");
+            if (solutionFound == 0) printf("Didn't converge\n");
             return x1;
         }
     } else exit(EXIT_FAILURE);
 }
 
-Polynomial *copyPolynomial(Polynomial *F) {
-    if (F != NULL) {
-        Polynomial *copy = malloc(sizeof(Polynomial));
-        copy->highestDegree = F->highestDegree;
-        copy->coefficient = malloc((F->highestDegree + 1) * sizeof(double));
-        for (int i = 0; i <= F->highestDegree; i++) copy->coefficient[i] = F->coefficient[i];
-        return copy;
-    } else return NULL;
-}
-
 double *solve(Polynomial *F) {
     if (F != NULL) {
         double *root = malloc(F->highestDegree * sizeof(double));
+        printf("roots :\n");
         Polynomial *temp = copyPolynomial(F);
         for (int i = 0; i < F->highestDegree; i++) {
             root[i] = newtonMethod(temp);
             temp = syntheticDivision(temp, root[i]);
+            printf("%lf\n", root[i]);
         }
         return root;
     } else return NULL;

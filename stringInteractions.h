@@ -42,8 +42,22 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+/**
+ * Compare strings
+ * This function compare 2 strings, it returns 1 if the first is shorter, 2 if the second is shorter and 0 if they are equal
+ * @param string1 - first string for comparison
+ * @param string2 - second string for comparison
+ * @return result of comparison
+ */
 short shorterString(const char *string1, const char *string2);
 
+/**
+ * Search for string in a string
+ * This function verify if a given string is contained in another, it returns 1 if it does and 0 otherwise
+ * @param mainString - The string to check for the other string
+ * @param toSearch - The string to search
+ * @return result of search
+ */
 short containString(const char *mainString, const char *toSearch);
 
 /**
@@ -69,19 +83,54 @@ double readDoubleInFile(FILE *currentFile, char *temp);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 /**
+ * Create string matrix
+ * This function create a matrix with strings as values, this is used to handle matrix with variables
+ * @param nbRows - number of rows of the matrix
+ * @param nbColumns - number of columns of the matrix
+ * @param initialValue - values to initialise the element to
+ * @return created string matrix
+ */
+StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue);
+
+/**
+ * Free an existing string matrix
+ * This function free an existing string matrix and change its pointer to NULL if it worked successfully
+ * @param M - The string matrix to free
+ */
+void freeStringMatrix(StringMatrix *M);
+
+/**
+ * Remove a row in a string matrix
+ * This function return a string matrix created by removing a row of a given string matrix
+ * @param M - The original string matrix
+ * @param rowIndex - The index of the row to remove
+ * @return string matrix created by removing a row
+ */
+StringMatrix *removeSRow(StringMatrix *M, int rowIndex);
+
+/**
+ * Remove a column in a string matrix
+ * This function return a string matrix created by removing a column of a given matrix
+ * @param M - The original string matrix
+ * @param columnIndex - The index of the column to remove
+ * @return string matrix created by removing a column
+ */
+StringMatrix *removeSColumn(StringMatrix *M, int columnIndex);
+
+/**
  * Implement a variable
  * This function add the variable in the diagonal to be used for P(lambda)
- * @param M
- * @return
+ * @param M - The given string matrix
+ * @return string matrix with the variable X subtracted in the diagonal
  */
-StringMatrix *detPForm(StringMatrix *M);
+StringMatrix *changeToPLambdaForm(StringMatrix *M);
 
 /**
  * Determinant in string format
  * This function output the determinant of a given matrix in string format
- * @param M
- * @return
+ * @param M - The given string matrix
+ * @return determinant in string format
  */
-char *detToString(StringMatrix *M);
+char *detOfStringMatrix(StringMatrix *M);
 
 #endif //LINEARALGEBRA_STRINGINTERACTIONS_H

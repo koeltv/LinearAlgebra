@@ -35,9 +35,10 @@ Matrix *readMatrixWIP(); //TODO Problem pointer
 /**
  * Current read a matrix in file
  * This function read a matrix in a file given a specific format and return a Matrix structure made from it
+ * @param link
  * @return matrix formed from the file
  */
-Matrix *readMatrixInFile();
+Matrix *readMatrixInFile(char *link);
 
 /**
  * Create a simple matrix
@@ -61,7 +62,7 @@ void freeMatrix(Matrix *M);
  * This function return a matrix created by removing a row of a given matrix
  * @param M - The original matrix
  * @param rowIndex - The index of the row to remove
- * @return M created by removing a row
+ * @return matrix created by removing a row
  */
 Matrix *removeRow(Matrix *M, int rowIndex);
 
@@ -171,6 +172,13 @@ Matrix *multiply(Matrix *A, Matrix *B);
  */
 Matrix *transpose(Matrix *M);
 
+/**
+ * print matrix
+ * This function print a given matrix in the terminal
+ * @param M - the given matrix
+ */
+void printMatrix(Matrix *M);
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Advanced operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -216,20 +224,28 @@ Matrix *inverse(Matrix *M);
 Matrix *solveAugmentedMatrix(Matrix *M);
 
 /**
+ * Eigen values of a matrix
+ * This function return the eigen values of a given matrix
+ * @param M  - the given matrix
+ * @return eigen values of M
+ */
+double *eigenValues(Matrix *M);
+
+/**
+ * Eigen vectors of a matrix
+ * This function return the eigen vectors of a given matrix in a matrix form
+ * @param M - the given matrix
+ * @param eigenvalues - the eigenvalues of M
+ * @return eigen vectors in matrix form
+ */
+Matrix *eigenVectors(Matrix *M, const double *eigenvalues);
+
+/**
  * Triangularise a matrix
  * This function triangularise (or diagonalise) a given matrix
  * @param M - the given matrix
  * @return triangularised M
  */
 Matrix *triangularise(Matrix *M);
-
-/**
- * print matrix
- * This function print a given matrix in the terminal
- * @param M - the given matrix
- */
-void printMatrix(Matrix *M);
-
-double *eigenValues(Matrix *M);
 
 #endif //LINEARALGEBRA_MATRIX_H

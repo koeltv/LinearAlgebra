@@ -48,9 +48,9 @@ Matrix *readMatrixWIP(){
     return matrix;
 }
 
-Matrix *readMatrixInFile(){
+Matrix *readMatrixInFile(char *link){
     FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
+    if ((currentFile = fopen(link, "rb")) == NULL) exit(EXIT_FAILURE);
     char *firstLine = readString(currentFile);
 
     //Creation of the matrix
@@ -212,6 +212,17 @@ Matrix *transpose(Matrix *M){
     } else return NULL;
 }
 
+void printMatrix(Matrix *M){
+    printf("=====================================\n");
+    if (M != NULL) {
+        for (int i = 0; i < M->rows; i++) {
+            for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
+            printf("\n");
+        }
+    } else printf("No matrix\n");
+    printf("=====================================\n");
+}
+
 double trace(Matrix *M){
     if (M != NULL) {
         double trace = 0;
@@ -297,7 +308,8 @@ Matrix *solveAugmentedMatrix(Matrix *M){
 
 double *eigenValues(Matrix *M){
     if (M != NULL){
-        return solve(stringToPolynomial(detToString(detPForm(toStringMatrix(M)))));
+        char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
+        return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
     } else return NULL;
 }
 
@@ -317,6 +329,14 @@ Matrix *eigenVectors(Matrix *M, const double *eigenvalues){
     return eigenMatrix;
 }
 
+Matrix *triangularise(Matrix *M){
+    if (M != NULL) {
+        Matrix *PInverse, *P = eigenVectors(M, eigenValues(M));
+        if ((PInverse = inverse(P)) != NULL) return multiply(multiply(PInverse, M), P);
+    }
+    return NULL;
+}
+
 StringMatrix *toStringMatrix(Matrix *M){
     StringMatrix *toString = malloc(sizeof(StringMatrix));
     toString->columns = M->columns;
@@ -330,23 +350,4 @@ StringMatrix *toStringMatrix(Matrix *M){
         }
     }
     return toString;
-}
-
-Matrix *triangularise(Matrix *M){
-    if (M != NULL) {
-        Matrix *PInverse, *P = eigenVectors(M, eigenValues(M));
-        if ((PInverse = inverse(P)) != NULL) return multiply(multiply(PInverse, M), P);
-    }
-    return NULL;
-}
-
-void printMatrix(Matrix *M){
-    printf("=====================================\n");
-    if (M != NULL) {
-        for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
-            printf("\n");
-        }
-    } else printf("No matrix\n");
-    printf("=====================================\n");
 }

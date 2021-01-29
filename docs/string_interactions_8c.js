@@ -1,8 +1,8 @@
 var string_interactions_8c =
 [
+    [ "changeToPLambdaForm", "string_interactions_8c.html#a8eff6d464165e27345644c7f4c5e52cd", null ],
     [ "containString", "string_interactions_8c.html#a6306f696850d2f27a45cc5f8caefd1dc", null ],
-    [ "detPForm", "string_interactions_8c.html#a22ada272d4935acc766aa103861289fc", null ],
-    [ "detToString", "string_interactions_8c.html#aa1980e25971d1bcaa1c1ae8c2d51a15e", null ],
+    [ "detOfStringMatrix", "string_interactions_8c.html#ae0642f00c8e67f79d64890f45665b714", null ],
     [ "freeStringMatrix", "string_interactions_8c.html#a5fedb0e0e5dd9619c738f313e9ff12c2", null ],
     [ "length", "string_interactions_8c.html#a5e6c13b6b96060a3c07e87c3cd623fa6", null ],
     [ "newStringMatrix", "string_interactions_8c.html#a3e6e0bb3b3c97497ce1b1cb210757783", null ],

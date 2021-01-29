@@ -7,55 +7,23 @@
 
 #include "stringInteractions.h"
 
-double readDoubleInString(const char *string, int *position){
-    double result = 0;
-    while (string[*position] == ' ') (*position)++;
-
-    //Read the sign
-    int sign = 1;
-    if (string[*position] == '-') sign = -1;
-    while (string[*position] == ' ' || string[*position] == '+' || string[*position] == '-') (*position)++;
-
-    //Read the value
-    do {
-        if (string[*position] >= '0' && string[*position] <= '9') {
-            result = result * 10 + string[*position] - '0';
-            (*position)++;
-        }
-        else if (string[*position] == '.'){
-            double decimal = 0.1;
-            (*position)++;
-            do {
-                result += (string[*position] - '0') * decimal;
-                decimal /= 10;
-                (*position)++;
-            } while (string[*position] >= '0' && string[*position] <= '9');
-        }
-    } while (string[*position] == '.' || (string[*position] >= '0' && string[*position] <= '9'));
-    return result * sign;
+char *readString(FILE *current){
+    int i = 0;
+    char temp, *string = (char*) malloc(20 * sizeof(char)); //On part d'une chaîne de 20 caractères
+    fscanf(current, " %c", &temp);
+    while (temp >= ' ' && temp <= '~'){
+        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //Si on dépasse 20 caractères, on ajoute un espace de 20 caractères à la chaîne
+        string[i] = temp;
+        fscanf(current, "%c", &temp);
+        i++;
+    } string[i] = '\0';
+    return string;
 }
 
-double readDoubleInFile(FILE *currentFile, char *temp){
-    double result = 0;
-    fscanf(currentFile, " %c", temp);
-    if (*temp == '-') {
-        fscanf(currentFile, "%c", temp);
-        result -= (double)(*temp - '0');
-    } else result += (double)(*temp - '0');
-    do {
-        fscanf(currentFile, "%c", temp);
-        if (*temp >= '0' && *temp <= '9') result = result * 10 + *temp - '0';
-        else if (*temp == '.'){
-            double decimal = 0.1;
-            fscanf(currentFile, "%c", temp);
-            do {
-                result += (*temp - '0') * decimal;
-                decimal /= 10;
-                fscanf(currentFile, "%c", temp);
-            } while (*temp >= '0' && *temp <= '9');
-        }
-    } while (*temp == '.' || (*temp >= '0' && *temp <= '9'));
-    return result;
+int length(const char *string){
+    int length = 0;
+    while (string[length] != '\0') length++;
+    return length;
 }
 
 short shorterString(const char *string1, const char *string2){
@@ -81,17 +49,55 @@ short containString(const char *mainString, const char *toSearch){
     return 0;
 }
 
-char *readString(FILE *current){
-    int i = 0;
-    char temp, *string = (char*) malloc(20 * sizeof(char)); //On part d'une chaîne de 20 caractères
-    fscanf(current, " %c", &temp);
-    while (temp >= ' ' && temp <= '~'){
-        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //Si on dépasse 20 caractères, on ajoute un espace de 20 caractères à la chaîne
-        string[i] = temp;
-        fscanf(current, "%c", &temp);
-        i++;
-    } string[i] = '\0';
-    return string;
+double readDoubleInString(const char *string, int *position){
+
+    //Search for the sign
+    while (*position >= 0 && string[*position] == ' ') (*position)--;
+    while (string[*position] != '\0' && (string[*position] < '0' || string[*position] > '9') && string[*position] != '-') (*position)++;
+
+    //Read the sign
+    int sign = 1;
+    if (string[*position] == '-') sign = -1;
+    while (string[*position] == ' ' || string[*position] == '+' || string[*position] == '-') (*position)++;
+
+    //Read the value
+    double result = 0;
+    do {
+        if (string[*position] >= '0' && string[*position] <= '9') {
+            result = result * 10 + string[(*position)++] - '0';
+        }
+        else if (string[(*position)++] == '.'){
+            double decimal = 0.1;
+            do {
+                result += (string[(*position)++] - '0') * decimal;
+                decimal /= 10;
+            } while (string[(*position)] >= '0' && string[(*position)] <= '9');
+        }
+    } while (string[*position] == '.' || (string[*position] >= '0' && string[*position] <= '9'));
+    return result * sign;
+}
+
+double readDoubleInFile(FILE *currentFile, char *temp){
+    double result = 0;
+    fscanf(currentFile, " %c", temp);
+    if (*temp == '-') {
+        fscanf(currentFile, "%c", temp);
+        result -= (double)(*temp - '0');
+    } else result += (double)(*temp - '0');
+    do {
+        fscanf(currentFile, "%c", temp);
+        if (*temp >= '0' && *temp <= '9') result = result * 10 + *temp - '0';
+        else if (*temp == '.') {
+            double decimal = 0.1;
+            fscanf(currentFile, "%c", temp);
+            do {
+                result += (*temp - '0') * decimal;
+                decimal /= 10;
+                fscanf(currentFile, "%c", temp);
+            } while (*temp >= '0' && *temp <= '9');
+        }
+    } while (*temp == '.' || (*temp >= '0' && *temp <= '9'));
+    return result;
 }
 
 StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue){
@@ -140,27 +146,20 @@ StringMatrix *removeSColumn(StringMatrix *M, int columnIndex){
     } else return NULL;
 }
 
-int length(const char *string){
-    int length = 0;
-    while (string[length] != '\0') length++;
-    return length;
-}
-
-StringMatrix *detPForm(StringMatrix *M){
+StringMatrix *changeToPLambdaForm(StringMatrix *M){
     for (int i = 0; i < M->columns; i++) {
-        snprintf(M->values[i][i], (length(M->values[i][i]) + 5) * sizeof(char), "%s - X", M->values[i][i]);
+        snprintf(M->values[i][i], (length(M->values[i][i]) + 6) * sizeof(char), "%s - 1X", M->values[i][i]);
     }
     return M;
 }
 
-char *detToString(StringMatrix *M){
+char *detOfStringMatrix(StringMatrix *M){
     if (M->rows == 1 && M->columns == 1) return M->values[0][0];
     else {
-        //char *result = calloc(200, sizeof(char));
         char *result = calloc(1, sizeof(char));
         for (int i = 0, sign = 1; i < M->rows; i++, sign*=-1) {
             StringMatrix *subDet = removeSRow(removeSColumn(M, 0), i);
-            char *detOfSubDet = detToString(subDet);
+            char *detOfSubDet = detOfStringMatrix(subDet);
             int totalSize = length(M->values[i][0]) + length(detOfSubDet);
 
             if (sign == -1) {

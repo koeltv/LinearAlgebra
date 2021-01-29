@@ -12,12 +12,6 @@
 // Structures
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
- * @struct Boolean
- * Represent a boolean value
- */
-typedef enum{false, true} Boolean;
-
-/**
  * @struct Polynomial
  * Structure representing a polynomial of any degree
  */
@@ -30,20 +24,6 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
- * Print a polynomial
- * Print a given polynomial in the terminal
- * @param F - The given polynomial
- */
-void printPolynomial(Polynomial *F);
-
-/**
- * Free an existing polynomial
- * This function free an existing polynomial and change its pointer to NULL if it worked successfully
- * @param F - The polynomial to free
- */
-void freePolynomial(Polynomial *F);
-
-/**
  * Convert a string to a polynomial
  * This function return a polynomial created from a string
  * @note there can be more than one coefficient for the same power of X
@@ -51,7 +31,14 @@ void freePolynomial(Polynomial *F);
  * @param string - The given string
  * @return polynomial created from the string
  */
-Polynomial *stringToPolynomial(char *string);
+Polynomial *stringToPolynomial(const char *string, int start, int end);
+
+/**
+ * Free an existing polynomial
+ * This function free an existing polynomial and change its pointer to NULL if it worked successfully
+ * @param F - The polynomial to free
+ */
+void freePolynomial(Polynomial *F);
 
 /**
  * Copy a polynomial
@@ -83,6 +70,13 @@ double apply(Polynomial *F, double x);
  * @return F'
  */
 Polynomial *derive(Polynomial *F);
+
+/**
+ * Print a polynomial
+ * Print a given polynomial in the terminal
+ * @param F - The given polynomial
+ */
+void printPolynomial(Polynomial *F);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Advanced operator functions
