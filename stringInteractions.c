@@ -9,10 +9,10 @@
 
 char *readString(FILE *current){
     int i = 0;
-    char temp, *string = (char*) malloc(20 * sizeof(char)); //On part d'une chaîne de 20 caractères
+    char temp, *string = (char*) malloc(20 * sizeof(char)); //We start from a chain of 20 characters
     fscanf(current, " %c", &temp);
     while (temp >= ' ' && temp <= '~'){
-        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //Si on dépasse 20 caractères, on ajoute un espace de 20 caractères à la chaîne
+        if (i % 19 == 1 && i > 19) string = (char *) realloc (string, (i + 20) * sizeof(char)); //If we go over 20, we add 20 more to the chain
         string[i] = temp;
         fscanf(current, "%c", &temp);
         i++;

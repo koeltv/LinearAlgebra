@@ -79,8 +79,8 @@ int degreeOfString(const char *string, int start, int end){
                 else if (string[partialEnd] == ')') counter--;
             } while (counter > 0);
             //degree of the parenthesis
-            int localdegree = degreeOfString(string, i + 1, partialEnd - 1);
-            if (localdegree > degree) degree = localdegree;
+            int localDegree = degreeOfString(string, i + 1, partialEnd - 1);
+            if (localDegree > degree) degree = localDegree;
             i = partialEnd;
         } else if (string[i] == '*'){
             //Case of multiplication

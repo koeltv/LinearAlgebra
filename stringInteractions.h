@@ -1,3 +1,8 @@
+/**
+ * @file stringInteractions.h Header file of stringInteractions.c
+ * @author Valentin Koeltgen
+ */
+
 #ifndef LINEARALGEBRA_STRINGINTERACTIONS_H
 #define LINEARALGEBRA_STRINGINTERACTIONS_H
 
