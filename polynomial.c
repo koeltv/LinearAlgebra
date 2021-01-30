@@ -225,13 +225,12 @@ Polynomial *syntheticDivision(Polynomial *F, double root){
 double newtonMethod(Polynomial *F) {
     if (F != NULL && F->highestDegree > 0) {
         //If the maximum degree is 1, the root is easy to find
-        if (F->highestDegree == 1){
-            return F->coefficient[0] / F->coefficient[1];
-        } else {
+        if (F->highestDegree == 1) return -F->coefficient[0] / F->coefficient[1];
+        else {
             //Initialisation
             double x0 = 1, x1;
             Polynomial *fPrime = derive(F);
-            double tolerance = 1e-7, epsilon = 1e-14;
+            double tolerance = 1e-9, epsilon = 1e-15;
             int maxIterations = 100;
             short solutionFound = 0;
             //Application of the method until precision or number of iterations is reached
@@ -252,18 +251,39 @@ double newtonMethod(Polynomial *F) {
     } else exit(EXIT_FAILURE);
 }
 
+int roundDouble(double value){
+    int intPart = (int) value;
+    if (value >= intPart + 0.5) return intPart + 1;
+    else return intPart;
+}
+
+double roundPreciseDouble(double value){
+    double difference = (roundDouble(value)) - value;
+    if (difference < 0) difference *= -1;
+    if (difference < 1e-14) return roundDouble(value);
+    else return value;
+}
+
 Solutions *solve(Polynomial *F) { //TODO Search for problems with roots
     if (F != NULL) {
         Solutions *x = malloc(sizeof(Solutions));
         x->size = F->highestDegree;
         x->values = malloc(x->size * sizeof(double));
-        printf("roots :\n");
         Polynomial *temp = copyPolynomial(F);
         for (int i = 0; i < x->size; i++) {
-            x->values[i] = newtonMethod(temp);
+            x->values[i] = roundPreciseDouble(newtonMethod(temp));
             temp = syntheticDivision(temp, x->values[i]);
-            printf("%lf\n", x->values[i]);
         }
         return x;
     } else return NULL;
+}
+
+void printSolutions(Solutions *x){
+    if (x->size > 0) {
+        printf("Solutions = {%1.2lf", x->values[0]);
+        for (int i = 1; i < x->size; i++) {
+            printf(", %1.2lf", x->values[1]);
+        }
+        printf("}\n");
+    } else printf("No solutions\n");
 }
