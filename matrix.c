@@ -182,9 +182,11 @@ Matrix *innerMultiply(Matrix *A, Matrix *B){
 
 Matrix *scalarMultiply(Matrix *M, double scalar){
     if (M != NULL) {
-        Matrix *scalarM = newMatrix(M->rows, M->columns, 0);
+        Matrix *scalarM = copy(M);
         for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) scalarM->values[i][j] = M->values[i][j] * scalar;
+            for (int j = 0; j < M->columns; j++) {
+                scalarM->values[i][j] *= scalar;
+            }
         }
         return scalarM;
     } else return NULL;
@@ -272,61 +274,37 @@ Matrix *inverse(Matrix *M){
     } return NULL;
 }
 
-Solutions *solveAugmentedMatrix(Matrix *M){
-    //TODO If not square, make into one (!!! case = 0)
-
-    //Normalise first row
-    Matrix *augmented = addColumn(M);
-    for (int i = 0; i < augmented->columns; i++) {
-        augmented->values[0][i] /= M->values[0][0];
+Matrix *solveAugmentedMatrix(Matrix *M){
+    //TODO If something like [0,2;0,1] problem
+    //Reduce number of rows to be equal or less than the number of columns
+    Matrix *toSolve = copy(M);
+    while (toSolve->rows > toSolve->columns) {
+        //Remove a null row if there is one
+        int index = 0;
+        for (int i = 0, nbOfZeros = 0; i < toSolve->rows && index == 0; i++, nbOfZeros = 0) {
+            for (int j = 0; j < toSolve->columns; j++) if (toSolve->values[i][j] == 0) nbOfZeros++;
+            if (nbOfZeros >= toSolve->columns) index = i;
+        }
+        toSolve = removeRow(toSolve, index);
     }
 
+    Matrix *augmented = addColumn(toSolve);
+    freeMatrix(toSolve);
     //Change matrix to echelon form
-    for (int i = 0; i < augmented->columns - 1; i++) { //Column by column for echelon form
-        for (int j = i+1; j < augmented->rows; j++) { //Row by row for first = 0
-            double coefficient = augmented->values[j][0] >= 0 ? -1 * augmented->values[0][0] * augmented->values[j][0] : augmented->values[0][0] * augmented->values[j][0];
-            for (int k = 0; k < augmented->columns; k++) { //Rest of the row
-                augmented->values[j][k] += coefficient * augmented->values[0][k];
+    for (int i = 1; i <= augmented->rows; i++) { //Column by column for echelon form
+        //Normalise previous row
+        double normaliseValue = augmented->values[i-1][i-1];
+        for (int j = i-1; j < augmented->columns; j++) augmented->values[i-1][j] /= normaliseValue;
+        //Subtract previous row to the next ones
+        for (int j = i; j < augmented->rows; j++) {
+            double coefficient = -1 * augmented->values[i-1][i-1] * augmented->values[j][i-1];
+            //Apply row by row
+            for (int k = i-1; k < augmented->columns; k++) {
+                augmented->values[j][k] += coefficient * augmented->values[i-1][k];
             }
         }
     }
-    if (augmented->values[M->rows-1][M->columns] != 0) {
-        augmented->values[M->rows-1][M->columns] /= augmented->values[M->rows-1][M->columns-1];
-    }
-    if (augmented->values[M->rows-1][M->columns] == -0) augmented->values[M->rows-1][M->columns] = 0;
-
-    if (augmented->values[M->rows-1][M->columns-1] != 0) {
-        augmented->values[M->rows-1][M->columns-1] /= augmented->values[M->rows-1][M->columns-1];
-    }
-
-    //Solve the linear system TODO Handle more than 1 vector
-    Solutions *solution = malloc(sizeof(Solutions));
-    solution->size = M->columns;
-    solution->values = calloc(M->columns, sizeof(double));
-//    for (int i = M->rows-1; i >= 0; i--) {
-//        solution->values[M->rows - i-1] = augmented->values[i][M->columns];
-//        for (int j = i; j < M->rows-1; j++) {
-//            solution->values[M->rows - i-1] -= augmented->values[i][j] * solution->values[M->rows - j-1];
-//        }
-//    }
-
-    if (augmented->values[M->rows-1][M->columns-1] == 0) {
-        solution->values[M->rows - 1] = 1;
-    } else {
-        solution->values[M->rows - 1] = 0;
-    }
-
-    for (int i = M->rows-2; i >= 0; i--) {
-        for (int j = i; j < M->rows-1; j++) {
-            solution->values[M->rows - i-2] -= augmented->values[i][j] * solution->values[M->rows - j-1];
-        }
-        solution->values[M->rows - i-2] /= augmented->values[i][M->columns-1];
-    }
-
-    printf("Solutions :\n");
-    for (int i = M->rows-1; i >= 0; i--) printf("x%d = %1.2lf\n", M->rows-1 - i, solution->values[i]);
-
-    return solution;
+    return augmented;
 }
 
 Solutions *eigenValues(Matrix *M){
@@ -336,7 +314,7 @@ Solutions *eigenValues(Matrix *M){
     } else return NULL;
 }
 
-short orthogonal(Matrix *M1, Matrix *M2){
+char orthogonal(Matrix *M1, Matrix *M2){
     if (M1->rows == M2->rows){
         Matrix *toSolve = M1;
         for (int i = 0; i < M2->columns; i++) {
@@ -370,18 +348,77 @@ Matrix *completeOrthogonal(Matrix *M){
     }
 }
 
-Matrix *eigenVectors(Matrix *M){
-    Solutions *eigValues = eigenValues(M);
-    Matrix *eigenMatrix = newMatrix(M->rows, eigValues->size, 0);
+//Solutions *solveForValues(Matrix *M);
 
-    for (int nbVectors = 0; nbVectors < eigenMatrix->columns; nbVectors++) {
-        Matrix *toSolve = copy(M);
-        for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[nbVectors];
-        Solutions *vector = solveAugmentedMatrix(toSolve);
-        freeMatrix(toSolve);
-        for (int j = 0; j < M->rows; j++) eigenMatrix->values[j][nbVectors] = vector->values[j];
+char isLineEmpty(Matrix *M, int index){
+    int nbOfZeros = 0;
+    for (int j = 0; j < M->columns - 1; j++) if (M->values[index][j] == 0) nbOfZeros++;
+    if (nbOfZeros == M->columns - 1) return 1;
+    else return 0;
+}
+
+Matrix *solveForVectors(Matrix *M){
+    Matrix **v = malloc((M->columns - 1) * sizeof(Matrix*));
+
+    //Search for independent, only if 0 = 0
+    if (M->rows < M->columns - 1) {
+        //Add new empty vector (0, ..., 1) or similar
+        for (int i = M->columns - 2; i > M->rows-1; i--) {
+            v[i] = newMatrix(M->columns - 1, 1, 0);
+            v[i]->values[i][0] = 1;
+        }
     }
-    return completeOrthogonal(eigenMatrix);
+
+    //Creating the others
+    for (int i = 0; i <= M->rows-1; i++) {
+        v[i] = newMatrix(M->columns - 1, 1, 0);
+    }
+
+    //Vectors exprimed in function of the others
+    for (int i = M->rows - 1; i >= 0; i--) {
+        if (isLineEmpty(M, i) == 1) v[i]->values[i][0] = 1;
+        else {
+            for (int j = M->columns - 2; j > i; j--) {
+                v[i] = minus(v[i], scalarMultiply(v[j], M->values[i][j]));
+            }
+        }
+    }
+
+    //Reforming the matrix by picking the rows
+    Matrix *output = newMatrix(M->columns - 1, 1, 0);
+    int currentIndex = 0;
+    for (int i = 0; i < M->columns-1; i++) {
+        //If the i-th value of the vectors are null ignore them, else create a vector from them
+        int nullLine = 0;
+        for (int j = 0; j < M->columns - 1 && nullLine == 0; j++) if (v[j]->values[i][0] != 0) nullLine++;
+        //If the line isn't null
+        if (nullLine > 0) {
+            if (currentIndex > 0) output = addColumn(output);
+            //Copy the values of this line for each vector
+            for (int j = 0; j <= M->rows; j++) {
+                output->values[j][currentIndex] = v[j]->values[i][0];
+            }
+            currentIndex++;
+        }
+    }
+    return output;
+}
+
+Matrix *eigenVectors(Matrix *M){
+    if (M->columns == M->rows) {
+        Solutions *eigValues = eigenValues(M);
+        Matrix *eigenMatrix = newMatrix(M->rows, eigValues->size, 0);
+
+        for (int nbVectors = 0; nbVectors < eigenMatrix->columns; nbVectors++) {
+            Matrix *toSolve = copy(M);
+            for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[nbVectors];
+            Matrix *vectors = solveAugmentedMatrix(toSolve);
+            freeMatrix(toSolve);
+            for (int j = 0; j < M->rows; j++) eigenMatrix->values[j][nbVectors] = vectors->values[j][0];
+            freeMatrix(vectors);
+        }
+        return completeOrthogonal(eigenMatrix);
+    } else return NULL;
 }
 
 Matrix *triangularise(Matrix *M){
