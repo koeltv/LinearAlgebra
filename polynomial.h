@@ -116,4 +116,6 @@ double newtonMethod(Polynomial *F);
  */
 Solutions *solve(Polynomial *F);
 
+void printSolutions(Solutions *x);
+
 #endif //LINEARALGEBRA_POLYNOMIAL_H

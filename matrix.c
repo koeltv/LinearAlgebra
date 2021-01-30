@@ -371,14 +371,9 @@ Matrix *completeOrthogonal(Matrix *M){
 }
 
 Matrix *eigenVectors(Matrix *M){
-    //Solutions *eigValues = eigenValues(M);
-    Solutions *eigValues = malloc(sizeof(Solutions));
-    eigValues->values = malloc(2 * sizeof(double));
-    eigValues->values[0] = 2;
-    eigValues->values[1] = 4;
-    eigValues->size = 2;
-
+    Solutions *eigValues = eigenValues(M);
     Matrix *eigenMatrix = newMatrix(M->rows, eigValues->size, 0);
+
     for (int nbVectors = 0; nbVectors < eigenMatrix->columns; nbVectors++) {
         Matrix *toSolve = copy(M);
         for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[nbVectors];

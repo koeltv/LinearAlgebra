@@ -13,21 +13,17 @@
  * @return an integer confirming the success or failure of program end
  */
 int main() {
-    //char F[100] = "(1 + 2X) + ((1X^2) * (1X^2) * (1X))";
-    //printf("%s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
-    //printf("Polynomial form : ");
-    //printPolynomial(stringToPolynomial(F, 0, length(F) + 1));
+//    char F[100] = "(3 - 1X) * (3 - 1X) - 1";
+//    printf("F(X) = %s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
+//    Polynomial *P = stringToPolynomial(F, 0, length(F) + 1);
+//    printf("Polynomial form : "); printPolynomial(P);
+//    printSolutions(solve(P));
 
     Matrix *chat = newMatrix(2, 2, 1);
     chat->values[0][0] = 3; chat->values[1][1] = 3;
-    //eigenValues(chat);
-    printMatrix(eigenVectors(chat));
+    printMatrix(chat);
     printMatrix(triangularise(chat));
-//    char *result = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(chat)));
-//    printf("Result : %s\n", result);
-//    solve(stringToPolynomial(result, 0, length(result) + 1));
 
-    //printf("%s\n", detOfStringMatrix(toStringMatrix(newMatrix(2, 2, 1))));
     char *command = NULL;
     do {
         if (command != NULL) free(command);
