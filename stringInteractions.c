@@ -147,7 +147,7 @@ StringMatrix *removeSColumn(StringMatrix *M, int columnIndex){
 }
 
 StringMatrix *changeToPLambdaForm(StringMatrix *M){
-    for (int i = 0; i < M->columns; i++) {
+    for (int i = 0; i < M->rows; i++) {
         snprintf(M->values[i][i], (length(M->values[i][i]) + 6) * sizeof(char), "%s - 1X", M->values[i][i]);
     }
     return M;

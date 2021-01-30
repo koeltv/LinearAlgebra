@@ -221,7 +221,9 @@ Matrix *inverse(Matrix *M);
  * @param M - the given augmented matrix
  * @return solvable augmented matrix
  */
-Solutions *solveAugmentedMatrix(Matrix *M);
+Matrix *solveAugmentedMatrix(Matrix *M);
+
+Matrix *solveForVectors(Matrix *M);
 
 /**
  * Eigen values of a matrix

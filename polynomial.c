@@ -264,7 +264,7 @@ double roundPreciseDouble(double value){
     else return value;
 }
 
-Solutions *solve(Polynomial *F) { //TODO Search for problems with roots
+Solutions *solve(Polynomial *F) {
     if (F != NULL) {
         Solutions *x = malloc(sizeof(Solutions));
         x->size = F->highestDegree;
