@@ -260,7 +260,7 @@ int roundDouble(double value){
 double roundPreciseDouble(double value){
     double difference = (roundDouble(value)) - value;
     if (difference < 0) difference *= -1;
-    if (difference < 1e-14) return roundDouble(value);
+    if (difference < 1e-9) return roundDouble(value);
     else return value;
 }
 
