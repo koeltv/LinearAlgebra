@@ -223,8 +223,6 @@ Matrix *inverse(Matrix *M);
  */
 Matrix *solveAugmentedMatrix(Matrix *M);
 
-Matrix *solveForVectors(Matrix *M);
-
 /**
  * Eigen values of a matrix
  * This function return the eigen values of a given matrix

@@ -13,7 +13,7 @@
  * @return an integer confirming the success or failure of program end
  */
 int main() {
-//    char F[100] = "(3 - 1X) * (3 - 1X) - 1";
+//    char F[100] = "(1 - 1X) * 1X^2";
 //    printf("F(X) = %s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
 //    Polynomial *P = stringToPolynomial(F, 0, length(F) + 1);
 //    printf("Polynomial form : "); printPolynomial(P);
@@ -30,15 +30,27 @@ int main() {
 //    M->values[3][0] = 5; M->values[3][1] = 5; M->values[3][2] = 2;
 //    solveAugmentedMatrix(M);
 
-    Matrix *M = newMatrix(2, 2, 0);
-    M->values[0][0] = 1; M->values[0][1] = 2;
-    M->values[1][0] = 0; M->values[1][1] = 3;
+//    Matrix *M = newMatrix(2, 2, 0);
+//    M->values[0][0] = 1; M->values[0][1] = 2;
+//    M->values[1][0] = 0; M->values[1][1] = 3;
+//    //solveForVectors(solveAugmentedMatrix(M));
+//    char *temp = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
+//    printPolynomial(stringToPolynomial(temp, 0, length(temp) + 1));
+//    M->values[0][0] -= 1; M->values[1][1] -= 1;
+//    printMatrix(solveAugmentedMatrix(M));
+//    printMatrix(eigenVectors(M));
+
+    Matrix *M = newMatrix(3, 3, 0);
+    M->values[0][0] = 1; M->values[0][1] = 2; M->values[0][2] = 3;
+    M->values[1][0] = 0; M->values[1][1] = 0; M->values[1][2] = 0;
+    M->values[2][0] = 0; M->values[2][1] = 0; M->values[2][2] = 0;
+    printMatrix(M);
     //solveForVectors(solveAugmentedMatrix(M));
-    char *temp = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
-    printPolynomial(stringToPolynomial(temp, 0, length(temp) + 1));
+    //char *temp = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
+    //printPolynomial(stringToPolynomial(temp, 0, length(temp) + 1));
+    //printMatrix(solveAugmentedMatrix(M));
     printMatrix(eigenVectors(M));
-
-
+    //printMatrix(eigenVectors(M));
 
 //    char *command = NULL;
 //    do {
