@@ -13,11 +13,11 @@
  * @return an integer confirming the success or failure of program end
  */
 int main() {
-//    char F[100] = "(1 - 1X) * 1X^2";
-//    printf("F(X) = %s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
-//    Polynomial *P = stringToPolynomial(F, 0, length(F) + 1);
-//    printf("Polynomial form : "); printPolynomial(P);
-//    printSolutions(solve(P));
+    char F[100] = "2X^2 + 4X + 1";
+    printf("F(X) = %s is of degree %d\n", F, degreeOfString(F, 0, length(F)+1));
+    Polynomial *P = stringToPolynomial(F, 0, length(F) + 1);
+    printf("Polynomial form : "); printPolynomial(P);
+    printSolutions(solve(P));
 
 //    Matrix *chat = newMatrix(2, 2, 1);
 //    chat->values[0][0] = 3; chat->values[1][1] = 3;
@@ -40,17 +40,18 @@ int main() {
 //    printMatrix(solveAugmentedMatrix(M));
 //    printMatrix(eigenVectors(M));
 
-    Matrix *M = newMatrix(3, 3, 0);
-    M->values[0][0] = 1; M->values[0][1] = 2; M->values[0][2] = 3;
-    M->values[1][0] = 0; M->values[1][1] = 0; M->values[1][2] = 0;
-    M->values[2][0] = 0; M->values[2][1] = 0; M->values[2][2] = 0;
-    printMatrix(M);
-    //solveForVectors(solveAugmentedMatrix(M));
-    //char *temp = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
-    //printPolynomial(stringToPolynomial(temp, 0, length(temp) + 1));
-    //printMatrix(solveAugmentedMatrix(M));
-    printMatrix(eigenVectors(M));
-    //printMatrix(eigenVectors(M));
+//    Matrix *M = newMatrix(3, 3, 0);
+//    M->values[0][0] = 1; M->values[0][1] = 2; M->values[0][2] = 3;
+//    M->values[1][0] = 0; M->values[1][1] = 0; M->values[1][2] = 0;
+//    M->values[2][0] = 0; M->values[2][1] = 0; M->values[2][2] = 0;
+//    printMatrix(M);
+//    solveForVectors(solveAugmentedMatrix(M));
+//    char *temp = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
+//    printPolynomial(stringToPolynomial(temp, 0, length(temp) + 1));
+//    printMatrix(solveAugmentedMatrix(M));
+//    printMatrix(eigenVectors(M));
+//    printMatrix(eigenVectors(M));
+//    printMatrix(triangularise(M));
 
 //    char *command = NULL;
 //    do {

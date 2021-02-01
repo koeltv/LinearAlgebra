@@ -167,13 +167,11 @@ Polynomial *readFirstCoefficient(const char *string, int *start){
     else {
         //If there is no power after the X
         if (string[*start + 1] != '^') {
-            index = 1;
-            (*start)++;
+            index = 1; (*start)++;
         }
         //If there is a power after the X
         else if (string[*start + 1] == '^' && string[*start + 2] >= '0' && string[*start + 2] <= '9') {
             index = (int) readDoubleInString(string, start);
-            (*start) += 2;
         }
     }
     output->highestDegree = index;
@@ -186,7 +184,6 @@ Polynomial *stringToPolynomial(const char *string, int start, int end){
     if (string != NULL) {
         //Recuperation of the first coefficient
         Polynomial *F = readFirstCoefficient(string, &start);
-
         //Recuperation of the rest
         for (int currentSign = start; string[currentSign] != '\0' && currentSign < end;) {
             while (string[currentSign] != '\0' && string[currentSign] != '-' && string[currentSign] != '+' && string[currentSign] != '*') currentSign++;
@@ -228,11 +225,9 @@ double newtonMethod(Polynomial *F) {
         if (F->highestDegree == 1) return -F->coefficient[0] / F->coefficient[1];
         else {
             //Initialisation
-            double x0 = 1, x1;
+            double x0 = 1, x1, tolerance = 1e-9, epsilon = 1e-15;
             Polynomial *fPrime = derive(F);
-            double tolerance = 1e-9, epsilon = 1e-15;
-            int maxIterations = 100;
-            short solutionFound = 0;
+            int maxIterations = 100; char solutionFound = 0;
             //Application of the method until precision or number of iterations is reached
             for (int i = 1; i < maxIterations; i++) {
                 double y = apply(F, x0), yPrime = apply(fPrime, x0);
@@ -245,7 +240,7 @@ double newtonMethod(Polynomial *F) {
             }
             //End of the method, free temporary values and return output
             freePolynomial(fPrime);
-            if (solutionFound == 0) printf("Didn't converge\n");
+            if (solutionFound == 0) return IMAGINARY;
             return x1;
         }
     } else exit(EXIT_FAILURE);
@@ -271,7 +266,9 @@ Solutions *solve(Polynomial *F) {
         x->values = malloc(x->size * sizeof(double));
         Polynomial *temp = copyPolynomial(F);
         for (int i = 0; i < x->size; i++) {
-            x->values[i] = roundPreciseDouble(newtonMethod(temp));
+            double root = roundPreciseDouble(newtonMethod(temp));
+            if (root == IMAGINARY) return NULL;
+            x->values[i] = root;
             temp = syntheticDivision(temp, x->values[i]);
         }
         return x;
@@ -279,11 +276,11 @@ Solutions *solve(Polynomial *F) {
 }
 
 void printSolutions(Solutions *x){
-    if (x->size > 0) {
+    if (x != NULL && x->size > 0) {
         printf("Solutions = {%1.2lf", x->values[0]);
         for (int i = 1; i < x->size; i++) {
             printf(", %1.2lf", x->values[1]);
         }
         printf("}\n");
-    } else printf("No solutions\n");
+    } else printf("No solutions or some are complex numbers\n");
 }

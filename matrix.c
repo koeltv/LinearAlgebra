@@ -398,30 +398,30 @@ Matrix *solveForVectors(Matrix *M){
     Matrix **v = malloc((M->columns - 1) * sizeof(Matrix*));
     Matrix *N = copy(M);
 
+    //If we have an empty column, we move the empty row associated to the unrestricted value to its row
     for (int i = 0; i < N->columns - 1; i++) {
         if (isColumnEmpty(N, i) == 1) {
-            //find a null row
-            for (int j = 0; j < N->rows; j++) {
+            for (int j = 0; j < N->rows; j++) { //find a null row
                 if (isRowEmpty(N, j) == 1) {
-                    N = swapRows(N, i, j); break;
+                    for (int k = i; k < j; k++) N = swapRows(N, k, j); break;
                 }
             }
         }
     }
 
-    //If a row as only one value, nullify it
-    for (int i = 0, nbOfZeros = 0; i < M->rows; i++, nbOfZeros = 0) {
-        for (int j = 0; j < M->columns - 1; j++) if (N->values[i][j] == 0) nbOfZeros++;
-        if (nbOfZeros >= N->columns-2) for (int j = 0; j < N->columns - 1; j++) N->values[i][j] = 0;
-    }
+//    If a row as only one value, nullify it
+//    for (int i = 0, nbOfZeros = 0; i < M->rows; i++, nbOfZeros = 0) {
+//        for (int j = 0; j < M->columns - 1; j++) if (N->values[i][j] == 0) nbOfZeros++;
+//        if (nbOfZeros >= N->columns-2) for (int j = 0; j < N->columns - 1; j++) N->values[i][j] = 0;
+//    }
 
-    //Search for independent, only if 0 = 0 and the left part is not in square format
+    //Initialise and search for unrestricted values (only if 0 = 0)
     for (int i = 0; i < N->rows; i++) {
         v[i] = newMatrix(N->columns - 1, 1, 0);
         if (isRowEmpty(N, i) == 1) v[i]->values[i][0] = 1;
     }
 
-    //Vectors exprimed in function of the others
+    //Calculate vectors in function of the others
     for (int i = N->rows - 1; i >= 0; i--) {
         if (isRowEmpty(N, i) != 1){
             for (int j = N->columns - 2; j >= 0; j--) {
@@ -436,15 +436,13 @@ Matrix *solveForVectors(Matrix *M){
     int currentIndex = 0;
     for (int i = 0; i < N->columns - 1; i++) {
         //If the i-th value of the vectors are null ignore them, else create a vector from them
-        int nullLine = 0;
-        for (int j = 0; j < N->columns - 1 && nullLine == 0; j++) if (v[j]->values[i][0] != 0) nullLine++;
+        int atLeastAValueAtIndex = 0;
+        for (int j = 0; j < N->columns - 1 && atLeastAValueAtIndex == 0; j++) if (v[j]->values[i][0] != 0) atLeastAValueAtIndex++;
         //If the line isn't null
-        if (nullLine > 0) {
+        if (atLeastAValueAtIndex > 0) {
             if (currentIndex > 0) output = addColumn(output);
             //Copy the values of this line for each vector
-            for (int j = 0; j < N->rows; j++) {
-                output->values[j][currentIndex] = v[j]->values[i][0];
-            }
+            for (int j = 0; j < N->rows; j++) output->values[j][currentIndex] = v[j]->values[i][0];
             currentIndex++;
         }
     }
@@ -468,6 +466,8 @@ Matrix *eigenVectors(Matrix *M){
                 for (int i = 0; i < vectors->columns; i++) {
                     if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
                     for (int j = 0; j < vectors->rows; j++) eigenMatrix->values[j][nbVectors] = vectors->values[j][i];
+                    printf("Iteration %d of vector %d (%d Columns) :\n", i, n, vectors->columns);
+                    printMatrix(eigenMatrix);
                     nbVectors++;
                 }
                 freeMatrix(vectors);
