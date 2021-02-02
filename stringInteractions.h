@@ -47,6 +47,8 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+void copyString(char *original, char *destination);
+
 /**
  * Compare strings
  * This function compare 2 strings, it returns 1 if the first is shorter, 2 if the second is shorter and 0 if they are equal

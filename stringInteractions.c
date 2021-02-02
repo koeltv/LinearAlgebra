@@ -26,6 +26,12 @@ int length(const char *string){
     return length;
 }
 
+void copyString(char *original, char *destination){
+    for (int i = 0; i <= length(original) + 1; i++) {
+        destination[i] = original[i];
+    }
+}
+
 short shorterString(const char *string1, const char *string2){
     int i;
     for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
