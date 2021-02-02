@@ -26,24 +26,33 @@ int length(const char *string){
     return length;
 }
 
-void copyString(char *original, char *destination){
-    for (int i = 0; i <= length(original) + 1; i++) {
-        destination[i] = original[i];
-    }
+char *firstWord(const char *string){
+    int i = 0 , j;
+    while (string[i] == ' ') i++;
+    for (j = i; string[j] != '\0' && string[j] != ' '; j++);
+    char *word = calloc(j - i + 1, sizeof(char));
+    int k;
+    for (k = 0; i < j; k++) word[k] = string[i++];
+    word[k] = '\0';
+    return word;
 }
 
-short shorterString(const char *string1, const char *string2){
+void copyString(char *original, char *destination){
+    for (int i = 0; i <= length(original) + 1; i++) destination[i] = original[i];
+}
+
+char shorterString(const char *string1, const char *string2){
     int i;
     for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
         if (string1[i] < string2[i]) return 1;
         else if (string1[i] > string2[i]) return 2;
     }
-    if (string1[i] == '\0') return 1;
-    else if (string2[i] == '\0') return 2;
-    else return 0;
+    if (string1[i] == '\0' && string2[i] == '\0') return 0;
+    else if (string1[i] == '\0') return 1;
+    else return 2;
 }
 
-short containString(const char *mainString, const char *toSearch){
+char containString(const char *mainString, const char *toSearch){
     int i = 0, j;
     while (mainString[i] != '\0' && mainString[i] != toSearch[0]) i++;
     if (mainString[i] != '\0'){
@@ -53,6 +62,28 @@ short containString(const char *mainString, const char *toSearch){
         if (toSearch[j] == '\0') return 1;
     }
     return 0;
+}
+
+char containCharInOrder(const char *string, const char *charToSearch){
+    int totalOfCharToFind = length(charToSearch);
+    for (int i = 0, nbOfCharFound = 0; string[i] != '\0'; i++) {
+        if (string[i] == charToSearch[nbOfCharFound]) nbOfCharFound++;
+        if (nbOfCharFound == totalOfCharToFind) return 1;
+    }
+    return 0;
+}
+
+char *extractBetweenChar(const char *string, char first, char last){
+    int firstIndex = 0;
+    while (string[firstIndex] != '\0' && string[firstIndex] != first) firstIndex++;
+    char *extracted = NULL;
+    if (string[firstIndex] != '\0') {
+        int i;
+        for (i = firstIndex + 1; string[i] != '\0' && string[i] != last; i++);
+        extracted = calloc(i - firstIndex, sizeof(char));
+        for (int j = firstIndex + 1, k = 0; j < i; j++) extracted[k++] = string[j];
+    }
+    return extracted;
 }
 
 double readDoubleInString(const char *string, int *position){

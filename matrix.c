@@ -74,6 +74,29 @@ Matrix *readMatrixInFile(char *link){
     return matrix;
 }
 
+Matrix *readMatrixInString(char *string){
+    //Creation of the matrix
+    Matrix *matrix = malloc(sizeof(Matrix));
+    matrix->columns = matrix->rows = 1;
+    for (int i = 0; string[i] != ']' && string[i] != '\0'; i++) {
+        if (matrix->rows == 1 && string[i] == ',') matrix->columns++;
+        else if (string[i] == ';') matrix->rows++;
+    }
+
+    //Initialisation of the matrix
+    int startOfMatrix = 0;
+    matrix->name = firstWord(string);
+//    snprintf(matrix->name, 20 * sizeof(char), "%c", string[startOfMatrix]);
+    while (string[startOfMatrix] != '[') startOfMatrix++;
+
+    matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
+    for (int k = 0; k < matrix->rows; k++) {
+        matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
+        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInString(string, &startOfMatrix);
+    }
+    return matrix;
+}
+
 Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
     M->rows = nbRows; M->columns = nbColumns;

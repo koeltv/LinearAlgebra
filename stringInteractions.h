@@ -17,6 +17,7 @@
  * Structure representing a matrix of any size but with values in string format
  */
 typedef struct {
+    char *name;
     char ***values; ///Elements of the matrix contained in a 2 dimensional array
     int rows; ///Number of rows of the matrix
     int columns; ///Number of columns matrix
@@ -47,6 +48,8 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+char *firstWord(const char *string);
+
 void copyString(char *original, char *destination);
 
 /**
@@ -56,7 +59,7 @@ void copyString(char *original, char *destination);
  * @param string2 - second string for comparison
  * @return result of comparison
  */
-short shorterString(const char *string1, const char *string2);
+char shorterString(const char *string1, const char *string2);
 
 /**
  * Search for string in a string
@@ -65,7 +68,11 @@ short shorterString(const char *string1, const char *string2);
  * @param toSearch - The string to search
  * @return result of search
  */
-short containString(const char *mainString, const char *toSearch);
+char containString(const char *mainString, const char *toSearch);
+
+char containCharInOrder(const char *string, const char *charToSearch);
+
+char *extractBetweenChar(const char *string, char first, char last);
 
 /**
  * Read a double in a string
