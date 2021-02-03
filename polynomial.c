@@ -47,7 +47,7 @@ Polynomial *derive(Polynomial *F){
 
 void printPolynomial(Polynomial *F){
     if (F != NULL) {
-        printf("F(X) = %1.1lfX^%d", F->coefficient[F->highestDegree], F->highestDegree);
+        printf("%s(X) = %1.1lfX^%d", F->name, F->coefficient[F->highestDegree], F->highestDegree);
         for (int i = F->highestDegree - 1; i >= 0; i--) {
             if (F->coefficient[i] != 0) {
                 //Choose the sign

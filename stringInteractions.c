@@ -86,6 +86,15 @@ char *extractBetweenChar(const char *string, char first, char last){
     return extracted;
 }
 
+char *extractBetweenIndexes(const char *string, int first, int last){
+    if (string != NULL && length(string) + 1 <= last - first) {
+        char *result = calloc(last - first, sizeof(char));
+        for (int i = first; string[i] != '\0' && i < last; i++) result[i - first] = string[i];
+        result[last - first] = string[last];
+        return result;
+    } else return NULL;
+}
+
 double readDoubleInString(const char *string, int *position){
 
     //Search for the sign

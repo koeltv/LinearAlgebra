@@ -85,7 +85,7 @@ Matrix *readMatrixInString(char *string){
 
     //Initialisation of the matrix
     int startOfMatrix = 0;
-    matrix->name = firstWord(string);
+    //matrix->name = firstWord(string);
 //    snprintf(matrix->name, 20 * sizeof(char), "%c", string[startOfMatrix]);
     while (string[startOfMatrix] != '[') startOfMatrix++;
 
@@ -238,14 +238,14 @@ Matrix *transpose(Matrix *M){
 }
 
 void printMatrix(Matrix *M){
-    printf("=====================================\n");
     if (M != NULL) {
+        printf("%s =\n", M->name);
         for (int i = 0; i < M->rows; i++) {
+            printf("\t");
             for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
             printf("\n");
         }
     } else printf("No matrix\n");
-    printf("=====================================\n");
 }
 
 double trace(Matrix *M){

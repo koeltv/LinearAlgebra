@@ -74,6 +74,8 @@ char containCharInOrder(const char *string, const char *charToSearch);
 
 char *extractBetweenChar(const char *string, char first, char last);
 
+char *extractBetweenIndexes(const char *string, int first, int last);
+
 /**
  * Read a double in a string
  * This function return a double read from a string
