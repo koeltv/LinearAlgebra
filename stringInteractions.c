@@ -37,6 +37,13 @@ char *firstWord(const char *string){
     return word;
 }
 
+int firstOccurrenceOf(const char *string, char toSearch){
+    for (int i = 0; string[i] != '\0'; i++) {
+        if (string[i] == toSearch) return i;
+    }
+    return -1;
+}
+
 void copyString(char *original, char *destination){
     for (int i = 0; i <= length(original) + 1; i++) destination[i] = original[i];
 }
@@ -86,13 +93,29 @@ char *extractBetweenChar(const char *string, char first, char last){
     return extracted;
 }
 
+char *extractUpToChar(const char *string, char last){
+    char *extracted = calloc(1, sizeof(char));
+        for (int j = 0, k = 0; string[j] != '\0' && j < last; j++) {
+            extracted = realloc(extracted, (j + 1) * sizeof(char));
+            extracted[k++] = string[j];
+        }
+    return extracted;
+}
+
 char *extractBetweenIndexes(const char *string, int first, int last){
-    if (string != NULL && length(string) + 1 <= last - first) {
+    if (string != NULL && length(string) + 1 >= last - first) {
         char *result = calloc(last - first, sizeof(char));
         for (int i = first; string[i] != '\0' && i < last; i++) result[i - first] = string[i];
         result[last - first] = string[last];
         return result;
     } else return NULL;
+}
+
+char nextOperator(const char *string){
+    for (int i = 0; string[i] != '\0'; i++) {
+        if (string[i] == '+' || string[i] == '-' || string[i] == '*') return string[i];
+    }
+    return '\0';
 }
 
 double readDoubleInString(const char *string, int *position){

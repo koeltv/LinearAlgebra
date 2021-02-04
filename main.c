@@ -21,17 +21,6 @@ Register *newRegister(){
     return reg;
 }
 
-void addToRegister(Register *MainRegister, Polynomial *newPolynomial, Matrix *newMatrix){
-    if (newPolynomial != NULL) {
-        MainRegister->listOfPolynomials = realloc(MainRegister->listOfPolynomials, ++MainRegister->sizes[0]);
-        MainRegister->listOfPolynomials[MainRegister->sizes[0]] = newPolynomial;
-    }
-    if (newMatrix != NULL) {
-        MainRegister->listOfMatrices = realloc(MainRegister->listOfMatrices, ++MainRegister->sizes[1] * sizeof(Matrix*));
-        MainRegister->listOfMatrices[MainRegister->sizes[1] - 1] = newMatrix;
-    }
-}
-
 Matrix *searchMatrix(Register *MainRegister, const char *name){
     if (MainRegister->listOfMatrices != NULL) {
         for (int i = 0; i < MainRegister->sizes[1]; i++) {
@@ -51,13 +40,136 @@ Polynomial *searchPolynomial(Register *MainRegister, const char *name){
     return NULL;
 }
 
-Register *nextCommand(Register *mainRegister, char *command){
-    if (containString(command, "=") == 1) { //Assign the result
-        Register *result = nextCommand(mainRegister, extractBetweenChar(command, '=', '\0'));
-        if (containCharInOrder(command, "X") == 1 && result != NULL) {
+void addToRegister(Register *MainRegister, Polynomial *newPolynomial, Matrix *newMatrix){ //TODO Test problem when update
+    if (newPolynomial != NULL) {
+        if (searchPolynomial(MainRegister, newPolynomial->name) != NULL) {
+            for (int i = 0; i < MainRegister->sizes[0]; i++) {
+                if (shorterString(MainRegister->listOfPolynomials[i]->name, newPolynomial->name) == 0) {
+                    freePolynomial(MainRegister->listOfPolynomials[i]);
+                    MainRegister->listOfPolynomials[i] = newPolynomial;
+                }
+            }
+        } else {
+            MainRegister->listOfPolynomials = realloc(MainRegister->listOfPolynomials, ++MainRegister->sizes[0] * sizeof(Polynomial*));
+            MainRegister->listOfPolynomials[MainRegister->sizes[0]] = newPolynomial;
+        }
+    }
+    if (newMatrix != NULL) {
+        if (searchMatrix(MainRegister, newMatrix->name) != NULL) {
+            for (int i = 0; i < MainRegister->sizes[1]; i++) {
+                if (shorterString(MainRegister->listOfMatrices[i]->name, newMatrix->name) == 0) {
+                    freeMatrix(MainRegister->listOfMatrices[i]);
+                    MainRegister->listOfMatrices[i] = newMatrix;
+                }
+            }
+        } else {
+            MainRegister->listOfMatrices = realloc(MainRegister->listOfMatrices,++MainRegister->sizes[1] * sizeof(Matrix*));
+            MainRegister->listOfMatrices[MainRegister->sizes[1] - 1] = newMatrix;
+        }
+    }
+}
+
+Register *recursiveCommandDecomposition(Register *mainRegister, char *command) {
+    if (containString(command, "=") == 1) {
+        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '=', '\0'));
+        if (result != NULL && result->listOfPolynomials != NULL) {
             result->listOfPolynomials[0]->name = firstWord(command);
-        } else if (containCharInOrder(command, "[]") == 1 && result != NULL) {
+        } else if (result != NULL && result->listOfMatrices != NULL) {
             result->listOfMatrices[0]->name = firstWord(command);
+        }
+        return result;
+    } else if (nextOperator(command) == '+') {
+        Register *result = newRegister();
+        Register *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '+', '\0'));
+        if (rightPart != NULL) {
+            Register *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToChar(command, '+'));
+            if (leftPart != NULL) {
+                if (rightPart->listOfPolynomials != NULL) {
+                    if (leftPart->listOfPolynomials != NULL) {
+                        Polynomial *polynomial = pAdd(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
+                        addToRegister(result, polynomial, NULL);
+                    }
+                } else if (rightPart->listOfMatrices != NULL) {
+                    if (leftPart->listOfMatrices != NULL) {
+                        Matrix *matrix = sum(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
+                        addToRegister(result, NULL, matrix);
+                    }
+                }
+            }
+        }
+        return result;
+    } else if (nextOperator(command) == '-') {
+        Register *result = newRegister();
+        Register *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '-', '\0'));
+        if (rightPart != NULL) {
+            Register *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToChar(command, '-'));
+            if (leftPart != NULL) {
+                if (rightPart->listOfPolynomials != NULL) {
+                    if (leftPart->listOfPolynomials != NULL) {
+                        Polynomial *polynomial = pAdd(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
+                        addToRegister(result, polynomial, NULL);
+                    }
+                } else if (rightPart->listOfMatrices != NULL) {
+                    if (leftPart->listOfMatrices != NULL) {
+                        Matrix *matrix = minus(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
+                        addToRegister(result, NULL, matrix);
+                    }
+                }
+            }
+        }
+        return result;
+    } else if (nextOperator(command) == '*') {
+        Register *result = newRegister();
+        Register *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '*', '\0'));
+        if (rightPart != NULL) {
+            Register *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToChar(command, '*'));
+            if (leftPart != NULL) {
+                if (rightPart->listOfPolynomials != NULL) {
+                    if (leftPart->listOfPolynomials != NULL) {
+                        Polynomial *polynomial = pMultiply(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
+                        addToRegister(result, polynomial, NULL);
+                    }
+                } else if (rightPart->listOfMatrices != NULL) {
+                    if (leftPart->listOfMatrices != NULL) {
+                        Matrix *matrix = multiply(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
+                        addToRegister(result, NULL, matrix);
+                    }
+                }
+            }
+        }
+        return result;
+    } else {
+
+    }
+}
+
+Register *nextCommand(Register *mainRegister, char *command){
+    //Assign the result if equal
+    if (containString(command, "=") == 1) {
+        Register *result = nextCommand(mainRegister, extractBetweenChar(command, '=', '\0'));
+        if (result != NULL && result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0]->name = firstWord(command);
+        } else if (result != NULL && result->listOfMatrices != NULL) {
+            result->listOfMatrices[0]->name = firstWord(command);
+        }
+        return result;
+    //Do addition of left and right part
+    } else if (containString(command, "+") == 1 || containString(command, "-") == 1) {
+        char *objectName = firstWord(command);
+        Register *result = nextCommand(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '+') + 1, length(command) + 1));
+        if (result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0] = pAdd(searchPolynomial(mainRegister, objectName), result->listOfPolynomials[0]);
+        } else if (result->listOfMatrices != NULL) {
+            result->listOfMatrices[0] = sum(searchMatrix(mainRegister, objectName), result->listOfMatrices[0]);
+        }
+        return result;
+    } else if (containString(command, "*") == 1) {
+        char *objectName = firstWord(command);
+        Register *result = nextCommand(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '*'), length(command) + 1));
+        if (result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0] = pMultiply(searchPolynomial(mainRegister, objectName), result->listOfPolynomials[0]);
+        } else if (result->listOfMatrices != NULL) {
+            result->listOfMatrices[0] = multiply(searchMatrix(mainRegister, objectName), result->listOfMatrices[0]);
         }
         return result;
     } else if (containCharInOrder(command, "[]") == 1) { //Create matrix
@@ -72,6 +184,21 @@ Register *nextCommand(Register *mainRegister, char *command){
         addToRegister(PResult, P, NULL);
         printf("New Polynomial added\n");
         return PResult;
+    } else {
+        for (int i = 0; i < mainRegister->sizes[0]; i++) {
+            if (containString(command, mainRegister->listOfPolynomials[i]->name) == 1) {
+                Register *result = newRegister();
+                addToRegister(result, mainRegister->listOfPolynomials[i], NULL);
+                return result;
+            }
+        }
+        for (int i = 0; i < mainRegister->sizes[1]; i++) {
+            if (containString(command, mainRegister->listOfMatrices[i]->name) == 1) {
+                Register *result = newRegister();
+                addToRegister(result, NULL, mainRegister->listOfMatrices[i]);
+                return result;
+            }
+        }
     }
     return NULL;
 }
@@ -140,12 +267,40 @@ int main() {
             if (toUse != NULL) printSolutions(eigenValues(toUse));
             else printf("The matrix %s doesn't exist\n", name);
         }
-        else {
+        else if (containCharInOrder(command, "trace()") == 1) { //Eigen values
+            char *name = extractBetweenChar(command, '(', ')');
+            Matrix *toUse = searchMatrix(mainRegister, name);
+            if (toUse != NULL) printf("%1.2lf\n", trace(toUse));
+            else printf("The matrix %s doesn't exist\n", name);
+        }
+        else if (containCharInOrder(command, "det()") == 1) { //Eigen values
+            char *name = extractBetweenChar(command, '(', ')');
+            Matrix *toUse = searchMatrix(mainRegister, name);
+            if (toUse != NULL) {
+                printf("%1.2lf\n", det(toUse));
+                freeMatrix(toUse);
+            }
+            else printf("The matrix %s doesn't exist\n", name);
+        }
+        else if (containCharInOrder(command, "solve()") == 1) { //Eigen values
+            char *name = extractBetweenChar(command, '(', ')');
+            Matrix *toUse = searchMatrix(mainRegister, name);
+            if (toUse != NULL) {
+                printMatrix(solveAugmentedMatrix(toUse));
+                freeMatrix(toUse);
+            } else {
+                Polynomial *toSolve = searchPolynomial(mainRegister, name);
+                if (toSolve != NULL) printSolutions(solve(toSolve));
+                freePolynomial(toSolve);
+            }
+        }
+        else { //If no simple command, search for a composed one
             //Apply command recursively
             Register *result = nextCommand(mainRegister, command);
             //Print to the console or save the result
             printResultOfOperation(&mainRegister, result);
         }
+        //If no known operation were detected, nothing should happen
 
         //Re-Initialise the command string
         if (command != NULL) free(command);

@@ -65,6 +65,10 @@ Polynomial *copyPolynomial(Polynomial *F);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 int degreeOfString(const char *string, int start, int end);
 
+Polynomial *pAdd(Polynomial *F, Polynomial *G);
+
+Polynomial *pMultiply(Polynomial *F, Polynomial *G);
+
 /**
  * Apply the polynomial for a given value
  * This function apply the given polynomial with the given value

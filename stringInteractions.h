@@ -50,6 +50,8 @@ int length(const char *string);
 
 char *firstWord(const char *string);
 
+int firstOccurrenceOf(const char *string, char toSearch);
+
 void copyString(char *original, char *destination);
 
 /**
@@ -74,7 +76,11 @@ char containCharInOrder(const char *string, const char *charToSearch);
 
 char *extractBetweenChar(const char *string, char first, char last);
 
+char *extractUpToChar(const char *string, char last);
+
 char *extractBetweenIndexes(const char *string, int first, int last);
+
+char nextOperator(const char *string);
 
 /**
  * Read a double in a string
