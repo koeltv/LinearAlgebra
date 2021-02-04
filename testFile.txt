@@ -42,3 +42,32 @@ M = [1,2,3;4,5,6;7,8,10]
 //    printMatrix(eigenVectors(M));
 //    printMatrix(eigenVectors(M));
 //    printMatrix(triangularise(M));
+
+//Assign the result if equal
+    if (containString(command, "=") == 1) {
+        Register *result = nextCommand(mainRegister, extractBetweenChar(command, '=', '\0'));
+        if (result != NULL && result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0]->name = firstWord(command);
+        } else if (result != NULL && result->listOfMatrices != NULL) {
+            result->listOfMatrices[0]->name = firstWord(command);
+        }
+        return result;
+        //Do addition of left and right part
+    } else if (containString(command, "+") == 1 || containString(command, "-") == 1) {
+        char *objectName = firstWord(command);
+        Register *result = nextCommand(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '+') + 1, length(command) + 1));
+        if (result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0] = pAdd(searchPolynomial(mainRegister, objectName), result->listOfPolynomials[0]);
+        } else if (result->listOfMatrices != NULL) {
+            result->listOfMatrices[0] = sum(searchMatrix(mainRegister, objectName), result->listOfMatrices[0]);
+        }
+        return result;
+    } else if (containString(command, "*") == 1) {
+        char *objectName = firstWord(command);
+        Register *result = nextCommand(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '*'), length(command) + 1));
+        if (result->listOfPolynomials != NULL) {
+            result->listOfPolynomials[0] = pMultiply(searchPolynomial(mainRegister, objectName), result->listOfPolynomials[0]);
+        } else if (result->listOfMatrices != NULL) {
+            result->listOfMatrices[0] = multiply(searchMatrix(mainRegister, objectName), result->listOfMatrices[0]);
+        }
+        return result;

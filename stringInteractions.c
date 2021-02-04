@@ -95,10 +95,11 @@ char *extractBetweenChar(const char *string, char first, char last){
 
 char *extractUpToChar(const char *string, char last){
     char *extracted = calloc(1, sizeof(char));
-        for (int j = 0, k = 0; string[j] != '\0' && j < last; j++) {
+    int k = 0;
+        for (int j = 0; string[j] != '\0' && string[j] != last; j++) {
             extracted = realloc(extracted, (j + 1) * sizeof(char));
             extracted[k++] = string[j];
-        }
+        } extracted[k] = '\0';
     return extracted;
 }
 
