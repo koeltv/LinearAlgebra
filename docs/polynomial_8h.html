@@ -96,6 +96,7 @@ $(document).ready(function(){initNavTree('polynomial_8h.html',''); initResizable
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">polynomial.h File Reference</div>  </div>
@@ -113,6 +114,14 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_polynomial.html">Polynomial</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing a polynomial of any degree.  <a href="struct_polynomial.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_solutions.html">Solutions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing solutions linked to an equation.  <a href="struct_solutions.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa35de4191580967b40efde73bc47b2b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3">IMAGINARY</a>&#160;&#160;&#160;12345.54321</td></tr>
+<tr class="separator:aa35de4191580967b40efde73bc47b2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -127,6 +136,12 @@ Functions</h2></td></tr>
 <tr class="separator:aeb42774cebe51ce8f107566297a4f772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a616af06563603812e1b7b0a9ec7599aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a616af06563603812e1b7b0a9ec7599aa">degreeOfString</a> (const char *string, int start, int end)</td></tr>
 <tr class="separator:a616af06563603812e1b7b0a9ec7599aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5198c88027c5c1cacb50543cd824d20b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a5198c88027c5c1cacb50543cd824d20b">pAdd</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F, <a class="el" href="struct_polynomial.html">Polynomial</a> *G)</td></tr>
+<tr class="separator:a5198c88027c5c1cacb50543cd824d20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfaf4973983215e8035a05dded9a011b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#acfaf4973983215e8035a05dded9a011b">pMinus</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F, <a class="el" href="struct_polynomial.html">Polynomial</a> *G)</td></tr>
+<tr class="separator:acfaf4973983215e8035a05dded9a011b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad820bf3ce3501baaf5cc700bca7cea17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ad820bf3ce3501baaf5cc700bca7cea17">pMultiply</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F, <a class="el" href="struct_polynomial.html">Polynomial</a> *G)</td></tr>
+<tr class="separator:ad820bf3ce3501baaf5cc700bca7cea17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f03b8060384c6f1a81b3dcb027699ea"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a8f03b8060384c6f1a81b3dcb027699ea">apply</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F, double x)</td></tr>
 <tr class="memdesc:a8f03b8060384c6f1a81b3dcb027699ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the polynomial for a given value This function apply the given polynomial with the given value.  <a href="polynomial_8h.html#a8f03b8060384c6f1a81b3dcb027699ea">More...</a><br /></td></tr>
 <tr class="separator:a8f03b8060384c6f1a81b3dcb027699ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,14 +157,31 @@ Functions</h2></td></tr>
 <tr class="memitem:a539b8af1dce4daf3af784254c7da6a4d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a539b8af1dce4daf3af784254c7da6a4d">newtonMethod</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F)</td></tr>
 <tr class="memdesc:a539b8af1dce4daf3af784254c7da6a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application of the Newton Method This function apply the Newton Method to find a root of the given polynomial.  <a href="polynomial_8h.html#a539b8af1dce4daf3af784254c7da6a4d">More...</a><br /></td></tr>
 <tr class="separator:a539b8af1dce4daf3af784254c7da6a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c5cb9c1e3de572a3f99ef5e760eb346"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a7c5cb9c1e3de572a3f99ef5e760eb346">solve</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F)</td></tr>
-<tr class="memdesc:a7c5cb9c1e3de572a3f99ef5e760eb346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the roots of a polynomial This function return the roots of a given polynomial of any degree.  <a href="polynomial_8h.html#a7c5cb9c1e3de572a3f99ef5e760eb346">More...</a><br /></td></tr>
-<tr class="separator:a7c5cb9c1e3de572a3f99ef5e760eb346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f59cc6be8ec88d6fe2826c301c2e218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a7f59cc6be8ec88d6fe2826c301c2e218">solve</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F)</td></tr>
+<tr class="memdesc:a7f59cc6be8ec88d6fe2826c301c2e218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the roots of a polynomial This function return the roots of a given polynomial of any degree.  <a href="polynomial_8h.html#a7f59cc6be8ec88d6fe2826c301c2e218">More...</a><br /></td></tr>
+<tr class="separator:a7f59cc6be8ec88d6fe2826c301c2e218"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d3351ba5806a2be3e8bc08bd5df31f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a72d3351ba5806a2be3e8bc08bd5df31f">printSolutions</a> (<a class="el" href="struct_solutions.html">Solutions</a> *x)</td></tr>
+<tr class="separator:a72d3351ba5806a2be3e8bc08bd5df31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file of <a class="el" href="polynomial_8c.html" title="Functions on polynomial.">polynomial.c</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aa35de4191580967b40efde73bc47b2b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa35de4191580967b40efde73bc47b2b3">&#9670;&nbsp;</a></span>IMAGINARY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define IMAGINARY&#160;&#160;&#160;12345.54321</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a8f03b8060384c6f1a81b3dcb027699ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f03b8060384c6f1a81b3dcb027699ea">&#9670;&nbsp;</a></span>apply()</h2>
 
@@ -330,6 +362,90 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a5198c88027c5c1cacb50543cd824d20b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5198c88027c5c1cacb50543cd824d20b">&#9670;&nbsp;</a></span>pAdd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a>* pAdd </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>G</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfaf4973983215e8035a05dded9a011b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfaf4973983215e8035a05dded9a011b">&#9670;&nbsp;</a></span>pMinus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a>* pMinus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>G</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad820bf3ce3501baaf5cc700bca7cea17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad820bf3ce3501baaf5cc700bca7cea17">&#9670;&nbsp;</a></span>pMultiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a>* pMultiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
+          <td class="paramname"><em>G</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9b7148ba196736454dd459ca695a9ab5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b7148ba196736454dd459ca695a9ab5">&#9670;&nbsp;</a></span>printPolynomial()</h2>
 
@@ -356,14 +472,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7c5cb9c1e3de572a3f99ef5e760eb346"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c5cb9c1e3de572a3f99ef5e760eb346">&#9670;&nbsp;</a></span>solve()</h2>
+<a id="a72d3351ba5806a2be3e8bc08bd5df31f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d3351ba5806a2be3e8bc08bd5df31f">&#9670;&nbsp;</a></span>printSolutions()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* solve </td>
+          <td class="memname">void printSolutions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f59cc6be8ec88d6fe2826c301c2e218"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f59cc6be8ec88d6fe2826c301c2e218">&#9670;&nbsp;</a></span>solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_solutions.html">Solutions</a>* solve </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
           <td class="paramname"><em>F</em></td><td>)</td>

@@ -49,14 +49,16 @@ void copyString(char *original, char *destination){
 }
 
 char shorterString(const char *string1, const char *string2){
-    int i;
-    for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
-        if (string1[i] < string2[i]) return 1;
-        else if (string1[i] > string2[i]) return 2;
-    }
-    if (string1[i] == '\0' && string2[i] == '\0') return 0;
-    else if (string1[i] == '\0') return 1;
-    else return 2;
+    if (string1 != NULL && string2 != NULL) {
+        int i;
+        for (i = 0; string1[i] != '\0' && string2[i] != '\0'; i++) {
+            if (string1[i] < string2[i]) return 1;
+            else if (string1[i] > string2[i]) return 2;
+        }
+        if (string1[i] == '\0' && string2[i] == '\0') return 0;
+        else if (string1[i] == '\0') return 1;
+        else return 2;
+    } else return -1;
 }
 
 char containString(const char *mainString, const char *toSearch){
@@ -85,8 +87,11 @@ char *extractBetweenChar(const char *string, char first, char last){
     while (string[firstIndex] != '\0' && string[firstIndex] != first) firstIndex++;
     char *extracted = NULL;
     if (string[firstIndex] != '\0') {
-        int i;
-        for (i = firstIndex + 1; string[i] != '\0' && string[i] != last; i++);
+        int i, nbOfParenthesis = 0;
+        for (i = firstIndex + 1; string[i] != '\0' && (string[i] != last || nbOfParenthesis > 0); i++) {
+            if (string[i] == '(') nbOfParenthesis++;
+            else if (string[i] == ')') nbOfParenthesis--;
+        }
         extracted = calloc(i - firstIndex, sizeof(char));
         for (int j = firstIndex + 1, k = 0; j < i; j++) extracted[k++] = string[j];
     }
@@ -103,6 +108,16 @@ char *extractUpToChar(const char *string, char last){
     return extracted;
 }
 
+char *extractUpToIndex(const char *string, int last){
+    char *extracted = calloc(1, sizeof(char));
+    int k = 0;
+    for (int j = 0; string[j] != '\0' && j < last; j++) {
+        extracted = realloc(extracted, (j + 1) * sizeof(char));
+        extracted[k++] = string[j];
+    } extracted[k] = '\0';
+    return extracted;
+}
+
 char *extractBetweenIndexes(const char *string, int first, int last){
     if (string != NULL && length(string) + 1 >= last - first) {
         char *result = calloc(last - first, sizeof(char));
@@ -112,11 +127,13 @@ char *extractBetweenIndexes(const char *string, int first, int last){
     } else return NULL;
 }
 
-char nextOperator(const char *string){
-    for (int i = 0; string[i] != '\0'; i++) {
-        if (string[i] == '+' || string[i] == '-' || string[i] == '*') return string[i];
+int nextOperator(const char *string){
+    for (int i = 0, nbOfParenthesis = 0; string[i] != '\0'; i++) {
+        if (string[i] == '(') nbOfParenthesis++;
+        else if (string[i] == ')') nbOfParenthesis--;
+        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*')) return i;
     }
-    return '\0';
+    return -1;
 }
 
 double readDoubleInString(const char *string, int *position){

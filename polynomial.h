@@ -67,6 +67,8 @@ int degreeOfString(const char *string, int start, int end);
 
 Polynomial *pAdd(Polynomial *F, Polynomial *G);
 
+Polynomial *pMinus(Polynomial *F, Polynomial *G);
+
 Polynomial *pMultiply(Polynomial *F, Polynomial *G);
 
 /**

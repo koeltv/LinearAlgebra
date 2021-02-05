@@ -78,9 +78,11 @@ char *extractBetweenChar(const char *string, char first, char last);
 
 char *extractUpToChar(const char *string, char last);
 
+char *extractUpToIndex(const char *string, int last);
+
 char *extractBetweenIndexes(const char *string, int first, int last);
 
-char nextOperator(const char *string);
+int nextOperator(const char *string);
 
 /**
  * Read a double in a string

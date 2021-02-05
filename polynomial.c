@@ -135,6 +135,31 @@ Polynomial *pAdd(Polynomial *F, Polynomial *G){
     return output;
 }
 
+Polynomial *pMinus(Polynomial *F, Polynomial *G){
+    Polynomial *output = malloc(sizeof(Polynomial));
+    Polynomial *lowerPolynomial, *higherPolynomial;
+    if (F->highestDegree < G->highestDegree) {
+        lowerPolynomial = F;
+        higherPolynomial = G;
+    } else {
+        lowerPolynomial = G;
+        higherPolynomial = F;
+    }
+
+    output->highestDegree = higherPolynomial->highestDegree;
+    output->coefficient = malloc((higherPolynomial->highestDegree + 1) * sizeof(double));
+    for (int i = 0; i <= lowerPolynomial->highestDegree; i++) {
+        output->coefficient[i] = lowerPolynomial->coefficient[i] - higherPolynomial->coefficient[i];
+    }
+    int sign = 1;
+    if (higherPolynomial == G) sign = -1;
+
+    for (int i = lowerPolynomial->highestDegree + 1; i <= higherPolynomial->highestDegree; i++) {
+        output->coefficient[i] = sign * higherPolynomial->coefficient[i];
+    }
+    return output;
+}
+
 Polynomial *pMultiply(Polynomial *F, Polynomial *G){
     Polynomial *output = malloc(sizeof(Polynomial));
     output->highestDegree = F->highestDegree + G->highestDegree;
@@ -277,10 +302,8 @@ Solutions *solve(Polynomial *F) {
 
 void printSolutions(Solutions *x){
     if (x != NULL && x->size > 0) {
-        printf("Solutions = {%1.2lf", x->values[0]);
-        for (int i = 1; i < x->size; i++) {
-            printf(", %1.2lf", x->values[1]);
-        }
+        printf("{%1.2lf", x->values[0]);
+        for (int i = 1; i < x->size; i++) printf(", %1.2lf", x->values[1]);
         printf("}\n");
     } else printf("No solutions or some are complex numbers\n");
 }

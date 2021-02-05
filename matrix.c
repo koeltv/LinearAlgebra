@@ -99,6 +99,7 @@ Matrix *readMatrixInString(char *string){
 
 Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
+    M->name = NULL;
     M->rows = nbRows; M->columns = nbColumns;
     M->values = (double**) malloc(M->rows * sizeof(double*));
     for (int i = 0; i < M->rows; i++) {
@@ -231,7 +232,7 @@ Matrix *transpose(Matrix *M){
     if (M != NULL) {
         Matrix *transpose = newMatrix(M->columns, M->rows, 0);
         for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) transpose->values[i][j] = M->values[j][i];
+            for (int j = 0; j < M->columns; j++) transpose->values[j][i] = M->values[i][j];
         }
         return transpose;
     } else return NULL;
@@ -239,7 +240,7 @@ Matrix *transpose(Matrix *M){
 
 void printMatrix(Matrix *M){
     if (M != NULL) {
-        printf("%s =\n", M->name);
+        if (M->name != NULL) printf("%s =\n", M->name);
         for (int i = 0; i < M->rows; i++) {
             printf("\t");
             for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
