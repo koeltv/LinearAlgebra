@@ -1,8 +1,8 @@
 var searchData=
 [
   ['scalarmultiply_90',['scalarMultiply',['../matrix_8c.html#a7cef230990bc3920b448b1b356c483b3',1,'scalarMultiply(Matrix *M, double scalar):&#160;matrix.c'],['../matrix_8h.html#a7cef230990bc3920b448b1b356c483b3',1,'scalarMultiply(Matrix *M, double scalar):&#160;matrix.c']]],
-  ['searchmatrix_91',['searchMatrix',['../register_8c.html#a9bdf5f37439805396dc03939282584a9',1,'searchMatrix(Register *MainRegister, const char *name):&#160;register.c'],['../register_8h.html#a9bdf5f37439805396dc03939282584a9',1,'searchMatrix(Register *MainRegister, const char *name):&#160;register.c']]],
-  ['searchpolynomial_92',['searchPolynomial',['../register_8c.html#aa65e1f753e6a73dc13436ead425fe4ea',1,'searchPolynomial(Register *MainRegister, const char *name):&#160;register.c'],['../register_8h.html#aa65e1f753e6a73dc13436ead425fe4ea',1,'searchPolynomial(Register *MainRegister, const char *name):&#160;register.c']]],
+  ['searchmatrix_91',['searchMatrix',['../register_8c.html#a08f86167301deb2ced4cf07f416563e6',1,'searchMatrix(Register *aRegister, const char *name):&#160;register.c'],['../register_8h.html#a08f86167301deb2ced4cf07f416563e6',1,'searchMatrix(Register *aRegister, const char *name):&#160;register.c']]],
+  ['searchpolynomial_92',['searchPolynomial',['../register_8c.html#aa1f399ba16d86265154df1dab2380995',1,'searchPolynomial(Register *aRegister, const char *name):&#160;register.c'],['../register_8h.html#aa1f399ba16d86265154df1dab2380995',1,'searchPolynomial(Register *aRegister, const char *name):&#160;register.c']]],
   ['shorterstring_93',['shorterString',['../string_interactions_8c.html#a70c1db3b91d855a19e987b2294d5f4ea',1,'shorterString(const char *string1, const char *string2):&#160;stringInteractions.c'],['../string_interactions_8h.html#a70c1db3b91d855a19e987b2294d5f4ea',1,'shorterString(const char *string1, const char *string2):&#160;stringInteractions.c']]],
   ['size_94',['size',['../struct_solutions.html#a439227feff9d7f55384e8780cfc2eb82',1,'Solutions']]],
   ['sizes_95',['sizes',['../struct_register.html#a7e644882803f96765e58add0b83aff94',1,'Register']]],

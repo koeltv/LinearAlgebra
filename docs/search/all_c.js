@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['readdoubleinfile_71',['readDoubleInFile',['../string_interactions_8c.html#a9582bed6c820b9e2ffd0c2feacb28f56',1,'readDoubleInFile(FILE *currentFile, char *temp):&#160;stringInteractions.c'],['../string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56',1,'readDoubleInFile(FILE *currentFile, char *temp):&#160;stringInteractions.c']]],
-  ['readdoubleinstring_72',['readDoubleInString',['../string_interactions_8c.html#ae81441345d450a38905b001d12832bf8',1,'readDoubleInString(const char *string, int *position):&#160;stringInteractions.c'],['../string_interactions_8h.html#ae81441345d450a38905b001d12832bf8',1,'readDoubleInString(const char *string, int *position):&#160;stringInteractions.c']]],
-  ['readfirstcoefficient_73',['readFirstCoefficient',['../polynomial_8c.html#aa6c85edf3dd131a924dce71c1b520239',1,'polynomial.c']]],
-  ['readmatrixinfile_74',['readMatrixInFile',['../matrix_8c.html#af9c4c40307189cce64b23320040dea8f',1,'readMatrixInFile(char *link):&#160;matrix.c'],['../matrix_8h.html#af9c4c40307189cce64b23320040dea8f',1,'readMatrixInFile(char *link):&#160;matrix.c']]],
+  ['readdoubleinfile_72',['readDoubleInFile',['../string_interactions_8c.html#a9582bed6c820b9e2ffd0c2feacb28f56',1,'readDoubleInFile(FILE *currentFile, char *temp):&#160;stringInteractions.c'],['../string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56',1,'readDoubleInFile(FILE *currentFile, char *temp):&#160;stringInteractions.c']]],
+  ['readdoubleinstring_73',['readDoubleInString',['../string_interactions_8c.html#ae81441345d450a38905b001d12832bf8',1,'readDoubleInString(const char *string, int *position):&#160;stringInteractions.c'],['../string_interactions_8h.html#ae81441345d450a38905b001d12832bf8',1,'readDoubleInString(const char *string, int *position):&#160;stringInteractions.c']]],
+  ['readfirstcoefficient_74',['readFirstCoefficient',['../polynomial_8c.html#aa6c85edf3dd131a924dce71c1b520239',1,'polynomial.c']]],
   ['readmatrixinstring_75',['readMatrixInString',['../matrix_8c.html#aa66580f54649b34bbdcb3ec12ae1cd45',1,'readMatrixInString(char *string):&#160;matrix.c'],['../matrix_8h.html#aa66580f54649b34bbdcb3ec12ae1cd45',1,'readMatrixInString(char *string):&#160;matrix.c']]],
-  ['readmatrixwip_76',['readMatrixWIP',['../matrix_8c.html#a308febcad4d0156caf38eda75918a65d',1,'readMatrixWIP():&#160;matrix.c'],['../matrix_8h.html#a308febcad4d0156caf38eda75918a65d',1,'readMatrixWIP():&#160;matrix.c']]],
-  ['readme_2emd_77',['readme.md',['../readme_8md.html',1,'']]],
+  ['readme_2emd_76',['readme.md',['../readme_8md.html',1,'']]],
+  ['readscriptfile_77',['readScriptFile',['../main_8c.html#a4d9b82bfd88898db4e874d19612e1889',1,'readScriptFile(Register *mainRegister, char *link):&#160;main.c'],['../main_8h.html#a4d9b82bfd88898db4e874d19612e1889',1,'readScriptFile(Register *mainRegister, char *link):&#160;main.c']]],
   ['readstring_78',['readString',['../string_interactions_8c.html#ae4472dee32965298f6ad1f25f58061db',1,'readString(FILE *current):&#160;stringInteractions.c'],['../string_interactions_8h.html#ae4472dee32965298f6ad1f25f58061db',1,'readString(FILE *current):&#160;stringInteractions.c']]],
   ['recursivecommanddecomposition_79',['recursiveCommandDecomposition',['../main_8c.html#a62fa52a6b729827577622ec6c39933aa',1,'recursiveCommandDecomposition(Register *mainRegister, char *command):&#160;main.c'],['../main_8h.html#a62fa52a6b729827577622ec6c39933aa',1,'recursiveCommandDecomposition(Register *mainRegister, char *command):&#160;main.c']]],
   ['register_80',['Register',['../struct_register.html',1,'']]],

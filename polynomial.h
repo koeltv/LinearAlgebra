@@ -18,7 +18,7 @@
  * Structure representing a polynomial of any degree
  */
 typedef struct {
-    char *name;
+    char *name; ///Name of the polynomial
     double *coefficient; ///Coefficients of the polynomial
     int highestDegree; ///Highest degree of the polynomial
 } Polynomial;

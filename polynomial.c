@@ -8,14 +8,14 @@
 #include "polynomial.h"
 
 void freePolynomial(Polynomial *F){
-    if (F != NULL){
+    if (F){
         free(F->coefficient); free(F);
         F = NULL;
     }
 }
 
 Polynomial *copyPolynomial(Polynomial *F) {
-    if (F != NULL) {
+    if (F) {
         Polynomial *copy = malloc(sizeof(Polynomial));
         copy->highestDegree = F->highestDegree;
         copy->coefficient = malloc((F->highestDegree + 1) * sizeof(double));
@@ -25,7 +25,7 @@ Polynomial *copyPolynomial(Polynomial *F) {
 }
 
 double apply(Polynomial *F, double x){
-    if (F != NULL) {
+    if (F) {
         double result = F->coefficient[0];
         for (int i = 1; i <= F->highestDegree; i++) {
             result += F->coefficient[i] * x;
@@ -36,7 +36,7 @@ double apply(Polynomial *F, double x){
 }
 
 Polynomial *derive(Polynomial *F){
-    if (F != NULL && F->highestDegree > 0) {
+    if (F && F->highestDegree > 0) {
         Polynomial *FPrime = malloc(sizeof(Polynomial));
         FPrime->coefficient = malloc(F->highestDegree * sizeof(double));
         FPrime->highestDegree = F->highestDegree - 1;
@@ -46,19 +46,21 @@ Polynomial *derive(Polynomial *F){
 }
 
 void printPolynomial(Polynomial *F){
-    if (F != NULL) {
-        printf("%s(X) = %1.1lfX^%d", F->name, F->coefficient[F->highestDegree], F->highestDegree);
-        for (int i = F->highestDegree - 1; i >= 0; i--) {
-            if (F->coefficient[i] != 0) {
+    if (F) {
+        if (F->name) printf("%s(X) = ", F->name);
+        for (int i = F->highestDegree; i >= 0; i--) {
+            if (F->coefficient[i]) {
                 //Choose the sign
                 int sign = 1;
-                if (F->coefficient[i] < 0) {
-                    printf(" - ");
-                    sign = -1;
-                } else printf(" + ");
+                if (i != F->highestDegree) {
+                    if (F->coefficient[i] < 0) {
+                        printf(" - ");
+                        sign = -1;
+                    } else printf(" + ");
+                }
                 //Print the value with the power of X
-                if (i == 1) printf("%1.1lfX", F->coefficient[i] * sign);
-                else if (i == 0) printf("%1.1lf", F->coefficient[i] * sign);
+                if (i == 0) printf("%1.1lf", F->coefficient[i] * sign);
+                else if (i == 1) printf("%1.1lfX", F->coefficient[i] * sign);
                 else printf("%1.1lfX^%d", F->coefficient[i] * sign, i);
             }
         }
@@ -100,12 +102,10 @@ int degreeOfString(const char *string, int start, int end){
             if (string[i] == 'X'){
                 if (string[i+1] == '^') {
                     if (string[i+2] >= '1' && string[i+2] <= '9' && string[i+2] - '0' > degree) {
-                        degree = string[i+2] - '0';
-                        i += 2;
+                        degree = string[i+2] - '0'; i += 2;
                     }
                 } else if (degree < 1) {
-                    degree = 1;
-                    i++;
+                    degree = 1; i++;
                 }
             }
         }
@@ -206,7 +206,7 @@ Polynomial *readFirstCoefficient(const char *string, int *start){
 }
 
 Polynomial *stringToPolynomial(const char *string, int start, int end){
-    if (string != NULL) {
+    if (string) {
         //Recuperation of the first coefficient
         Polynomial *F = readFirstCoefficient(string, &start);
         //Recuperation of the rest
@@ -226,7 +226,7 @@ Polynomial *stringToPolynomial(const char *string, int start, int end){
 }
 
 Polynomial *syntheticDivision(Polynomial *F, double root){
-    if (F != NULL) {
+    if (F) {
         Polynomial *quotient = malloc(sizeof(Polynomial));
         quotient->coefficient = malloc((F->highestDegree) * sizeof(double));
         quotient->highestDegree = F->highestDegree - 1;
@@ -245,7 +245,7 @@ Polynomial *syntheticDivision(Polynomial *F, double root){
 }
 
 double newtonMethod(Polynomial *F) {
-    if (F != NULL && F->highestDegree > 0) {
+    if (F && F->highestDegree > 0) {
         //If the maximum degree is 1, the root is easy to find
         if (F->highestDegree == 1) return -F->coefficient[0] / F->coefficient[1];
         else {
@@ -265,7 +265,7 @@ double newtonMethod(Polynomial *F) {
             }
             //End of the method, free temporary values and return output
             freePolynomial(fPrime);
-            if (solutionFound == 0) return IMAGINARY;
+            if (!solutionFound) return IMAGINARY;
             return x1;
         }
     } else exit(EXIT_FAILURE);
@@ -285,7 +285,7 @@ double roundPreciseDouble(double value){
 }
 
 Solutions *solve(Polynomial *F) {
-    if (F != NULL) {
+    if (F) {
         Solutions *x = malloc(sizeof(Solutions));
         x->size = F->highestDegree;
         x->values = malloc(x->size * sizeof(double));
@@ -301,7 +301,7 @@ Solutions *solve(Polynomial *F) {
 }
 
 void printSolutions(Solutions *x){
-    if (x != NULL && x->size > 0) {
+    if (x && x->size > 0) {
         printf("{%1.2lf", x->values[0]);
         for (int i = 1; i < x->size; i++) printf(", %1.2lf", x->values[1]);
         printf("}\n");

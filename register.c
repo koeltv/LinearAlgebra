@@ -15,59 +15,79 @@ Register *newRegister(){
     return reg;
 }
 
-Matrix *searchMatrix(Register *MainRegister, const char *name){
-    if (MainRegister->listOfMatrices != NULL) {
-        for (int i = 0; i < MainRegister->sizes[1]; i++) {
-            if (shorterString(MainRegister->listOfMatrices[i]->name, name) == 0) return MainRegister->listOfMatrices[i];
+Matrix *searchMatrix(Register *aRegister, const char *name){
+    if (aRegister->listOfMatrices) {
+        for (int i = 0; i < aRegister->sizes[1]; i++) {
+            if (!shorterString(aRegister->listOfMatrices[i]->name, name)) return aRegister->listOfMatrices[i];
         }
     }
     return NULL;
 }
 
-Polynomial *searchPolynomial(Register *MainRegister, const char *name){
-    if (MainRegister->listOfPolynomials != NULL) {
-        for (int i = 0; i < MainRegister->sizes[0]; i++) {
-            if (shorterString(MainRegister->listOfPolynomials[i]->name, name) == 0) return MainRegister->listOfPolynomials[i];
+Polynomial *searchPolynomial(Register *aRegister, const char *name){
+    if (aRegister->listOfPolynomials) {
+        for (int i = 0; i < aRegister->sizes[0]; i++) {
+            if (!shorterString(aRegister->listOfPolynomials[i]->name, name)) return aRegister->listOfPolynomials[i];
         }
     }
     return NULL;
 }
 
-void addToRegister(Register *MainRegister, Polynomial *newPolynomial, Matrix *newMatrix){
-    if (newPolynomial != NULL) {
-        if (searchPolynomial(MainRegister, newPolynomial->name) != NULL) {
-            for (int i = 0; i < MainRegister->sizes[0]; i++) {
-                if (shorterString(MainRegister->listOfPolynomials[i]->name, newPolynomial->name) == 0) {
-                    freePolynomial(MainRegister->listOfPolynomials[i]);
-                    MainRegister->listOfPolynomials[i] = newPolynomial;
+void addToRegister(Register *aRegister, Polynomial *newPolynomial, Matrix *newMatrix){
+    if (newPolynomial) {
+        if (searchPolynomial(aRegister, newPolynomial->name)) {
+            for (int i = 0; i < aRegister->sizes[0]; i++) {
+                if (!shorterString(aRegister->listOfPolynomials[i]->name, newPolynomial->name)) {
+                    freePolynomial(aRegister->listOfPolynomials[i]);
+                    aRegister->listOfPolynomials[i] = newPolynomial;
                 }
             }
         } else {
-            MainRegister->listOfPolynomials = realloc(MainRegister->listOfPolynomials, ++MainRegister->sizes[0] * sizeof(Polynomial*));
-            MainRegister->listOfPolynomials[MainRegister->sizes[0]] = newPolynomial;
+            aRegister->listOfPolynomials = realloc(aRegister->listOfPolynomials, ++aRegister->sizes[0] * sizeof(Polynomial*));
+            aRegister->listOfPolynomials[aRegister->sizes[0] - 1] = newPolynomial;
         }
-    } else if (newMatrix != NULL) {
-        if (searchMatrix(MainRegister, newMatrix->name) != NULL) {
-            for (int i = 0; i < MainRegister->sizes[1]; i++) {
-                if (shorterString(MainRegister->listOfMatrices[i]->name, newMatrix->name) == 0) {
-                    freeMatrix(MainRegister->listOfMatrices[i]);
-                    MainRegister->listOfMatrices[i] = newMatrix;
+    }
+    if (newMatrix) {
+        if (searchMatrix(aRegister, newMatrix->name)) {
+            for (int i = 0; i < aRegister->sizes[1]; i++) {
+                if (shorterString(aRegister->listOfMatrices[i]->name, newMatrix->name) == 0) {
+                    freeMatrix(aRegister->listOfMatrices[i]);
+                    aRegister->listOfMatrices[i] = newMatrix;
                 }
             }
         } else {
-            MainRegister->listOfMatrices = realloc(MainRegister->listOfMatrices,++MainRegister->sizes[1] * sizeof(Matrix*));
-            MainRegister->listOfMatrices[MainRegister->sizes[1] - 1] = newMatrix;
+            aRegister->listOfMatrices = realloc(aRegister->listOfMatrices, ++aRegister->sizes[1] * sizeof(Matrix*));
+            aRegister->listOfMatrices[aRegister->sizes[1] - 1] = newMatrix;
         }
     }
 }
 
-void freeRegisterContent(Register *mainRegister){
-    if (mainRegister != NULL) {
-        for (int i = 0; i < mainRegister->sizes[0]; i++) freePolynomial(mainRegister->listOfPolynomials[i]);
-        free(mainRegister->listOfPolynomials);
-        mainRegister->listOfPolynomials = NULL;
-        for (int i = 0; i < mainRegister->sizes[1]; i++) freeMatrix(mainRegister->listOfMatrices[i]);
-        free(mainRegister->listOfMatrices);
-        mainRegister->listOfMatrices = NULL;
+void freeRegisterContent(Register *aRegister){
+    if (aRegister) {
+        for (int i = 0; i < aRegister->sizes[0]; i++) freePolynomial(aRegister->listOfPolynomials[i]);
+        free(aRegister->listOfPolynomials);
+        aRegister->listOfPolynomials = NULL;
+        aRegister->sizes[0] = 0;
+        for (int i = 0; i < aRegister->sizes[1]; i++) freeMatrix(aRegister->listOfMatrices[i]);
+        free(aRegister->listOfMatrices);
+        aRegister->listOfMatrices = NULL;
+        aRegister->sizes[1] = 0;
     }
+}
+
+void printRegister(Register *aRegister){
+    if (aRegister->listOfPolynomials) {
+        printf("===============Polynomials================\n");
+        for (int i = 0; i < aRegister->sizes[0]; i++) {
+            printPolynomial(aRegister->listOfPolynomials[i]); printf("\n");
+        }
+    }
+    if (aRegister->listOfMatrices) {
+        printf("=================Matrices=================\n");
+        for (int i = 0; i < aRegister->sizes[1]; i++) {
+            printMatrix(aRegister->listOfMatrices[i]); printf("\n");
+        }
+    }
+    if (!aRegister->listOfPolynomials && !aRegister->listOfMatrices) printf("The register is empty\n");
+    else printf("==========================================\n");
 }

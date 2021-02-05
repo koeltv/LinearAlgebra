@@ -64,7 +64,7 @@ M = [1,2,3;4,5,6;7,8,10]
         return result;
     } else if (containString(command, "*") == 1) {
         char *objectName = firstWord(command);
-        Register *result = nextCommand(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '*'), length(command) + 1));
+        Register *result = extractObject(mainRegister, extractBetweenIndexes(command, firstOccurrenceOf(command, '*'), length(command) + 1));
         if (result->listOfPolynomials != NULL) {
             result->listOfPolynomials[0] = pMultiply(searchPolynomial(mainRegister, objectName), result->listOfPolynomials[0]);
         } else if (result->listOfMatrices != NULL) {
