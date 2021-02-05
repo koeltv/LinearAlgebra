@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rows_141',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix::rows()'],['../struct_string_matrix.html#a061459acc9e078fa4699e0e349887215',1,'StringMatrix::rows()']]]
+  ['m_220',['M',['../test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba',1,'testFile.txt']]]
 ];

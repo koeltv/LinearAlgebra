@@ -18,6 +18,7 @@
  * Structure representing a polynomial of any degree
  */
 typedef struct {
+    char *name; ///Name of the polynomial
     double *coefficient; ///Coefficients of the polynomial
     int highestDegree; ///Highest degree of the polynomial
 } Polynomial;
@@ -63,6 +64,12 @@ Polynomial *copyPolynomial(Polynomial *F);
 // Basic operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 int degreeOfString(const char *string, int start, int end);
+
+Polynomial *pAdd(Polynomial *F, Polynomial *G);
+
+Polynomial *pMinus(Polynomial *F, Polynomial *G);
+
+Polynomial *pMultiply(Polynomial *F, Polynomial *G);
 
 /**
  * Apply the polynomial for a given value

@@ -7,75 +7,30 @@
 
 #include "matrix.h"
 
-Matrix *readMatrixWIP(){
-    FILE *currentFile;
-    if ((currentFile = fopen("../testFile.txt", "rb")) == NULL) exit(EXIT_FAILURE);
-
-    //Creation of the matrix object
-    Matrix *matrix = (Matrix*) malloc(sizeof(Matrix));
-
-    //Initialisation
-    char temp = ' ';
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
-    matrix->values = (double**) malloc(sizeof(double*));
-
-    double first; //TODO Solve problem with values[0][0]
-
-    //First Row
-    double *holder = (double*) malloc(10 * sizeof(double));
-    for (matrix->columns = 0; temp == '[' || temp == ','; matrix->columns++) {
-        holder[matrix->columns] = readDoubleInFile(currentFile, &temp);
-        //if (matrix->columns == 0) first = holder[0];
-        if (matrix->columns > 0 && matrix->columns % 10 == 0) holder = realloc(holder, matrix->columns + 10);
-    }
-    matrix->values[0] = (double*) malloc(matrix->columns * sizeof(double));
-    for (int i = 0; i < matrix->columns; i++) matrix->values[0][i] = holder[i];
-    free(holder);
-
-    //Other rows
-    if (matrix->columns > 0 && temp == ';') {
-        for (matrix->rows = 1; temp == ';'; matrix->rows++) {
-            matrix->values[matrix->rows] = (double*) malloc(matrix->columns * sizeof(double));
-            matrix->values[matrix->rows][0] = readDoubleInFile(currentFile, &temp);
-            for (int j = 1; j < matrix->columns && temp == ','; j++) {
-                matrix->values[matrix->rows][j] = readDoubleInFile(currentFile, &temp);
-            }
-        }
-    }
-
-    //matrix->values[0][0] = first;
-    fclose(currentFile);
-    return matrix;
-}
-
-Matrix *readMatrixInFile(char *link){
-    FILE *currentFile;
-    if ((currentFile = fopen(link, "rb")) == NULL) exit(EXIT_FAILURE);
-    char *firstLine = readString(currentFile);
-
+Matrix *readMatrixInString(char *string){
     //Creation of the matrix
     Matrix *matrix = malloc(sizeof(Matrix));
     matrix->columns = matrix->rows = 1;
-    for (int i = 0; firstLine[i] != ']' && firstLine[i] != '\0'; i++) {
-        if (matrix->rows == 1 && firstLine[i] == ',') matrix->columns++;
-        else if (firstLine[i] == ';') matrix->rows++;
+    for (int i = 0; string[i] != ']' && string[i] != '\0'; i++) {
+        if (matrix->rows == 1 && string[i] == ',') matrix->columns++;
+        else if (string[i] == ';') matrix->rows++;
     }
 
     //Initialisation of the matrix
-    char temp = ' ';
-    rewind(currentFile);
-    while (temp != '[') fscanf(currentFile, "%c", &temp);
+    int startOfMatrix = 0;
+    while (string[startOfMatrix] != '[') startOfMatrix++;
 
     matrix->values = (double**) malloc(matrix->rows * sizeof(double*));
     for (int k = 0; k < matrix->rows; k++) {
         matrix->values[k] = (double*) malloc(matrix->columns * sizeof(double));
-        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInFile(currentFile, &temp);
+        for (int j = 0; j < matrix->columns; j++) matrix->values[k][j] = readDoubleInString(string, &startOfMatrix);
     }
     return matrix;
 }
 
 Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
+    M->name = NULL;
     M->rows = nbRows; M->columns = nbColumns;
     M->values = (double**) malloc(M->rows * sizeof(double*));
     for (int i = 0; i < M->rows; i++) {
@@ -86,7 +41,7 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
 }
 
 void freeMatrix(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         for (int i = 0; i < M->rows; i++) free(M->values[i]);
         free(M->values); free(M);
         M = NULL;
@@ -94,7 +49,7 @@ void freeMatrix(Matrix *M){
 }
 
 Matrix *removeRow(Matrix *M, int rowIndex){
-    if (M != NULL) {
+    if (M) {
         Matrix *smallerM = newMatrix(M->rows - 1, M->columns, 0);
         for (int i = 0; i < M->rows; i++) {
             for (int j = 0; j < M->columns; j++) {
@@ -106,7 +61,7 @@ Matrix *removeRow(Matrix *M, int rowIndex){
 }
 
 Matrix *removeColumn(Matrix *M, int columnIndex){
-    if (M != NULL) {
+    if (M) {
         Matrix *smallerM = newMatrix(M->rows, M->columns - 1, 0);
         for (int i = 0; i < M->rows; i++) {
             for (int j = 0; j < M->columns; j++) {
@@ -118,7 +73,7 @@ Matrix *removeColumn(Matrix *M, int columnIndex){
 }
 
 Matrix *addColumn(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         Matrix *biggerM = newMatrix(M->rows, M->columns + 1, 0);
         for (int i = 0; i < M->rows; i++) {
             for (int j = 0; j < M->columns; j++) biggerM->values[i][j] = M->values[i][j];
@@ -129,7 +84,7 @@ Matrix *addColumn(Matrix *M){
 }
 
 Matrix *subMat(Matrix* M, int r1, int r2, int c1, int c2){
-    if (M != NULL) {
+    if (M) {
         Matrix *subM = newMatrix(r2 - r1, c2 - c1, 0);
         for (int i = r1; i < r2; i++) {
             for (int j = c1; j < c2; j++) {
@@ -141,7 +96,7 @@ Matrix *subMat(Matrix* M, int r1, int r2, int c1, int c2){
 }
 
 Matrix *copy(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         Matrix *copy = newMatrix(M->rows, M->columns, 0);
         for (int i = 0; i < M->rows; i++) {
             for (int j = 0; j < M->columns; j++) copy->values[i][j] = M->values[i][j];
@@ -151,7 +106,7 @@ Matrix *copy(Matrix *M){
 }
 
 Matrix *sum(Matrix *A, Matrix *B){
-    if (A != NULL && B != NULL && A->columns == B->columns && A->rows == B->rows) {
+    if (A && B && A->columns == B->columns && A->rows == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] + B->values[i][j];
@@ -161,7 +116,7 @@ Matrix *sum(Matrix *A, Matrix *B){
 }
 
 Matrix *minus(Matrix *A, Matrix *B){
-    if (A != NULL && B != NULL && A->columns == B->columns && A->rows == B->rows) {
+    if (A && B && A->columns == B->columns && A->rows == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] - B->values[i][j];
@@ -171,7 +126,7 @@ Matrix *minus(Matrix *A, Matrix *B){
 }
 
 Matrix *innerMultiply(Matrix *A, Matrix *B){
-    if (A != NULL && B != NULL && A->columns == B->columns && A->rows == B->rows) {
+    if (A && B && A->columns == B->columns && A->rows == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] * B->values[i][j];
@@ -181,7 +136,7 @@ Matrix *innerMultiply(Matrix *A, Matrix *B){
 }
 
 Matrix *scalarMultiply(Matrix *M, double scalar){
-    if (M != NULL) {
+    if (M) {
         Matrix *scalarM = copy(M);
         for (int i = 0; i < M->rows; i++) {
             for (int j = 0; j < M->columns; j++) {
@@ -193,7 +148,7 @@ Matrix *scalarMultiply(Matrix *M, double scalar){
 }
 
 Matrix *multiply(Matrix *A, Matrix *B){
-    if (A != NULL && B != NULL && A->columns == B->rows) {
+    if (A && B && A->columns == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) {
@@ -205,28 +160,28 @@ Matrix *multiply(Matrix *A, Matrix *B){
 }
 
 Matrix *transpose(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         Matrix *transpose = newMatrix(M->columns, M->rows, 0);
         for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) transpose->values[i][j] = M->values[j][i];
+            for (int j = 0; j < M->columns; j++) transpose->values[j][i] = M->values[i][j];
         }
         return transpose;
     } else return NULL;
 }
 
 void printMatrix(Matrix *M){
-    printf("=====================================\n");
-    if (M != NULL) {
+    if (M) {
+        if (M->name) printf("%s =\n", M->name);
         for (int i = 0; i < M->rows; i++) {
+            printf("\t");
             for (int j = 0; j < M->columns; j++) printf("%1.1lf\t", M->values[i][j]);
             printf("\n");
         }
     } else printf("No matrix\n");
-    printf("=====================================\n");
 }
 
 double trace(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         double trace = 0;
         int lastDiagonal = M->columns < M->rows ? M->columns : M->rows;
         for (int i = 0; i < lastDiagonal; i++) trace += M->values[i][i];
@@ -235,7 +190,7 @@ double trace(Matrix *M){
 }
 
 double det(Matrix *M){
-    if (M != NULL && M->columns == M->rows){
+    if (M && M->columns == M->rows){
         if (M->columns == 1) return M->values[0][0];
         else {
             double result = 0;
@@ -251,7 +206,7 @@ double det(Matrix *M){
 }
 
 Matrix *adjugate(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         Matrix *adjM = newMatrix(M->rows, M->columns, 0);
         for (int i = 0, sign = 1; i < M->rows; i++, sign *= -1) {
             for (int j = 0; j < M->columns; j++, sign *= -1) {
@@ -266,7 +221,7 @@ Matrix *adjugate(Matrix *M){
 }
 
 Matrix *inverse(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         double determinant = det(M);
         if (determinant != 0 && M->rows == M->columns) {
             return scalarMultiply(transpose(adjugate(M)), 1 / det(M));
@@ -352,7 +307,7 @@ Matrix *solveAugmentedMatrix(Matrix *M){
 }
 
 Solutions *eigenValues(Matrix *M){
-    if (M != NULL){
+    if (M){
         char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
         return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
     } else return NULL;
@@ -478,9 +433,9 @@ Matrix *eigenVectors(Matrix *M){
 }
 
 Matrix *triangularise(Matrix *M){
-    if (M != NULL) {
+    if (M) {
         Matrix *PInverse, *P = eigenVectors(M);
-        if ((PInverse = inverse(P)) != NULL) return multiply(multiply(PInverse, M), P);
+        if ((PInverse = inverse(P))) return multiply(multiply(PInverse, M), P);
     }
     return NULL;
 }

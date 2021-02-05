@@ -17,6 +17,7 @@
  * Structure representing a matrix of any size
  */
 typedef struct {
+    char *name;
     double **values; ///Elements of the matrix contained in a 2 dimensional array
     int rows; ///Number of rows of the matrix
     int columns; ///Number of columns matrix
@@ -26,19 +27,12 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
- * (WIP) Read a matrix in a file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
- * @return matrix formed from the file
- */
-Matrix *readMatrixWIP(); //TODO Problem pointer
-
-/**
- * Current read a matrix in file
- * This function read a matrix in a file given a specific format and return a Matrix structure made from it
+ * Current read a matrix in string
+ * This function read a matrix in a string given a specific format and return a matrix structure made from it
  * @param link
  * @return matrix formed from the file
  */
-Matrix *readMatrixInFile(char *link);
+Matrix *readMatrixInString(char *string);
 
 /**
  * Create a simple matrix

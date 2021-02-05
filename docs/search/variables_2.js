@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['m_140',['M',['../test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba',1,'testFile.txt']]]
+  ['listofmatrices_218',['listOfMatrices',['../struct_register.html#afaea219cd871cba59a86206c68f24fd9',1,'Register']]],
+  ['listofpolynomials_219',['listOfPolynomials',['../struct_register.html#a8eac5b471175c0109be111a98c4c042b',1,'Register']]]
 ];
