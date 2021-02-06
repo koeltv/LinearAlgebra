@@ -101,6 +101,9 @@ $(document).ready(function(){initNavTree('register_8h.html',''); initResizable()
 <div class="title">register.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Header file of <a class="el" href="register_8c.html" title="Functions on register.">register.c</a>.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="matrix_8h_source.html">matrix.h</a>&quot;</code><br />
 </div>
 <p><a href="register_8h_source.html">Go to the source code of this file.</a></p>
@@ -116,6 +119,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a27689da9dfdc50bfd41631a7deff16dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a27689da9dfdc50bfd41631a7deff16dc">newRegister</a> ()</td></tr>
 <tr class="memdesc:a27689da9dfdc50bfd41631a7deff16dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new register.  <a href="register_8h.html#a27689da9dfdc50bfd41631a7deff16dc">More...</a><br /></td></tr>
 <tr class="separator:a27689da9dfdc50bfd41631a7deff16dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">freeRegisterContent</a> (<a class="el" href="struct_register.html">Register</a> *aRegister)</td></tr>
+<tr class="memdesc:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty a register This function free the content of a register but doesn't free it.  <a href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">More...</a><br /></td></tr>
+<tr class="separator:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08f86167301deb2ced4cf07f416563e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a08f86167301deb2ced4cf07f416563e6">searchMatrix</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, const char *name)</td></tr>
 <tr class="memdesc:a08f86167301deb2ced4cf07f416563e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a matrix in a register This function returns a corresponding matrix if it exist in the register and it's name matches or NULL otherwise.  <a href="register_8h.html#a08f86167301deb2ced4cf07f416563e6">More...</a><br /></td></tr>
 <tr class="separator:a08f86167301deb2ced4cf07f416563e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,14 +131,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a87389f4606e4e829010a221430db607d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a87389f4606e4e829010a221430db607d">addToRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, <a class="el" href="struct_polynomial.html">Polynomial</a> *newPolynomial, <a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">newMatrix</a>)</td></tr>
 <tr class="memdesc:a87389f4606e4e829010a221430db607d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add to a register This function add an object to an existing register.  <a href="register_8h.html#a87389f4606e4e829010a221430db607d">More...</a><br /></td></tr>
 <tr class="separator:a87389f4606e4e829010a221430db607d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">freeRegisterContent</a> (<a class="el" href="struct_register.html">Register</a> *aRegister)</td></tr>
-<tr class="memdesc:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty a register This function free the content of a register but doesn't free it.  <a href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">More...</a><br /></td></tr>
-<tr class="separator:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6faec37497b21b9073bb835475a2936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#af6faec37497b21b9073bb835475a2936">printRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister)</td></tr>
 <tr class="memdesc:af6faec37497b21b9073bb835475a2936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a register This function prints the whole content of a register.  <a href="register_8h.html#af6faec37497b21b9073bb835475a2936">More...</a><br /></td></tr>
 <tr class="separator:af6faec37497b21b9073bb835475a2936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header file of <a class="el" href="register_8c.html" title="Functions on register.">register.c</a>. </p>
+<dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a87389f4606e4e829010a221430db607d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87389f4606e4e829010a221430db607d">&#9670;&nbsp;</a></span>addToRegister()</h2>
 

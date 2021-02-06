@@ -63,12 +63,41 @@ Polynomial *copyPolynomial(Polynomial *F);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * Degree of a polynomial in string format
+ * This function return the degree of a polynomial in string format
+ * @param string - The polynomial in string format
+ * @param start - The starting index of the string
+ * @param end - The end index of the string
+ * @return degree of the polynomial
+ */
 int degreeOfString(const char *string, int start, int end);
 
+/**
+ * Sum polynomials
+ * This function return the sum of 2 polynomials
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F + G
+ */
 Polynomial *pAdd(Polynomial *F, Polynomial *G);
 
+/**
+ * Subtract polynomials
+ * This function return the diffence of the first polynomial by the second
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F - G
+ */
 Polynomial *pMinus(Polynomial *F, Polynomial *G);
 
+/**
+ * Multiply polynomials
+ * This function return the product of 2 polynomials
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F * G
+ */
 Polynomial *pMultiply(Polynomial *F, Polynomial *G);
 
 /**
@@ -125,6 +154,11 @@ double newtonMethod(Polynomial *F);
  */
 Solutions *solve(Polynomial *F);
 
+/**
+ * Print a group of solutions
+ * This function print a group of solutions in the terminal
+ * @param x - Solutions to print
+ */
 void printSolutions(Solutions *x);
 
 #endif //LINEARALGEBRA_POLYNOMIAL_H

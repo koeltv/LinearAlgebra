@@ -1,5 +1,5 @@
 /**
- * @file main.h Header file of register.c
+ * @file register.h Header file of register.c
  * @author Valentin Koeltgen
  */
 
@@ -8,6 +8,9 @@
 
 #include "matrix.h"
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Structures
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
  * @struct Register
  * Structure representing a global container of objects used in this program
@@ -18,12 +21,25 @@ typedef struct {
     Matrix **listOfMatrices; ///List of matrices
 } Register;
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Construction functions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
  * Create a new register
  * @return created register
  */
 Register *newRegister();
 
+/**
+ * Empty a register
+ * This function free the content of a register but doesn't free it
+ * @param aRegister - The register to empty
+ */
+void freeRegisterContent(Register *aRegister);
+
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Basic operator functions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
  * Search for a matrix in a register
  * This function returns a corresponding matrix if it exist in the register and it's name matches or NULL otherwise
@@ -51,13 +67,6 @@ Polynomial *searchPolynomial(Register *aRegister, const char *name);
  * @param newMatrix - The matrix to add
  */
 void addToRegister(Register *aRegister, Polynomial *newPolynomial, Matrix *newMatrix);
-
-/**
- * Empty a register
- * This function free the content of a register but doesn't free it
- * @param aRegister - The register to empty
- */
-void freeRegisterContent(Register *aRegister);
 
 /**
  * Print the content of a register

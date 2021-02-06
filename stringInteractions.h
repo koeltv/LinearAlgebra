@@ -48,10 +48,30 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+/**
+ * First word of a string
+ * This function return the first word of a string (surrounded by whitespaces)
+ * @param string - The string where to extract the first word
+ * @return first word
+ */
 char *firstWord(const char *string);
 
+/**
+ * Index of a character in a string
+ * This function return the index of the first occurrence of a character in a string
+ * @note This function returns -1 if it doesn't find the character
+ * @param string - The string where to search
+ * @param toSearch - The character to search
+ * @return index of the first occurrence of toSearch
+ */
 int firstOccurrenceOf(const char *string, char toSearch);
 
+/**
+ * Copy a string
+ * This function copy the first string in the second
+ * @param original - String to copy
+ * @param destination - Copy
+ */
 void copyString(char *original, char *destination);
 
 /**
@@ -72,16 +92,61 @@ char shorterString(const char *string1, const char *string2);
  */
 char containString(const char *mainString, const char *toSearch);
 
+/**
+ * Verify if the string contains the character in order
+ * This function return 1 if the string contains the character in order and 0 if it doesn't
+ * @param string - String to scan for the characters
+ * @param charToSearch - Characters to search
+ * @return result of the scan
+ */
 char containCharInOrder(const char *string, const char *charToSearch);
 
+/**
+ * Extract string between 2 characters
+ * This function return the string between 2 given characters
+ * @param string - The original string
+ * @param first - The first character
+ * @param last - The second character
+ * @return extracted string
+ */
 char *extractBetweenChar(const char *string, char first, char last);
 
-char *extractUpToChar(const char *string, char last);
-
-char *extractUpToIndex(const char *string, int last);
-
+/**
+ * Extract string between 2 indexes
+ * This function return the string between 2 given indexes
+ * @param string - The original string
+ * @param first - The first index
+ * @param last - The second index
+ * @return extracted string
+ */
 char *extractBetweenIndexes(const char *string, int first, int last);
 
+/**
+ * Extract string up to a character
+ * This function return the string until a character
+ * @param string - The original string
+ * @param last - The end character
+ * @return extracted string
+ */
+char *extractUpToChar(const char *string, char last);
+
+/**
+ * Extract up to an index
+ * This function return the string until an index
+ * @param string - The original string
+ * @param last - The end index
+ * @return extracted string
+ */
+char *extractUpToIndex(const char *string, int last);
+
+/**
+ * Find next operator in a string
+ * This function return the index of the next operator at the same "depth level" as the starting point
+ * @note The depth level is related to parenthesis, adding a set of parenthesis add a depth level
+ * @note If it doesn't find any operator (+, -, *), it returns -1
+ * @param string - string to scan for an operator
+ * @return index of the next operator
+ */
 int nextOperator(const char *string);
 
 /**
