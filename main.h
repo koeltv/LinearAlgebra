@@ -16,7 +16,7 @@
  * @param operator - The operation to apply
  * @return register containing the result
  */
-Register *applyOperation(Register *mainRegister, char *operation, char operator);
+Object *applyOperation(Register *mainRegister, char *operation, char operator);
 
 /**
  * Get a basic object from a string
@@ -25,7 +25,7 @@ Register *applyOperation(Register *mainRegister, char *operation, char operator)
  * @param command - object in string format
  * @return register containing the object
  */
-Register *extractObject(Register *mainRegister, char *command);
+Object *extractObject(Register *mainRegister, char *command);
 
 /**
  * Apply a composite command recursively
@@ -34,7 +34,7 @@ Register *extractObject(Register *mainRegister, char *command);
  * @param command - command in string form
  * @return register containing the result of the command
  */
-Register *recursiveCommandDecomposition(Register *mainRegister, char *command);
+Object *recursiveCommandDecomposition(Register *mainRegister, char *command);
 
 /**
  * Print the content of a file in a buffer

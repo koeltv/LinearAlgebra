@@ -7,7 +7,7 @@
 
 #include "stringInteractions.h"
 
-char *readString(FILE *current){
+char *readString(FILE *current) {
     int i = 0;
     char temp, *string = (char*) malloc(20 * sizeof(char)); //We start from a chain of 20 characters
     fscanf(current, " %c", &temp);
@@ -20,13 +20,13 @@ char *readString(FILE *current){
     return string;
 }
 
-int length(const char *string){
+int length(const char *string) { //TODO Remove the +1 on all functions using this (\0 is included)
     int length = 0;
     while (string[length] != '\0') length++;
     return length;
 }
 
-char *firstWord(const char *string){
+char *firstWord(const char *string) {
     int i = 0 , j;
     while (string[i] == ' ') i++;
     for (j = i; string[j] && string[j] != ' '; j++);
@@ -37,18 +37,18 @@ char *firstWord(const char *string){
     return word;
 }
 
-int firstOccurrenceOf(const char *string, char toSearch){
+int firstOccurrenceOf(const char *string, char toSearch) {
     for (int i = 0; string[i]; i++) {
         if (string[i] == toSearch) return i;
     }
     return -1;
 }
 
-void copyString(char *original, char *destination){
+void copyString(char *original, char *destination) {
     for (int i = 0; i <= length(original) + 1; i++) destination[i] = original[i];
 }
 
-char shorterString(const char *string1, const char *string2){
+char shorterString(const char *string1, const char *string2) {
     if (string1 && string2) {
         int i;
         for (i = 0; string1[i] && string2[i]; i++) {
@@ -61,7 +61,7 @@ char shorterString(const char *string1, const char *string2){
     } else return -1;
 }
 
-char containString(const char *mainString, const char *toSearch){
+char containString(const char *mainString, const char *toSearch) {
     int i = 0, j;
     while (mainString[i] && mainString[i] != toSearch[0]) i++;
     if (mainString[i]){
@@ -73,7 +73,7 @@ char containString(const char *mainString, const char *toSearch){
     return 0;
 }
 
-char containCharInOrder(const char *string, const char *charToSearch){
+char containCharInOrder(const char *string, const char *charToSearch) {
     int totalOfCharToFind = length(charToSearch);
     for (int i = 0, nbOfCharFound = 0; string[i]; i++) {
         if (string[i] == charToSearch[nbOfCharFound]) nbOfCharFound++;
@@ -82,7 +82,7 @@ char containCharInOrder(const char *string, const char *charToSearch){
     return 0;
 }
 
-char *extractBetweenChar(const char *string, char first, char last){
+char *extractBetweenChar(const char *string, char first, char last) {
     int firstIndex = 0;
     while (string[firstIndex] && string[firstIndex] != first) firstIndex++;
     char *extracted = NULL;
@@ -98,7 +98,7 @@ char *extractBetweenChar(const char *string, char first, char last){
     return extracted;
 }
 
-char *extractUpToChar(const char *string, char last){
+char *extractUpToChar(const char *string, char last) {
     char *extracted = calloc(1, sizeof(char));
     int k = 0;
         for (int j = 0; string[j] && string[j] != last; j++) {
@@ -108,7 +108,7 @@ char *extractUpToChar(const char *string, char last){
     return extracted;
 }
 
-char *extractUpToIndex(const char *string, int last){
+char *extractUpToIndex(const char *string, int last) {
     char *extracted = calloc(1, sizeof(char));
     int k = 0;
     for (int j = 0; string[j] && j < last; j++) {
@@ -118,7 +118,7 @@ char *extractUpToIndex(const char *string, int last){
     return extracted;
 }
 
-char *extractBetweenIndexes(const char *string, int first, int last){
+char *extractBetweenIndexes(const char *string, int first, int last) {
     if (string && length(string) + 1 >= last - first) {
         char *result = calloc(last - first, sizeof(char));
         for (int i = first; string[i] && i < last; i++) result[i - first] = string[i];
@@ -127,7 +127,7 @@ char *extractBetweenIndexes(const char *string, int first, int last){
     } else return NULL;
 }
 
-int nextOperator(const char *string){
+int nextOperator(const char *string) {
     for (int i = 0, nbOfParenthesis = 0; string[i]; i++) {
         if (string[i] == '(') nbOfParenthesis++;
         else if (string[i] == ')') nbOfParenthesis--;
@@ -138,7 +138,7 @@ int nextOperator(const char *string){
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
-double readDoubleInString(const char *string, int *position){
+double readDoubleInString(const char *string, int *position) {
 
     //Search for the sign
     while (*position >= 0 && string[*position] == ' ') (*position)--;
@@ -165,7 +165,7 @@ double readDoubleInString(const char *string, int *position){
 }
 #pragma clang diagnostic pop
 
-double readDoubleInFile(FILE *currentFile, char *temp){
+double readDoubleInFile(FILE *currentFile, char *temp) {
     double result = 0;
     fscanf(currentFile, " %c", temp);
     if (*temp == '-') {
@@ -188,7 +188,7 @@ double readDoubleInFile(FILE *currentFile, char *temp){
     return result;
 }
 
-StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue){
+StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
     StringMatrix* M = malloc(sizeof(StringMatrix));
     M->rows = nbRows; M->columns = nbColumns;
     M->values = malloc(M->rows * sizeof(char**));
@@ -199,7 +199,7 @@ StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue){
     return M;
 }
 
-void freeStringMatrix(StringMatrix *M){
+void freeStringMatrix(StringMatrix *M) {
     if (M) {
         for (int i = 0; i < M->rows; i++) {
             //for (int j = 0; j < M->columns; j++) free(M->values[i][j]);
@@ -210,7 +210,7 @@ void freeStringMatrix(StringMatrix *M){
     }
 }
 
-StringMatrix *removeSRow(StringMatrix *M, int rowIndex){
+StringMatrix *removeSRow(StringMatrix *M, int rowIndex) {
     if (M) {
         StringMatrix *smallerM = newStringMatrix(M->rows - 1, M->columns, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -222,7 +222,7 @@ StringMatrix *removeSRow(StringMatrix *M, int rowIndex){
     } else return NULL;
 }
 
-StringMatrix *removeSColumn(StringMatrix *M, int columnIndex){
+StringMatrix *removeSColumn(StringMatrix *M, int columnIndex) {
     if (M) {
         StringMatrix *smallerM = newStringMatrix(M->rows, M->columns - 1, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -234,14 +234,14 @@ StringMatrix *removeSColumn(StringMatrix *M, int columnIndex){
     } else return NULL;
 }
 
-StringMatrix *changeToPLambdaForm(StringMatrix *M){
+StringMatrix *changeToPLambdaForm(StringMatrix *M) {
     for (int i = 0; i < M->rows; i++) {
         snprintf(M->values[i][i], (length(M->values[i][i]) + 6) * sizeof(char), "%s - 1X", M->values[i][i]);
     }
     return M;
 }
 
-char *detOfStringMatrix(StringMatrix *M){
+char *detOfStringMatrix(StringMatrix *M) {
     if (M->rows == 1 && M->columns == 1) return M->values[0][0];
     else {
         char *result = calloc(1, sizeof(char));

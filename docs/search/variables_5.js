@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rows_222',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix::rows()'],['../struct_string_matrix.html#a061459acc9e078fa4699e0e349887215',1,'StringMatrix::rows()']]]
+  ['polynomial_227',['polynomial',['../struct_object.html#a9db481df6b8e6b9619ebd63edf3f8d85',1,'Object']]]
 ];

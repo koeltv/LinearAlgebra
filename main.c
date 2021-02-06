@@ -7,110 +7,64 @@
 
 #include "main.h"
 
-Register *applyOperation(Register *mainRegister, char *operation, char operator) {
-    Register *result = newRegister();
-    Register *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation) + 1));
+Object *applyOperation(Register *mainRegister, char *operation, char operator) {
+    Object *result = newObject();
+    Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation) + 1));
     if (rightPart) {
-        Register *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToIndex(operation, nextOperator(operation)));
+        Object *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToIndex(operation, nextOperator(operation)));
         if (leftPart) {
-            if (rightPart->listOfPolynomials && leftPart->listOfPolynomials) {
-                Polynomial *polynomial = NULL;
-                if (operator == '+') polynomial = pAdd(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
-                else if (operator == '-') polynomial = pMinus(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
-                else if (operator == '*') polynomial = pMultiply(leftPart->listOfPolynomials[0], rightPart->listOfPolynomials[0]);
-                addToRegister(result, polynomial, NULL);
-            } else if (rightPart->listOfMatrices && leftPart->listOfMatrices) {
-                Matrix *matrix = NULL;
-                if (operator == '+') matrix = sum(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
-                else if (operator == '-') matrix = minus(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
-                else if (operator == '*') matrix = multiply(leftPart->listOfMatrices[0], rightPart->listOfMatrices[0]);
-                addToRegister(result, NULL, matrix);
+            if (rightPart->polynomial && leftPart->polynomial) {
+                if (operator == '+') result->polynomial = pAdd(leftPart->polynomial, rightPart->polynomial);
+                else if (operator == '-') result->polynomial = pMinus(leftPart->polynomial, rightPart->polynomial);
+                else if (operator == '*') result->polynomial = pMultiply(leftPart->polynomial, rightPart->polynomial);
+            } else if (rightPart->matrix && leftPart->matrix) {
+                if (operator == '+') result->matrix = sum(leftPart->matrix, rightPart->matrix);
+                else if (operator == '-') result->matrix = minus(leftPart->matrix, rightPart->matrix);
+                else if (operator == '*') result->matrix = multiply(leftPart->matrix, rightPart->matrix);
             }
         }
     }
     return result;
 }
 
-Register *extractObject(Register *mainRegister, char *command) {
+Object *extractObject(Register *mainRegister, char *command) {
     if (containCharInOrder(command, "[]")) { //Create matrix
-        Matrix *M = readMatrixInString(command);
-        Register *MResult = newRegister();
-        addToRegister(MResult, NULL, M);
+        Object *result = newObject();
+        result->matrix = readMatrixInString(command);
         printf("New matrix added\n");
-        return MResult;
+        return result;
     } else if (containCharInOrder(command, "X")) { //Create polynomial
-        Polynomial *P = stringToPolynomial(command, 0, length(command) + 1);
-        Register *PResult = newRegister();
-        addToRegister(PResult, P, NULL);
+        Object *result = newObject();
+        result->polynomial = stringToPolynomial(command, 0, length(command) + 1);
         printf("New Polynomial added\n");
-        return PResult;
+        return result;
     } else { //Search for existing object
-        for (int i = 0; i < mainRegister->sizes[0]; i++) {
-            if (containString(command, mainRegister->listOfPolynomials[i]->name)) {
-                Register *result = newRegister();
-                addToRegister(result, mainRegister->listOfPolynomials[i], NULL);
-                return result;
-            }
-        }
-        for (int i = 0; i < mainRegister->sizes[1]; i++) {
-            if (containString(command, mainRegister->listOfMatrices[i]->name)) {
-                Register *result = newRegister();
-                addToRegister(result, NULL, mainRegister->listOfMatrices[i]);
-                return result;
-            }
-        }
+        return searchObject(mainRegister, command);
     }
-    return NULL;
 }
 
-Register *recursiveCommandDecomposition(Register *mainRegister, char *command) {
-    if (containCharInOrder(command, "display()")) {
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result->listOfPolynomials) printPolynomial(result->listOfPolynomials[0]);
-        else if (result->listOfMatrices) printMatrix(result->listOfMatrices[0]);
-        else printf("Couldn't calculate %s", command);
-        return NULL;
-    } else if (containCharInOrder(command, "eig()")) { //Eigen values
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->listOfMatrices) printSolutions(eigenValues(result->listOfMatrices[0]));
-        return NULL;
-    } else if (containCharInOrder(command, "trace()")) { //Trace of the matrix
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->listOfMatrices) printf("%1.2lf\n", trace(result->listOfMatrices[0]));
-        return NULL;
-    } else if (containCharInOrder(command, "det()")) { //Determinant of the matrix
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->listOfMatrices) printf("%1.2lf\n", det(result->listOfMatrices[0]));
-        return NULL;
-    } else if (containCharInOrder(command, "solve()")) { //Solve polynomial or matrix
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->listOfPolynomials) {
-            printSolutions(solve(result->listOfPolynomials[0]));
-        } else if (result && result->listOfMatrices) {
-            printMatrix(solveAugmentedMatrix(result->listOfMatrices[0]));
-        }
-        return NULL;
-    } else if (containString(command, "=")) {
-        Register *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '=', '\0'));
-        if (result && result->listOfPolynomials) {
-            result->listOfPolynomials[0]->name = firstWord(command);
-        } else if (result && result->listOfMatrices) {
-            result->listOfMatrices[0]->name = firstWord(command);
+Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
+    if (containString(command, "=")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '=', '\0'));
+        if (result) {
+            if (result->polynomial) {
+                result->polynomial = copyPolynomial(result->polynomial);
+                result->polynomial->name = firstWord(command);
+            } else if (result->matrix) {
+                result->matrix = copy(result->matrix);
+                result->matrix->name = firstWord(command);
+            }
         }
         return result;
     } else if (!containString(command, "X") && (command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
         return applyOperation(mainRegister, command, command[nextOperator(command)]);
     //Put special cases after this, we need to verify everything else before
     } else if (containCharInOrder(command, "trans()")) {
-        Register *temp = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (temp->listOfMatrices) {
-            Register *result = newRegister();
-            addToRegister(result, NULL, transpose(temp->listOfMatrices[0]));
-            return result;
-        }
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) result->matrix = transpose(result->matrix);
+        return result;
     }
     else return extractObject(mainRegister, command);
-    return NULL;
 }
 
 void printFileContent(char *link, FILE *output) {
@@ -137,16 +91,36 @@ void executeCommand(Register *mainRegister, char *command) {
     } else if (containCharInOrder(command, "readScript()")) {
         char *fileLink = extractBetweenChar(command, '(', ')');
         readScriptFile(mainRegister, fileLink);
+    } else if (containCharInOrder(command, "display()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result) {
+            if (result->polynomial) printPolynomial(result->polynomial);
+            else if (result->matrix) printMatrix(result->matrix);
+        } else printf("Couldn't calculate %s\n", command);
+    } else if (containCharInOrder(command, "eig()")) { //Eigen values
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) printSolutions(eigenValues(result->matrix));
+    } else if (containCharInOrder(command, "trace()")) { //Trace of the matrix
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) printf("%1.2lf\n", trace(result->matrix));
+    } else if (containCharInOrder(command, "det()")) { //Determinant of the matrix
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) printf("%1.2lf\n", det(result->matrix));
+    } else if (containCharInOrder(command, "solve()")) { //Solve polynomial or matrix
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result) {
+            if (result->polynomial) printSolutions(solve(result->polynomial));
+            else if (result->matrix) printMatrix(solveAugmentedMatrix(result->matrix));
+        }
     } else { //If no simple command, search for a composed one
-        Register *result = recursiveCommandDecomposition(mainRegister, command);
+        Object *result = recursiveCommandDecomposition(mainRegister, command);
         //Print to the console or save the result
-        if (result->listOfPolynomials) addToRegister(mainRegister, result->listOfPolynomials[0], NULL);
-        else if (result->listOfMatrices) addToRegister(mainRegister, NULL, result->listOfMatrices[0]);
+        if (result) addToRegister(mainRegister, result);
         else printf("Failed to do this operation, please verify it and try again\n");
     }
 }
 
-void readScriptFile(Register *mainRegister, char *link) {
+void readScriptFile(Register *mainRegister, char *link) { //TODO Solve problem with stopping before end of file
     FILE *input = NULL;
     if ((input = fopen(link, "rb"))) {
         while (!feof(input)) { //Read a line, then execute it

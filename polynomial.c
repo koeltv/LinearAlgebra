@@ -7,7 +7,7 @@
 
 #include "polynomial.h"
 
-void freePolynomial(Polynomial *F){
+void freePolynomial(Polynomial *F) {
     if (F){
         free(F->coefficient); free(F);
         F = NULL;
@@ -17,14 +17,14 @@ void freePolynomial(Polynomial *F){
 Polynomial *copyPolynomial(Polynomial *F) {
     if (F) {
         Polynomial *copy = malloc(sizeof(Polynomial));
-        copy->highestDegree = F->highestDegree;
+        copy->name = NULL; copy->highestDegree = F->highestDegree;
         copy->coefficient = malloc((F->highestDegree + 1) * sizeof(double));
         for (int i = 0; i <= F->highestDegree; i++) copy->coefficient[i] = F->coefficient[i];
         return copy;
     } else return NULL;
 }
 
-double apply(Polynomial *F, double x){
+double apply(Polynomial *F, double x) {
     if (F) {
         double result = F->coefficient[0];
         for (int i = 1; i <= F->highestDegree; i++) {
@@ -35,7 +35,7 @@ double apply(Polynomial *F, double x){
     } else exit(EXIT_FAILURE);
 }
 
-Polynomial *derive(Polynomial *F){
+Polynomial *derive(Polynomial *F) {
     if (F && F->highestDegree > 0) {
         Polynomial *FPrime = malloc(sizeof(Polynomial));
         FPrime->coefficient = malloc(F->highestDegree * sizeof(double));
@@ -45,7 +45,7 @@ Polynomial *derive(Polynomial *F){
     } else return NULL;
 }
 
-void printPolynomial(Polynomial *F){
+void printPolynomial(Polynomial *F) {
     if (F) {
         if (F->name) printf("%s(X) = ", F->name);
         for (int i = F->highestDegree; i >= 0; i--) {
@@ -68,7 +68,7 @@ void printPolynomial(Polynomial *F){
     } else printf("No F\n");
 }
 
-int degreeOfString(const char *string, int start, int end){
+int degreeOfString(const char *string, int start, int end) {
     int degree = 0;
     for (int i = start; string[i] != '\0' && i <= end; i++) {
         //Count in parenthesis
@@ -113,7 +113,7 @@ int degreeOfString(const char *string, int start, int end){
     return degree;
 }
 
-Polynomial *pAdd(Polynomial *F, Polynomial *G){
+Polynomial *pAdd(Polynomial *F, Polynomial *G) {
     Polynomial *output = malloc(sizeof(Polynomial));
     Polynomial *lowerPolynomial, *higherPolynomial;
     if (F->highestDegree < G->highestDegree) {
@@ -135,7 +135,7 @@ Polynomial *pAdd(Polynomial *F, Polynomial *G){
     return output;
 }
 
-Polynomial *pMinus(Polynomial *F, Polynomial *G){
+Polynomial *pMinus(Polynomial *F, Polynomial *G) {
     Polynomial *output = malloc(sizeof(Polynomial));
     Polynomial *lowerPolynomial, *higherPolynomial;
     if (F->highestDegree < G->highestDegree) {
@@ -160,7 +160,7 @@ Polynomial *pMinus(Polynomial *F, Polynomial *G){
     return output;
 }
 
-Polynomial *pMultiply(Polynomial *F, Polynomial *G){
+Polynomial *pMultiply(Polynomial *F, Polynomial *G) {
     Polynomial *output = malloc(sizeof(Polynomial));
     output->highestDegree = F->highestDegree + G->highestDegree;
     output->coefficient = calloc(output->highestDegree + 1, sizeof(double));
@@ -183,7 +183,7 @@ Polynomial *next(const char *string, int *start) {
     return stringToPolynomial(string, firstPosition, *start - 1);
 }
 
-Polynomial *readFirstCoefficient(const char *string, int *start){
+Polynomial *readFirstCoefficient(const char *string, int *start) {
     Polynomial *output = malloc(sizeof(Polynomial));
     double value = readDoubleInString(string, start);
     int index = -1;
@@ -205,7 +205,7 @@ Polynomial *readFirstCoefficient(const char *string, int *start){
     return output;
 }
 
-Polynomial *stringToPolynomial(const char *string, int start, int end){
+Polynomial *stringToPolynomial(const char *string, int start, int end) {
     if (string) {
         //Recuperation of the first coefficient
         Polynomial *F = readFirstCoefficient(string, &start);
@@ -225,7 +225,7 @@ Polynomial *stringToPolynomial(const char *string, int start, int end){
     } else return NULL;
 }
 
-Polynomial *syntheticDivision(Polynomial *F, double root){
+Polynomial *syntheticDivision(Polynomial *F, double root) {
     if (F) {
         Polynomial *quotient = malloc(sizeof(Polynomial));
         quotient->coefficient = malloc((F->highestDegree) * sizeof(double));
@@ -271,13 +271,13 @@ double newtonMethod(Polynomial *F) {
     } else exit(EXIT_FAILURE);
 }
 
-int roundDouble(double value){
+int roundDouble(double value) {
     int intPart = (int) value;
     if (value >= intPart + 0.5) return intPart + 1;
     else return intPart;
 }
 
-double roundPreciseDouble(double value){
+double roundPreciseDouble(double value) {
     double difference = (roundDouble(value)) - value;
     if (difference < 0) difference *= -1;
     if (difference < 1e-9) return roundDouble(value);
@@ -300,7 +300,7 @@ Solutions *solve(Polynomial *F) {
     } else return NULL;
 }
 
-void printSolutions(Solutions *x){
+void printSolutions(Solutions *x) {
     if (x && x->size > 0) {
         printf("{%1.2lf", x->values[0]);
         for (int i = 1; i < x->size; i++) printf(", %1.2lf", x->values[1]);
