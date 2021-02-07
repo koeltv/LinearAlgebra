@@ -36,6 +36,13 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
+ * Create an empty polynomial of the given degree
+ * @param degree - Degree of the polynomial to create
+ * @return created polynomial
+ */
+Polynomial *newPolynomial(int degree);
+
+/**
  * Convert a string to a polynomial
  * This function return a polynomial created from a string
  * @note there can be more than one coefficient for the same power of X

@@ -4,6 +4,7 @@ var string_interactions_8h =
     [ "changeToPLambdaForm", "string_interactions_8h.html#a8eff6d464165e27345644c7f4c5e52cd", null ],
     [ "containCharInOrder", "string_interactions_8h.html#a6ee66956db83f79941175f8e8cb1a38e", null ],
     [ "containString", "string_interactions_8h.html#a3c204a97df640f9bb2b9d23c702d9eac", null ],
+    [ "containValue", "string_interactions_8h.html#ad5631bcccaeffa0f48f74f221088b3ec", null ],
     [ "copyString", "string_interactions_8h.html#a96b5df6283121e614f6e7edb96b5189c", null ],
     [ "detOfStringMatrix", "string_interactions_8h.html#ae0642f00c8e67f79d64890f45665b714", null ],
     [ "extractBetweenChar", "string_interactions_8h.html#a61f1f2f2e832e2940e4bca17f745aad1", null ],

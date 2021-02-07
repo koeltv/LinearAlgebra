@@ -8,6 +8,7 @@ var polynomial_8h =
     [ "degreeOfString", "polynomial_8h.html#a616af06563603812e1b7b0a9ec7599aa", null ],
     [ "derive", "polynomial_8h.html#ac9cf3e2f18565382be13c8e23d5a9d09", null ],
     [ "freePolynomial", "polynomial_8h.html#ae70a1fbf38c3b877137c4e90f4368a9a", null ],
+    [ "newPolynomial", "polynomial_8h.html#a6ec0d6c9ed449f9ceba18d5c7837c3f2", null ],
     [ "newtonMethod", "polynomial_8h.html#a539b8af1dce4daf3af784254c7da6a4d", null ],
     [ "pAdd", "polynomial_8h.html#a5198c88027c5c1cacb50543cd824d20b", null ],
     [ "pMinus", "polynomial_8h.html#acfaf4973983215e8035a05dded9a011b", null ],

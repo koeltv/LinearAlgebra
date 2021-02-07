@@ -136,6 +136,13 @@ int nextOperator(const char *string) {
     return -1;
 }
 
+char containValue(const char *string) {
+    for (int i = 0; string[i] != '\0'; i++) {
+        if (string[i] >= '0' && string[i] <= '9') return 1;
+    }
+    return 0;
+}
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 double readDoubleInString(const char *string, int *position) {

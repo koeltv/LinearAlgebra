@@ -9,22 +9,26 @@
 
 Register *newRegister() {
     Register *reg = malloc(sizeof(Register));
-    reg->sizes[0] = 0; reg->sizes[1] = 0;
-    reg->listOfPolynomials = NULL; reg->listOfMatrices = NULL;
+    reg->sizes[0] = 0; reg->sizes[1] = 0; reg->sizes[2] = 0;
+    reg->listOfPolynomials = NULL; reg->listOfMatrices = NULL; reg->listOfVariables = NULL;
     return reg;
 }
 
-void freeRegister(Register *toFree) {
+void freeRegister(Register **toFree) {
     if (toFree) {
-        if (toFree->listOfPolynomials) {
-            for (int i = 0; i < toFree->sizes[0]; i++) freePolynomial(toFree->listOfPolynomials[i]);
-            free(toFree->listOfPolynomials);
+        if ((*toFree)->listOfPolynomials) {
+            for (int i = 0; i < (*toFree)->sizes[0]; i++) freePolynomial((*toFree)->listOfPolynomials[i]);
+            free((*toFree)->listOfPolynomials); (*toFree)->listOfPolynomials = NULL;
         }
-        if (toFree->listOfMatrices) {
-            for (int i = 0; i < toFree->sizes[1]; i++) freeMatrix(toFree->listOfMatrices[i]);
-            free(toFree->listOfMatrices);
+        if ((*toFree)->listOfMatrices) {
+            for (int i = 0; i < (*toFree)->sizes[1]; i++) freeMatrix((*toFree)->listOfMatrices[i]);
+            free((*toFree)->listOfMatrices); (*toFree)->listOfMatrices = NULL;
         }
-        free(toFree); toFree = NULL;
+        if ((*toFree)->listOfVariables) {
+            for (int i = 0; i < (*toFree)->sizes[2]; i++) freeVariable((*toFree)->listOfVariables[i]);
+            free((*toFree)->listOfVariables); (*toFree)->listOfVariables = NULL;
+        }
+        free(*toFree); *toFree = NULL;
     }
 }
 
@@ -36,12 +40,15 @@ void freeRegisterContent(Register *aRegister) {
         for (int i = 0; i < aRegister->sizes[1]; i++) freeMatrix(aRegister->listOfMatrices[i]);
         free(aRegister->listOfMatrices); aRegister->listOfMatrices = NULL;
         aRegister->sizes[1] = 0;
+        for (int i = 0; i < aRegister->sizes[2]; i++) freeVariable(aRegister->listOfVariables[i]);
+        free(aRegister->listOfVariables); aRegister->listOfVariables = NULL;
+        aRegister->sizes[2] = 0;
     }
 }
 
 Object *newObject() {
     Object *new = malloc(sizeof(Object));
-    new->matrix = NULL; new->polynomial = NULL;
+    new->matrix = NULL; new->polynomial = NULL; new->variable = NULL;
     return new;
 }
 
@@ -69,6 +76,13 @@ Object *searchObject(Register *aRegister, const char *name) {
             }
         }
     }
+    if (aRegister->listOfVariables) {
+        for (int i = 0; i < aRegister->sizes[2]; i++) {
+            if (!shorterString(aRegister->listOfVariables[i]->name, firstWord(name))) {
+                result->variable = aRegister->listOfVariables[i]; return result;
+            }
+        }
+    }
     return NULL;
 }
 
@@ -93,38 +107,72 @@ void deleteFromRegister(Register *aRegister, Object *toDelete){
             }
         }
     }
+    if (toDelete->variable) {
+        for (int i = 0; i < aRegister->sizes[2]; i++) {
+            if (aRegister->listOfVariables[i] == toDelete->variable) {
+                freeVariable(aRegister->listOfVariables[i]);
+                for (int j = i; j < aRegister->sizes[2] - 1; j++) aRegister->listOfVariables[j] = aRegister->listOfVariables[j + 1];
+                if (--aRegister->sizes[2] == 0) aRegister->listOfVariables = NULL;
+                break;
+            }
+        }
+    }
 }
 
 void addToRegister(Register *aRegister, Object *newObject){
     if (newObject->polynomial && newObject->polynomial->name) {
         Object *found = searchObject(aRegister, newObject->polynomial->name);
-        if (found && found->polynomial && newObject->polynomial) { //Overwriting current polynomial
+        if (found && found->polynomial) { //Overwriting current polynomial
             for (int i = 0; i < aRegister->sizes[0]; i++) {
                 if (!shorterString(aRegister->listOfPolynomials[i]->name, newObject->polynomial->name)) {
                     aRegister->listOfPolynomials[i] = newObject->polynomial; break;
                 }
             }
-        } else { //Adding new polynomial (and suppressing matrix with the same name if there is one)
-            if (found && found->matrix && newObject->polynomial) deleteFromRegister(aRegister, found);
+            printf("Overwrote polynomial %s\n", newObject->polynomial->name);
+        } else { //Adding new polynomial (and suppressing object with the same name if there is one)
+            if (found && (found->matrix || found->variable)) {
+                deleteFromRegister(aRegister, found);
+                printf("Overwrote object %s\n", newObject->polynomial->name);
+            } else printf("New polynomial %s added\n", newObject->polynomial->name);
             aRegister->listOfPolynomials = realloc(aRegister->listOfPolynomials, ++aRegister->sizes[0] * sizeof(Polynomial*));
             aRegister->listOfPolynomials[aRegister->sizes[0] - 1] = newObject->polynomial;
         }
-        printf("New polynomial added\n");
     }
     if (newObject->matrix && newObject->matrix->name) {
         Object *found = searchObject(aRegister, newObject->matrix->name);
-        if (found && found->matrix && newObject->matrix) { //Overwriting current matrix
+        if (found && found->matrix) { //Overwriting current matrix
             for (int i = 0; i < aRegister->sizes[1]; i++) {
                 if (!shorterString(aRegister->listOfMatrices[i]->name, newObject->matrix->name)) {
                     aRegister->listOfMatrices[i] = newObject->matrix; break;
                 }
             }
-        } else { //Adding new matrix (and suppressing polynomial with the same name if there is one)
-            if (found && found->polynomial && newObject->matrix) deleteFromRegister(aRegister, found);
+            printf("Overwrote matrix %s\n", newObject->matrix->name);
+        } else { //Adding new matrix (and suppressing object with the same name if there is one)
+            if (found && (found->polynomial || found->variable)) {
+                deleteFromRegister(aRegister, found);
+                printf("Overwrote object %s\n", newObject->matrix->name);
+            } else printf("New matrix %s added\n", newObject->matrix->name);
             aRegister->listOfMatrices = realloc(aRegister->listOfMatrices, ++aRegister->sizes[1] * sizeof(Matrix*));
             aRegister->listOfMatrices[aRegister->sizes[1] - 1] = newObject->matrix;
         }
-        printf("New matrix added\n");
+    }
+    if (newObject->variable && newObject->variable->name) {
+        Object *found = searchObject(aRegister, newObject->variable->name);
+        if (found && found->variable) { //Overwriting current variable
+            for (int i = 0; i < aRegister->sizes[2]; i++) {
+                if (!shorterString(aRegister->listOfVariables[i]->name, newObject->variable->name)) {
+                    aRegister->listOfVariables[i] = newObject->variable; break;
+                }
+            }
+            printf("Overwrote variable %s\n", newObject->variable->name);
+        } else { //Adding new variable (and suppressing object with the same name if there is one)
+            if (found && (found->polynomial || found->matrix)) {
+                deleteFromRegister(aRegister, found);
+                printf("Overwrote object %s\n", newObject->variable->name);
+            } else printf("New variable %s added\n", newObject->variable->name);
+            aRegister->listOfVariables = realloc(aRegister->listOfVariables, ++aRegister->sizes[2] * sizeof(Variable*));
+            aRegister->listOfVariables[aRegister->sizes[2] - 1] = newObject->variable;
+        }
     }
 }
 
@@ -141,6 +189,12 @@ void printRegister(Register *aRegister){
             printMatrix(aRegister->listOfMatrices[i]); printf("\n");
         }
     }
-    if (!aRegister->listOfPolynomials && !aRegister->listOfMatrices) printf("The register is empty\n");
+    if (aRegister->listOfVariables) {
+        printf("=================Variables=================\n");
+        for (int i = 0; i < aRegister->sizes[2]; i++) {
+            printVariable(aRegister->listOfVariables[i]); printf("\n");
+        }
+    }
+    if (!aRegister->listOfPolynomials && !aRegister->listOfMatrices && !aRegister->listOfVariables) printf("The register is empty\n");
     else printf("==========================================\n");
 }

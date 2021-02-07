@@ -7,6 +7,7 @@
 #define LINEARALGEBRA_REGISTER_H
 
 #include "matrix.h"
+#include "variable.h"
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
@@ -16,9 +17,10 @@
  * Structure representing a container of objects used in this program
  */
 typedef struct {
-    int sizes[2]; ///Sizes of the list of objects
+    int sizes[3]; ///Sizes of the list of objects
     Polynomial **listOfPolynomials; ///List of polynomials
     Matrix **listOfMatrices; ///List of matrices
+    Variable **listOfVariables; ///List of variables
 } Register;
 
 /**
@@ -28,6 +30,7 @@ typedef struct {
 typedef struct {
     Polynomial *polynomial;
     Matrix *matrix;
+    Variable *variable;
 } Object;
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -43,7 +46,7 @@ Register *newRegister();
  * Free a register
  * @param toFree - Register to free
  */
-void freeRegister(Register *toFree);
+void freeRegister(Register **toFree);
 
 /**
  * Empty a register
@@ -72,7 +75,7 @@ void freeObject(Object *toFree);
  * This function returns a corresponding object if it exist in the register and it's name matches. It returns NULL otherwise
  * @param aRegister - The register to analyze
  * @param name - The name of the object to search
- * @return found polynomial
+ * @return found object
  */
 Object *searchObject(Register *aRegister, const char *name);
 
@@ -89,8 +92,7 @@ void deleteFromRegister(Register *aRegister, Object *toDelete);
  * This function add an object to an existing register
  * @note When we only need to add 1 and not the other, we can put NULL
  * @param aRegister - The destination register
- * @param newPolynomial - The polynomial to add
- * @param newMatrix - The matrix to add
+ * @param newObject - The objects to add
  */
 void addToRegister(Register *aRegister, Object *newObject);
 

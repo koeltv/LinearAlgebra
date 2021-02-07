@@ -102,10 +102,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
  <b>Members</b> : Valentin Koeltgen <br  />
  <b>License</b> : MIT <br  />
 </p>
-<p>This project goal is to create a program with a simple command-line interface to do calculations on polynomial and matrices. <br  />
+<p>This project goal is to create a program with a simple command-line interface to do calculations on polynomial, matrices and variables. <br  />
  Right now the project is limited to handling real values but imaginary values handling can be added in the future.</p>
 <p>The program should be able to handle advanced maths in the form of simple user commands or script files containing commands. <br  />
- It should be able to handle all kind of objects, like polynomials, matrices, vectors (matrices with 1 column) or simple values (not yet implemented).</p>
+ It should be able to handle all kind of objects, like polynomials, matrices, vectors (matrices with 1 column) or simple values.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Command List</h1>
 <p>This is a list of commands that are available to the user</p>
@@ -134,9 +134,9 @@ Simple operations</h2>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Composite operations</h2>
 <p>The following commands are not final, they can be used recursively</p>
-<p><code>&lt;operation1&gt; + &lt;operation2&gt;</code> This command return the sum of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type <br  />
- <code>&lt;operation1&gt; - &lt;operation2&gt;</code> This command return the difference of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type <br  />
- <code>&lt;operation1&gt; * &lt;operation2&gt;</code> This command return the product of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type <br  />
+<p><code>&lt;operation1&gt; + &lt;operation2&gt;</code> This command return the sum of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; - &lt;operation2&gt;</code> This command return the difference of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; * &lt;operation2&gt;</code> This command return the product of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial/matrix with a variable) <br  />
  <code>trans(&lt;operation&gt;)</code> This command return the transposed of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
  <code>adj(&lt;operation&gt;)</code> This command return the adjugate of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
  <code>inv(&lt;operation&gt;)</code> This command return the inverse of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />

@@ -2,11 +2,11 @@
 **Members** : Valentin Koeltgen  
 **License** : MIT  
 
-This project goal is to create a program with a simple command-line interface to do calculations on polynomial and matrices.  
+This project goal is to create a program with a simple command-line interface to do calculations on polynomial, matrices and variables.  
 Right now the project is limited to handling real values but imaginary values handling can be added in the future.
 
 The program should be able to handle advanced maths in the form of simple user commands or script files containing commands.  
-It should be able to handle all kind of objects, like polynomials, matrices, vectors (matrices with 1 column) or simple values (not yet implemented).
+It should be able to handle all kind of objects, like polynomials, matrices, vectors (matrices with 1 column) or simple values.
 
 # Command List  
 This is a list of commands that are available to the user
@@ -35,9 +35,9 @@ The following commands are final but accept composite operations as argument
 ## Composite operations
 The following commands are not final, they can be used recursively
 
-`<operation1> + <operation2>` This command return the sum of \<operation1> and \<operation2> if they are of the same type   
-`<operation1> - <operation2>` This command return the difference of \<operation1> and \<operation2> if they are of the same type  
-`<operation1> * <operation2>` This command return the product of \<operation1> and \<operation2> if they are of the same type  
+`<operation1> + <operation2>` This command return the sum of \<operation1> and \<operation2> if they are of the same type (or a polynomial with a variable)  
+`<operation1> - <operation2>` This command return the difference of \<operation1> and \<operation2> if they are of the same type (or a polynomial with a variable)  
+`<operation1> * <operation2>` This command return the product of \<operation1> and \<operation2> if they are of the same type (or a polynomial/matrix with a variable)  
 `trans(<operation>)` This command return the transposed of \<operation>, \<operation> must be a matrix  
 `adj(<operation>)` This command return the adjugate of \<operation>, \<operation> must be a matrix  
 `inv(<operation>)` This command return the inverse of \<operation>, \<operation> must be a matrix  

@@ -10,20 +10,6 @@
 #include <stdio.h>
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-// Structures
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * @struct StringMatrix
- * Structure representing a matrix of any size but with values in string format
- */
-typedef struct {
-    char *name;
-    char ***values; ///Elements of the matrix contained in a 2 dimensional array
-    int rows; ///Number of rows of the matrix
-    int columns; ///Number of columns matrix
-} StringMatrix;
-
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
@@ -149,6 +135,8 @@ char *extractUpToIndex(const char *string, int last);
  */
 int nextOperator(const char *string);
 
+char containValue(const char *string);
+
 /**
  * Read a double in a string
  * This function return a double read from a string
@@ -173,6 +161,16 @@ void printFileContent(char *link, FILE *output);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Matrix interactions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * @struct StringMatrix
+ * Structure representing a matrix of any size but with values in string format
+ */
+typedef struct {
+    char *name;
+    char ***values; ///Elements of the matrix contained in a 2 dimensional array
+    int rows; ///Number of rows of the matrix
+    int columns; ///Number of columns matrix
+} StringMatrix;
 
 /**
  * Create string matrix

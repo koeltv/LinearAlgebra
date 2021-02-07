@@ -15,7 +15,6 @@
 /**
  * Apply a script file
  * This function read a given file and apply the commands in it line by line
- * @attention For now a blank line is needed at the end of the file
  * @param mainRegister - The register to add and search for existing objects
  * @param link - link of the file in string format
  */
@@ -23,7 +22,7 @@ void readScriptFile(Register *mainRegister, char *link);
 
 /**
  * (WIP) Apply a mathematical operation
- * This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomials or matrices)
+ * This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomial, matrix or variable)
  * @param mainRegister - The register to search for existing objects
  * @param operation - Operation to do in string format
  * @param operator - The operation to apply

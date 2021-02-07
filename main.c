@@ -18,24 +18,42 @@ void readScriptFile(Register *mainRegister, char *link) {
     } else fprintf(stderr, "Script not found at %s\n", link);
 }
 
-Object *applyOperation(Register *mainRegister, char *operation, char operator) {
+Object *applyOperation(Register *mainRegister, char *operation, char operator) { //TODO Add priorities and depth level
     Object *result = newObject();
     Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation)));
     if (rightPart) {
         Object *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToIndex(operation, nextOperator(operation)));
         if (leftPart) {
-            if (rightPart->polynomial && leftPart->polynomial) {
+            if (rightPart->polynomial && leftPart->polynomial) { //F(X) +/-/* G(X)
                 if (operator == '+') result->polynomial = pAdd(leftPart->polynomial, rightPart->polynomial);
                 else if (operator == '-') result->polynomial = pMinus(leftPart->polynomial, rightPart->polynomial);
                 else if (operator == '*') result->polynomial = pMultiply(leftPart->polynomial, rightPart->polynomial);
-            } else if (rightPart->matrix && leftPart->matrix) {
+            } else if (rightPart->matrix && leftPart->matrix) { //M +/-/* N
                 if (operator == '+') result->matrix = sum(leftPart->matrix, rightPart->matrix);
                 else if (operator == '-') result->matrix = minus(leftPart->matrix, rightPart->matrix);
                 else if (operator == '*') result->matrix = multiply(leftPart->matrix, rightPart->matrix);
+            } else if (rightPart->variable && leftPart->variable) { //x +/-/* y
+                if (operator == '+') result->variable = newVariable(leftPart->variable->value + rightPart->variable->value);
+                else if (operator == '-') result->variable = newVariable(leftPart->variable->value - rightPart->variable->value);
+                else if (operator == '*') result->variable = newVariable(leftPart->variable->value * rightPart->variable->value);
+            } else if (operator == '*' && ((rightPart->matrix && leftPart->variable) || (rightPart->variable && leftPart->matrix))) { //M * x
+                if (leftPart->variable) result->matrix = scalarMultiply(rightPart->matrix, leftPart->variable->value);
+                else result->matrix = scalarMultiply(leftPart->matrix, rightPart->variable->value);
+            } else if ((rightPart->polynomial && leftPart->variable) || (rightPart->variable && leftPart->polynomial)) { //P(X) +/-/* x
+                Polynomial *polynomial; Variable *variable;
+                if (rightPart->polynomial) {
+                    polynomial = rightPart->polynomial; variable = leftPart->variable;
+                } else {
+                    polynomial = leftPart->polynomial; variable = rightPart->variable;
+                }
+                if (operator == '+') result->polynomial = pAdd(polynomial, variableToPolynomial(variable));
+                else if (operator == '*') result->polynomial = pMultiply(polynomial, variableToPolynomial(variable));
+                else if (operator == '-') {
+                    if (rightPart->variable) result->polynomial = pMinus(polynomial, variableToPolynomial(variable));
+                    else result->polynomial = pMinus(variableToPolynomial(variable), polynomial);
+                }
             }
-            freeObject(leftPart);
         }
-        freeObject(rightPart);
     }
     return result;
 }
@@ -48,6 +66,11 @@ Object *extractObject(Register *mainRegister, char *command) {
     } else if (containCharInOrder(command, "X")) { //Create polynomial
         Object *result = newObject();
         result->polynomial = stringToPolynomial(command, 0, length(command));
+        return result;
+    } else if (containValue(command)) {
+        Object *result = newObject();
+        int temp = 0;
+        result->variable = newVariable(readDoubleInString(command, &temp));
         return result;
     } else { //Search for existing object
         return searchObject(mainRegister, command);
@@ -64,46 +87,65 @@ Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
             } else if (result->matrix) {
                 result->matrix = copy(result->matrix);
                 result->matrix->name = firstWord(command);
+            } else if (result->variable) {
+                result->variable = copyVariable(result->variable);
+                result->variable->name = firstWord(command);
             }
         }
         return result;
-    } else if (!containString(command, "X") && !containCharInOrder(command, "[]") && (command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
+    } else if ((command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
         return applyOperation(mainRegister, command, command[nextOperator(command)]);
     //Put special cases after this, we need to verify everything else before
     } //From here the operations are on matrices
     else if (containCharInOrder(command, "trans()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->matrix) result->matrix = transpose(result->matrix);
-        return result;
+        if (result && result->matrix) {
+            result->matrix = transpose(result->matrix);
+            return result;
+        } else return NULL;
     } else if (containCharInOrder(command, "adj()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->matrix) result->matrix = adjugate(result->matrix);
-        return result;
+        if (result && result->matrix) {
+            result->matrix = adjugate(result->matrix);
+            return result;
+        } else return NULL;
     } else if (containCharInOrder(command, "inv()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->matrix) result->matrix = inverse(result->matrix);
-        return result;
+        if (result && result->matrix) {
+            result->matrix = inverse(result->matrix);
+            return result;
+        } else return NULL;
     } else if (containCharInOrder(command, "eigVectors()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->matrix) result->matrix = eigenVectors(result->matrix);
-        return result;
+        if (result && result->matrix) {
+            result->matrix = eigenVectors(result->matrix);
+            return result;
+        } else return NULL;
     } else if (containCharInOrder(command, "triangularise()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->matrix) result->matrix = triangularise(result->matrix);
-        return result;
+        if (result && result->matrix) {
+            result->matrix = triangularise(result->matrix);
+            return result;
+        } else return NULL;
     } else if (containCharInOrder(command, "PLambda()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result && result->matrix) {
             char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(result->matrix)));
             result->matrix = NULL;
             result->polynomial = stringToPolynomial(stringForm, 0, length(stringForm));
-        }
-        return result;
+            return result;
+        } else return NULL;
     } //From here the operations are on polynomials
     else if (containCharInOrder(command, "derive()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
-        if (result && result->polynomial) result->polynomial = derive(result->polynomial);
-        return result;
+        if (result && !result->matrix) {
+            if (result->polynomial) result->polynomial = derive(result->polynomial);
+            else if (result->variable) {
+                result->polynomial = derive(variableToPolynomial(result->variable));
+                result->variable = NULL;
+            }
+            return result;
+        } else return NULL;
     }
     else return extractObject(mainRegister, command);
 }
@@ -126,7 +168,7 @@ void executeCommand(Register *mainRegister, char *command) {
         if (result) {
             if (result->polynomial) printPolynomial(result->polynomial);
             else if (result->matrix) printMatrix(result->matrix);
-            freeObject(result);
+            else if (result->variable) printVariable(result->variable);
         } else printf("Couldn't calculate %s\n", command);
     } else if (containCharInOrder(command, "eig()")) { //Eigen values
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
@@ -173,7 +215,6 @@ int main() {
         command = readString(stdin);
     } while (!containString(command, "exit"));
 
-    freeRegister(mainRegister);
-
+    freeRegister(&mainRegister);
     return EXIT_SUCCESS;
 }

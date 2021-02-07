@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['size_255',['size',['../struct_solutions.html#a439227feff9d7f55384e8780cfc2eb82',1,'Solutions']]],
-  ['sizes_256',['sizes',['../struct_register.html#a7e644882803f96765e58add0b83aff94',1,'Register']]]
+  ['size_277',['size',['../struct_solutions.html#a439227feff9d7f55384e8780cfc2eb82',1,'Solutions']]],
+  ['sizes_278',['sizes',['../struct_register.html#a08f1de90025f4de9dd45705247479b8a',1,'Register']]]
 ];
