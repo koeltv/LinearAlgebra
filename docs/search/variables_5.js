@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['polynomial_227',['polynomial',['../struct_object.html#a9db481df6b8e6b9619ebd63edf3f8d85',1,'Object']]]
+  ['is_247',['is',['../help_8txt.html#a91bf59a8f1004075e82a71ea5e5a3c80',1,'help.txt']]]
 ];

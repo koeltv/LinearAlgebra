@@ -159,9 +159,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae81441345d450a38905b001d12832bf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">readDoubleInString</a> (const char *string, int *position)</td></tr>
 <tr class="memdesc:ae81441345d450a38905b001d12832bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a string This function return a double read from a string.  <a href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">More...</a><br /></td></tr>
 <tr class="separator:ae81441345d450a38905b001d12832bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">readDoubleInFile</a> (FILE *currentFile, char *temp)</td></tr>
-<tr class="memdesc:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value.  <a href="string_interactions_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">More...</a><br /></td></tr>
-<tr class="separator:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa699299b10d57547ab6d578738c662f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#aa699299b10d57547ab6d578738c662f4">printFileContent</a> (char *link, FILE *output)</td></tr>
+<tr class="memdesc:aa699299b10d57547ab6d578738c662f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it.  <a href="string_interactions_8h.html#aa699299b10d57547ab6d578738c662f4">More...</a><br /></td></tr>
+<tr class="separator:aa699299b10d57547ab6d578738c662f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e6e0bb3b3c97497ce1b1cb210757783"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a3e6e0bb3b3c97497ce1b1cb210757783">newStringMatrix</a> (int nbRows, int nbColumns, char *initialValue)</td></tr>
 <tr class="memdesc:a3e6e0bb3b3c97497ce1b1cb210757783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create string matrix This function create a matrix with strings as values, this is used to handle matrix with variables.  <a href="string_interactions_8h.html#a3e6e0bb3b3c97497ce1b1cb210757783">More...</a><br /></td></tr>
 <tr class="separator:a3e6e0bb3b3c97497ce1b1cb210757783"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -713,23 +713,23 @@ If it doesn't find any operator (+, -, *), it returns -1 </dd></dl>
 
 </div>
 </div>
-<a id="a9582bed6c820b9e2ffd0c2feacb28f56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9582bed6c820b9e2ffd0c2feacb28f56">&#9670;&nbsp;</a></span>readDoubleInFile()</h2>
+<a id="aa699299b10d57547ab6d578738c662f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa699299b10d57547ab6d578738c662f4">&#9670;&nbsp;</a></span>printFileContent()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double readDoubleInFile </td>
+          <td class="memname">void printFileContent </td>
           <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>currentFile</em>, </td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>link</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>temp</em>&#160;</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>output</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -739,15 +739,14 @@ If it doesn't find any operator (+, -, *), it returns -1 </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p>Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value. </p>
+<p>Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">currentFile</td><td>- The file stream where the double will be read </td></tr>
-    <tr><td class="paramname">temp</td><td>- the pointer </td></tr>
+    <tr><td class="paramname">link</td><td>- Link of the file to read </td></tr>
+    <tr><td class="paramname">output</td><td>- Buffer where the content while be outputted </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>double read </dd></dl>
 
 </div>
 </div>

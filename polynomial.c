@@ -38,6 +38,7 @@ double apply(Polynomial *F, double x) {
 Polynomial *derive(Polynomial *F) {
     if (F && F->highestDegree > 0) {
         Polynomial *FPrime = malloc(sizeof(Polynomial));
+        FPrime->name = NULL;
         FPrime->coefficient = malloc(F->highestDegree * sizeof(double));
         FPrime->highestDegree = F->highestDegree - 1;
         for (int i = 0; i < F->highestDegree; i++) FPrime->coefficient[i] = F->coefficient[i + 1] * (i + 1);

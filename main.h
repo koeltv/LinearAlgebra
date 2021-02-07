@@ -8,6 +8,19 @@
 
 #include "register.h"
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Commands interactions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+/**
+ * Apply a script file
+ * This function read a given file and apply the commands in it line by line
+ * @attention For now a blank line is needed at the end of the file
+ * @param mainRegister - The register to add and search for existing objects
+ * @param link - link of the file in string format
+ */
+void readScriptFile(Register *mainRegister, char *link);
+
 /**
  * (WIP) Apply a mathematical operation
  * This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomials or matrices)
@@ -37,28 +50,11 @@ Object *extractObject(Register *mainRegister, char *command);
 Object *recursiveCommandDecomposition(Register *mainRegister, char *command);
 
 /**
- * Print the content of a file in a buffer
- * This function print the content of the file at the given link in the output buffer without modifying it
- * @param link - Link of the file to read
- * @param output - Buffer where the content while be outputted
- */
-void printFileContent(char *link, FILE *output);
-
-/**
  * Apply any command
  * This function is the first called when reading a command, it can take simple and composite commands, see readme.md for more details
  * @param mainRegister
  * @param command
  */
 void executeCommand(Register *mainRegister, char *command);
-
-/**
- * Apply a script file
- * This function read a given file and apply the commands in it line by line
- * @attention For now a blank line is needed at the end of the file
- * @param mainRegister - The register to add and search for existing objects
- * @param link - link of the file in string format
- */
-void readScriptFile(Register *mainRegister, char *link);
 
 #endif //LINEARALGEBRA_MAIN_H

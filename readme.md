@@ -39,6 +39,12 @@ The following commands are not final, they can be used recursively
 `<operation1> - <operation2>` This command return the difference of \<operation1> and \<operation2> if they are of the same type  
 `<operation1> * <operation2>` This command return the product of \<operation1> and \<operation2> if they are of the same type  
 `trans(<operation>)` This command return the transposed of \<operation>, \<operation> must be a matrix
+`adj(<operation>)` This command return the adjugate of \<operation>, \<operation> must be a matrix
+`inv(<operation>)` This command return the inverse of \<operation>, \<operation> must be a matrix
+`eigVectors(<operation>)` This command return the eigen vectors of \<operation> in matrix form completed with orthonormal vectors if needed, \<operation> must be a matrix
+`triangularise(<operation>)` This command return the triangularised form of \<operation>, \<operation> must be a matrix
+`PLambda(<operation>)` This command return the polynomial P(lambda) = det(\<operation> - lambda * I) of \<operation>, \<operation> must be a matrix
+`derive(<operation>)` This command return the derivative of \<operation>, \<operation> must be a polynomial
 
 ## Basic object
 The following arguments can be used as fundamentals to create or call objects

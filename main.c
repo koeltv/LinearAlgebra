@@ -7,9 +7,20 @@
 
 #include "main.h"
 
+void readScriptFile(Register *mainRegister, char *link) {
+    FILE *input = NULL;
+    if ((input = fopen(link, "rb"))) {
+        while (!feof(input)) { //Read a line, then execute it
+            char *command = readString(input);
+            executeCommand(mainRegister, command);
+            free(command);
+        }
+    } else fprintf(stderr, "Script not found at %s\n", link);
+}
+
 Object *applyOperation(Register *mainRegister, char *operation, char operator) {
     Object *result = newObject();
-    Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation) + 1));
+    Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation)));
     if (rightPart) {
         Object *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToIndex(operation, nextOperator(operation)));
         if (leftPart) {
@@ -22,7 +33,9 @@ Object *applyOperation(Register *mainRegister, char *operation, char operator) {
                 else if (operator == '-') result->matrix = minus(leftPart->matrix, rightPart->matrix);
                 else if (operator == '*') result->matrix = multiply(leftPart->matrix, rightPart->matrix);
             }
+            freeObject(leftPart);
         }
+        freeObject(rightPart);
     }
     return result;
 }
@@ -31,12 +44,10 @@ Object *extractObject(Register *mainRegister, char *command) {
     if (containCharInOrder(command, "[]")) { //Create matrix
         Object *result = newObject();
         result->matrix = readMatrixInString(command);
-        printf("New matrix added\n");
         return result;
     } else if (containCharInOrder(command, "X")) { //Create polynomial
         Object *result = newObject();
-        result->polynomial = stringToPolynomial(command, 0, length(command) + 1);
-        printf("New Polynomial added\n");
+        result->polynomial = stringToPolynomial(command, 0, length(command));
         return result;
     } else { //Search for existing object
         return searchObject(mainRegister, command);
@@ -56,33 +67,51 @@ Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
             }
         }
         return result;
-    } else if (!containString(command, "X") && (command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
+    } else if (!containString(command, "X") && !containCharInOrder(command, "[]") && (command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
         return applyOperation(mainRegister, command, command[nextOperator(command)]);
     //Put special cases after this, we need to verify everything else before
-    } else if (containCharInOrder(command, "trans()")) {
+    } //From here the operations are on matrices
+    else if (containCharInOrder(command, "trans()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result && result->matrix) result->matrix = transpose(result->matrix);
+        return result;
+    } else if (containCharInOrder(command, "adj()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) result->matrix = adjugate(result->matrix);
+        return result;
+    } else if (containCharInOrder(command, "inv()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) result->matrix = inverse(result->matrix);
+        return result;
+    } else if (containCharInOrder(command, "eigVectors()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) result->matrix = eigenVectors(result->matrix);
+        return result;
+    } else if (containCharInOrder(command, "triangularise()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) result->matrix = triangularise(result->matrix);
+        return result;
+    } else if (containCharInOrder(command, "PLambda()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->matrix) {
+            char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(result->matrix)));
+            result->matrix = NULL;
+            result->polynomial = stringToPolynomial(stringForm, 0, length(stringForm));
+        }
+        return result;
+    } //From here the operations are on polynomials
+    else if (containCharInOrder(command, "derive()")) {
+        Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
+        if (result && result->polynomial) result->polynomial = derive(result->polynomial);
         return result;
     }
     else return extractObject(mainRegister, command);
 }
 
-void printFileContent(char *link, FILE *output) {
-    FILE *input = NULL;
-    if ((input = fopen(link, "rb"))) {
-        char temp;
-        while (!feof(input)) {
-            fscanf(input, "%c", &temp);
-            fprintf(output, "%c", temp);
-        }
-    }
-}
-
 void executeCommand(Register *mainRegister, char *command) {
     //Apply simple command that doesn't need processing
     if (containString(command, "help")) { //Help file
-        printFileContent("../readme.md", stdout);
-        printf("\n\n");
+        printFileContent("../help.txt", stdout); printf("\n\n");
     } else if (containString(command, "displayAll")) {
         printRegister(mainRegister);
     } else if (containString(command, "clear")) {
@@ -91,44 +120,39 @@ void executeCommand(Register *mainRegister, char *command) {
     } else if (containCharInOrder(command, "readScript()")) {
         char *fileLink = extractBetweenChar(command, '(', ')');
         readScriptFile(mainRegister, fileLink);
+        free(fileLink);
     } else if (containCharInOrder(command, "display()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result) {
             if (result->polynomial) printPolynomial(result->polynomial);
             else if (result->matrix) printMatrix(result->matrix);
+            freeObject(result);
         } else printf("Couldn't calculate %s\n", command);
     } else if (containCharInOrder(command, "eig()")) { //Eigen values
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result && result->matrix) printSolutions(eigenValues(result->matrix));
+        freeObject(result);
     } else if (containCharInOrder(command, "trace()")) { //Trace of the matrix
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result && result->matrix) printf("%1.2lf\n", trace(result->matrix));
+        freeObject(result);
     } else if (containCharInOrder(command, "det()")) { //Determinant of the matrix
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result && result->matrix) printf("%1.2lf\n", det(result->matrix));
+        freeObject(result);
     } else if (containCharInOrder(command, "solve()")) { //Solve polynomial or matrix
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
         if (result) {
             if (result->polynomial) printSolutions(solve(result->polynomial));
             else if (result->matrix) printMatrix(solveAugmentedMatrix(result->matrix));
         }
+        freeObject(result);
     } else { //If no simple command, search for a composed one
         Object *result = recursiveCommandDecomposition(mainRegister, command);
         //Print to the console or save the result
         if (result) addToRegister(mainRegister, result);
-        else printf("Failed to do this operation, please verify it and try again\n");
+        else fprintf(stderr, "Failed to do this operation, please verify it and try again\n");
     }
-}
-
-void readScriptFile(Register *mainRegister, char *link) { //TODO Solve problem with stopping before end of file
-    FILE *input = NULL;
-    if ((input = fopen(link, "rb"))) {
-        while (!feof(input)) { //Read a line, then execute it
-            char *command = readString(input);
-            executeCommand(mainRegister, command);
-            free(command);
-        }
-    } else printf("Script not found at %s\n", link);
 }
 
 /**
@@ -148,6 +172,8 @@ int main() {
         if (command) free(command);
         command = readString(stdin);
     } while (!containString(command, "exit"));
+
+    freeRegister(mainRegister);
 
     return EXIT_SUCCESS;
 }

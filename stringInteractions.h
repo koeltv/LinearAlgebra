@@ -158,14 +158,17 @@ int nextOperator(const char *string);
  */
 double readDoubleInString(const char *string, int *position);
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// File interactions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
 /**
- * Read a double in a file stream
- * The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value
- * @param currentFile - The file stream where the double will be read
- * @param temp - the pointer
- * @return double read
+ * Print the content of a file in a buffer
+ * This function print the content of the file at the given link in the output buffer without modifying it
+ * @param link - Link of the file to read
+ * @param output - Buffer where the content while be outputted
  */
-double readDoubleInFile(FILE *currentFile, char *temp);
+void printFileContent(char *link, FILE *output);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Matrix interactions

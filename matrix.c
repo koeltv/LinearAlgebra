@@ -10,6 +10,7 @@
 Matrix *readMatrixInString(char *string) {
     //Creation of the matrix
     Matrix *matrix = malloc(sizeof(Matrix));
+    matrix->name = NULL;
     matrix->columns = matrix->rows = 1;
     for (int i = 0; string[i] != ']' && string[i] != '\0'; i++) {
         if (matrix->rows == 1 && string[i] == ',') matrix->columns++;
@@ -120,16 +121,6 @@ Matrix *minus(Matrix *A, Matrix *B) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] - B->values[i][j];
-        }
-        return C;
-    } else return NULL;
-}
-
-Matrix *innerMultiply(Matrix *A, Matrix *B) {
-    if (A && B && A->columns == B->columns && A->rows == B->rows) {
-        Matrix *C = newMatrix(A->rows, A->columns, 0);
-        for (int i = 0; i < A->rows; i++) {
-            for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] * B->values[i][j];
         }
         return C;
     } else return NULL;
@@ -309,7 +300,7 @@ Matrix *solveAugmentedMatrix(Matrix *M) {
 Solutions *eigenValues(Matrix *M) {
     if (M){
         char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
-        return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
+        return solve(stringToPolynomial(stringForm, 0, length(stringForm)));
     } else return NULL;
 }
 
@@ -442,11 +433,10 @@ Matrix *triangularise(Matrix *M) {
 
 StringMatrix *toStringMatrix(Matrix *M) {
     StringMatrix *toString = malloc(sizeof(StringMatrix));
-    toString->columns = M->columns;
-    toString->rows = M->rows;
-    toString->values = malloc(toString->rows * sizeof(char***));
+    toString->columns = M->columns; toString->rows = M->rows;
+    toString->values = malloc(toString->rows * sizeof(char**));
     for (int i = 0; i < M->rows; i++) {
-        toString->values[i] = malloc(toString->columns * sizeof(char**));
+        toString->values[i] = malloc(toString->columns * sizeof(char*));
         for (int j = 0; j < M->columns; j++) {
             toString->values[i][j] = malloc(20 * sizeof(char));
             snprintf(toString->values[i][j], 2000 * sizeof(char), "%lf", M->values[i][j]);

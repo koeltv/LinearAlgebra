@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rows_228',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix::rows()'],['../struct_string_matrix.html#a061459acc9e078fa4699e0e349887215',1,'StringMatrix::rows()']]]
+  ['listofmatrices_248',['listOfMatrices',['../struct_register.html#afaea219cd871cba59a86206c68f24fd9',1,'Register']]],
+  ['listofpolynomials_249',['listOfPolynomials',['../struct_register.html#a8eac5b471175c0109be111a98c4c042b',1,'Register']]]
 ];

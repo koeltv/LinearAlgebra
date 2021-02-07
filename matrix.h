@@ -129,17 +129,6 @@ Matrix *sum(Matrix *A, Matrix *B);
 Matrix *minus(Matrix *A, Matrix *B);
 
 /**
- * Inner multiplication of 2 matrices
- * This function multiply the elements of 2 matrices
- * @note This operation is different from a standard matrix multiplication, it only multiplies element by element
- * @warning They must be of identical dimensions
- * @param A - first matrix
- * @param B - second matrix
- * @return inner multiplication of the matrices
- */
-Matrix *innerMultiply(Matrix *A, Matrix *B);
-
-/**
  * Multiply a matrix by a scalar
  * This function multiply a matrix by a real scalar
  * @param M - matrix

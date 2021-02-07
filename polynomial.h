@@ -84,7 +84,7 @@ Polynomial *pAdd(Polynomial *F, Polynomial *G);
 
 /**
  * Subtract polynomials
- * This function return the diffence of the first polynomial by the second
+ * This function return the difference of the first polynomial by the second
  * @param F - first polynomial
  * @param G - second polynomial
  * @return F - G

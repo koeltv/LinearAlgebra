@@ -11,7 +11,7 @@ char *readString(FILE *current) {
     int i = 0;
     char temp, *string = (char*) malloc(20 * sizeof(char)); //We start from a chain of 20 characters
     fscanf(current, " %c", &temp);
-    while (temp >= ' ' && temp <= '~'){
+    while (!feof(current) && temp >= ' ' && temp <= '~'){
         if (i % 19 == 1 && i > 19) string = realloc (string, (i + 20) * sizeof(char)); //If we go over 20, we add 20 more to the chain
         string[i] = temp;
         fscanf(current, "%c", &temp);
@@ -20,7 +20,7 @@ char *readString(FILE *current) {
     return string;
 }
 
-int length(const char *string) { //TODO Remove the +1 on all functions using this (\0 is included)
+int length(const char *string) {
     int length = 0;
     while (string[length] != '\0') length++;
     return length;
@@ -45,7 +45,7 @@ int firstOccurrenceOf(const char *string, char toSearch) {
 }
 
 void copyString(char *original, char *destination) {
-    for (int i = 0; i <= length(original) + 1; i++) destination[i] = original[i];
+    for (int i = 0; i <= length(original); i++) destination[i] = original[i];
 }
 
 char shorterString(const char *string1, const char *string2) {
@@ -119,7 +119,7 @@ char *extractUpToIndex(const char *string, int last) {
 }
 
 char *extractBetweenIndexes(const char *string, int first, int last) {
-    if (string && length(string) + 1 >= last - first) {
+    if (string && length(string) >= last - first) {
         char *result = calloc(last - first, sizeof(char));
         for (int i = first; string[i] && i < last; i++) result[i - first] = string[i];
         result[last - first] = string[last];
@@ -165,27 +165,15 @@ double readDoubleInString(const char *string, int *position) {
 }
 #pragma clang diagnostic pop
 
-double readDoubleInFile(FILE *currentFile, char *temp) {
-    double result = 0;
-    fscanf(currentFile, " %c", temp);
-    if (*temp == '-') {
-        fscanf(currentFile, "%c", temp);
-        result -= (double)(*temp - '0');
-    } else result += (double)(*temp - '0');
-    do {
-        fscanf(currentFile, "%c", temp);
-        if (*temp >= '0' && *temp <= '9') result = result * 10 + *temp - '0';
-        else if (*temp == '.') {
-            double decimal = 0.1;
-            fscanf(currentFile, "%c", temp);
-            do {
-                result += (*temp - '0') * decimal;
-                decimal /= 10;
-                fscanf(currentFile, "%c", temp);
-            } while (*temp >= '0' && *temp <= '9');
+void printFileContent(char *link, FILE *output) {
+    FILE *input = NULL;
+    if ((input = fopen(link, "rb"))) {
+        char temp;
+        while (!feof(input)) {
+            fscanf(input, "%c", &temp);
+            fprintf(output, "%c", temp);
         }
-    } while (*temp == '.' || (*temp >= '0' && *temp <= '9'));
-    return result;
+    }
 }
 
 StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
@@ -252,21 +240,21 @@ char *detOfStringMatrix(StringMatrix *M) {
 
             if (sign == -1) {
                 if (length(result) < 1) {
-                    totalSize += 15;
+                    totalSize += 14;
                     result = realloc(result, totalSize * sizeof(char));
                     snprintf(result, totalSize * sizeof(char), "(%s) * (-1) * (%s)", M->values[i][0], detOfSubDet);
                 } else {
-                    totalSize += 22 + length(result);
+                    totalSize += 21 + length(result);
                     result = realloc(result, totalSize * sizeof(char));
                     snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (-1) * (%s))", result, M->values[i][0], detOfSubDet);
                 }
             } else {
                 if (length(result) < 1) {
-                    totalSize += 8;
+                    totalSize += 7;
                     result = realloc(result, totalSize * sizeof(char));
                     snprintf(result, totalSize * sizeof(char), "(%s) * (%s)", M->values[i][0], detOfSubDet);
                 } else {
-                    totalSize += 15 + length(result);
+                    totalSize += 14 + length(result);
                     result = realloc(result, totalSize * sizeof(char));
                     snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (%s))", result, M->values[i][0], detOfSubDet);
                 }

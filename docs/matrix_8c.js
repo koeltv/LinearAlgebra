@@ -8,7 +8,6 @@ var matrix_8c =
     [ "eigenValues", "matrix_8c.html#afbaabb9f20d10bc1adbc830f6d763253", null ],
     [ "eigenVectors", "matrix_8c.html#a593e1181a0f6e2b8bbafe044da1ec7ad", null ],
     [ "freeMatrix", "matrix_8c.html#a8eb3a32f94e337a2b85e9a7639f8cd62", null ],
-    [ "innerMultiply", "matrix_8c.html#a9989ef26362bb4165e6f737983ec4544", null ],
     [ "inverse", "matrix_8c.html#aa99fae5e1a520eb3f3a4272df49a759d", null ],
     [ "isColumnEmpty", "matrix_8c.html#aa80a605211f7eae80fc9d9201646f217", null ],
     [ "isRowEmpty", "matrix_8c.html#a07dcc8563d1e3f7973b47186da531c48", null ],

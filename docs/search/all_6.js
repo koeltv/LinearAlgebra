@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['if_35',['if',['../test_file_8txt.html#ab940c9572eb8fdcf716ea700a0c3272f',1,'if(containString(command, &quot;=&quot;)==1):&#160;testFile.txt'],['../test_file_8txt.html#a510b8fb85bf82c6ec29b5e6cca20cbdf',1,'if(containString(command, &quot;+&quot;)==1||containString(command, &quot;-&quot;)==1):&#160;testFile.txt'],['../test_file_8txt.html#a3aaf64d7893bea6202726af6b969eeae',1,'if(containString(command, &quot;*&quot;)==1):&#160;testFile.txt']]],
-  ['imaginary_36',['IMAGINARY',['../polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3',1,'polynomial.h']]],
-  ['innermultiply_37',['innerMultiply',['../matrix_8c.html#a9989ef26362bb4165e6f737983ec4544',1,'innerMultiply(Matrix *A, Matrix *B):&#160;matrix.c'],['../matrix_8h.html#a9989ef26362bb4165e6f737983ec4544',1,'innerMultiply(Matrix *A, Matrix *B):&#160;matrix.c']]],
-  ['inverse_38',['inverse',['../matrix_8c.html#aa99fae5e1a520eb3f3a4272df49a759d',1,'inverse(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#aa99fae5e1a520eb3f3a4272df49a759d',1,'inverse(Matrix *M):&#160;matrix.c']]],
-  ['iscolumnempty_39',['isColumnEmpty',['../matrix_8c.html#aa80a605211f7eae80fc9d9201646f217',1,'matrix.c']]],
-  ['isrowempty_40',['isRowEmpty',['../matrix_8c.html#a07dcc8563d1e3f7973b47186da531c48',1,'matrix.c']]]
+  ['if_44',['if',['../test_file_8txt.html#ab940c9572eb8fdcf716ea700a0c3272f',1,'if(containString(command, &quot;=&quot;)==1):&#160;testFile.txt'],['../test_file_8txt.html#a510b8fb85bf82c6ec29b5e6cca20cbdf',1,'if(containString(command, &quot;+&quot;)==1||containString(command, &quot;-&quot;)==1):&#160;testFile.txt'],['../test_file_8txt.html#a3aaf64d7893bea6202726af6b969eeae',1,'if(containString(command, &quot;*&quot;)==1):&#160;testFile.txt']]],
+  ['imaginary_45',['IMAGINARY',['../polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3',1,'polynomial.h']]],
+  ['inv_46',['inv',['../help_8txt.html#adc19db9c202e7da9598331bacea9149b',1,'help.txt']]],
+  ['inverse_47',['inverse',['../matrix_8c.html#aa99fae5e1a520eb3f3a4272df49a759d',1,'inverse(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#aa99fae5e1a520eb3f3a4272df49a759d',1,'inverse(Matrix *M):&#160;matrix.c']]],
+  ['is_48',['is',['../help_8txt.html#a91bf59a8f1004075e82a71ea5e5a3c80',1,'help.txt']]],
+  ['iscolumnempty_49',['isColumnEmpty',['../matrix_8c.html#aa80a605211f7eae80fc9d9201646f217',1,'matrix.c']]],
+  ['isrowempty_50',['isRowEmpty',['../matrix_8c.html#a07dcc8563d1e3f7973b47186da531c48',1,'matrix.c']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['size_229',['size',['../struct_solutions.html#a439227feff9d7f55384e8780cfc2eb82',1,'Solutions']]],
-  ['sizes_230',['sizes',['../struct_register.html#a7e644882803f96765e58add0b83aff94',1,'Register']]]
+  ['m_250',['M',['../test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba',1,'testFile.txt']]],
+  ['matrix_251',['matrix',['../struct_object.html#a5327a94a5beb2ed093339571856d20cb',1,'Object::matrix()'],['../help_8txt.html#a463f6d0f8d30df523707b4b355889f9f',1,'matrix():&#160;help.txt']]]
 ];
