@@ -23,19 +23,19 @@ void readScriptFile(Register *mainRegister, char *link);
 /**
  * (WIP) Apply a mathematical operation
  * This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomial, matrix or variable)
- * @param mainRegister - The register to search for existing objects
- * @param operation - Operation to do in string format
+ * @param leftOperand - Left part of the operation
+ * @param rightOperand - Right part of the operation
  * @param operator - The operation to apply
- * @return register containing the result
+ * @return object containing the result
  */
-Object *applyOperation(Register *mainRegister, char *operation, char operator);
+Object *applyOperation(Object *leftOperand, char operator, Object *rightOperand);
 
 /**
  * Get a basic object from a string
  * This function recuperate a basic object (existing or created)
  * @param mainRegister - The register to search for existing objects
  * @param command - object in string format
- * @return register containing the object
+ * @return object containing the object
  */
 Object *extractObject(Register *mainRegister, char *command);
 
@@ -44,15 +44,15 @@ Object *extractObject(Register *mainRegister, char *command);
  * This function apply a command by reducing to basic object and combining them
  * @param mainRegister - The register to search for existing objects
  * @param command - command in string form
- * @return register containing the result of the command
+ * @return object containing the result of the command
  */
 Object *recursiveCommandDecomposition(Register *mainRegister, char *command);
 
 /**
  * Apply any command
  * This function is the first called when reading a command, it can take simple and composite commands, see readme.md for more details
- * @param mainRegister
- * @param command
+ * @param mainRegister - The register to search for existing objects
+ * @param command - The command to execute
  */
 void executeCommand(Register *mainRegister, char *command);
 

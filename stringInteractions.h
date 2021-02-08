@@ -126,14 +126,14 @@ char *extractUpToChar(const char *string, char last);
 char *extractUpToIndex(const char *string, int last);
 
 /**
- * Find next operator in a string
- * This function return the index of the next operator at the same "depth level" as the starting point
- * @note The depth level is related to parenthesis, adding a set of parenthesis add a depth level
- * @note If it doesn't find any operator (+, -, *), it returns -1
- * @param string - string to scan for an operator
- * @return index of the next operator
+ * Find next operand in string
+ * This functions update to indexes to surround the next operand in a string
+ * @note If the end of the string is reached, both indexes will point to the end of the string ('\0')
+ * @param string - String to scan
+ * @param firstIndex - Index to place before next operand
+ * @param secondIndex - Index to place after next operand
  */
-int nextOperator(const char *string);
+void nextOperator(const char *string, int *firstIndex, int *secondIndex);
 
 char containValue(const char *string);
 

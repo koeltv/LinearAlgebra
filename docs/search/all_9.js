@@ -9,5 +9,5 @@ var searchData=
   ['newtonmethod_74',['newtonMethod',['../polynomial_8c.html#a539b8af1dce4daf3af784254c7da6a4d',1,'newtonMethod(Polynomial *F):&#160;polynomial.c'],['../polynomial_8h.html#a539b8af1dce4daf3af784254c7da6a4d',1,'newtonMethod(Polynomial *F):&#160;polynomial.c']]],
   ['newvariable_75',['newVariable',['../variable_8c.html#ac7f9559f2c28111d163d6b14d3a3f0e7',1,'newVariable(double value):&#160;variable.c'],['../variable_8h.html#ac7f9559f2c28111d163d6b14d3a3f0e7',1,'newVariable(double value):&#160;variable.c']]],
   ['next_76',['next',['../polynomial_8c.html#a8b417f817dc3bfb1e60f7cfc64f05506',1,'polynomial.c']]],
-  ['nextoperator_77',['nextOperator',['../string_interactions_8c.html#ab58fc2e6b97fd5b73668949f885fa4a9',1,'nextOperator(const char *string):&#160;stringInteractions.c'],['../string_interactions_8h.html#ab58fc2e6b97fd5b73668949f885fa4a9',1,'nextOperator(const char *string):&#160;stringInteractions.c']]]
+  ['nextoperator_77',['nextOperator',['../string_interactions_8c.html#aa491a23fbb096881422333e8c0bb0b0b',1,'nextOperator(const char *string, int *firstIndex, int *secondIndex):&#160;stringInteractions.c'],['../string_interactions_8h.html#aa491a23fbb096881422333e8c0bb0b0b',1,'nextOperator(const char *string, int *firstIndex, int *secondIndex):&#160;stringInteractions.c']]]
 ];

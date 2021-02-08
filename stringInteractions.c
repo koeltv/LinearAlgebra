@@ -120,20 +120,11 @@ char *extractUpToIndex(const char *string, int last) {
 
 char *extractBetweenIndexes(const char *string, int first, int last) {
     if (string && length(string) >= last - first) {
-        char *result = calloc(last - first, sizeof(char));
+        char *result = calloc(last - first + 2, sizeof(char));
         for (int i = first; string[i] && i < last; i++) result[i - first] = string[i];
         result[last - first] = string[last];
         return result;
     } else return NULL;
-}
-
-int nextOperator(const char *string) {
-    for (int i = 0, nbOfParenthesis = 0; string[i]; i++) {
-        if (string[i] == '(') nbOfParenthesis++;
-        else if (string[i] == ')') nbOfParenthesis--;
-        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*')) return i;
-    }
-    return -1;
 }
 
 char containValue(const char *string) {
@@ -145,6 +136,20 @@ char containValue(const char *string) {
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
+void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
+    (*firstIndex)++;
+    while (string[*firstIndex] && string[*firstIndex] != '+' && string[*firstIndex] != '-' && string[*firstIndex] != '*') (*firstIndex)++;
+    int i = *firstIndex + 1;
+    for (int nbOfParenthesis = 0; string[*firstIndex] && string[i]; i++) {
+        if (string[i] == '(') nbOfParenthesis++;
+        else if (string[i] == ')') nbOfParenthesis--;
+        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-')) {
+            *secondIndex = i - 1; break;
+        }
+    }
+    if (!string[i]) *secondIndex = i;
+}
+
 double readDoubleInString(const char *string, int *position) {
 
     //Search for the sign

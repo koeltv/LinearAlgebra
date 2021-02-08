@@ -153,9 +153,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a229ad98e18fa59665ba54e29abbb118d"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a229ad98e18fa59665ba54e29abbb118d">extractUpToIndex</a> (const char *string, int last)</td></tr>
 <tr class="memdesc:a229ad98e18fa59665ba54e29abbb118d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract up to an index This function return the string until an index.  <a href="string_interactions_8h.html#a229ad98e18fa59665ba54e29abbb118d">More...</a><br /></td></tr>
 <tr class="separator:a229ad98e18fa59665ba54e29abbb118d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab58fc2e6b97fd5b73668949f885fa4a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ab58fc2e6b97fd5b73668949f885fa4a9">nextOperator</a> (const char *string)</td></tr>
-<tr class="memdesc:ab58fc2e6b97fd5b73668949f885fa4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find next operator in a string This function return the index of the next operator at the same "depth level" as the starting point.  <a href="string_interactions_8h.html#ab58fc2e6b97fd5b73668949f885fa4a9">More...</a><br /></td></tr>
-<tr class="separator:ab58fc2e6b97fd5b73668949f885fa4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa491a23fbb096881422333e8c0bb0b0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#aa491a23fbb096881422333e8c0bb0b0b">nextOperator</a> (const char *string, int *firstIndex, int *secondIndex)</td></tr>
+<tr class="memdesc:aa491a23fbb096881422333e8c0bb0b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find next operand in string This functions update to indexes to surround the next operand in a string.  <a href="string_interactions_8h.html#aa491a23fbb096881422333e8c0bb0b0b">More...</a><br /></td></tr>
+<tr class="separator:aa491a23fbb096881422333e8c0bb0b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5631bcccaeffa0f48f74f221088b3ec"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ad5631bcccaeffa0f48f74f221088b3ec">containValue</a> (const char *string)</td></tr>
 <tr class="separator:ad5631bcccaeffa0f48f74f221088b3ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81441345d450a38905b001d12832bf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">readDoubleInString</a> (const char *string, int *position)</td></tr>
@@ -703,33 +703,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab58fc2e6b97fd5b73668949f885fa4a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab58fc2e6b97fd5b73668949f885fa4a9">&#9670;&nbsp;</a></span>nextOperator()</h2>
+<a id="aa491a23fbb096881422333e8c0bb0b0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa491a23fbb096881422333e8c0bb0b0b">&#9670;&nbsp;</a></span>nextOperator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int nextOperator </td>
+          <td class="memname">void nextOperator </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em></td><td>)</td>
+          <td class="paramname"><em>string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>firstIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>secondIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Find next operator in a string This function return the index of the next operator at the same "depth level" as the starting point. </p>
-<dl class="section note"><dt>Note</dt><dd>The depth level is related to parenthesis, adding a set of parenthesis add a depth level </dd>
-<dd>
-If it doesn't find any operator (+, -, *), it returns -1 </dd></dl>
+<p>Find next operand in string This functions update to indexes to surround the next operand in a string. </p>
+<dl class="section note"><dt>Note</dt><dd>If the end of the string is reached, both indexes will point to the end of the string ('\0') </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string</td><td>- string to scan for an operator </td></tr>
+    <tr><td class="paramname">string</td><td>- String to scan </td></tr>
+    <tr><td class="paramname">firstIndex</td><td>- Index to place before next operand </td></tr>
+    <tr><td class="paramname">secondIndex</td><td>- Index to place after next operand </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>index of the next operator </dd></dl>
 
 </div>
 </div>

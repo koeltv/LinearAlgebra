@@ -15,7 +15,7 @@ var string_interactions_8c =
     [ "freeStringMatrix", "string_interactions_8c.html#a5fedb0e0e5dd9619c738f313e9ff12c2", null ],
     [ "length", "string_interactions_8c.html#a5e6c13b6b96060a3c07e87c3cd623fa6", null ],
     [ "newStringMatrix", "string_interactions_8c.html#a3e6e0bb3b3c97497ce1b1cb210757783", null ],
-    [ "nextOperator", "string_interactions_8c.html#ab58fc2e6b97fd5b73668949f885fa4a9", null ],
+    [ "nextOperator", "string_interactions_8c.html#aa491a23fbb096881422333e8c0bb0b0b", null ],
     [ "printFileContent", "string_interactions_8c.html#aa699299b10d57547ab6d578738c662f4", null ],
     [ "readDoubleInString", "string_interactions_8c.html#ae81441345d450a38905b001d12832bf8", null ],
     [ "readString", "string_interactions_8c.html#ae4472dee32965298f6ad1f25f58061db", null ],

@@ -18,46 +18,6 @@ void readScriptFile(Register *mainRegister, char *link) {
     } else fprintf(stderr, "Script not found at %s\n", link);
 }
 
-Object *applyOperation(Register *mainRegister, char *operation, char operator) { //TODO Add priorities and depth level
-    Object *result = newObject();
-    Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(operation, nextOperator(operation) + 1, length(operation)));
-    if (rightPart) {
-        Object *leftPart = recursiveCommandDecomposition(mainRegister, extractUpToIndex(operation, nextOperator(operation)));
-        if (leftPart) {
-            if (rightPart->polynomial && leftPart->polynomial) { //F(X) +/-/* G(X)
-                if (operator == '+') result->polynomial = pAdd(leftPart->polynomial, rightPart->polynomial);
-                else if (operator == '-') result->polynomial = pMinus(leftPart->polynomial, rightPart->polynomial);
-                else if (operator == '*') result->polynomial = pMultiply(leftPart->polynomial, rightPart->polynomial);
-            } else if (rightPart->matrix && leftPart->matrix) { //M +/-/* N
-                if (operator == '+') result->matrix = sum(leftPart->matrix, rightPart->matrix);
-                else if (operator == '-') result->matrix = minus(leftPart->matrix, rightPart->matrix);
-                else if (operator == '*') result->matrix = multiply(leftPart->matrix, rightPart->matrix);
-            } else if (rightPart->variable && leftPart->variable) { //x +/-/* y
-                if (operator == '+') result->variable = newVariable(leftPart->variable->value + rightPart->variable->value);
-                else if (operator == '-') result->variable = newVariable(leftPart->variable->value - rightPart->variable->value);
-                else if (operator == '*') result->variable = newVariable(leftPart->variable->value * rightPart->variable->value);
-            } else if (operator == '*' && ((rightPart->matrix && leftPart->variable) || (rightPart->variable && leftPart->matrix))) { //M * x
-                if (leftPart->variable) result->matrix = scalarMultiply(rightPart->matrix, leftPart->variable->value);
-                else result->matrix = scalarMultiply(leftPart->matrix, rightPart->variable->value);
-            } else if ((rightPart->polynomial && leftPart->variable) || (rightPart->variable && leftPart->polynomial)) { //P(X) +/-/* x
-                Polynomial *polynomial; Variable *variable;
-                if (rightPart->polynomial) {
-                    polynomial = rightPart->polynomial; variable = leftPart->variable;
-                } else {
-                    polynomial = leftPart->polynomial; variable = rightPart->variable;
-                }
-                if (operator == '+') result->polynomial = pAdd(polynomial, variableToPolynomial(variable));
-                else if (operator == '*') result->polynomial = pMultiply(polynomial, variableToPolynomial(variable));
-                else if (operator == '-') {
-                    if (rightPart->variable) result->polynomial = pMinus(polynomial, variableToPolynomial(variable));
-                    else result->polynomial = pMinus(variableToPolynomial(variable), polynomial);
-                }
-            }
-        }
-    }
-    return result;
-}
-
 Object *extractObject(Register *mainRegister, char *command) {
     if (containCharInOrder(command, "[]")) { //Create matrix
         Object *result = newObject();
@@ -77,6 +37,40 @@ Object *extractObject(Register *mainRegister, char *command) {
     }
 }
 
+Object *applyOperation(Object *leftOperand, char operator, Object *rightOperand) {
+    Object *result = newObject();
+    if (rightOperand->polynomial && leftOperand->polynomial) { //F(X) +/-/* G(X)
+        if (operator == '+') result->polynomial = pAdd(leftOperand->polynomial, rightOperand->polynomial);
+        else if (operator == '-') result->polynomial = pMinus(leftOperand->polynomial, rightOperand->polynomial);
+        else if (operator == '*') result->polynomial = pMultiply(leftOperand->polynomial, rightOperand->polynomial);
+    } else if (rightOperand->matrix && leftOperand->matrix) { //M +/-/* N
+        if (operator == '+') result->matrix = sum(leftOperand->matrix, rightOperand->matrix);
+        else if (operator == '-') result->matrix = minus(leftOperand->matrix, rightOperand->matrix);
+        else if (operator == '*') result->matrix = multiply(leftOperand->matrix, rightOperand->matrix);
+    } else if (rightOperand->variable && leftOperand->variable) { //x +/-/* y
+        if (operator == '+') result->variable = newVariable(leftOperand->variable->value + rightOperand->variable->value);
+        else if (operator == '-') result->variable = newVariable(leftOperand->variable->value - rightOperand->variable->value);
+        else if (operator == '*') result->variable = newVariable(leftOperand->variable->value * rightOperand->variable->value);
+    } else if (operator == '*' && ((rightOperand->matrix && leftOperand->variable) || (rightOperand->variable && leftOperand->matrix))) { //M * x
+        if (leftOperand->variable) result->matrix = scalarMultiply(rightOperand->matrix, leftOperand->variable->value);
+        else result->matrix = scalarMultiply(leftOperand->matrix, rightOperand->variable->value);
+    } else if ((rightOperand->polynomial && leftOperand->variable) || (rightOperand->variable && leftOperand->polynomial)) { //P(X) +/-/* x
+        Polynomial *polynomial; Variable *variable;
+        if (rightOperand->polynomial) {
+            polynomial = rightOperand->polynomial; variable = leftOperand->variable;
+        } else {
+            polynomial = leftOperand->polynomial; variable = rightOperand->variable;
+        }
+        if (operator == '+') result->polynomial = pAdd(polynomial, variableToPolynomial(variable));
+        else if (operator == '*') result->polynomial = pMultiply(polynomial, variableToPolynomial(variable));
+        else if (operator == '-') {
+            if (rightOperand->variable) result->polynomial = pMinus(polynomial, variableToPolynomial(variable));
+            else result->polynomial = pMinus(variableToPolynomial(variable), polynomial);
+        }
+    }
+    return result;
+}
+
 Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
     if (containString(command, "=")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '=', '\0'));
@@ -93,8 +87,19 @@ Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
             }
         }
         return result;
-    } else if ((command[nextOperator(command)] == '+' || command[nextOperator(command)] == '-' || command[nextOperator(command)] == '*')) {
-        return applyOperation(mainRegister, command, command[nextOperator(command)]);
+    } else if (containString(command, "+") || containString(command, "-") || containString(command, "*")) {
+        int firstIndex = 0, secondIndex = 0; //TODO Verify if priorities works
+        nextOperator(command, &firstIndex, &secondIndex);
+        Object *result = recursiveCommandDecomposition(mainRegister, extractUpToIndex(command, firstIndex));
+        while (result && command[firstIndex]) {
+            Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(command, firstIndex + 1, secondIndex));
+
+            if (rightPart) result = applyOperation(result, command[firstIndex], rightPart);
+
+            nextOperator(command, &firstIndex, &secondIndex);
+        }
+        return result;
+
     //Put special cases after this, we need to verify everything else before
     } //From here the operations are on matrices
     else if (containCharInOrder(command, "trans()")) {
@@ -215,6 +220,6 @@ int main() {
         command = readString(stdin);
     } while (!containString(command, "exit"));
 
-    freeRegister(&mainRegister);
+    freeRegister(&mainRegister); //TODO Change all free() functions to use address of pointer
     return EXIT_SUCCESS;
 }
