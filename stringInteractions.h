@@ -43,24 +43,6 @@ int length(const char *string);
 char *firstWord(const char *string);
 
 /**
- * Index of a character in a string
- * This function return the index of the first occurrence of a character in a string
- * @note This function returns -1 if it doesn't find the character
- * @param string - The string where to search
- * @param toSearch - The character to search
- * @return index of the first occurrence of toSearch
- */
-int firstOccurrenceOf(const char *string, char toSearch);
-
-/**
- * Copy a string
- * This function copy the first string in the second
- * @param original - String to copy
- * @param destination - Copy
- */
-void copyString(char *original, char *destination);
-
-/**
  * Compare strings
  * This function compare 2 strings, it returns 1 if the first is shorter, 2 if the second is shorter and 0 if they are equal
  * @param string1 - first string for comparison
@@ -108,15 +90,6 @@ char *extractBetweenChar(const char *string, char first, char last);
 char *extractBetweenIndexes(const char *string, int first, int last);
 
 /**
- * Extract string up to a character
- * This function return the string until a character
- * @param string - The original string
- * @param last - The end character
- * @return extracted string
- */
-char *extractUpToChar(const char *string, char last);
-
-/**
  * Extract up to an index
  * This function return the string until an index
  * @param string - The original string
@@ -124,6 +97,13 @@ char *extractUpToChar(const char *string, char last);
  * @return extracted string
  */
 char *extractUpToIndex(const char *string, int last);
+
+/**
+ * Check if there exist an operator outside of parenthesis
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char operatorWithoutDepth(const char *string);
 
 /**
  * Find next operand in string
@@ -135,7 +115,20 @@ char *extractUpToIndex(const char *string, int last);
  */
 void nextOperator(const char *string, int *firstIndex, int *secondIndex);
 
+/**
+ * Verify if the string contain a number
+ * @param string - String to scan
+ * @return result of the scan
+ */
 char containValue(const char *string);
+
+/**
+ * Verify if everything is between parenthesis
+ * @note This function doesn't count whitespaces, if they are some outside of parenthesis it will not count them
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char everythingIsBetweenParenthesis(const char *string);
 
 /**
  * Read a double in a string

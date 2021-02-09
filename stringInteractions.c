@@ -37,17 +37,6 @@ char *firstWord(const char *string) {
     return word;
 }
 
-int firstOccurrenceOf(const char *string, char toSearch) {
-    for (int i = 0; string[i]; i++) {
-        if (string[i] == toSearch) return i;
-    }
-    return -1;
-}
-
-void copyString(char *original, char *destination) {
-    for (int i = 0; i <= length(original); i++) destination[i] = original[i];
-}
-
 char shorterString(const char *string1, const char *string2) {
     if (string1 && string2) {
         int i;
@@ -98,16 +87,6 @@ char *extractBetweenChar(const char *string, char first, char last) {
     return extracted;
 }
 
-char *extractUpToChar(const char *string, char last) {
-    char *extracted = calloc(1, sizeof(char));
-    int k = 0;
-        for (int j = 0; string[j] && string[j] != last; j++) {
-            extracted = realloc(extracted, (j + 1) * sizeof(char));
-            extracted[k++] = string[j];
-        } extracted[k] = '\0';
-    return extracted;
-}
-
 char *extractUpToIndex(const char *string, int last) {
     char *extracted = calloc(1, sizeof(char));
     int k = 0;
@@ -134,11 +113,37 @@ char containValue(const char *string) {
     return 0;
 }
 
+char everythingIsBetweenParenthesis(const char *string) {
+    for (int i = 0, nbOfParenthesis = 0; string[i]; i++) {
+        if (string[i] == '(') nbOfParenthesis++;
+        else if (string[i] == ')') nbOfParenthesis--;
+        else if (string[i] != ' ' && nbOfParenthesis < 1) return 0;
+    }
+    return 1;
+}
+
+char operatorWithoutDepth(const char *string) {
+    for (int i = 0, nbOfParenthesis = 0; string[i]; i++) {
+        if (string[i] == '(') nbOfParenthesis++;
+        else if (string[i] == ')') nbOfParenthesis--;
+        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*')) return 1;
+    }
+    return 0;
+}
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
-    (*firstIndex)++;
-    while (string[*firstIndex] && string[*firstIndex] != '+' && string[*firstIndex] != '-' && string[*firstIndex] != '*') (*firstIndex)++;
+    if (string[*firstIndex] && string[*firstIndex] != '(') (*firstIndex)++;
+    int temp = 0;
+    for (int nbOfParenthesis = 0; string[*firstIndex]; (*firstIndex)++) {
+        if (string[*firstIndex] == '(') nbOfParenthesis++;
+        else if (string[*firstIndex] == ')') nbOfParenthesis--;
+        else if (nbOfParenthesis < 1 && string[*firstIndex] == '*') temp = *firstIndex;
+        else if (nbOfParenthesis < 1 && (string[*firstIndex] == '+' || string[*firstIndex] == '-')) break;
+    }
+    if (!string[*firstIndex] && temp) *firstIndex = temp;
+    //while (string[*firstIndex] && string[*firstIndex] != '+' && string[*firstIndex] != '-' && string[*firstIndex] != '*') (*firstIndex)++;
     int i = *firstIndex + 1;
     for (int nbOfParenthesis = 0; string[*firstIndex] && string[i]; i++) {
         if (string[i] == '(') nbOfParenthesis++;

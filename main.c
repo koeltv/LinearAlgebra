@@ -72,6 +72,9 @@ Object *applyOperation(Object *leftOperand, char operator, Object *rightOperand)
 }
 
 Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
+    //If we have global parenthesis, we get rid of them
+    if (everythingIsBetweenParenthesis(command)) command = extractBetweenChar(command, '(', ')');
+
     if (containString(command, "=")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '=', '\0'));
         if (result) {
@@ -87,20 +90,20 @@ Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
             }
         }
         return result;
-    } else if (containString(command, "+") || containString(command, "-") || containString(command, "*")) {
-        int firstIndex = 0, secondIndex = 0; //TODO Verify if priorities works
+    } else if (operatorWithoutDepth(command)) {
+        int firstIndex = 0, secondIndex = 0;
+        //We change the indexes to surround the next operand
         nextOperator(command, &firstIndex, &secondIndex);
+        //We calculate the left part (before the indexes
         Object *result = recursiveCommandDecomposition(mainRegister, extractUpToIndex(command, firstIndex));
+        //We add all other operand one by one
         while (result && command[firstIndex]) {
             Object *rightPart = recursiveCommandDecomposition(mainRegister, extractBetweenIndexes(command, firstIndex + 1, secondIndex));
-
             if (rightPart) result = applyOperation(result, command[firstIndex], rightPart);
-
+            firstIndex = secondIndex;
             nextOperator(command, &firstIndex, &secondIndex);
         }
         return result;
-
-    //Put special cases after this, we need to verify everything else before
     } //From here the operations are on matrices
     else if (containCharInOrder(command, "trans()")) {
         Object *result = recursiveCommandDecomposition(mainRegister, extractBetweenChar(command, '(', ')'));
