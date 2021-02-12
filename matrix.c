@@ -41,11 +41,11 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue) {
     return M;
 }
 
-void freeMatrix(Matrix *M) {
-    if (M) {
-        for (int i = 0; i < M->rows; i++) free(M->values[i]);
-        free(M->values); free(M);
-        M = NULL;
+void freeMatrix(Matrix **M) {
+    if (*M) {
+        for (int i = 0; i < (*M)->rows; i++) free((*M)->values[i]);
+        free((*M)->values); free(*M);
+        *M = NULL;
     }
 }
 
@@ -189,7 +189,7 @@ double det(Matrix *M) {
                 Matrix *subDet = removeColumn(M, 0);
                 subDet = removeRow(subDet, i);
                 result += M->values[i][0] * det(subDet) * sign;
-                freeMatrix(subDet);
+                freeMatrix(&subDet);
             }
             return result;
         }
@@ -204,7 +204,7 @@ Matrix *adjugate(Matrix *M) {
                 Matrix *coFactor = removeColumn(M, j);
                 coFactor = removeRow(coFactor, i);
                 adjM->values[i][j] = sign * det(coFactor);
-                freeMatrix(coFactor);
+                freeMatrix(&coFactor);
             }
         }
         return adjM;
@@ -408,7 +408,7 @@ Matrix *eigenVectors(Matrix *M) {
                 Matrix *toSolve = copy(M);
                 for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[n];
                 Matrix *vectors = solveForVectors(solveAugmentedMatrix(addColumn(toSolve)));
-                freeMatrix(toSolve);
+                freeMatrix(&toSolve);
                 for (int i = 0; i < vectors->columns; i++) {
                     if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
                     for (int j = 0; j < vectors->rows; j++) eigenMatrix->values[j][nbVectors] = vectors->values[j][i];
@@ -416,7 +416,7 @@ Matrix *eigenVectors(Matrix *M) {
                     printMatrix(eigenMatrix);
                     nbVectors++;
                 }
-                freeMatrix(vectors);
+                freeMatrix(&vectors);
             }
         }
         return completeOrthogonal(eigenMatrix);

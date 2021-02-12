@@ -34,7 +34,7 @@ Variable *newVariable(double value);
  * Free a variable
  * @param toFree - The variable to free
  */
-void freeVariable(Variable *toFree);
+void freeVariable(Variable **toFree);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions

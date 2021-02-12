@@ -40,7 +40,7 @@ typedef struct {
  * Create a new register
  * @return created register
  */
-Register *newRegister();
+Register newRegister();
 
 /**
  * Free a register
@@ -65,7 +65,7 @@ Object *newObject();
  * Free an object
  * @param toFree - The object to free
  */
-void freeObject(Object *toFree);
+void freeObject(Object **toFree);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions

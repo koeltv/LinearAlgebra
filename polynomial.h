@@ -57,7 +57,7 @@ Polynomial *stringToPolynomial(const char *string, int start, int end);
  * This function free an existing polynomial and change its pointer to NULL if it worked successfully
  * @param F - The polynomial to free
  */
-void freePolynomial(Polynomial *F);
+void freePolynomial(Polynomial **F);
 
 /**
  * Copy a polynomial

@@ -7,7 +7,7 @@ var matrix_8h =
     [ "det", "matrix_8h.html#ae0df367fbdf5be60a91d3d7b54dc78a4", null ],
     [ "eigenValues", "matrix_8h.html#afbaabb9f20d10bc1adbc830f6d763253", null ],
     [ "eigenVectors", "matrix_8h.html#a593e1181a0f6e2b8bbafe044da1ec7ad", null ],
-    [ "freeMatrix", "matrix_8h.html#a8eb3a32f94e337a2b85e9a7639f8cd62", null ],
+    [ "freeMatrix", "matrix_8h.html#a7d9683aa38c5f0d3a0a3036766056adc", null ],
     [ "inverse", "matrix_8h.html#aa99fae5e1a520eb3f3a4272df49a759d", null ],
     [ "minus", "matrix_8h.html#accee8b0b2fe112f89b81844316ff1bac", null ],
     [ "multiply", "matrix_8h.html#a8d65c668b4f9b40a5c8d63d93bada733", null ],

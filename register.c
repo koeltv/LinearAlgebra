@@ -7,25 +7,22 @@
 
 #include "register.h"
 
-Register *newRegister() {
-    Register *reg = malloc(sizeof(Register));
-    reg->sizes[0] = 0; reg->sizes[1] = 0; reg->sizes[2] = 0;
-    reg->listOfPolynomials = NULL; reg->listOfMatrices = NULL; reg->listOfVariables = NULL;
-    return reg;
+Register newRegister() {
+    return (Register) {{0, 0, 0}, NULL, NULL, NULL};
 }
 
 void freeRegister(Register **toFree) {
     if (toFree) {
         if ((*toFree)->listOfPolynomials) {
-            for (int i = 0; i < (*toFree)->sizes[0]; i++) freePolynomial((*toFree)->listOfPolynomials[i]);
+            for (int i = 0; i < (*toFree)->sizes[0]; i++) freePolynomial(&(*toFree)->listOfPolynomials[i]);
             free((*toFree)->listOfPolynomials); (*toFree)->listOfPolynomials = NULL;
         }
         if ((*toFree)->listOfMatrices) {
-            for (int i = 0; i < (*toFree)->sizes[1]; i++) freeMatrix((*toFree)->listOfMatrices[i]);
+            for (int i = 0; i < (*toFree)->sizes[1]; i++) freeMatrix(&(*toFree)->listOfMatrices[i]);
             free((*toFree)->listOfMatrices); (*toFree)->listOfMatrices = NULL;
         }
         if ((*toFree)->listOfVariables) {
-            for (int i = 0; i < (*toFree)->sizes[2]; i++) freeVariable((*toFree)->listOfVariables[i]);
+            for (int i = 0; i < (*toFree)->sizes[2]; i++) freeVariable(&(*toFree)->listOfVariables[i]);
             free((*toFree)->listOfVariables); (*toFree)->listOfVariables = NULL;
         }
         free(*toFree); *toFree = NULL;
@@ -34,13 +31,13 @@ void freeRegister(Register **toFree) {
 
 void freeRegisterContent(Register *aRegister) {
     if (aRegister) {
-        for (int i = 0; i < aRegister->sizes[0]; i++) freePolynomial(aRegister->listOfPolynomials[i]);
+        for (int i = 0; i < aRegister->sizes[0]; i++) freePolynomial(&aRegister->listOfPolynomials[i]);
         free(aRegister->listOfPolynomials); aRegister->listOfPolynomials = NULL;
         aRegister->sizes[0] = 0;
-        for (int i = 0; i < aRegister->sizes[1]; i++) freeMatrix(aRegister->listOfMatrices[i]);
+        for (int i = 0; i < aRegister->sizes[1]; i++) freeMatrix(&aRegister->listOfMatrices[i]);
         free(aRegister->listOfMatrices); aRegister->listOfMatrices = NULL;
         aRegister->sizes[1] = 0;
-        for (int i = 0; i < aRegister->sizes[2]; i++) freeVariable(aRegister->listOfVariables[i]);
+        for (int i = 0; i < aRegister->sizes[2]; i++) freeVariable(&aRegister->listOfVariables[i]);
         free(aRegister->listOfVariables); aRegister->listOfVariables = NULL;
         aRegister->sizes[2] = 0;
     }
@@ -52,11 +49,11 @@ Object *newObject() {
     return new;
 }
 
-void freeObject(Object *toFree) {
-    if (toFree) {
-        freeMatrix(toFree->matrix);
-        freePolynomial(toFree->polynomial);
-        toFree = NULL;
+void freeObject(Object **toFree) {
+    if (*toFree) {
+        freeMatrix(&(*toFree)->matrix);
+        freePolynomial(&(*toFree)->polynomial);
+        *toFree = NULL;
     }
 }
 
@@ -86,11 +83,11 @@ Object *searchObject(Register *aRegister, const char *name) {
     return NULL;
 }
 
-void deleteFromRegister(Register *aRegister, Object *toDelete){
+void deleteFromRegister(Register *aRegister, Object *toDelete) {
     if (toDelete->polynomial) {
         for (int i = 0; i < aRegister->sizes[0]; i++) {
             if (aRegister->listOfPolynomials[i] == toDelete->polynomial) {
-                freePolynomial(aRegister->listOfPolynomials[i]);
+                freePolynomial(&aRegister->listOfPolynomials[i]);
                 for (int j = i; j < aRegister->sizes[0] - 1; j++) aRegister->listOfPolynomials[j] = aRegister->listOfPolynomials[j + 1];
                 if (--aRegister->sizes[0] == 0) aRegister->listOfPolynomials = NULL;
                 break;
@@ -100,7 +97,7 @@ void deleteFromRegister(Register *aRegister, Object *toDelete){
     if (toDelete->matrix) {
         for (int i = 0; i < aRegister->sizes[1]; i++) {
             if (aRegister->listOfMatrices[i] == toDelete->matrix) {
-                freeMatrix(aRegister->listOfMatrices[i]);
+                freeMatrix(&aRegister->listOfMatrices[i]);
                 for (int j = i; j < aRegister->sizes[1] - 1; j++) aRegister->listOfMatrices[j] = aRegister->listOfMatrices[j + 1];
                 if (--aRegister->sizes[1] == 0) aRegister->listOfMatrices = NULL;
                 break;
@@ -110,7 +107,7 @@ void deleteFromRegister(Register *aRegister, Object *toDelete){
     if (toDelete->variable) {
         for (int i = 0; i < aRegister->sizes[2]; i++) {
             if (aRegister->listOfVariables[i] == toDelete->variable) {
-                freeVariable(aRegister->listOfVariables[i]);
+                freeVariable(&aRegister->listOfVariables[i]);
                 for (int j = i; j < aRegister->sizes[2] - 1; j++) aRegister->listOfVariables[j] = aRegister->listOfVariables[j + 1];
                 if (--aRegister->sizes[2] == 0) aRegister->listOfVariables = NULL;
                 break;
@@ -119,7 +116,7 @@ void deleteFromRegister(Register *aRegister, Object *toDelete){
     }
 }
 
-void addToRegister(Register *aRegister, Object *newObject){
+void addToRegister(Register *aRegister, Object *newObject) {
     if (newObject->polynomial && newObject->polynomial->name) {
         Object *found = searchObject(aRegister, newObject->polynomial->name);
         if (found && found->polynomial) { //Overwriting current polynomial
@@ -176,7 +173,7 @@ void addToRegister(Register *aRegister, Object *newObject){
     }
 }
 
-void printRegister(Register *aRegister){
+void printRegister(Register *aRegister) {
     if (aRegister->listOfPolynomials) {
         printf("===============Polynomials================\n");
         for (int i = 0; i < aRegister->sizes[0]; i++) {

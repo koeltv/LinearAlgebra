@@ -49,7 +49,7 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue);
  * This function free an existing matrix and change its pointer to NULL if it worked successfully
  * @param M - The matrix to free
  */
-void freeMatrix(Matrix *M);
+void freeMatrix(Matrix **M);
 
 /**
  * Remove a row in a matrix

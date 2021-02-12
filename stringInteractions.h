@@ -180,7 +180,7 @@ StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue);
  * This function free an existing string matrix and change its pointer to NULL if it worked successfully
  * @param M - The string matrix to free
  */
-void freeStringMatrix(StringMatrix *M);
+void freeStringMatrix(StringMatrix **M);
 
 /**
  * Remove a row in a string matrix

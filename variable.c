@@ -13,9 +13,9 @@ Variable *newVariable(double value) {
     return newVariable;
 }
 
-void freeVariable(Variable *toFree) {
-    free(toFree->name); free(toFree);
-    toFree = NULL;
+void freeVariable(Variable **toFree) {
+    free((*toFree)->name); free(*toFree);
+    *toFree = NULL;
 }
 
 void printVariable(Variable *variable) {

@@ -15,10 +15,10 @@ Polynomial *newPolynomial(int degree) {
     return new;
 }
 
-void freePolynomial(Polynomial *F) {
-    if (F){
-        free(F->coefficient); free(F);
-        F = NULL;
+void freePolynomial(Polynomial **F) {
+    if (*F){
+        free((*F)->coefficient); free(*F);
+        *F = NULL;
     }
 }
 
@@ -255,7 +255,7 @@ double newtonMethod(Polynomial *F) {
                 x0 = x1;
             }
             //End of the method, free temporary values and return output
-            freePolynomial(fPrime);
+            freePolynomial(&fPrime);
             if (!solutionFound) return IMAGINARY;
             return x1;
         }

@@ -10,7 +10,7 @@ var string_interactions_8c =
     [ "extractBetweenIndexes", "string_interactions_8c.html#ae2310222b4baa065f990989e52fb641a", null ],
     [ "extractUpToIndex", "string_interactions_8c.html#a229ad98e18fa59665ba54e29abbb118d", null ],
     [ "firstWord", "string_interactions_8c.html#ad9a530cf7751a8237c7ba4c2d946fc59", null ],
-    [ "freeStringMatrix", "string_interactions_8c.html#a5fedb0e0e5dd9619c738f313e9ff12c2", null ],
+    [ "freeStringMatrix", "string_interactions_8c.html#acd3d9c5a1cd8af611082c080cfa21cf7", null ],
     [ "length", "string_interactions_8c.html#a5e6c13b6b96060a3c07e87c3cd623fa6", null ],
     [ "newStringMatrix", "string_interactions_8c.html#a3e6e0bb3b3c97497ce1b1cb210757783", null ],
     [ "nextOperator", "string_interactions_8c.html#aa491a23fbb096881422333e8c0bb0b0b", null ],

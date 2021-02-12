@@ -204,14 +204,14 @@ StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
     return M;
 }
 
-void freeStringMatrix(StringMatrix *M) {
-    if (M) {
-        for (int i = 0; i < M->rows; i++) {
+void freeStringMatrix(StringMatrix **M) {
+    if (*M) {
+        for (int i = 0; i < (*M)->rows; i++) {
             //for (int j = 0; j < M->columns; j++) free(M->values[i][j]);
-            free(M->values[i]);
+            free((*M)->values[i]);
         }
-        free(M->values); free(M);
-        M = NULL;
+        free((*M)->values); free(*M);
+        *M = NULL;
     }
 }
 
@@ -276,7 +276,7 @@ char *detOfStringMatrix(StringMatrix *M) {
                     snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (%s))", result, M->values[i][0], detOfSubDet);
                 }
             }
-            freeStringMatrix(subDet);
+            freeStringMatrix(&subDet);
         }
         return result;
     }
