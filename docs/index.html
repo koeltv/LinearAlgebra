@@ -98,11 +98,72 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="title">Manuel Linear Algebra Solver </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><b>Members</b> : Valentin Koeltgen <br  />
+<div class="textblock"><p><br  />
+ <b>Members</b> : Valentin Koeltgen <br  />
  <b>License</b> : MIT <br  />
 </p>
-<p>This project goal is to create a program with a simple command-line interface to do calculations on polynomial and matrices. <br  />
- Right now the project is limited to handling real values but imaginary values handling can be added in the future </p>
+<p>This project goal is to create a program with a simple command-line interface to do calculations on polynomial, matrices and variables. <br  />
+ Right now the project is limited to handling real values but imaginary values handling can be added in the future.</p>
+<p>The program should be able to handle advanced maths in the form of simple user commands or script files containing commands. <br  />
+ It should be able to handle all kind of objects, like polynomials, matrices, vectors (matrices with 1 column) or simple values.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Command List</h1>
+<p>This is a list of commands that are available to the user</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Simple commands</h2>
+<p>The following commands don't need any arguments, they are used to do action related to the user</p>
+<p><code>help</code> This command display this page in the terminal <br  />
+ <code>displayAll</code> This command display the whole content of the main register <br  />
+ <code>clear</code> This command empty the main register <br  />
+ <code>readScript(&lt;link&gt;)</code> This command apply the content of a script located at <code>&lt;link&gt;</code>, it reads it line by line and apply every command</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Simple operations</h2>
+<p>The following commands are final but accept composite operations as argument</p>
+<p><code>display(&lt;operation&gt;)</code> This command display the result of <code>&lt;operation&gt;</code> in the terminal <br  />
+ <code>eig(&lt;operation&gt;)</code> This command display the eigen values of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>solve(&lt;operation&gt;)</code> This command display the result of solving <code>&lt;operation&gt;</code>,</p><ul>
+<li>if <code>&lt;operation&gt;</code> is an augmented matrix, the result will be the matrix in echelon form <br  />
+</li>
+<li>if <code>&lt;operation&gt;</code> is a polynomial, the result will be the roots of the polynomial <br  />
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Composite operations</h2>
+<p>The following commands are not final, they can be used recursively</p>
+<p><code>&lt;objectName&gt; = &lt;operation&gt;</code> This command create a new object in the register which contain the result of <code>operation</code> and has for name <code>&lt;objectName&gt;</code> <br  />
+ <code>&lt;operation1&gt; + &lt;operation2&gt;</code> This command return the sum of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; - &lt;operation2&gt;</code> This command return the difference of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; * &lt;operation2&gt;</code> This command return the product of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial/matrix with a variable) <br  />
+ <code>trans(&lt;operation&gt;)</code> This command return the transposed of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>adj(&lt;operation&gt;)</code> This command return the adjugate of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>inv(&lt;operation&gt;)</code> This command return the inverse of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>eigVectors(&lt;operation&gt;)</code> This command return the eigen vectors of <code>&lt;operation&gt;</code> in matrix form completed with orthonormal vectors if needed, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>triangularise(&lt;operation&gt;)</code> This command return the triangularised form of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>PLambda(&lt;operation&gt;)</code> This command return the polynomial <code>P(lambda) = det(&lt;operation&gt; - lambda * I)</code> of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>derive(&lt;operation&gt;)</code> This command return the derivative of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a polynomial <br  />
+ <code>trace(&lt;operation&gt;)</code> This command return the trace of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>det(&lt;operation&gt;)</code> This command return the determinant of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Basic object</h2>
+<p>The following arguments can be used as fundamentals to create or call objects</p>
+<p><code>&lt;objectName&gt;</code> This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but can only be the size of one word, no space accepted <br  />
+ <code>[&lt;matrixFormat&gt;]</code> This will create a matrix object. The format used to create a matrix is the following :</p><ul>
+<li>all values in a row are separated by a <code>,</code></li>
+<li>all rows are separated by a <code>;</code>, the last one doesn't need it</li>
+</ul>
+<p><em>Example :</em> <code>[1,2,3;4,5,6;7,8,9]</code> is a correct 3x3 matrix, <code>[1,2;3,4,5]</code> is not correct since the 2nd row has more values than the first <br  />
+</p>
+<p><code>&lt;polynomialFormat&gt;</code> This will create a polynomial object. The format used to create a polynomial is the following :</p><ul>
+<li>to write coefficient, one must use the format <code>&lt;coefficient&gt;X^&lt;power&gt;</code> with &lt;coefficient&gt; any real value and &lt;power&gt; an integer<ul>
+<li>if &lt;power&gt; is 1, the coefficient can be written as <code>&lt;coefficient&gt;X</code></li>
+<li>if &lt;power&gt; is 0, the coefficient can be written as <code>&lt;coefficient&gt;</code></li>
+</ul>
+</li>
+<li>every coefficient must have an explicit value, for example <code>X^3</code> is not accepted but <code>1X^3</code> is. <br  />
+</li>
+</ul>
+<p><em>Example :</em> <code>2X + 1X^2 * (2X + 2)</code> is correct an will create the polynomial <code>2X^3 + 2X^2 + 2X + 0</code>, <code>X + 2X^1.5</code> is not correct because the first X doesn't have a coefficient and the power of the second is not an integer </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

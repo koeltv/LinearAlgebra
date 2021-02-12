@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['coefficient_101',['coefficient',['../struct_polynomial.html#a79344dd1582f301ada9dace88c583b87',1,'Polynomial']]],
-  ['columns_102',['columns',['../struct_matrix.html#a341d2f00089fffc71eb6dbfd29f56c89',1,'Matrix']]]
+  ['a_259',['a',['../help_8txt.html#af0bbd481cbb736ce6dd62152947417a8',1,'help.txt']]]
 ];

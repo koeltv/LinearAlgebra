@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['newmatrix_80',['newMatrix',['../matrix_8c.html#a43a9b0a75747c361b92ef5b28afc0db6',1,'newMatrix(int nbRows, int nbColumns, double initialValue):&#160;matrix.c'],['../matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6',1,'newMatrix(int nbRows, int nbColumns, double initialValue):&#160;matrix.c']]],
-  ['newtonmethod_81',['newtonMethod',['../polynomial_8c.html#a3dbd988e14cdbb686d6d55fe17fcf2f3',1,'newtonMethod(Polynomial *polynomial):&#160;polynomial.c'],['../polynomial_8h.html#a3dbd988e14cdbb686d6d55fe17fcf2f3',1,'newtonMethod(Polynomial *polynomial):&#160;polynomial.c']]]
+  ['length_204',['length',['../string_interactions_8c.html#a5e6c13b6b96060a3c07e87c3cd623fa6',1,'length(const char *string):&#160;stringInteractions.c'],['../string_interactions_8h.html#a5e6c13b6b96060a3c07e87c3cd623fa6',1,'length(const char *string):&#160;stringInteractions.c']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['printmatrix_82',['printMatrix',['../matrix_8c.html#a6be48c1e90d50db14c9f06c1ebac8a87',1,'printMatrix(Matrix *matrix):&#160;matrix.c'],['../matrix_8h.html#a6be48c1e90d50db14c9f06c1ebac8a87',1,'printMatrix(Matrix *matrix):&#160;matrix.c']]],
-  ['printpolynomial_83',['printPolynomial',['../polynomial_8c.html#abc18046118cfa9b8c842fd881e275157',1,'printPolynomial(Polynomial *polynomial):&#160;polynomial.c'],['../polynomial_8h.html#abc18046118cfa9b8c842fd881e275157',1,'printPolynomial(Polynomial *polynomial):&#160;polynomial.c']]]
+  ['main_205',['main',['../main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.c']]],
+  ['minus_206',['minus',['../matrix_8c.html#accee8b0b2fe112f89b81844316ff1bac',1,'minus(Matrix *A, Matrix *B):&#160;matrix.c'],['../matrix_8h.html#accee8b0b2fe112f89b81844316ff1bac',1,'minus(Matrix *A, Matrix *B):&#160;matrix.c']]],
+  ['multiply_207',['multiply',['../matrix_8c.html#a8d65c668b4f9b40a5c8d63d93bada733',1,'multiply(Matrix *A, Matrix *B):&#160;matrix.c'],['../matrix_8h.html#a8d65c668b4f9b40a5c8d63d93bada733',1,'multiply(Matrix *A, Matrix *B):&#160;matrix.c']]]
 ];

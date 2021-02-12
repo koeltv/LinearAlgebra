@@ -104,7 +104,9 @@ $(document).ready(function(){initNavTree('matrix_8h.html',''); initResizable(); 
 
 <p>Header file of <a class="el" href="matrix_8c.html" title="Functions on matrix.">matrix.c</a>.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="string_interactions_8h_source.html">stringInteractions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="polynomial_8h_source.html">polynomial.h</a>&quot;</code><br />
+</div>
 <p><a href="matrix_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -115,85 +117,82 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">readDoubleInFile</a> (FILE *currentFile, char *temp)</td></tr>
-<tr class="memdesc:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value.  <a href="matrix_8h.html#a9582bed6c820b9e2ffd0c2feacb28f56">More...</a><br /></td></tr>
-<tr class="separator:a9582bed6c820b9e2ffd0c2feacb28f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a308febcad4d0156caf38eda75918a65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a308febcad4d0156caf38eda75918a65d">readMatrixWIP</a> ()</td></tr>
-<tr class="memdesc:a308febcad4d0156caf38eda75918a65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it  <a href="matrix_8h.html#a308febcad4d0156caf38eda75918a65d">More...</a><br /></td></tr>
-<tr class="separator:a308febcad4d0156caf38eda75918a65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4472dee32965298f6ad1f25f58061db"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae4472dee32965298f6ad1f25f58061db">readString</a> (FILE *current)</td></tr>
-<tr class="memdesc:ae4472dee32965298f6ad1f25f58061db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a string in a file stream This function read a string of any size in a given file stream.  <a href="matrix_8h.html#ae4472dee32965298f6ad1f25f58061db">More...</a><br /></td></tr>
-<tr class="separator:ae4472dee32965298f6ad1f25f58061db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50b7176cde2ad94612e201eec38e4180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a50b7176cde2ad94612e201eec38e4180">readMatrixInFile</a> ()</td></tr>
-<tr class="memdesc:a50b7176cde2ad94612e201eec38e4180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it.  <a href="matrix_8h.html#a50b7176cde2ad94612e201eec38e4180">More...</a><br /></td></tr>
-<tr class="separator:a50b7176cde2ad94612e201eec38e4180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa66580f54649b34bbdcb3ec12ae1cd45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aa66580f54649b34bbdcb3ec12ae1cd45">readMatrixInString</a> (char *string)</td></tr>
+<tr class="memdesc:aa66580f54649b34bbdcb3ec12ae1cd45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current read a matrix in string This function read a matrix in a string given a specific format and return a matrix structure made from it.  <a href="matrix_8h.html#aa66580f54649b34bbdcb3ec12ae1cd45">More...</a><br /></td></tr>
+<tr class="separator:aa66580f54649b34bbdcb3ec12ae1cd45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43a9b0a75747c361b92ef5b28afc0db6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">newMatrix</a> (int nbRows, int nbColumns, double initialValue)</td></tr>
 <tr class="memdesc:a43a9b0a75747c361b92ef5b28afc0db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a simple matrix This function create a simple matrix with the given number of columns and rows and with it's values initialized with the given value.  <a href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">More...</a><br /></td></tr>
 <tr class="separator:a43a9b0a75747c361b92ef5b28afc0db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee4541cf7942641ba3946e5e00cf1039"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aee4541cf7942641ba3946e5e00cf1039">freeMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:aee4541cf7942641ba3946e5e00cf1039"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free an existing matrix This function free an existing matrix and change its pointer to NULL if it worked successfully.  <a href="matrix_8h.html#aee4541cf7942641ba3946e5e00cf1039">More...</a><br /></td></tr>
-<tr class="separator:aee4541cf7942641ba3946e5e00cf1039"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b1a163951f554455a3afed1cc1a2ec5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a2b1a163951f554455a3afed1cc1a2ec5">removeRow</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix, int rowIndex)</td></tr>
-<tr class="memdesc:a2b1a163951f554455a3afed1cc1a2ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a row in a matrix This function return a matrix created by removing a row of a given matrix.  <a href="matrix_8h.html#a2b1a163951f554455a3afed1cc1a2ec5">More...</a><br /></td></tr>
-<tr class="separator:a2b1a163951f554455a3afed1cc1a2ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6bd8a6c22c931456b79dd1242af82b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae6bd8a6c22c931456b79dd1242af82b6">removeColumn</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix, int columnIndex)</td></tr>
-<tr class="memdesc:ae6bd8a6c22c931456b79dd1242af82b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a column in a matrix This function return a matrix created by removing a column of a given matrix.  <a href="matrix_8h.html#ae6bd8a6c22c931456b79dd1242af82b6">More...</a><br /></td></tr>
-<tr class="separator:ae6bd8a6c22c931456b79dd1242af82b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23b44149efbdbf8897ba45361b64c8cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a23b44149efbdbf8897ba45361b64c8cd">addColumn</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:a23b44149efbdbf8897ba45361b64c8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a column to a matrix This function return a matrix created by adding a column in the last position of a given matrix.  <a href="matrix_8h.html#a23b44149efbdbf8897ba45361b64c8cd">More...</a><br /></td></tr>
-<tr class="separator:a23b44149efbdbf8897ba45361b64c8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a970167a519af6c341fa11f06313a485c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a970167a519af6c341fa11f06313a485c">subMat</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix, int r1, int r2, int c1, int c2)</td></tr>
-<tr class="memdesc:a970167a519af6c341fa11f06313a485c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a subMatrix This function create a subMatrix of a given matrix.  <a href="matrix_8h.html#a970167a519af6c341fa11f06313a485c">More...</a><br /></td></tr>
-<tr class="separator:a970167a519af6c341fa11f06313a485c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dca83f92a03dee6a4035507a7b5ac0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a2dca83f92a03dee6a4035507a7b5ac0b">copy</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:a2dca83f92a03dee6a4035507a7b5ac0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a matrix This function creates an exact copy of a given matrix.  <a href="matrix_8h.html#a2dca83f92a03dee6a4035507a7b5ac0b">More...</a><br /></td></tr>
-<tr class="separator:a2dca83f92a03dee6a4035507a7b5ac0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d9683aa38c5f0d3a0a3036766056adc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7d9683aa38c5f0d3a0a3036766056adc">freeMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> **<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a7d9683aa38c5f0d3a0a3036766056adc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free an existing matrix This function free an existing matrix and change its pointer to NULL if it worked successfully.  <a href="matrix_8h.html#a7d9683aa38c5f0d3a0a3036766056adc">More...</a><br /></td></tr>
+<tr class="separator:a7d9683aa38c5f0d3a0a3036766056adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904afae327a47071595fa68b0ea0660c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a904afae327a47071595fa68b0ea0660c">removeRow</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>, int rowIndex)</td></tr>
+<tr class="memdesc:a904afae327a47071595fa68b0ea0660c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a row in a matrix This function return a matrix created by removing a row of a given matrix.  <a href="matrix_8h.html#a904afae327a47071595fa68b0ea0660c">More...</a><br /></td></tr>
+<tr class="separator:a904afae327a47071595fa68b0ea0660c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710603d3739261b8b2b8102768c125d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a710603d3739261b8b2b8102768c125d3">removeColumn</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>, int columnIndex)</td></tr>
+<tr class="memdesc:a710603d3739261b8b2b8102768c125d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a column in a matrix This function return a matrix created by removing a column of a given matrix.  <a href="matrix_8h.html#a710603d3739261b8b2b8102768c125d3">More...</a><br /></td></tr>
+<tr class="separator:a710603d3739261b8b2b8102768c125d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a801025cc9c71123294adbbc0e2b4d02e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a801025cc9c71123294adbbc0e2b4d02e">addColumn</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a801025cc9c71123294adbbc0e2b4d02e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a column to a matrix This function return a matrix created by adding a column in the last position of a given matrix.  <a href="matrix_8h.html#a801025cc9c71123294adbbc0e2b4d02e">More...</a><br /></td></tr>
+<tr class="separator:a801025cc9c71123294adbbc0e2b4d02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb5ea712071c641035befd7ae82ba77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8eb5ea712071c641035befd7ae82ba77">subMat</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>, int r1, int r2, int c1, int c2)</td></tr>
+<tr class="memdesc:a8eb5ea712071c641035befd7ae82ba77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a subMatrix This function create a subMatrix of a given matrix.  <a href="matrix_8h.html#a8eb5ea712071c641035befd7ae82ba77">More...</a><br /></td></tr>
+<tr class="separator:a8eb5ea712071c641035befd7ae82ba77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6414f3996aaf4386b25ef9d33824f05d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a6414f3996aaf4386b25ef9d33824f05d">copy</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a6414f3996aaf4386b25ef9d33824f05d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a M This function creates an exact copy of a given M.  <a href="matrix_8h.html#a6414f3996aaf4386b25ef9d33824f05d">More...</a><br /></td></tr>
+<tr class="separator:a6414f3996aaf4386b25ef9d33824f05d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfba50a3145edadcd0551b9387fa3d33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#abfba50a3145edadcd0551b9387fa3d33">toStringMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:abfba50a3145edadcd0551b9387fa3d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform a matrix to a string matrix This function take a given matrix and create a matrix with value in string format to enable the use of variables.  <a href="matrix_8h.html#abfba50a3145edadcd0551b9387fa3d33">More...</a><br /></td></tr>
+<tr class="separator:abfba50a3145edadcd0551b9387fa3d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71d6bb7c079a119cc30f60ec6316bc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae71d6bb7c079a119cc30f60ec6316bc8">sum</a> (<a class="el" href="struct_matrix.html">Matrix</a> *A, <a class="el" href="struct_matrix.html">Matrix</a> *B)</td></tr>
 <tr class="memdesc:ae71d6bb7c079a119cc30f60ec6316bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sum 2 matrices This functions sums 2 matrices.  <a href="matrix_8h.html#ae71d6bb7c079a119cc30f60ec6316bc8">More...</a><br /></td></tr>
 <tr class="separator:ae71d6bb7c079a119cc30f60ec6316bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accee8b0b2fe112f89b81844316ff1bac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#accee8b0b2fe112f89b81844316ff1bac">minus</a> (<a class="el" href="struct_matrix.html">Matrix</a> *A, <a class="el" href="struct_matrix.html">Matrix</a> *B)</td></tr>
 <tr class="memdesc:accee8b0b2fe112f89b81844316ff1bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtract 2 matrices This functions subtracts 2 matrices.  <a href="matrix_8h.html#accee8b0b2fe112f89b81844316ff1bac">More...</a><br /></td></tr>
 <tr class="separator:accee8b0b2fe112f89b81844316ff1bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9989ef26362bb4165e6f737983ec4544"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a9989ef26362bb4165e6f737983ec4544">innerMultiply</a> (<a class="el" href="struct_matrix.html">Matrix</a> *A, <a class="el" href="struct_matrix.html">Matrix</a> *B)</td></tr>
-<tr class="memdesc:a9989ef26362bb4165e6f737983ec4544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inner multiplication of 2 matrices This function multiply the elements of 2 matrices.  <a href="matrix_8h.html#a9989ef26362bb4165e6f737983ec4544">More...</a><br /></td></tr>
-<tr class="separator:a9989ef26362bb4165e6f737983ec4544"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac68af7acb5c257ede250acb1875eef4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ac68af7acb5c257ede250acb1875eef4c">scalarMultiply</a> (<a class="el" href="struct_matrix.html">Matrix</a> *A, double scalar)</td></tr>
-<tr class="memdesc:ac68af7acb5c257ede250acb1875eef4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a matrix by a scalar This function multiply a matrix by a real scalar.  <a href="matrix_8h.html#ac68af7acb5c257ede250acb1875eef4c">More...</a><br /></td></tr>
-<tr class="separator:ac68af7acb5c257ede250acb1875eef4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cef230990bc3920b448b1b356c483b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7cef230990bc3920b448b1b356c483b3">scalarMultiply</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>, double scalar)</td></tr>
+<tr class="memdesc:a7cef230990bc3920b448b1b356c483b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply a matrix by a scalar This function multiply a matrix by a real scalar.  <a href="matrix_8h.html#a7cef230990bc3920b448b1b356c483b3">More...</a><br /></td></tr>
+<tr class="separator:a7cef230990bc3920b448b1b356c483b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d65c668b4f9b40a5c8d63d93bada733"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8d65c668b4f9b40a5c8d63d93bada733">multiply</a> (<a class="el" href="struct_matrix.html">Matrix</a> *A, <a class="el" href="struct_matrix.html">Matrix</a> *B)</td></tr>
 <tr class="memdesc:a8d65c668b4f9b40a5c8d63d93bada733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard matrix multiplication This function does a standard multiplication of 2 matrices.  <a href="matrix_8h.html#a8d65c668b4f9b40a5c8d63d93bada733">More...</a><br /></td></tr>
 <tr class="separator:a8d65c668b4f9b40a5c8d63d93bada733"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcc0342a0a35e83eb23edf84e427c6e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#adcc0342a0a35e83eb23edf84e427c6e4">transpose</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:adcc0342a0a35e83eb23edf84e427c6e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transpose of a matrix This function return the transpose of a given matrix.  <a href="matrix_8h.html#adcc0342a0a35e83eb23edf84e427c6e4">More...</a><br /></td></tr>
-<tr class="separator:adcc0342a0a35e83eb23edf84e427c6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9062de9b2271e8f9c864052d1c4131b2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a9062de9b2271e8f9c864052d1c4131b2">trace</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:a9062de9b2271e8f9c864052d1c4131b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace of a matrix This function return the trace of a given matrix.  <a href="matrix_8h.html#a9062de9b2271e8f9c864052d1c4131b2">More...</a><br /></td></tr>
-<tr class="separator:a9062de9b2271e8f9c864052d1c4131b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a215743b4bafbd6fd9460606c68189733"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a215743b4bafbd6fd9460606c68189733">transpose</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a215743b4bafbd6fd9460606c68189733"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transpose of a matrix This function return the transpose of a given matrix.  <a href="matrix_8h.html#a215743b4bafbd6fd9460606c68189733">More...</a><br /></td></tr>
+<tr class="separator:a215743b4bafbd6fd9460606c68189733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7">printMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">print matrix This function print a given matrix in the terminal  <a href="matrix_8h.html#acec802aa7a5e7e74cb7c1bdf0ec38eb7">More...</a><br /></td></tr>
+<tr class="separator:acec802aa7a5e7e74cb7c1bdf0ec38eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac34dd3e4c7981893d216934a0d1e20"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a0ac34dd3e4c7981893d216934a0d1e20">trace</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a0ac34dd3e4c7981893d216934a0d1e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trace of a matrix This function return the trace of a given matrix.  <a href="matrix_8h.html#a0ac34dd3e4c7981893d216934a0d1e20">More...</a><br /></td></tr>
+<tr class="separator:a0ac34dd3e4c7981893d216934a0d1e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0df367fbdf5be60a91d3d7b54dc78a4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae0df367fbdf5be60a91d3d7b54dc78a4">det</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
 <tr class="memdesc:ae0df367fbdf5be60a91d3d7b54dc78a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determinant of a matrix This function return the determinant of a given matrix.  <a href="matrix_8h.html#ae0df367fbdf5be60a91d3d7b54dc78a4">More...</a><br /></td></tr>
 <tr class="separator:ae0df367fbdf5be60a91d3d7b54dc78a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dd341957a3be0ef30bf58236765ec1c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7dd341957a3be0ef30bf58236765ec1c">adjugate</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:a7dd341957a3be0ef30bf58236765ec1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjugate of a matrix This function return the adjugate of a given matrix.  <a href="matrix_8h.html#a7dd341957a3be0ef30bf58236765ec1c">More...</a><br /></td></tr>
-<tr class="separator:a7dd341957a3be0ef30bf58236765ec1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4c2bd5c86299bb2670e55cd31c6fb66"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aa4c2bd5c86299bb2670e55cd31c6fb66">inverse</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:aa4c2bd5c86299bb2670e55cd31c6fb66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse of a matrix This function return the inverse matrix of a given matrix if it exists.  <a href="matrix_8h.html#aa4c2bd5c86299bb2670e55cd31c6fb66">More...</a><br /></td></tr>
-<tr class="separator:aa4c2bd5c86299bb2670e55cd31c6fb66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7387b77cb43f5499fd13e16c00cca341"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7387b77cb43f5499fd13e16c00cca341">adjugate</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a7387b77cb43f5499fd13e16c00cca341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjugate of a matrix This function return the adjugate of a given matrix.  <a href="matrix_8h.html#a7387b77cb43f5499fd13e16c00cca341">More...</a><br /></td></tr>
+<tr class="separator:a7387b77cb43f5499fd13e16c00cca341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa99fae5e1a520eb3f3a4272df49a759d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aa99fae5e1a520eb3f3a4272df49a759d">inverse</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:aa99fae5e1a520eb3f3a4272df49a759d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse of a matrix This function return the inverse M of a given M if it exists.  <a href="matrix_8h.html#aa99fae5e1a520eb3f3a4272df49a759d">More...</a><br /></td></tr>
+<tr class="separator:aa99fae5e1a520eb3f3a4272df49a759d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa85b732ed77437c85578bdcb38245c28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#aa85b732ed77437c85578bdcb38245c28">solveAugmentedMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
 <tr class="memdesc:aa85b732ed77437c85578bdcb38245c28"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Resolution of an augmented matrix This function return the given augmented matrix in a solvable format  <a href="matrix_8h.html#aa85b732ed77437c85578bdcb38245c28">More...</a><br /></td></tr>
 <tr class="separator:aa85b732ed77437c85578bdcb38245c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc5e961a6450e9542892dd5576186fd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#adc5e961a6450e9542892dd5576186fd7">triangularise</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:adc5e961a6450e9542892dd5576186fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangularise a matrix This function triangularise (or diagonalise) a given matrix.  <a href="matrix_8h.html#adc5e961a6450e9542892dd5576186fd7">More...</a><br /></td></tr>
-<tr class="separator:adc5e961a6450e9542892dd5576186fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6be48c1e90d50db14c9f06c1ebac8a87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a6be48c1e90d50db14c9f06c1ebac8a87">printMatrix</a> (<a class="el" href="struct_matrix.html">Matrix</a> *matrix)</td></tr>
-<tr class="memdesc:a6be48c1e90d50db14c9f06c1ebac8a87"><td class="mdescLeft">&#160;</td><td class="mdescRight">print matrix This function print a given matrix in the terminal  <a href="matrix_8h.html#a6be48c1e90d50db14c9f06c1ebac8a87">More...</a><br /></td></tr>
-<tr class="separator:a6be48c1e90d50db14c9f06c1ebac8a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbaabb9f20d10bc1adbc830f6d763253"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#afbaabb9f20d10bc1adbc830f6d763253">eigenValues</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:afbaabb9f20d10bc1adbc830f6d763253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eigen values of a matrix This function return the eigen values of a given matrix.  <a href="matrix_8h.html#afbaabb9f20d10bc1adbc830f6d763253">More...</a><br /></td></tr>
+<tr class="separator:afbaabb9f20d10bc1adbc830f6d763253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a593e1181a0f6e2b8bbafe044da1ec7ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a593e1181a0f6e2b8bbafe044da1ec7ad">eigenVectors</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a593e1181a0f6e2b8bbafe044da1ec7ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eigen vectors of a matrix This function return the eigen vectors of a given matrix in a matrix form.  <a href="matrix_8h.html#a593e1181a0f6e2b8bbafe044da1ec7ad">More...</a><br /></td></tr>
+<tr class="separator:a593e1181a0f6e2b8bbafe044da1ec7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae99bf0fae7b3faf1a522b88ee04594c9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#ae99bf0fae7b3faf1a522b88ee04594c9">triangularise</a> (<a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:ae99bf0fae7b3faf1a522b88ee04594c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangularise a matrix This function triangularise (or diagonalise) a given matrix.  <a href="matrix_8h.html#ae99bf0fae7b3faf1a522b88ee04594c9">More...</a><br /></td></tr>
+<tr class="separator:ae99bf0fae7b3faf1a522b88ee04594c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Header file of <a class="el" href="matrix_8c.html" title="Functions on matrix.">matrix.c</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a23b44149efbdbf8897ba45361b64c8cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23b44149efbdbf8897ba45361b64c8cd">&#9670;&nbsp;</a></span>addColumn()</h2>
+<a id="a801025cc9c71123294adbbc0e2b4d02e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a801025cc9c71123294adbbc0e2b4d02e">&#9670;&nbsp;</a></span>addColumn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +201,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* addColumn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -211,7 +210,7 @@ Functions</h2></td></tr>
 <p>Add a column to a matrix This function return a matrix created by adding a column in the last position of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The original matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- The original matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -219,8 +218,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7dd341957a3be0ef30bf58236765ec1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dd341957a3be0ef30bf58236765ec1c">&#9670;&nbsp;</a></span>adjugate()</h2>
+<a id="a7387b77cb43f5499fd13e16c00cca341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7387b77cb43f5499fd13e16c00cca341">&#9670;&nbsp;</a></span>adjugate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +228,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* adjugate </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -238,7 +237,7 @@ Functions</h2></td></tr>
 <p>Adjugate of a matrix This function return the adjugate of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- the given matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
   </table>
   </dd>
 </dl>
@@ -246,8 +245,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2dca83f92a03dee6a4035507a7b5ac0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dca83f92a03dee6a4035507a7b5ac0b">&#9670;&nbsp;</a></span>copy()</h2>
+<a id="a6414f3996aaf4386b25ef9d33824f05d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6414f3996aaf4386b25ef9d33824f05d">&#9670;&nbsp;</a></span>copy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,16 +255,16 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* copy </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Copy a matrix This function creates an exact copy of a given matrix. </p>
+<p>Copy a M This function creates an exact copy of a given M. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The matrix to copy </td></tr>
+    <tr><td class="paramname">M</td><td>- The M to copy </td></tr>
   </table>
   </dd>
 </dl>
@@ -300,8 +299,62 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aee4541cf7942641ba3946e5e00cf1039"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee4541cf7942641ba3946e5e00cf1039">&#9670;&nbsp;</a></span>freeMatrix()</h2>
+<a id="afbaabb9f20d10bc1adbc830f6d763253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbaabb9f20d10bc1adbc830f6d763253">&#9670;&nbsp;</a></span>eigenValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_solutions.html">Solutions</a>* eigenValues </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Eigen values of a matrix This function return the eigen values of a given matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>eigen values of M </dd></dl>
+
+</div>
+</div>
+<a id="a593e1181a0f6e2b8bbafe044da1ec7ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a593e1181a0f6e2b8bbafe044da1ec7ad">&#9670;&nbsp;</a></span>eigenVectors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* eigenVectors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Eigen vectors of a matrix This function return the eigen vectors of a given matrix in a matrix form. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>eigen vectors in matrix form </dd></dl>
+
+</div>
+</div>
+<a id="a7d9683aa38c5f0d3a0a3036766056adc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d9683aa38c5f0d3a0a3036766056adc">&#9670;&nbsp;</a></span>freeMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,8 +362,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void freeMatrix </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> **&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -319,55 +372,15 @@ Functions</h2></td></tr>
 <p>Free an existing matrix This function free an existing matrix and change its pointer to NULL if it worked successfully. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The matrix to free </td></tr>
+    <tr><td class="paramname">M</td><td>- The matrix to free </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a9989ef26362bb4165e6f737983ec4544"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9989ef26362bb4165e6f737983ec4544">&#9670;&nbsp;</a></span>innerMultiply()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* innerMultiply </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>B</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Inner multiplication of 2 matrices This function multiply the elements of 2 matrices. </p>
-<dl class="section note"><dt>Note</dt><dd>This operation is different from a standard matrix multiplication, it only multiplies element by element </dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>They must be of identical dimensions </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">A</td><td>- first matrix </td></tr>
-    <tr><td class="paramname">B</td><td>- second matrix </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>inner multiplication of the matrices </dd></dl>
-
-</div>
-</div>
-<a id="aa4c2bd5c86299bb2670e55cd31c6fb66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4c2bd5c86299bb2670e55cd31c6fb66">&#9670;&nbsp;</a></span>inverse()</h2>
+<a id="aa99fae5e1a520eb3f3a4272df49a759d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa99fae5e1a520eb3f3a4272df49a759d">&#9670;&nbsp;</a></span>inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -376,21 +389,21 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* inverse </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Inverse of a matrix This function return the inverse matrix of a given matrix if it exists. </p>
+<p>Inverse of a matrix This function return the inverse M of a given M if it exists. </p>
 <dl class="section warning"><dt>Warning</dt><dd>If the given matrix is not reversible, the function return NULL </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- the given matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>matrix^-1 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>M^-1 </dd></dl>
 
 </div>
 </div>
@@ -517,8 +530,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6be48c1e90d50db14c9f06c1ebac8a87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6be48c1e90d50db14c9f06c1ebac8a87">&#9670;&nbsp;</a></span>printMatrix()</h2>
+<a id="acec802aa7a5e7e74cb7c1bdf0ec38eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec802aa7a5e7e74cb7c1bdf0ec38eb7">&#9670;&nbsp;</a></span>printMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -527,7 +540,7 @@ Functions</h2></td></tr>
           <td class="memname">void printMatrix </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -536,120 +549,42 @@ Functions</h2></td></tr>
 <p>print matrix This function print a given matrix in the terminal </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- the given matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a9582bed6c820b9e2ffd0c2feacb28f56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9582bed6c820b9e2ffd0c2feacb28f56">&#9670;&nbsp;</a></span>readDoubleInFile()</h2>
+<a id="aa66580f54649b34bbdcb3ec12ae1cd45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa66580f54649b34bbdcb3ec12ae1cd45">&#9670;&nbsp;</a></span>readMatrixInString()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double readDoubleInFile </td>
+          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixInString </td>
           <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>currentFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>temp</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read a double in a file stream The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value. </p>
+<p>Current read a matrix in string This function read a matrix in a string given a specific format and return a matrix structure made from it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">currentFile</td><td>- The file stream where the double will be read </td></tr>
-    <tr><td class="paramname">temp</td><td>- the pointer </td></tr>
+    <tr><td class="paramname">link</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>double read </dd></dl>
-
-</div>
-</div>
-<a id="a50b7176cde2ad94612e201eec38e4180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50b7176cde2ad94612e201eec38e4180">&#9670;&nbsp;</a></span>readMatrixInFile()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixInFile </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Current read a matrix in file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it. </p>
 <dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
 
 </div>
 </div>
-<a id="a308febcad4d0156caf38eda75918a65d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a308febcad4d0156caf38eda75918a65d">&#9670;&nbsp;</a></span>readMatrixWIP()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* readMatrixWIP </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>(WIP) Read a matrix in a file This function read a matrix in a file given a specific format and return a <a class="el" href="struct_matrix.html" title="Structure representing a matrix of any size.">Matrix</a> structure made from it </p>
-<dl class="section return"><dt>Returns</dt><dd>matrix formed from the file </dd></dl>
-
-</div>
-</div>
-<a id="ae4472dee32965298f6ad1f25f58061db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4472dee32965298f6ad1f25f58061db">&#9670;&nbsp;</a></span>readString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* readString </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>current</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a string in a file stream This function read a string of any size in a given file stream. </p>
-<p>It will get all visible characters in the ASCII table </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">current</td><td>- The file stream where the string will be read </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>string formed from the file stream </dd></dl>
-
-</div>
-</div>
-<a id="ae6bd8a6c22c931456b79dd1242af82b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6bd8a6c22c931456b79dd1242af82b6">&#9670;&nbsp;</a></span>removeColumn()</h2>
+<a id="a710603d3739261b8b2b8102768c125d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710603d3739261b8b2b8102768c125d3">&#9670;&nbsp;</a></span>removeColumn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -658,7 +593,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* removeColumn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em>, </td>
+          <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -677,7 +612,7 @@ Functions</h2></td></tr>
 <p>Remove a column in a matrix This function return a matrix created by removing a column of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The original matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- The original matrix </td></tr>
     <tr><td class="paramname">columnIndex</td><td>- The index of the column to remove </td></tr>
   </table>
   </dd>
@@ -686,8 +621,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2b1a163951f554455a3afed1cc1a2ec5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b1a163951f554455a3afed1cc1a2ec5">&#9670;&nbsp;</a></span>removeRow()</h2>
+<a id="a904afae327a47071595fa68b0ea0660c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a904afae327a47071595fa68b0ea0660c">&#9670;&nbsp;</a></span>removeRow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -696,7 +631,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* removeRow </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em>, </td>
+          <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -715,7 +650,7 @@ Functions</h2></td></tr>
 <p>Remove a row in a matrix This function return a matrix created by removing a row of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The original matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- The original matrix </td></tr>
     <tr><td class="paramname">rowIndex</td><td>- The index of the row to remove </td></tr>
   </table>
   </dd>
@@ -724,8 +659,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac68af7acb5c257ede250acb1875eef4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac68af7acb5c257ede250acb1875eef4c">&#9670;&nbsp;</a></span>scalarMultiply()</h2>
+<a id="a7cef230990bc3920b448b1b356c483b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cef230990bc3920b448b1b356c483b3">&#9670;&nbsp;</a></span>scalarMultiply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -734,7 +669,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* scalarMultiply </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>A</em>, </td>
+          <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -753,7 +688,7 @@ Functions</h2></td></tr>
 <p>Multiply a matrix by a scalar This function multiply a matrix by a real scalar. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">A</td><td>- matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- matrix </td></tr>
     <tr><td class="paramname">scalar</td><td>- real scalar </td></tr>
   </table>
   </dd>
@@ -789,8 +724,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a970167a519af6c341fa11f06313a485c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a970167a519af6c341fa11f06313a485c">&#9670;&nbsp;</a></span>subMat()</h2>
+<a id="a8eb5ea712071c641035befd7ae82ba77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eb5ea712071c641035befd7ae82ba77">&#9670;&nbsp;</a></span>subMat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -799,7 +734,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* subMat </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em>, </td>
+          <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -836,7 +771,7 @@ Functions</h2></td></tr>
 <p>Create a subMatrix This function create a subMatrix of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The original matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- The original matrix </td></tr>
     <tr><td class="paramname">r1</td><td>- The index of the first row to take </td></tr>
     <tr><td class="paramname">r2</td><td>- The index of the last row to take </td></tr>
     <tr><td class="paramname">c1</td><td>- The index of the first column to take </td></tr>
@@ -887,8 +822,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9062de9b2271e8f9c864052d1c4131b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9062de9b2271e8f9c864052d1c4131b2">&#9670;&nbsp;</a></span>trace()</h2>
+<a id="abfba50a3145edadcd0551b9387fa3d33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfba50a3145edadcd0551b9387fa3d33">&#9670;&nbsp;</a></span>toStringMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_string_matrix.html">StringMatrix</a>* toStringMatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Transform a matrix to a string matrix This function take a given matrix and create a matrix with value in string format to enable the use of variables. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a0ac34dd3e4c7981893d216934a0d1e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac34dd3e4c7981893d216934a0d1e20">&#9670;&nbsp;</a></span>trace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -897,7 +859,7 @@ Functions</h2></td></tr>
           <td class="memname">double trace </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -906,16 +868,16 @@ Functions</h2></td></tr>
 <p>Trace of a matrix This function return the trace of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- the given matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>trace(matrix) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>trace(M) </dd></dl>
 
 </div>
 </div>
-<a id="adcc0342a0a35e83eb23edf84e427c6e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adcc0342a0a35e83eb23edf84e427c6e4">&#9670;&nbsp;</a></span>transpose()</h2>
+<a id="a215743b4bafbd6fd9460606c68189733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a215743b4bafbd6fd9460606c68189733">&#9670;&nbsp;</a></span>transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -924,7 +886,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* transpose </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -933,16 +895,16 @@ Functions</h2></td></tr>
 <p>Transpose of a matrix This function return the transpose of a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- The original matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- The original matrix </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>matrix^T </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>M^T </dd></dl>
 
 </div>
 </div>
-<a id="adc5e961a6450e9542892dd5576186fd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc5e961a6450e9542892dd5576186fd7">&#9670;&nbsp;</a></span>triangularise()</h2>
+<a id="ae99bf0fae7b3faf1a522b88ee04594c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99bf0fae7b3faf1a522b88ee04594c9">&#9670;&nbsp;</a></span>triangularise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -951,7 +913,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* triangularise </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>matrix</em></td><td>)</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -960,11 +922,11 @@ Functions</h2></td></tr>
 <p>Triangularise a matrix This function triangularise (or diagonalise) a given matrix. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix</td><td>- the given matrix </td></tr>
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>triangularised matrix </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>triangularised M </dd></dl>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['values_106',['values',['../struct_matrix.html#ab34258118e90a5d931989fa738fb6aec',1,'Matrix']]]
+  ['highestdegree_265',['highestDegree',['../struct_polynomial.html#aea808f82e82057817251d136fb83e7bc',1,'Polynomial']]]
 ];

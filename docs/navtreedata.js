@@ -25,7 +25,14 @@
 var NAVTREE =
 [
   [ "Linear Algebra Solver", "index.html", [
-    [ "Manuel Linear Algebra Solver", "index.html", null ],
+    [ "Manuel Linear Algebra Solver", "index.html", [
+      [ "Command List", "index.html#autotoc_md0", [
+        [ "Simple commands", "index.html#autotoc_md1", null ],
+        [ "Simple operations", "index.html#autotoc_md2", null ],
+        [ "Composite operations", "index.html#autotoc_md3", null ],
+        [ "Basic object", "index.html#autotoc_md4", null ]
+      ] ]
+    ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -40,8 +47,7 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ]
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]

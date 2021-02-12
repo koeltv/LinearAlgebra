@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rows_105',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix']]]
+  ['following_264',['following',['../help_8txt.html#a4031a2140637ea826c440171ddd9dd39',1,'help.txt']]]
 ];

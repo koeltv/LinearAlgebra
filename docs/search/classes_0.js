@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boolean_55',['Boolean',['../struct_boolean.html',1,'']]]
+  ['matrix_140',['Matrix',['../struct_matrix.html',1,'']]]
 ];
