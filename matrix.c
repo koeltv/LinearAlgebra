@@ -7,9 +7,10 @@
 
 #include "matrix.h"
 
-Matrix *readMatrixInString(char *string){
+Matrix *readMatrixInString(char *string) {
     //Creation of the matrix
     Matrix *matrix = malloc(sizeof(Matrix));
+    matrix->name = NULL;
     matrix->columns = matrix->rows = 1;
     for (int i = 0; string[i] != ']' && string[i] != '\0'; i++) {
         if (matrix->rows == 1 && string[i] == ',') matrix->columns++;
@@ -28,7 +29,7 @@ Matrix *readMatrixInString(char *string){
     return matrix;
 }
 
-Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
+Matrix *newMatrix(int nbRows, int nbColumns, double initialValue) {
     Matrix* M = (Matrix*) malloc(sizeof(Matrix));
     M->name = NULL;
     M->rows = nbRows; M->columns = nbColumns;
@@ -40,15 +41,15 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue){
     return M;
 }
 
-void freeMatrix(Matrix *M){
-    if (M) {
-        for (int i = 0; i < M->rows; i++) free(M->values[i]);
-        free(M->values); free(M);
-        M = NULL;
+void freeMatrix(Matrix **M) {
+    if (*M) {
+        for (int i = 0; i < (*M)->rows; i++) free((*M)->values[i]);
+        free((*M)->values); free(*M);
+        *M = NULL;
     }
 }
 
-Matrix *removeRow(Matrix *M, int rowIndex){
+Matrix *removeRow(Matrix *M, int rowIndex) {
     if (M) {
         Matrix *smallerM = newMatrix(M->rows - 1, M->columns, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -60,7 +61,7 @@ Matrix *removeRow(Matrix *M, int rowIndex){
     } else return NULL;
 }
 
-Matrix *removeColumn(Matrix *M, int columnIndex){
+Matrix *removeColumn(Matrix *M, int columnIndex) {
     if (M) {
         Matrix *smallerM = newMatrix(M->rows, M->columns - 1, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -72,7 +73,7 @@ Matrix *removeColumn(Matrix *M, int columnIndex){
     } else return NULL;
 }
 
-Matrix *addColumn(Matrix *M){
+Matrix *addColumn(Matrix *M) {
     if (M) {
         Matrix *biggerM = newMatrix(M->rows, M->columns + 1, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -83,7 +84,7 @@ Matrix *addColumn(Matrix *M){
     } else return NULL;
 }
 
-Matrix *subMat(Matrix* M, int r1, int r2, int c1, int c2){
+Matrix *subMat(Matrix* M, int r1, int r2, int c1, int c2) {
     if (M) {
         Matrix *subM = newMatrix(r2 - r1, c2 - c1, 0);
         for (int i = r1; i < r2; i++) {
@@ -95,7 +96,7 @@ Matrix *subMat(Matrix* M, int r1, int r2, int c1, int c2){
     } else return NULL;
 }
 
-Matrix *copy(Matrix *M){
+Matrix *copy(Matrix *M) {
     if (M) {
         Matrix *copy = newMatrix(M->rows, M->columns, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -105,7 +106,7 @@ Matrix *copy(Matrix *M){
     } else return NULL;
 }
 
-Matrix *sum(Matrix *A, Matrix *B){
+Matrix *sum(Matrix *A, Matrix *B) {
     if (A && B && A->columns == B->columns && A->rows == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
@@ -115,7 +116,7 @@ Matrix *sum(Matrix *A, Matrix *B){
     } else return NULL;
 }
 
-Matrix *minus(Matrix *A, Matrix *B){
+Matrix *minus(Matrix *A, Matrix *B) {
     if (A && B && A->columns == B->columns && A->rows == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
@@ -125,17 +126,7 @@ Matrix *minus(Matrix *A, Matrix *B){
     } else return NULL;
 }
 
-Matrix *innerMultiply(Matrix *A, Matrix *B){
-    if (A && B && A->columns == B->columns && A->rows == B->rows) {
-        Matrix *C = newMatrix(A->rows, A->columns, 0);
-        for (int i = 0; i < A->rows; i++) {
-            for (int j = 0; j < A->columns; j++) C->values[i][j] = A->values[i][j] * B->values[i][j];
-        }
-        return C;
-    } else return NULL;
-}
-
-Matrix *scalarMultiply(Matrix *M, double scalar){
+Matrix *scalarMultiply(Matrix *M, double scalar) {
     if (M) {
         Matrix *scalarM = copy(M);
         for (int i = 0; i < M->rows; i++) {
@@ -147,7 +138,7 @@ Matrix *scalarMultiply(Matrix *M, double scalar){
     } else return NULL;
 }
 
-Matrix *multiply(Matrix *A, Matrix *B){
+Matrix *multiply(Matrix *A, Matrix *B) {
     if (A && B && A->columns == B->rows) {
         Matrix *C = newMatrix(A->rows, A->columns, 0);
         for (int i = 0; i < A->rows; i++) {
@@ -159,7 +150,7 @@ Matrix *multiply(Matrix *A, Matrix *B){
     } else return NULL;
 }
 
-Matrix *transpose(Matrix *M){
+Matrix *transpose(Matrix *M) {
     if (M) {
         Matrix *transpose = newMatrix(M->columns, M->rows, 0);
         for (int i = 0; i < M->rows; i++) {
@@ -169,7 +160,7 @@ Matrix *transpose(Matrix *M){
     } else return NULL;
 }
 
-void printMatrix(Matrix *M){
+void printMatrix(Matrix *M) {
     if (M) {
         if (M->name) printf("%s =\n", M->name);
         for (int i = 0; i < M->rows; i++) {
@@ -180,7 +171,7 @@ void printMatrix(Matrix *M){
     } else printf("No matrix\n");
 }
 
-double trace(Matrix *M){
+double trace(Matrix *M) {
     if (M) {
         double trace = 0;
         int lastDiagonal = M->columns < M->rows ? M->columns : M->rows;
@@ -189,7 +180,7 @@ double trace(Matrix *M){
     } else exit(EXIT_FAILURE);
 }
 
-double det(Matrix *M){
+double det(Matrix *M) {
     if (M && M->columns == M->rows){
         if (M->columns == 1) return M->values[0][0];
         else {
@@ -198,14 +189,14 @@ double det(Matrix *M){
                 Matrix *subDet = removeColumn(M, 0);
                 subDet = removeRow(subDet, i);
                 result += M->values[i][0] * det(subDet) * sign;
-                freeMatrix(subDet);
+                freeMatrix(&subDet);
             }
             return result;
         }
     } else exit(EXIT_FAILURE);
 }
 
-Matrix *adjugate(Matrix *M){
+Matrix *adjugate(Matrix *M) {
     if (M) {
         Matrix *adjM = newMatrix(M->rows, M->columns, 0);
         for (int i = 0, sign = 1; i < M->rows; i++, sign *= -1) {
@@ -213,14 +204,14 @@ Matrix *adjugate(Matrix *M){
                 Matrix *coFactor = removeColumn(M, j);
                 coFactor = removeRow(coFactor, i);
                 adjM->values[i][j] = sign * det(coFactor);
-                freeMatrix(coFactor);
+                freeMatrix(&coFactor);
             }
         }
         return adjM;
     } else return NULL;
 }
 
-Matrix *inverse(Matrix *M){
+Matrix *inverse(Matrix *M) {
     if (M) {
         double determinant = det(M);
         if (determinant != 0 && M->rows == M->columns) {
@@ -229,28 +220,28 @@ Matrix *inverse(Matrix *M){
     } return NULL;
 }
 
-char isRowEmpty(Matrix *M, int index){
+char isRowEmpty(Matrix *M, int index) {
     int nbOfZeros = 0;
     for (int j = 0; j < M->columns; j++) if (M->values[index][j] == 0) nbOfZeros++;
     if (nbOfZeros == M->columns) return 1;
     else return 0;
 }
 
-char isColumnEmpty(Matrix *M, int index){
+char isColumnEmpty(Matrix *M, int index) {
     int nbOfZeros = 0;
     for (int j = 0; j < M->rows; j++) if (M->values[j][index] == 0) nbOfZeros++;
     if (nbOfZeros == M->rows) return 1;
     else return 0;
 }
 
-Matrix *swapRows(Matrix *M, int firstIndex, int secondIndex){
+Matrix *swapRows(Matrix *M, int firstIndex, int secondIndex) {
     Matrix *swapped = copy(M);
     for (int i = 0; i < M->columns; i++) swapped->values[firstIndex][i] = M->values[secondIndex][i];
     for (int i = 0; i < M->columns; i++) swapped->values[secondIndex][i] = M->values[firstIndex][i];
     return swapped;
 }
 
-Matrix *solveAugmentedMatrix(Matrix *M){
+Matrix *solveAugmentedMatrix(Matrix *M) {
     Matrix *toSolve = copy(M);
     //Reduce number of rows to be equal or less than the number of columns (square matrix)
     while (toSolve->rows > toSolve->columns - 1) {
@@ -306,14 +297,14 @@ Matrix *solveAugmentedMatrix(Matrix *M){
     return toSolve;
 }
 
-Solutions *eigenValues(Matrix *M){
+Solutions *eigenValues(Matrix *M) {
     if (M){
         char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(M)));
-        return solve(stringToPolynomial(stringForm, 0, length(stringForm) + 1));
+        return solve(stringToPolynomial(stringForm, 0, length(stringForm)));
     } else return NULL;
 }
 
-char orthogonal(Matrix *M1, Matrix *M2){
+char orthogonal(Matrix *M1, Matrix *M2) {
     if (M1->rows == M2->rows){
         Matrix *toSolve = M1;
         for (int i = 0; i < M2->columns; i++) {
@@ -326,7 +317,7 @@ char orthogonal(Matrix *M1, Matrix *M2){
     } else return -1;
 }
 
-Matrix *completeOrthogonal(Matrix *M){
+Matrix *completeOrthogonal(Matrix *M) {
     if (M->columns == M->rows) return M;
     else {
         Matrix *completed = M;
@@ -404,7 +395,7 @@ Matrix *solveForVectors(Matrix *M){
     return output;
 }
 
-Matrix *eigenVectors(Matrix *M){
+Matrix *eigenVectors(Matrix *M) {
     if (M->columns == M->rows) {
         Solutions *eigValues = eigenValues(M);
         Matrix *eigenMatrix = newMatrix(M->rows, 1, 0);
@@ -417,7 +408,7 @@ Matrix *eigenVectors(Matrix *M){
                 Matrix *toSolve = copy(M);
                 for (int j = 0; j < M->columns; j++) toSolve->values[j][j] -= eigValues->values[n];
                 Matrix *vectors = solveForVectors(solveAugmentedMatrix(addColumn(toSolve)));
-                freeMatrix(toSolve);
+                freeMatrix(&toSolve);
                 for (int i = 0; i < vectors->columns; i++) {
                     if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
                     for (int j = 0; j < vectors->rows; j++) eigenMatrix->values[j][nbVectors] = vectors->values[j][i];
@@ -425,14 +416,14 @@ Matrix *eigenVectors(Matrix *M){
                     printMatrix(eigenMatrix);
                     nbVectors++;
                 }
-                freeMatrix(vectors);
+                freeMatrix(&vectors);
             }
         }
         return completeOrthogonal(eigenMatrix);
     } else return NULL;
 }
 
-Matrix *triangularise(Matrix *M){
+Matrix *triangularise(Matrix *M) {
     if (M) {
         Matrix *PInverse, *P = eigenVectors(M);
         if ((PInverse = inverse(P))) return multiply(multiply(PInverse, M), P);
@@ -440,13 +431,12 @@ Matrix *triangularise(Matrix *M){
     return NULL;
 }
 
-StringMatrix *toStringMatrix(Matrix *M){
+StringMatrix *toStringMatrix(Matrix *M) {
     StringMatrix *toString = malloc(sizeof(StringMatrix));
-    toString->columns = M->columns;
-    toString->rows = M->rows;
-    toString->values = malloc(toString->rows * sizeof(char***));
+    toString->columns = M->columns; toString->rows = M->rows;
+    toString->values = malloc(toString->rows * sizeof(char**));
     for (int i = 0; i < M->rows; i++) {
-        toString->values[i] = malloc(toString->columns * sizeof(char**));
+        toString->values[i] = malloc(toString->columns * sizeof(char*));
         for (int j = 0; j < M->columns; j++) {
             toString->values[i][j] = malloc(20 * sizeof(char));
             snprintf(toString->values[i][j], 2000 * sizeof(char), "%lf", M->values[i][j]);

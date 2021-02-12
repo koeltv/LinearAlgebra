@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['addcolumn_0',['addColumn',['../matrix_8c.html#a801025cc9c71123294adbbc0e2b4d02e',1,'addColumn(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#a801025cc9c71123294adbbc0e2b4d02e',1,'addColumn(Matrix *M):&#160;matrix.c']]],
-  ['addtoregister_1',['addToRegister',['../register_8c.html#a87389f4606e4e829010a221430db607d',1,'addToRegister(Register *aRegister, Polynomial *newPolynomial, Matrix *newMatrix):&#160;register.c'],['../register_8h.html#a87389f4606e4e829010a221430db607d',1,'addToRegister(Register *aRegister, Polynomial *newPolynomial, Matrix *newMatrix):&#160;register.c']]],
-  ['adjugate_2',['adjugate',['../matrix_8c.html#a7387b77cb43f5499fd13e16c00cca341',1,'adjugate(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#a7387b77cb43f5499fd13e16c00cca341',1,'adjugate(Matrix *M):&#160;matrix.c']]],
-  ['apply_3',['apply',['../polynomial_8c.html#a8f03b8060384c6f1a81b3dcb027699ea',1,'apply(Polynomial *F, double x):&#160;polynomial.c'],['../polynomial_8h.html#a8f03b8060384c6f1a81b3dcb027699ea',1,'apply(Polynomial *F, double x):&#160;polynomial.c']]],
-  ['applyoperation_4',['applyOperation',['../main_8c.html#acc34f9dd1bf859bec247f7d6e6adc743',1,'applyOperation(Register *mainRegister, char *operation, char operator):&#160;main.c'],['../main_8h.html#acc34f9dd1bf859bec247f7d6e6adc743',1,'applyOperation(Register *mainRegister, char *operation, char operator):&#160;main.c']]]
+  ['a_0',['a',['../help_8txt.html#af0bbd481cbb736ce6dd62152947417a8',1,'help.txt']]],
+  ['addcolumn_1',['addColumn',['../matrix_8c.html#a801025cc9c71123294adbbc0e2b4d02e',1,'addColumn(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#a801025cc9c71123294adbbc0e2b4d02e',1,'addColumn(Matrix *M):&#160;matrix.c']]],
+  ['addtoregister_2',['addToRegister',['../register_8c.html#aec0810a471e790222242e3f07cb243d9',1,'addToRegister(Register *aRegister, Object *newObject):&#160;register.c'],['../register_8h.html#aec0810a471e790222242e3f07cb243d9',1,'addToRegister(Register *aRegister, Object *newObject):&#160;register.c']]],
+  ['adj_3',['adj',['../help_8txt.html#a4a99d741d7675bb1398396acd61dc9cd',1,'help.txt']]],
+  ['adjugate_4',['adjugate',['../matrix_8c.html#a7387b77cb43f5499fd13e16c00cca341',1,'adjugate(Matrix *M):&#160;matrix.c'],['../matrix_8h.html#a7387b77cb43f5499fd13e16c00cca341',1,'adjugate(Matrix *M):&#160;matrix.c']]],
+  ['apply_5',['apply',['../polynomial_8c.html#a8f03b8060384c6f1a81b3dcb027699ea',1,'apply(Polynomial *F, double x):&#160;polynomial.c'],['../polynomial_8h.html#a8f03b8060384c6f1a81b3dcb027699ea',1,'apply(Polynomial *F, double x):&#160;polynomial.c']]],
+  ['applyoperation_6',['applyOperation',['../main_8c.html#aae0a101183ed13ee59d09b81cbde79a6',1,'applyOperation(Object *leftOperand, char operator, Object *rightOperand):&#160;main.c'],['../main_8h.html#aae0a101183ed13ee59d09b81cbde79a6',1,'applyOperation(Object *leftOperand, char operator, Object *rightOperand):&#160;main.c']]]
 ];

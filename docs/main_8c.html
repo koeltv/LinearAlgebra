@@ -107,24 +107,21 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:acc34f9dd1bf859bec247f7d6e6adc743"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#acc34f9dd1bf859bec247f7d6e6adc743">applyOperation</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *operation, char operator)</td></tr>
-<tr class="memdesc:acc34f9dd1bf859bec247f7d6e6adc743"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Apply a mathematical operation This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomials or matrices)  <a href="main_8c.html#acc34f9dd1bf859bec247f7d6e6adc743">More...</a><br /></td></tr>
-<tr class="separator:acc34f9dd1bf859bec247f7d6e6adc743"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a79a61c3c27a5b3bbb5167cac608aab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a5a79a61c3c27a5b3bbb5167cac608aab">extractObject</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *command)</td></tr>
-<tr class="memdesc:a5a79a61c3c27a5b3bbb5167cac608aab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a basic object from a string This function recuperate a basic object (existing or created)  <a href="main_8c.html#a5a79a61c3c27a5b3bbb5167cac608aab">More...</a><br /></td></tr>
-<tr class="separator:a5a79a61c3c27a5b3bbb5167cac608aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62fa52a6b729827577622ec6c39933aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a62fa52a6b729827577622ec6c39933aa">recursiveCommandDecomposition</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *command)</td></tr>
-<tr class="memdesc:a62fa52a6b729827577622ec6c39933aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a composite command recursively This function apply a command by reducing to basic object and combining them.  <a href="main_8c.html#a62fa52a6b729827577622ec6c39933aa">More...</a><br /></td></tr>
-<tr class="separator:a62fa52a6b729827577622ec6c39933aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa699299b10d57547ab6d578738c662f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa699299b10d57547ab6d578738c662f4">printFileContent</a> (char *link, FILE *output)</td></tr>
-<tr class="memdesc:aa699299b10d57547ab6d578738c662f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it.  <a href="main_8c.html#aa699299b10d57547ab6d578738c662f4">More...</a><br /></td></tr>
-<tr class="separator:aa699299b10d57547ab6d578738c662f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6973e1db949112c1c458de0d81c18527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6973e1db949112c1c458de0d81c18527">executeCommand</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *command)</td></tr>
-<tr class="memdesc:a6973e1db949112c1c458de0d81c18527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply any command This function is the first called when reading a command, it can take simple and composite commands, see <a class="el" href="readme_8md.html">readme.md</a> for more details.  <a href="main_8c.html#a6973e1db949112c1c458de0d81c18527">More...</a><br /></td></tr>
-<tr class="separator:a6973e1db949112c1c458de0d81c18527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d9b82bfd88898db4e874d19612e1889"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4d9b82bfd88898db4e874d19612e1889">readScriptFile</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *link)</td></tr>
 <tr class="memdesc:a4d9b82bfd88898db4e874d19612e1889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a script file This function read a given file and apply the commands in it line by line.  <a href="main_8c.html#a4d9b82bfd88898db4e874d19612e1889">More...</a><br /></td></tr>
 <tr class="separator:a4d9b82bfd88898db4e874d19612e1889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2650edd662184ffc9d1ae642dcded6c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a2650edd662184ffc9d1ae642dcded6c7">extractObject</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:a2650edd662184ffc9d1ae642dcded6c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a basic object from a string This function recuperate a basic object (existing or created)  <a href="main_8c.html#a2650edd662184ffc9d1ae642dcded6c7">More...</a><br /></td></tr>
+<tr class="separator:a2650edd662184ffc9d1ae642dcded6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0a101183ed13ee59d09b81cbde79a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aae0a101183ed13ee59d09b81cbde79a6">applyOperation</a> (<a class="el" href="struct_object.html">Object</a> *leftOperand, char operator, <a class="el" href="struct_object.html">Object</a> *rightOperand)</td></tr>
+<tr class="memdesc:aae0a101183ed13ee59d09b81cbde79a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">(WIP) Apply a mathematical operation This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomial, matrix or variable)  <a href="main_8c.html#aae0a101183ed13ee59d09b81cbde79a6">More...</a><br /></td></tr>
+<tr class="separator:aae0a101183ed13ee59d09b81cbde79a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e05eca1fe862a3d1ae753b1095e6d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af3e05eca1fe862a3d1ae753b1095e6d3">recursiveCommandDecomposition</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:af3e05eca1fe862a3d1ae753b1095e6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a composite command recursively This function apply a command by reducing to basic object and combining them.  <a href="main_8c.html#af3e05eca1fe862a3d1ae753b1095e6d3">More...</a><br /></td></tr>
+<tr class="separator:af3e05eca1fe862a3d1ae753b1095e6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6973e1db949112c1c458de0d81c18527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a6973e1db949112c1c458de0d81c18527">executeCommand</a> (<a class="el" href="struct_register.html">Register</a> *mainRegister, char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:a6973e1db949112c1c458de0d81c18527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply any command This function is the first called when reading a command, it can take simple and composite commands, see <a class="el" href="readme_8md.html">readme.md</a> for more details.  <a href="main_8c.html#a6973e1db949112c1c458de0d81c18527">More...</a><br /></td></tr>
+<tr class="separator:a6973e1db949112c1c458de0d81c18527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function the main function is the first function to launch upon starting the program, it makes the link between all the components of the program.  <a href="main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,29 +131,29 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen</dd></dl>
 <p>This is the main file of the program, it takes care of the interactions with the user </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="acc34f9dd1bf859bec247f7d6e6adc743"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc34f9dd1bf859bec247f7d6e6adc743">&#9670;&nbsp;</a></span>applyOperation()</h2>
+<a id="aae0a101183ed13ee59d09b81cbde79a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae0a101183ed13ee59d09b81cbde79a6">&#9670;&nbsp;</a></span>applyOperation()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_register.html">Register</a>* applyOperation </td>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a>* applyOperation </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
-          <td class="paramname"><em>mainRegister</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>operation</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>leftOperand</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>operator</em>&#160;</td>
+          <td class="paramname"><em>operator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>rightOperand</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -166,16 +163,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>(WIP) Apply a mathematical operation This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomials or matrices) </p>
+<p>(WIP) Apply a mathematical operation This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomial, matrix or variable) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mainRegister</td><td>- The register to search for existing objects </td></tr>
-    <tr><td class="paramname">operation</td><td>- Operation to do in string format </td></tr>
+    <tr><td class="paramname">leftOperand</td><td>- Left part of the operation </td></tr>
+    <tr><td class="paramname">rightOperand</td><td>- Right part of the operation </td></tr>
     <tr><td class="paramname">operator</td><td>- The operation to apply </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>register containing the result </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>object containing the result </dd></dl>
 
 </div>
 </div>
@@ -208,22 +205,22 @@ Functions</h2></td></tr>
 <p>Apply any command This function is the first called when reading a command, it can take simple and composite commands, see <a class="el" href="readme_8md.html">readme.md</a> for more details. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mainRegister</td><td></td></tr>
-    <tr><td class="paramname">command</td><td></td></tr>
+    <tr><td class="paramname">mainRegister</td><td>- The register to search for existing objects </td></tr>
+    <tr><td class="paramname">command</td><td>- The command to execute </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a5a79a61c3c27a5b3bbb5167cac608aab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a79a61c3c27a5b3bbb5167cac608aab">&#9670;&nbsp;</a></span>extractObject()</h2>
+<a id="a2650edd662184ffc9d1ae642dcded6c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2650edd662184ffc9d1ae642dcded6c7">&#9670;&nbsp;</a></span>extractObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_register.html">Register</a>* extractObject </td>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a>* extractObject </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
           <td class="paramname"><em>mainRegister</em>, </td>
@@ -250,7 +247,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>register containing the object </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>object containing the object </dd></dl>
 
 </div>
 </div>
@@ -271,43 +268,6 @@ Functions</h2></td></tr>
 
 <p>Main function the main function is the first function to launch upon starting the program, it makes the link between all the components of the program. </p>
 <dl class="section return"><dt>Returns</dt><dd>an integer confirming the success or failure of program end </dd></dl>
-
-</div>
-</div>
-<a id="aa699299b10d57547ab6d578738c662f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa699299b10d57547ab6d578738c662f4">&#9670;&nbsp;</a></span>printFileContent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void printFileContent </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>link</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>output</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">link</td><td>- Link of the file to read </td></tr>
-    <tr><td class="paramname">output</td><td>- Buffer where the content while be outputted </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -338,7 +298,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Apply a script file This function read a given file and apply the commands in it line by line. </p>
-<dl class="section attention"><dt>Attention</dt><dd>For now a blank line is needed at the end of the file </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mainRegister</td><td>- The register to add and search for existing objects </td></tr>
@@ -349,14 +308,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a62fa52a6b729827577622ec6c39933aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62fa52a6b729827577622ec6c39933aa">&#9670;&nbsp;</a></span>recursiveCommandDecomposition()</h2>
+<a id="af3e05eca1fe862a3d1ae753b1095e6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3e05eca1fe862a3d1ae753b1095e6d3">&#9670;&nbsp;</a></span>recursiveCommandDecomposition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_register.html">Register</a>* recursiveCommandDecomposition </td>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a>* recursiveCommandDecomposition </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
           <td class="paramname"><em>mainRegister</em>, </td>
@@ -383,7 +342,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>register containing the result of the command </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>object containing the result of the command </dd></dl>
 
 </div>
 </div>

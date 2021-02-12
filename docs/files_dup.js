@@ -9,5 +9,7 @@ var files_dup =
     [ "register.c", "register_8c.html", "register_8c" ],
     [ "register.h", "register_8h.html", "register_8h" ],
     [ "stringInteractions.c", "string_interactions_8c.html", "string_interactions_8c" ],
-    [ "stringInteractions.h", "string_interactions_8h.html", "string_interactions_8h" ]
+    [ "stringInteractions.h", "string_interactions_8h.html", "string_interactions_8h" ],
+    [ "variable.c", "variable_8c.html", "variable_8c" ],
+    [ "variable.h", "variable_8h.html", "variable_8h" ]
 ];

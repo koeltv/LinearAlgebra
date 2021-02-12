@@ -49,7 +49,7 @@ Matrix *newMatrix(int nbRows, int nbColumns, double initialValue);
  * This function free an existing matrix and change its pointer to NULL if it worked successfully
  * @param M - The matrix to free
  */
-void freeMatrix(Matrix *M);
+void freeMatrix(Matrix **M);
 
 /**
  * Remove a row in a matrix
@@ -127,17 +127,6 @@ Matrix *sum(Matrix *A, Matrix *B);
  * @return subtraction of the matrices
  */
 Matrix *minus(Matrix *A, Matrix *B);
-
-/**
- * Inner multiplication of 2 matrices
- * This function multiply the elements of 2 matrices
- * @note This operation is different from a standard matrix multiplication, it only multiplies element by element
- * @warning They must be of identical dimensions
- * @param A - first matrix
- * @param B - second matrix
- * @return inner multiplication of the matrices
- */
-Matrix *innerMultiply(Matrix *A, Matrix *B);
 
 /**
  * Multiply a matrix by a scalar

@@ -10,20 +10,6 @@
 #include <stdio.h>
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-// Structures
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * @struct StringMatrix
- * Structure representing a matrix of any size but with values in string format
- */
-typedef struct {
-    char *name;
-    char ***values; ///Elements of the matrix contained in a 2 dimensional array
-    int rows; ///Number of rows of the matrix
-    int columns; ///Number of columns matrix
-} StringMatrix;
-
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
@@ -48,11 +34,13 @@ char *readString(FILE *current);
  */
 int length(const char *string);
 
+/**
+ * First word of a string
+ * This function return the first word of a string (surrounded by whitespaces)
+ * @param string - The string where to extract the first word
+ * @return first word
+ */
 char *firstWord(const char *string);
-
-int firstOccurrenceOf(const char *string, char toSearch);
-
-void copyString(char *original, char *destination);
 
 /**
  * Compare strings
@@ -72,17 +60,75 @@ char shorterString(const char *string1, const char *string2);
  */
 char containString(const char *mainString, const char *toSearch);
 
+/**
+ * Verify if the string contains the character in order
+ * This function return 1 if the string contains the character in order and 0 if it doesn't
+ * @param string - String to scan for the characters
+ * @param charToSearch - Characters to search
+ * @return result of the scan
+ */
 char containCharInOrder(const char *string, const char *charToSearch);
 
+/**
+ * Extract string between 2 characters
+ * This function return the string between 2 given characters
+ * @param string - The original string
+ * @param first - The first character
+ * @param last - The second character
+ * @return extracted string
+ */
 char *extractBetweenChar(const char *string, char first, char last);
 
-char *extractUpToChar(const char *string, char last);
-
-char *extractUpToIndex(const char *string, int last);
-
+/**
+ * Extract string between 2 indexes
+ * This function return the string between 2 given indexes
+ * @param string - The original string
+ * @param first - The first index
+ * @param last - The second index
+ * @return extracted string
+ */
 char *extractBetweenIndexes(const char *string, int first, int last);
 
-int nextOperator(const char *string);
+/**
+ * Extract up to an index
+ * This function return the string until an index
+ * @param string - The original string
+ * @param last - The end index
+ * @return extracted string
+ */
+char *extractUpToIndex(const char *string, int last);
+
+/**
+ * Check if there exist an operator outside of parenthesis
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char operatorWithoutDepth(const char *string);
+
+/**
+ * Find next operand in string
+ * This functions update to indexes to surround the next operand in a string
+ * @note If the end of the string is reached, both indexes will point to the end of the string ('\0')
+ * @param string - String to scan
+ * @param firstIndex - Index to place before next operand
+ * @param secondIndex - Index to place after next operand
+ */
+void nextOperator(const char *string, int *firstIndex, int *secondIndex);
+
+/**
+ * Verify if the string contain a number
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char containValue(const char *string);
+
+/**
+ * Verify if everything is between parenthesis
+ * @note This function doesn't count whitespaces, if they are some outside of parenthesis it will not count them
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char everythingIsBetweenParenthesis(const char *string);
 
 /**
  * Read a double in a string
@@ -93,18 +139,31 @@ int nextOperator(const char *string);
  */
 double readDoubleInString(const char *string, int *position);
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// File interactions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
 /**
- * Read a double in a file stream
- * The function readDoubleInFile read a double of any size in a filestream, update the pointer and returns the value
- * @param currentFile - The file stream where the double will be read
- * @param temp - the pointer
- * @return double read
+ * Print the content of a file in a buffer
+ * This function print the content of the file at the given link in the output buffer without modifying it
+ * @param link - Link of the file to read
+ * @param output - Buffer where the content while be outputted
  */
-double readDoubleInFile(FILE *currentFile, char *temp);
+void printFileContent(char *link, FILE *output);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Matrix interactions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * @struct StringMatrix
+ * Structure representing a matrix of any size but with values in string format
+ */
+typedef struct {
+    char *name;
+    char ***values; ///Elements of the matrix contained in a 2 dimensional array
+    int rows; ///Number of rows of the matrix
+    int columns; ///Number of columns matrix
+} StringMatrix;
 
 /**
  * Create string matrix
@@ -121,7 +180,7 @@ StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue);
  * This function free an existing string matrix and change its pointer to NULL if it worked successfully
  * @param M - The string matrix to free
  */
-void freeStringMatrix(StringMatrix *M);
+void freeStringMatrix(StringMatrix **M);
 
 /**
  * Remove a row in a string matrix

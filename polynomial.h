@@ -36,6 +36,13 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
+ * Create an empty polynomial of the given degree
+ * @param degree - Degree of the polynomial to create
+ * @return created polynomial
+ */
+Polynomial *newPolynomial(int degree);
+
+/**
  * Convert a string to a polynomial
  * This function return a polynomial created from a string
  * @note there can be more than one coefficient for the same power of X
@@ -50,7 +57,7 @@ Polynomial *stringToPolynomial(const char *string, int start, int end);
  * This function free an existing polynomial and change its pointer to NULL if it worked successfully
  * @param F - The polynomial to free
  */
-void freePolynomial(Polynomial *F);
+void freePolynomial(Polynomial **F);
 
 /**
  * Copy a polynomial
@@ -63,12 +70,41 @@ Polynomial *copyPolynomial(Polynomial *F);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * Degree of a polynomial in string format
+ * This function return the degree of a polynomial in string format
+ * @param string - The polynomial in string format
+ * @param start - The starting index of the string
+ * @param end - The end index of the string
+ * @return degree of the polynomial
+ */
 int degreeOfString(const char *string, int start, int end);
 
+/**
+ * Sum polynomials
+ * This function return the sum of 2 polynomials
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F + G
+ */
 Polynomial *pAdd(Polynomial *F, Polynomial *G);
 
+/**
+ * Subtract polynomials
+ * This function return the difference of the first polynomial by the second
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F - G
+ */
 Polynomial *pMinus(Polynomial *F, Polynomial *G);
 
+/**
+ * Multiply polynomials
+ * This function return the product of 2 polynomials
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F * G
+ */
 Polynomial *pMultiply(Polynomial *F, Polynomial *G);
 
 /**
@@ -125,6 +161,11 @@ double newtonMethod(Polynomial *F);
  */
 Solutions *solve(Polynomial *F);
 
+/**
+ * Print a group of solutions
+ * This function print a group of solutions in the terminal
+ * @param x - Solutions to print
+ */
 void printSolutions(Solutions *x);
 
 #endif //LINEARALGEBRA_POLYNOMIAL_H

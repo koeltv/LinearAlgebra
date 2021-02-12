@@ -101,40 +101,59 @@ $(document).ready(function(){initNavTree('register_8h.html',''); initResizable()
 <div class="title">register.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Header file of <a class="el" href="register_8c.html" title="Functions on register.">register.c</a>.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="matrix_8h_source.html">matrix.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="variable_8h_source.html">variable.h</a>&quot;</code><br />
 </div>
 <p><a href="register_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_register.html">Register</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing a global container of objects used in this program.  <a href="struct_register.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing a container of objects used in this program.  <a href="struct_register.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_object.html">Object</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure representing any type of object.  <a href="struct_object.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a27689da9dfdc50bfd41631a7deff16dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a27689da9dfdc50bfd41631a7deff16dc">newRegister</a> ()</td></tr>
-<tr class="memdesc:a27689da9dfdc50bfd41631a7deff16dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new register.  <a href="register_8h.html#a27689da9dfdc50bfd41631a7deff16dc">More...</a><br /></td></tr>
-<tr class="separator:a27689da9dfdc50bfd41631a7deff16dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08f86167301deb2ced4cf07f416563e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a08f86167301deb2ced4cf07f416563e6">searchMatrix</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, const char *name)</td></tr>
-<tr class="memdesc:a08f86167301deb2ced4cf07f416563e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a matrix in a register This function returns a corresponding matrix if it exist in the register and it's name matches or NULL otherwise.  <a href="register_8h.html#a08f86167301deb2ced4cf07f416563e6">More...</a><br /></td></tr>
-<tr class="separator:a08f86167301deb2ced4cf07f416563e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1f399ba16d86265154df1dab2380995"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#aa1f399ba16d86265154df1dab2380995">searchPolynomial</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, const char *name)</td></tr>
-<tr class="memdesc:aa1f399ba16d86265154df1dab2380995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for a polynomial in a register This function returns a corresponding polynomial if it exist in the register and it's name matches or NULL otherwise.  <a href="register_8h.html#aa1f399ba16d86265154df1dab2380995">More...</a><br /></td></tr>
-<tr class="separator:aa1f399ba16d86265154df1dab2380995"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87389f4606e4e829010a221430db607d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a87389f4606e4e829010a221430db607d">addToRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, <a class="el" href="struct_polynomial.html">Polynomial</a> *newPolynomial, <a class="el" href="struct_matrix.html">Matrix</a> *<a class="el" href="matrix_8h.html#a43a9b0a75747c361b92ef5b28afc0db6">newMatrix</a>)</td></tr>
-<tr class="memdesc:a87389f4606e4e829010a221430db607d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add to a register This function add an object to an existing register.  <a href="register_8h.html#a87389f4606e4e829010a221430db607d">More...</a><br /></td></tr>
-<tr class="separator:a87389f4606e4e829010a221430db607d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3999a5799b8b332f12d7b08fbe5e6226"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_register.html">Register</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a3999a5799b8b332f12d7b08fbe5e6226">newRegister</a> ()</td></tr>
+<tr class="memdesc:a3999a5799b8b332f12d7b08fbe5e6226"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new register.  <a href="register_8h.html#a3999a5799b8b332f12d7b08fbe5e6226">More...</a><br /></td></tr>
+<tr class="separator:a3999a5799b8b332f12d7b08fbe5e6226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba77f369628daad9f6e98c9d7a15c07d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#aba77f369628daad9f6e98c9d7a15c07d">freeRegister</a> (<a class="el" href="struct_register.html">Register</a> **toFree)</td></tr>
+<tr class="memdesc:aba77f369628daad9f6e98c9d7a15c07d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free a register.  <a href="register_8h.html#aba77f369628daad9f6e98c9d7a15c07d">More...</a><br /></td></tr>
+<tr class="separator:aba77f369628daad9f6e98c9d7a15c07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">freeRegisterContent</a> (<a class="el" href="struct_register.html">Register</a> *aRegister)</td></tr>
 <tr class="memdesc:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty a register This function free the content of a register but doesn't free it.  <a href="register_8h.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">More...</a><br /></td></tr>
 <tr class="separator:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c62b4e4a24321216f4efe27ff12eda2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a0c62b4e4a24321216f4efe27ff12eda2">newObject</a> ()</td></tr>
+<tr class="memdesc:a0c62b4e4a24321216f4efe27ff12eda2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new object.  <a href="register_8h.html#a0c62b4e4a24321216f4efe27ff12eda2">More...</a><br /></td></tr>
+<tr class="separator:a0c62b4e4a24321216f4efe27ff12eda2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b83acefab2b73dd03278bd5b0c61868"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a1b83acefab2b73dd03278bd5b0c61868">freeObject</a> (<a class="el" href="struct_object.html">Object</a> **toFree)</td></tr>
+<tr class="memdesc:a1b83acefab2b73dd03278bd5b0c61868"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free an object.  <a href="register_8h.html#a1b83acefab2b73dd03278bd5b0c61868">More...</a><br /></td></tr>
+<tr class="separator:a1b83acefab2b73dd03278bd5b0c61868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbefdd9e223ef2635e1dd268f1afd4ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#afbefdd9e223ef2635e1dd268f1afd4ac">searchObject</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, const char *name)</td></tr>
+<tr class="memdesc:afbefdd9e223ef2635e1dd268f1afd4ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for an object in a register This function returns a corresponding object if it exist in the register and it's name matches.  <a href="register_8h.html#afbefdd9e223ef2635e1dd268f1afd4ac">More...</a><br /></td></tr>
+<tr class="separator:afbefdd9e223ef2635e1dd268f1afd4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e980b1043a52de05d6b95624d1628cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#a6e980b1043a52de05d6b95624d1628cb">deleteFromRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, <a class="el" href="struct_object.html">Object</a> *toDelete)</td></tr>
+<tr class="memdesc:a6e980b1043a52de05d6b95624d1628cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete from a register This function delete an object from an existing register.  <a href="register_8h.html#a6e980b1043a52de05d6b95624d1628cb">More...</a><br /></td></tr>
+<tr class="separator:a6e980b1043a52de05d6b95624d1628cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0810a471e790222242e3f07cb243d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#aec0810a471e790222242e3f07cb243d9">addToRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister, <a class="el" href="struct_object.html">Object</a> *<a class="el" href="register_8h.html#a0c62b4e4a24321216f4efe27ff12eda2">newObject</a>)</td></tr>
+<tr class="memdesc:aec0810a471e790222242e3f07cb243d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add to a register This function add an object to an existing register.  <a href="register_8h.html#aec0810a471e790222242e3f07cb243d9">More...</a><br /></td></tr>
+<tr class="separator:aec0810a471e790222242e3f07cb243d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6faec37497b21b9073bb835475a2936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8h.html#af6faec37497b21b9073bb835475a2936">printRegister</a> (<a class="el" href="struct_register.html">Register</a> *aRegister)</td></tr>
 <tr class="memdesc:af6faec37497b21b9073bb835475a2936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a register This function prints the whole content of a register.  <a href="register_8h.html#af6faec37497b21b9073bb835475a2936">More...</a><br /></td></tr>
 <tr class="separator:af6faec37497b21b9073bb835475a2936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a87389f4606e4e829010a221430db607d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87389f4606e4e829010a221430db607d">&#9670;&nbsp;</a></span>addToRegister()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header file of <a class="el" href="register_8c.html" title="Functions on register.">register.c</a>. </p>
+<dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="aec0810a471e790222242e3f07cb243d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0810a471e790222242e3f07cb243d9">&#9670;&nbsp;</a></span>addToRegister()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,14 +167,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a> *&#160;</td>
-          <td class="paramname"><em>newPolynomial</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a> *&#160;</td>
-          <td class="paramname"><em>newMatrix</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>newObject</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -170,8 +183,96 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">aRegister</td><td>- The destination register </td></tr>
-    <tr><td class="paramname">newPolynomial</td><td>- The polynomial to add </td></tr>
-    <tr><td class="paramname">newMatrix</td><td>- The matrix to add </td></tr>
+    <tr><td class="paramname">newObject</td><td>- The objects to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6e980b1043a52de05d6b95624d1628cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e980b1043a52de05d6b95624d1628cb">&#9670;&nbsp;</a></span>deleteFromRegister()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void deleteFromRegister </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
+          <td class="paramname"><em>aRegister</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> *&#160;</td>
+          <td class="paramname"><em>toDelete</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete from a register This function delete an object from an existing register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aRegister</td><td>- The register to scan </td></tr>
+    <tr><td class="paramname">toDelete</td><td>- The object to delete </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1b83acefab2b73dd03278bd5b0c61868"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b83acefab2b73dd03278bd5b0c61868">&#9670;&nbsp;</a></span>freeObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a> **&#160;</td>
+          <td class="paramname"><em>toFree</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free an object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toFree</td><td>- The object to free </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aba77f369628daad9f6e98c9d7a15c07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba77f369628daad9f6e98c9d7a15c07d">&#9670;&nbsp;</a></span>freeRegister()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void freeRegister </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_register.html">Register</a> **&#160;</td>
+          <td class="paramname"><em>toFree</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free a register. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toFree</td><td>- <a class="el" href="struct_register.html" title="Structure representing a container of objects used in this program.">Register</a> to free </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,14 +305,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a27689da9dfdc50bfd41631a7deff16dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27689da9dfdc50bfd41631a7deff16dc">&#9670;&nbsp;</a></span>newRegister()</h2>
+<a id="a0c62b4e4a24321216f4efe27ff12eda2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c62b4e4a24321216f4efe27ff12eda2">&#9670;&nbsp;</a></span>newObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_register.html">Register</a>* newRegister </td>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a>* newObject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new object. </p>
+<dl class="section return"><dt>Returns</dt><dd>created object </dd></dl>
+
+</div>
+</div>
+<a id="a3999a5799b8b332f12d7b08fbe5e6226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3999a5799b8b332f12d7b08fbe5e6226">&#9670;&nbsp;</a></span>newRegister()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_register.html">Register</a> newRegister </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -251,14 +372,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a08f86167301deb2ced4cf07f416563e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08f86167301deb2ced4cf07f416563e6">&#9670;&nbsp;</a></span>searchMatrix()</h2>
+<a id="afbefdd9e223ef2635e1dd268f1afd4ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbefdd9e223ef2635e1dd268f1afd4ac">&#9670;&nbsp;</a></span>searchObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a>* searchMatrix </td>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a>* searchObject </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
           <td class="paramname"><em>aRegister</em>, </td>
@@ -277,53 +398,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Search for a matrix in a register This function returns a corresponding matrix if it exist in the register and it's name matches or NULL otherwise. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Search for an object in a register This function returns a corresponding object if it exist in the register and it's name matches. </p>
+<p>It returns NULL otherwise </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">aRegister</td><td>- The register to analyze </td></tr>
-    <tr><td class="paramname">name</td><td>- The name of the matrix to search </td></tr>
+    <tr><td class="paramname">name</td><td>- The name of the object to search </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>found matrix </dd></dl>
-
-</div>
-</div>
-<a id="aa1f399ba16d86265154df1dab2380995"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1f399ba16d86265154df1dab2380995">&#9670;&nbsp;</a></span>searchPolynomial()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a>* searchPolynomial </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_register.html">Register</a> *&#160;</td>
-          <td class="paramname"><em>aRegister</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Search for a polynomial in a register This function returns a corresponding polynomial if it exist in the register and it's name matches or NULL otherwise. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">aRegister</td><td>- The register to analyze </td></tr>
-    <tr><td class="paramname">name</td><td>- The name of the polynomial to search </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>found polynomial </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>found object </dd></dl>
 
 </div>
 </div>
