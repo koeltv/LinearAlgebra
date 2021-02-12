@@ -85,6 +85,7 @@ Object *recursiveCommandDecomposition(Register *mainRegister, char *command) {
                 result->variable = copyVariable(result->variable);
                 result->variable->name = firstWord(command);
             }
+            addToRegister(mainRegister, result);
         }
     } else if (operatorWithoutDepth(command)) {
         int firstIndex = 0, secondIndex = 0;
@@ -189,9 +190,8 @@ void executeCommand(Register *mainRegister, char *command) {
         freeObject(&result);
     } else { //If no simple command, search for a composed one
         Object *result = recursiveCommandDecomposition(mainRegister, command);
-        //Print to the console or save the result
-        if (result) addToRegister(mainRegister, result);
-        else fprintf(stderr, "Failed to do this operation, please verify it and try again\n");
+        //Print an error if no object was created (no command recognized)
+        if (!result) fprintf(stderr, "Failed to do this operation, please verify it and try again\n");
     }
 }
 

@@ -115,40 +115,39 @@ Simple commands</h2>
 <p><code>help</code> This command display this page in the terminal <br  />
  <code>displayAll</code> This command display the whole content of the main register <br  />
  <code>clear</code> This command empty the main register <br  />
- <code>readScript(&lt;link&gt;)</code> This command apply the content of a script located at &lt;link&gt;, it reads it line by line and apply every command</p>
+ <code>readScript(&lt;link&gt;)</code> This command apply the content of a script located at <code>&lt;link&gt;</code>, it reads it line by line and apply every command</p>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Simple operations</h2>
 <p>The following commands are final but accept composite operations as argument</p>
-<p><code>display(&lt;operation&gt;)</code> This command display the result of &lt;operation&gt; in the terminal <br  />
- <code>eig(&lt;operation&gt;)</code> This command display the eigen values of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>trace(&lt;operation&gt;)</code> This command display the trace of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>det(&lt;operation&gt;)</code> This command display the determinant of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>solve(&lt;operation&gt;)</code> This command display the result of solving &lt;operation&gt;,</p><ul>
-<li>if &lt;operation&gt; is an augmented matrix, the result will be the matrix in echelon form <br  />
+<p><code>display(&lt;operation&gt;)</code> This command display the result of <code>&lt;operation&gt;</code> in the terminal <br  />
+ <code>eig(&lt;operation&gt;)</code> This command display the eigen values of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>solve(&lt;operation&gt;)</code> This command display the result of solving <code>&lt;operation&gt;</code>,</p><ul>
+<li>if <code>&lt;operation&gt;</code> is an augmented matrix, the result will be the matrix in echelon form <br  />
 </li>
-<li>if &lt;operation&gt; is a polynomial, the result will be the roots of the polynomial <br  />
+<li>if <code>&lt;operation&gt;</code> is a polynomial, the result will be the roots of the polynomial <br  />
 </li>
 </ul>
-<p><code>&lt;objectName&gt; = &lt;operation&gt;</code> This command create a new object in the register which contain the result of &lt;operation&gt; and has for name &lt;objectName&gt; <br  />
-</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Composite operations</h2>
 <p>The following commands are not final, they can be used recursively</p>
-<p><code>&lt;operation1&gt; + &lt;operation2&gt;</code> This command return the sum of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial with a variable) <br  />
- <code>&lt;operation1&gt; - &lt;operation2&gt;</code> This command return the difference of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial with a variable) <br  />
- <code>&lt;operation1&gt; * &lt;operation2&gt;</code> This command return the product of &lt;operation1&gt; and &lt;operation2&gt; if they are of the same type (or a polynomial/matrix with a variable) <br  />
- <code>trans(&lt;operation&gt;)</code> This command return the transposed of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>adj(&lt;operation&gt;)</code> This command return the adjugate of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>inv(&lt;operation&gt;)</code> This command return the inverse of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>eigVectors(&lt;operation&gt;)</code> This command return the eigen vectors of &lt;operation&gt; in matrix form completed with orthonormal vectors if needed, &lt;operation&gt; must be a matrix <br  />
- <code>triangularise(&lt;operation&gt;)</code> This command return the triangularised form of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>PLambda(&lt;operation&gt;)</code> This command return the polynomial P(lambda) = det(&lt;operation&gt; - lambda * I) of &lt;operation&gt;, &lt;operation&gt; must be a matrix <br  />
- <code>derive(&lt;operation&gt;)</code> This command return the derivative of &lt;operation&gt;, &lt;operation&gt; must be a polynomial <br  />
+<p><code>&lt;objectName&gt; = &lt;operation&gt;</code> This command create a new object in the register which contain the result of <code>operation</code> and has for name <code>&lt;objectName&gt;</code> <br  />
+ <code>&lt;operation1&gt; + &lt;operation2&gt;</code> This command return the sum of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; - &lt;operation2&gt;</code> This command return the difference of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial with a variable) <br  />
+ <code>&lt;operation1&gt; * &lt;operation2&gt;</code> This command return the product of <code>&lt;operation1&gt;</code> and <code>&lt;operation2&gt;</code> if they are of the same type (or a polynomial/matrix with a variable) <br  />
+ <code>trans(&lt;operation&gt;)</code> This command return the transposed of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>adj(&lt;operation&gt;)</code> This command return the adjugate of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>inv(&lt;operation&gt;)</code> This command return the inverse of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>eigVectors(&lt;operation&gt;)</code> This command return the eigen vectors of <code>&lt;operation&gt;</code> in matrix form completed with orthonormal vectors if needed, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>triangularise(&lt;operation&gt;)</code> This command return the triangularised form of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>PLambda(&lt;operation&gt;)</code> This command return the polynomial <code>P(lambda) = det(&lt;operation&gt; - lambda * I)</code> of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>derive(&lt;operation&gt;)</code> This command return the derivative of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a polynomial <br  />
+ <code>trace(&lt;operation&gt;)</code> This command return the trace of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
+ <code>det(&lt;operation&gt;)</code> This command return the determinant of <code>&lt;operation&gt;</code>, <code>&lt;operation&gt;</code> must be a matrix <br  />
 </p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Basic object</h2>
 <p>The following arguments can be used as fundamentals to create or call objects</p>
-<p><code>&lt;objectName&gt;</code> This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but can only be the size of one word, no spaces accepted <br  />
+<p><code>&lt;objectName&gt;</code> This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but can only be the size of one word, no space accepted <br  />
  <code>[&lt;matrixFormat&gt;]</code> This will create a matrix object. The format used to create a matrix is the following :</p><ul>
 <li>all values in a row are separated by a <code>,</code></li>
 <li>all rows are separated by a <code>;</code>, the last one doesn't need it</li>
