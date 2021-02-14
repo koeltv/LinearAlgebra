@@ -40,7 +40,7 @@ typedef struct {
  * @param degree - Degree of the polynomial to create
  * @return created polynomial
  */
-Polynomial *newPolynomial(int degree);
+Polynomial newPolynomial(int degree);
 
 /**
  * Convert a string to a polynomial
@@ -50,22 +50,14 @@ Polynomial *newPolynomial(int degree);
  * @param string - The given string
  * @return polynomial created from the string
  */
-Polynomial *stringToPolynomial(const char *string, int start, int end);
+Polynomial stringToPolynomial(const char *string, int start, int end);
 
 /**
  * Free an existing polynomial
  * This function free an existing polynomial and change its pointer to NULL if it worked successfully
  * @param F - The polynomial to free
  */
-void freePolynomial(Polynomial **F);
-
-/**
- * Copy a polynomial
- * This function return a copy of a given polynomial
- * @param F - The polynomial to copy
- * @return copy created
- */
-Polynomial *copyPolynomial(Polynomial *F);
+void freePolynomial(Polynomial *F);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -87,7 +79,7 @@ int degreeOfString(const char *string, int start, int end);
  * @param G - second polynomial
  * @return F + G
  */
-Polynomial *pAdd(Polynomial *F, Polynomial *G);
+Polynomial pAdd(Polynomial F, Polynomial G);
 
 /**
  * Subtract polynomials
@@ -96,7 +88,7 @@ Polynomial *pAdd(Polynomial *F, Polynomial *G);
  * @param G - second polynomial
  * @return F - G
  */
-Polynomial *pMinus(Polynomial *F, Polynomial *G);
+Polynomial pMinus(Polynomial F, Polynomial G);
 
 /**
  * Multiply polynomials
@@ -105,7 +97,7 @@ Polynomial *pMinus(Polynomial *F, Polynomial *G);
  * @param G - second polynomial
  * @return F * G
  */
-Polynomial *pMultiply(Polynomial *F, Polynomial *G);
+Polynomial pMultiply(Polynomial F, Polynomial G);
 
 /**
  * Apply the polynomial for a given value
@@ -114,7 +106,7 @@ Polynomial *pMultiply(Polynomial *F, Polynomial *G);
  * @param x - the value to use
  * @return F(x)
  */
-double apply(Polynomial *F, double x);
+double apply(Polynomial F, double x);
 
 /**
  * Derive a polynomial
@@ -123,14 +115,14 @@ double apply(Polynomial *F, double x);
  * @param F - the polynomial to derive
  * @return F'
  */
-Polynomial *derive(Polynomial *F);
+Polynomial derive(Polynomial F);
 
 /**
  * Print a polynomial
  * Print a given polynomial in the terminal
  * @param F - The given polynomial
  */
-void printPolynomial(Polynomial *F);
+void printPolynomial(Polynomial F);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Advanced operator functions
@@ -142,7 +134,7 @@ void printPolynomial(Polynomial *F);
  * @param root - root by which to divide
  * @return divided polynomial
  */
-Polynomial *syntheticDivision(Polynomial *F, double root);
+Polynomial syntheticDivision(Polynomial F, double root);
 
 /**
  * Application of the Newton Method
@@ -150,7 +142,7 @@ Polynomial *syntheticDivision(Polynomial *F, double root);
  * @param F - The given polynomial
  * @return approximation of a root of the given polynomial
  */
-double newtonMethod(Polynomial *F);
+double newtonMethod(Polynomial F);
 
 /**
  * Find the roots of a polynomial
@@ -159,7 +151,7 @@ double newtonMethod(Polynomial *F);
  * @param F - The polynomial to solve
  * @return roots of the polynomial
  */
-Solutions *solve(Polynomial *F);
+Solutions *solve(Polynomial F);
 
 /**
  * Print a group of solutions

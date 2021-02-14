@@ -9,6 +9,11 @@
 #include "matrix.h"
 #include "variable.h"
 
+#define UNUSED -1 ///Index used to initialise objects and say that no object were returned
+#define POLYNOMIAL 0 ///Index for polynomials
+#define MATRIX 1 ///Index for matrices
+#define VARIABLE 2 ///Index for variables
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -18,19 +23,28 @@
  */
 typedef struct {
     int sizes[3]; ///Sizes of the list of objects
-    Polynomial **listOfPolynomials; ///List of polynomials
-    Matrix **listOfMatrices; ///List of matrices
-    Variable **listOfVariables; ///List of variables
+    Polynomial *listOfPolynomials; ///List of polynomials
+    Matrix *listOfMatrices; ///List of matrices
+    Variable *listOfVariables; ///List of variables
 } Register;
+
+/**
+ * @union Any
+ * Structure that can contain any object
+ */
+typedef union {
+    Polynomial polynomial;
+    Matrix matrix;
+    Variable variable;
+} Any;
 
 /**
  * @struct Object
  * Structure representing any type of object
  */
 typedef struct {
-    Polynomial *polynomial;
-    Matrix *matrix;
-    Variable *variable;
+    char type;
+    Any any;
 } Object;
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -43,12 +57,6 @@ typedef struct {
 Register newRegister();
 
 /**
- * Free a register
- * @param toFree - Register to free
- */
-void freeRegister(Register **toFree);
-
-/**
  * Empty a register
  * This function free the content of a register but doesn't free it
  * @param aRegister - The register to empty
@@ -59,13 +67,7 @@ void freeRegisterContent(Register *aRegister);
  * Create a new object
  * @return created object
  */
-Object *newObject();
-
-/**
- * Free an object
- * @param toFree - The object to free
- */
-void freeObject(Object **toFree);
+Object newObject();
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -77,7 +79,7 @@ void freeObject(Object **toFree);
  * @param name - The name of the object to search
  * @return found object
  */
-Object *searchObject(Register *aRegister, const char *name);
+Object searchObject(Register *aRegister, const char *name);
 
 /**
  * Delete from a register
@@ -85,7 +87,7 @@ Object *searchObject(Register *aRegister, const char *name);
  * @param aRegister - The register to scan
  * @param toDelete - The object to delete
  */
-void deleteFromRegister(Register *aRegister, Object *toDelete);
+void deleteFromRegister(Register *aRegister, Object toDelete);
 
 /**
  * Add to a register
@@ -94,7 +96,7 @@ void deleteFromRegister(Register *aRegister, Object *toDelete);
  * @param aRegister - The destination register
  * @param newObject - The objects to add
  */
-void addToRegister(Register *aRegister, Object *newObject);
+void addToRegister(Register *aRegister, Object newObject);
 
 /**
  * Print the content of a register

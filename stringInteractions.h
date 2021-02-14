@@ -173,14 +173,7 @@ typedef struct {
  * @param initialValue - values to initialise the element to
  * @return created string matrix
  */
-StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue);
-
-/**
- * Free an existing string matrix
- * This function free an existing string matrix and change its pointer to NULL if it worked successfully
- * @param M - The string matrix to free
- */
-void freeStringMatrix(StringMatrix **M);
+StringMatrix newStringMatrix(int nbRows, int nbColumns, char *initialValue);
 
 /**
  * Remove a row in a string matrix
@@ -189,7 +182,7 @@ void freeStringMatrix(StringMatrix **M);
  * @param rowIndex - The index of the row to remove
  * @return string matrix created by removing a row
  */
-StringMatrix *removeSRow(StringMatrix *M, int rowIndex);
+StringMatrix removeSRow(StringMatrix M, int rowIndex);
 
 /**
  * Remove a column in a string matrix
@@ -198,7 +191,7 @@ StringMatrix *removeSRow(StringMatrix *M, int rowIndex);
  * @param columnIndex - The index of the column to remove
  * @return string matrix created by removing a column
  */
-StringMatrix *removeSColumn(StringMatrix *M, int columnIndex);
+StringMatrix removeSColumn(StringMatrix M, int columnIndex);
 
 /**
  * Implement a variable
@@ -206,7 +199,7 @@ StringMatrix *removeSColumn(StringMatrix *M, int columnIndex);
  * @param M - The given string matrix
  * @return string matrix with the variable X subtracted in the diagonal
  */
-StringMatrix *changeToPLambdaForm(StringMatrix *M);
+StringMatrix changeToPLambdaForm(StringMatrix M);
 
 /**
  * Determinant in string format
@@ -214,6 +207,6 @@ StringMatrix *changeToPLambdaForm(StringMatrix *M);
  * @param M - The given string matrix
  * @return determinant in string format
  */
-char *detOfStringMatrix(StringMatrix *M);
+char *detOfStringMatrix(StringMatrix M);
 
 #endif //LINEARALGEBRA_STRINGINTERACTIONS_H

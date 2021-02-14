@@ -28,7 +28,7 @@ void readScriptFile(Register *mainRegister, char *link);
  * @param operator - The operation to apply
  * @return object containing the result
  */
-Object *applyOperation(Object *leftOperand, char operator, Object *rightOperand);
+Object applyOperation(Object leftOperand, char operator, Object rightOperand);
 
 /**
  * Get a basic object from a string
@@ -37,7 +37,7 @@ Object *applyOperation(Object *leftOperand, char operator, Object *rightOperand)
  * @param command - object in string format
  * @return object containing the object
  */
-Object *extractObject(Register *mainRegister, char *command);
+Object extractObject(Register *mainRegister, char *command);
 
 /**
  * Apply a composite command recursively
@@ -46,7 +46,7 @@ Object *extractObject(Register *mainRegister, char *command);
  * @param command - command in string form
  * @return object containing the result of the command
  */
-Object *recursiveCommandDecomposition(Register *mainRegister, char *command);
+Object recursiveCommandDecomposition(Register *mainRegister, char *command);
 
 /**
  * Apply any command
