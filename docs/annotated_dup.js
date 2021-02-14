@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "Any", "union_any.html", "union_any" ],
     [ "Matrix", "struct_matrix.html", "struct_matrix" ],
     [ "Object", "struct_object.html", "struct_object" ],
     [ "Polynomial", "struct_polynomial.html", "struct_polynomial" ],

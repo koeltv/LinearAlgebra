@@ -32,7 +32,7 @@ typedef struct {
  * @param link
  * @return matrix formed from the file
  */
-Matrix *readMatrixInString(char *string);
+Matrix readMatrixInString(char *string);
 
 /**
  * Create a simple matrix
@@ -42,14 +42,14 @@ Matrix *readMatrixInString(char *string);
  * @param initialValue - initial value for each element of the matrix
  * @return initialized matrix
  */
-Matrix *newMatrix(int nbRows, int nbColumns, double initialValue);
+Matrix newMatrix(int nbRows, int nbColumns, double initialValue);
 
 /**
  * Free an existing matrix
  * This function free an existing matrix and change its pointer to NULL if it worked successfully
  * @param M - The matrix to free
  */
-void freeMatrix(Matrix **M);
+void freeMatrix(Matrix *M);
 
 /**
  * Remove a row in a matrix
@@ -58,7 +58,7 @@ void freeMatrix(Matrix **M);
  * @param rowIndex - The index of the row to remove
  * @return matrix created by removing a row
  */
-Matrix *removeRow(Matrix *M, int rowIndex);
+Matrix removeRow(Matrix M, int rowIndex);
 
 /**
  * Remove a column in a matrix
@@ -67,7 +67,7 @@ Matrix *removeRow(Matrix *M, int rowIndex);
  * @param columnIndex - The index of the column to remove
  * @return matrix created by removing a column
  */
-Matrix *removeColumn(Matrix *M, int columnIndex);
+Matrix removeColumn(Matrix M, int columnIndex);
 
 /**
  * Add a column to a matrix
@@ -75,7 +75,7 @@ Matrix *removeColumn(Matrix *M, int columnIndex);
  * @param M - The original matrix
  * @return matrix created by adding a column
  */
-Matrix *addColumn(Matrix *M);
+Matrix addColumn(Matrix M);
 
 /**
  * Create a subMatrix
@@ -87,15 +87,7 @@ Matrix *addColumn(Matrix *M);
  * @param c2 - The index of the last column to take
  * @return subMatrix created
  */
-Matrix *subMat(Matrix *M, int r1, int r2, int c1, int c2);
-
-/**
- * Copy a M
- * This function creates an exact copy of a given M
- * @param M - The M to copy
- * @return copy created
- */
-Matrix *copy(Matrix *M);
+Matrix subMat(Matrix M, int r1, int r2, int c1, int c2);
 
 /**
  * Transform a matrix to a string matrix
@@ -103,7 +95,7 @@ Matrix *copy(Matrix *M);
  * @param M
  * @return
  */
-StringMatrix *toStringMatrix(Matrix *M);
+StringMatrix toStringMatrix(Matrix M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -116,7 +108,7 @@ StringMatrix *toStringMatrix(Matrix *M);
  * @param B - second matrix
  * @return sum of the matrices
  */
-Matrix *sum(Matrix *A, Matrix *B);
+Matrix sum(Matrix A, Matrix B);
 
 /**
  * Subtract 2 matrices
@@ -126,7 +118,7 @@ Matrix *sum(Matrix *A, Matrix *B);
  * @param B - second matrix
  * @return subtraction of the matrices
  */
-Matrix *minus(Matrix *A, Matrix *B);
+Matrix minus(Matrix A, Matrix B);
 
 /**
  * Multiply a matrix by a scalar
@@ -135,7 +127,7 @@ Matrix *minus(Matrix *A, Matrix *B);
  * @param scalar - real scalar
  * @return matrix multiplied by the scalar
  */
-Matrix *scalarMultiply(Matrix *M, double scalar);
+Matrix scalarMultiply(Matrix M, double scalar);
 
 /**
  * Standard matrix multiplication
@@ -145,7 +137,7 @@ Matrix *scalarMultiply(Matrix *M, double scalar);
  * @param B - the second matrix
  * @return multiplication of the matrices
  */
-Matrix *multiply(Matrix *A, Matrix *B);
+Matrix multiply(Matrix A, Matrix B);
 
 /**
  * Transpose of a matrix
@@ -153,14 +145,14 @@ Matrix *multiply(Matrix *A, Matrix *B);
  * @param M - The original matrix
  * @return M^T
  */
-Matrix *transpose(Matrix *M);
+Matrix transpose(Matrix M);
 
 /**
  * print matrix
  * This function print a given matrix in the terminal
  * @param M - the given matrix
  */
-void printMatrix(Matrix *M);
+void printMatrix(Matrix M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Advanced operator functions
@@ -171,7 +163,7 @@ void printMatrix(Matrix *M);
  * @param M - the given matrix
  * @return trace(M)
  */
-double trace(Matrix *M);
+double trace(Matrix M);
 
 /**
  * Determinant of a matrix
@@ -179,7 +171,7 @@ double trace(Matrix *M);
  * @param M - the given matrix
  * @return det(M)
  */
-double det(Matrix *M);
+double det(Matrix M);
 
 /**
  * Adjugate of a matrix
@@ -187,7 +179,7 @@ double det(Matrix *M);
  * @param M - the given matrix
  * @return adj(M)
  */
-Matrix *adjugate(Matrix *M);
+Matrix adjugate(Matrix M);
 
 /**
  * Inverse of a matrix
@@ -196,7 +188,7 @@ Matrix *adjugate(Matrix *M);
  * @param M - the given matrix
  * @return M^-1
  */
-Matrix *inverse(Matrix *M);
+Matrix inverse(Matrix M);
 
 /**
  * (WIP) Resolution of an augmented matrix
@@ -204,7 +196,7 @@ Matrix *inverse(Matrix *M);
  * @param M - the given augmented matrix
  * @return solvable augmented matrix
  */
-Matrix *solveAugmentedMatrix(Matrix *M);
+Matrix solveAugmentedMatrix(Matrix M);
 
 /**
  * Eigen values of a matrix
@@ -212,7 +204,7 @@ Matrix *solveAugmentedMatrix(Matrix *M);
  * @param M  - the given matrix
  * @return eigen values of M
  */
-Solutions *eigenValues(Matrix *M);
+Solutions *eigenValues(Matrix M);
 
 /**
  * Eigen vectors of a matrix
@@ -220,7 +212,7 @@ Solutions *eigenValues(Matrix *M);
  * @param M - the given matrix
  * @return eigen vectors in matrix form
  */
-Matrix *eigenVectors(Matrix *M);
+Matrix eigenVectors(Matrix M);
 
 /**
  * Triangularise a matrix
@@ -228,6 +220,6 @@ Matrix *eigenVectors(Matrix *M);
  * @param M - the given matrix
  * @return triangularised M
  */
-Matrix *triangularise(Matrix *M);
+Matrix triangularise(Matrix M);
 
 #endif //LINEARALGEBRA_MATRIX_H

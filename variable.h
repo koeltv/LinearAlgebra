@@ -28,13 +28,13 @@ typedef struct {
  * @param value - The value to initialise the variable
  * @return created variable
  */
-Variable *newVariable(double value);
+Variable newVariable(double value);
 
 /**
  * Free a variable
  * @param toFree - The variable to free
  */
-void freeVariable(Variable **toFree);
+void freeVariable(Variable *toFree);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -44,15 +44,7 @@ void freeVariable(Variable **toFree);
  * Print a given variable in the terminal
  * @param variable - Variable to print
  */
-void printVariable(Variable *variable);
-
-/**
- * Copy a variable
- * This function returns a copy of the given variable
- * @param variable - The variable to copy
- * @return copy of the variable
- */
-Variable *copyVariable(Variable *variable);
+void printVariable(Variable variable);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Polynomial interactions
@@ -63,6 +55,6 @@ Variable *copyVariable(Variable *variable);
  * @param variable - The variable to convert
  * @return corresponding polynomial
  */
-Polynomial *variableToPolynomial(Variable *variable);
+Polynomial variableToPolynomial(Variable variable);
 
 #endif //LINEARALGEBRA_VARIABLE_H

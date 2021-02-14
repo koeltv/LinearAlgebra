@@ -1,5 +1,5 @@
 /**
- * @file stringMatrix.c Functions on strings
+ * @file stringInteractions.c Functions on strings
  * @author Valentin Koeltgen
  *
  * This file contain all operations on strings
@@ -27,13 +27,13 @@ int length(const char *string) {
 }
 
 char *firstWord(const char *string) {
-    int i = 0 , j;
-    while (string[i] == ' ') i++;
-    for (j = i; string[j] && string[j] != ' '; j++);
-    char *word = calloc(j - i + 1, sizeof(char));
-    int k;
-    for (k = 0; i < j; k++) word[k] = string[i++];
-    word[k] = '\0';
+    int firstLetterIndex = 0, k = 0;
+    while (string[firstLetterIndex] == ' ') firstLetterIndex++;
+    char *word = NULL;
+    for (int i = firstLetterIndex; string[i] && string[i] != ' '; i++, k++) {
+        word = realloc(word, (i - firstLetterIndex + 1) * sizeof(char));
+        word[k] = string[i];
+    } word[k] = '\0';
     return word;
 }
 
@@ -72,24 +72,22 @@ char containCharInOrder(const char *string, const char *charToSearch) {
 }
 
 char *extractBetweenChar(const char *string, char first, char last) {
-    int firstIndex = 0;
+    int firstIndex = 0; char *extracted = NULL;
     while (string[firstIndex] && string[firstIndex] != first) firstIndex++;
-    char *extracted = NULL;
     if (string[firstIndex]) {
-        int i, nbOfParenthesis = 0;
-        for (i = firstIndex + 1; string[i] && (string[i] != last || nbOfParenthesis > 0); i++) {
-            if (string[i] == '(') nbOfParenthesis++;
-            else if (string[i] == ')') nbOfParenthesis--;
-        }
-        extracted = calloc(i - firstIndex, sizeof(char));
-        for (int j = firstIndex + 1, k = 0; j < i; j++) extracted[k++] = string[j];
+        int j = 0; firstIndex++;
+        for (int nbOfParenthesis = 0; string[firstIndex] && (string[firstIndex] != last || nbOfParenthesis > 0); firstIndex++) {
+            if (string[firstIndex] == '(') nbOfParenthesis++;
+            else if (string[firstIndex] == ')') nbOfParenthesis--;
+            extracted = realloc(extracted, ++j * sizeof(char));
+            extracted[j - 1] = string[firstIndex];
+        } extracted[j] = '\0';
     }
     return extracted;
 }
 
 char *extractUpToIndex(const char *string, int last) {
-    char *extracted = calloc(1, sizeof(char));
-    int k = 0;
+    char *extracted = NULL; int k = 0;
     for (int j = 0; string[j] && j < last; j++) {
         extracted = realloc(extracted, (j + 1) * sizeof(char));
         extracted[k++] = string[j];
@@ -123,7 +121,9 @@ char everythingIsBetweenParenthesis(const char *string) {
 }
 
 char operatorWithoutDepth(const char *string) {
-    for (int i = 0, nbOfParenthesis = 0; string[i]; i++) {
+    int i = 0;
+    while (string[i] == ' ' || string[i] == '+' || string[i] == '-') i++;
+    for (int nbOfParenthesis = 0; string[i]; i++) {
         if (string[i] == '(') nbOfParenthesis++;
         else if (string[i] == ')') nbOfParenthesis--;
         else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*')) return 1;
@@ -135,6 +135,7 @@ char operatorWithoutDepth(const char *string) {
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
     if (string[*firstIndex] && string[*firstIndex] != '(') (*firstIndex)++;
+    while (string[*firstIndex] == ' ' || string[*firstIndex] == '+' || string[*firstIndex] == '-') (*firstIndex)++;
     int temp = 0;
     for (int nbOfParenthesis = 0; string[*firstIndex]; (*firstIndex)++) {
         if (string[*firstIndex] == '(') nbOfParenthesis++;
@@ -143,7 +144,7 @@ void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
         else if (nbOfParenthesis < 1 && (string[*firstIndex] == '+' || string[*firstIndex] == '-')) break;
     }
     if (!string[*firstIndex] && temp) *firstIndex = temp;
-    //while (string[*firstIndex] && string[*firstIndex] != '+' && string[*firstIndex] != '-' && string[*firstIndex] != '*') (*firstIndex)++;
+
     int i = *firstIndex + 1;
     for (int nbOfParenthesis = 0; string[*firstIndex] && string[i]; i++) {
         if (string[i] == '(') nbOfParenthesis++;
@@ -156,7 +157,6 @@ void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
 }
 
 double readDoubleInString(const char *string, int *position) {
-
     //Search for the sign
     while (*position >= 0 && string[*position] == ' ') (*position)--;
     while (string[*position] && (string[*position] < '0' || string[*position] > '9') && string[*position] != '-') (*position)++;
@@ -190,93 +190,75 @@ void printFileContent(char *link, FILE *output) {
             fscanf(input, "%c", &temp);
             fprintf(output, "%c", temp);
         }
-    }
+    } else fprintf(stderr, "File was not found at %s\n", link);
 }
 
-StringMatrix *newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
-    StringMatrix* M = malloc(sizeof(StringMatrix));
-    M->rows = nbRows; M->columns = nbColumns;
-    M->values = malloc(M->rows * sizeof(char**));
-    for (int i = 0; i < M->rows; i++) {
-        M->values[i] = malloc(M->columns * sizeof(char*));
-        for (int j = 0; j < M->columns; j++) M->values[i][j] = initialValue;
+StringMatrix newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
+    StringMatrix M = {NULL, malloc(nbRows * sizeof(char**)), nbRows, nbColumns};
+    for (int i = 0; i < M.rows; i++) {
+        M.values[i] = malloc(M.columns * sizeof(char*));
+        for (int j = 0; j < M.columns; j++) M.values[i][j] = initialValue;
     }
     return M;
 }
 
-void freeStringMatrix(StringMatrix **M) {
-    if (*M) {
-        for (int i = 0; i < (*M)->rows; i++) {
-            //for (int j = 0; j < M->columns; j++) free(M->values[i][j]);
-            free((*M)->values[i]);
+StringMatrix removeSRow(StringMatrix M, int rowIndex) {
+    StringMatrix smallerM = newStringMatrix(M.rows - 1, M.columns, 0);
+    for (int i = 0; i < M.rows; i++) {
+        for (int j = 0; j < M.columns; j++) {
+            if (i != rowIndex) smallerM.values[i > rowIndex ? i - 1 : i][j] = M.values[i][j];
         }
-        free((*M)->values); free(*M);
-        *M = NULL;
     }
+    return smallerM;
 }
 
-StringMatrix *removeSRow(StringMatrix *M, int rowIndex) {
-    if (M) {
-        StringMatrix *smallerM = newStringMatrix(M->rows - 1, M->columns, 0);
-        for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) {
-                if (i != rowIndex) smallerM->values[i > rowIndex ? i - 1 : i][j] = M->values[i][j];
-            }
+StringMatrix removeSColumn(StringMatrix M, int columnIndex) {
+    StringMatrix smallerM = newStringMatrix(M.rows, M.columns - 1, 0);
+    for (int i = 0; i < M.rows; i++) {
+        for (int j = 0; j < M.columns; j++) {
+            if (j != columnIndex) smallerM.values[i][j > columnIndex ? j - 1 : j] = M.values[i][j];
         }
-        return smallerM;
-    } else return NULL;
+    }
+    return smallerM;
 }
 
-StringMatrix *removeSColumn(StringMatrix *M, int columnIndex) {
-    if (M) {
-        StringMatrix *smallerM = newStringMatrix(M->rows, M->columns - 1, 0);
-        for (int i = 0; i < M->rows; i++) {
-            for (int j = 0; j < M->columns; j++) {
-                if (j != columnIndex) smallerM->values[i][j > columnIndex ? j - 1 : j] = M->values[i][j];
-            }
-        }
-        return smallerM;
-    } else return NULL;
-}
-
-StringMatrix *changeToPLambdaForm(StringMatrix *M) {
-    for (int i = 0; i < M->rows; i++) {
-        snprintf(M->values[i][i], (length(M->values[i][i]) + 6) * sizeof(char), "%s - 1X", M->values[i][i]);
+StringMatrix changeToPLambdaForm(StringMatrix M) {
+    for (int i = 0; i < M.rows; i++) {
+        snprintf(M.values[i][i], (length(M.values[i][i]) + 6) * sizeof(char), "%s - 1X", M.values[i][i]);
     }
     return M;
 }
 
-char *detOfStringMatrix(StringMatrix *M) {
-    if (M->rows == 1 && M->columns == 1) return M->values[0][0];
+char *detOfStringMatrix(StringMatrix M) {
+    if (M.rows == 1 && M.columns == 1) return M.values[0][0];
     else {
         char *result = calloc(1, sizeof(char));
-        for (int i = 0, sign = 1; i < M->rows; i++, sign*=-1) {
-            StringMatrix *subDet = removeSRow(removeSColumn(M, 0), i);
+        for (int i = 0, sign = 1; i < M.rows; i++, sign*=-1) {
+            StringMatrix subDet = removeSRow(removeSColumn(M, 0), i);
             char *detOfSubDet = detOfStringMatrix(subDet);
-            int totalSize = length(M->values[i][0]) + length(detOfSubDet);
+            int totalSize = length(M.values[i][0]) + length(detOfSubDet);
 
             if (sign == -1) {
                 if (length(result) < 1) {
                     totalSize += 14;
                     result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) * (-1) * (%s)", M->values[i][0], detOfSubDet);
+                    snprintf(result, totalSize * sizeof(char), "(%s) * (-1) * (%s)", M.values[i][0], detOfSubDet);
                 } else {
                     totalSize += 21 + length(result);
                     result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (-1) * (%s))", result, M->values[i][0], detOfSubDet);
+                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (-1) * (%s))", result, M.values[i][0], detOfSubDet);
                 }
             } else {
                 if (length(result) < 1) {
                     totalSize += 7;
                     result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) * (%s)", M->values[i][0], detOfSubDet);
+                    snprintf(result, totalSize * sizeof(char), "(%s) * (%s)", M.values[i][0], detOfSubDet);
                 } else {
                     totalSize += 14 + length(result);
                     result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (%s))", result, M->values[i][0], detOfSubDet);
+                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (%s))", result, M.values[i][0], detOfSubDet);
                 }
             }
-            freeStringMatrix(&subDet);
         }
         return result;
     }
