@@ -1,5 +1,5 @@
 /**
- * @file stringMatrix.c Functions on strings
+ * @file stringInteractions.c Functions on strings
  * @author Valentin Koeltgen
  *
  * This file contain all operations on strings

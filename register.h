@@ -43,8 +43,8 @@ typedef union {
  * Structure representing any type of object
  */
 typedef struct {
-    char type;
-    Any any;
+    char type; ///Current used type of object
+    Any any; ///Object used
 } Object;
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
