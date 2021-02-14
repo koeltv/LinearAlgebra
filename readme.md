@@ -1,6 +1,6 @@
 @mainpage Manuel Linear Algebra Solver  
 **Members** : Valentin Koeltgen  
-**License** : MIT  
+**License** : GNU General Public License  
 
 This project goal is to create a program with a simple command-line interface to do calculations on polynomial, matrices and variables.  
 Right now the project is limited to handling real values but imaginary values handling can be added in the future.
