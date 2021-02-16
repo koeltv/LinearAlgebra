@@ -6,7 +6,6 @@
 #ifndef LINEARALGEBRA_MATRIX_H
 #define LINEARALGEBRA_MATRIX_H
 
-#include "stringInteractions.h"
 #include "polynomial.h"
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

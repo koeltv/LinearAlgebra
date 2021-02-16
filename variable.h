@@ -6,7 +6,8 @@
 #ifndef LINEARALGEBRA_VARIABLE_H
 #define LINEARALGEBRA_VARIABLE_H
 
-#include "polynomial.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
@@ -45,16 +46,5 @@ void freeVariable(Variable *toFree);
  * @param variable - Variable to print
  */
 void printVariable(Variable variable);
-
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-// Polynomial interactions
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * Transform a variable into a polynomial
- * This function returns a polynomial of degree 0 with the variable as coefficient, it is used to make interactions between variables and polynomial easier
- * @param variable - The variable to convert
- * @return corresponding polynomial
- */
-Polynomial variableToPolynomial(Variable variable);
 
 #endif //LINEARALGEBRA_VARIABLE_H

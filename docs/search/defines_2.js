@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['polynomial_279',['POLYNOMIAL',['../register_8h.html#ae13d91fe6e514f0aa1caba701ef1ff92',1,'register.h']]]
+  ['newobject_279',['newObject',['../register_8h.html#a71061fc2e92303da93350458b5c10bc1',1,'register.h']]],
+  ['newregister_280',['newRegister',['../register_8h.html#aa9bb0b31dff498de5514a0bbdf143e22',1,'register.h']]]
 ];

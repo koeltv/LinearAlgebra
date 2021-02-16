@@ -8,24 +8,14 @@
 #include "variable.h"
 
 Variable newVariable(double value) {
-    Variable newVariable = {NULL, value};
-    //Variable *newVariable = malloc(sizeof(Variable));
-    //newVariable->name = NULL; newVariable->value = value;
-    return newVariable;
+    return (Variable) {NULL, value};
 }
 
 void freeVariable(Variable *toFree) {
-    free(toFree);
-    toFree = NULL;
+    free(toFree); toFree = NULL;
 }
 
 void printVariable(Variable variable) {
     if (variable.name) printf("%s = ", variable.name);
     printf("%lf\n", variable.value);
-}
-
-Polynomial variableToPolynomial(Variable variable) {
-    Polynomial result = newPolynomial(0);
-    result.coefficient[0] = variable.value;
-    return result;
 }

@@ -7,10 +7,6 @@
 
 #include "register.h"
 
-Register newRegister() {
-    return (Register) {{0, 0, 0}, NULL, NULL, NULL};
-}
-
 void freeRegisterContent(Register *aRegister) {
     if (aRegister) {
         free(aRegister->listOfPolynomials); aRegister->listOfPolynomials = NULL;
@@ -20,10 +16,6 @@ void freeRegisterContent(Register *aRegister) {
         free(aRegister->listOfVariables); aRegister->listOfVariables = NULL;
         aRegister->sizes[VARIABLE] = 0;
     }
-}
-
-Object newObject() {
-    return (Object) {-1};
 }
 
 Object searchObject(Register *aRegister, const char *name) {
@@ -48,7 +40,7 @@ Object searchObject(Register *aRegister, const char *name) {
             }
         }
     }
-    return newObject();
+    return newObject;
 }
 
 void deleteFromRegister(Register *aRegister, Object toDelete) {
@@ -82,57 +74,57 @@ void deleteFromRegister(Register *aRegister, Object toDelete) {
     }
 }
 
-void addToRegister(Register *aRegister, Object newObject) {
-    if (newObject.type == POLYNOMIAL && newObject.any.polynomial.name) {
-        Object found = searchObject(aRegister, newObject.any.polynomial.name);
+void addToRegister(Register *aRegister, Object toAdd) {
+    if (toAdd.type == POLYNOMIAL && toAdd.any.polynomial.name) {
+        Object found = searchObject(aRegister, toAdd.any.polynomial.name);
         if (found.type == POLYNOMIAL) { //Overwriting current polynomial
             for (int i = 0; i < aRegister->sizes[POLYNOMIAL]; i++) {
-                if (!shorterString(aRegister->listOfPolynomials[i].name, newObject.any.polynomial.name)) {
-                    aRegister->listOfPolynomials[i] = newObject.any.polynomial; break;
+                if (!shorterString(aRegister->listOfPolynomials[i].name, toAdd.any.polynomial.name)) {
+                    aRegister->listOfPolynomials[i] = toAdd.any.polynomial; break;
                 }
             }
-            printf("Overwrote polynomial %s\n", newObject.any.polynomial.name);
+            printf("Overwrote polynomial %s\n", toAdd.any.polynomial.name);
         } else { //Adding new polynomial (and suppressing object with the same name if there is one)
             if (found.type == MATRIX || found.type == VARIABLE) {
                 deleteFromRegister(aRegister, found);
-                printf("Overwrote object %s\n", newObject.any.polynomial.name);
-            } else printf("New polynomial %s added\n", newObject.any.polynomial.name);
+                printf("Overwrote object %s\n", toAdd.any.polynomial.name);
+            } else printf("New polynomial %s added\n", toAdd.any.polynomial.name);
             aRegister->listOfPolynomials = realloc(aRegister->listOfPolynomials, ++aRegister->sizes[POLYNOMIAL] * sizeof(Polynomial));
-            aRegister->listOfPolynomials[aRegister->sizes[POLYNOMIAL] - 1] = newObject.any.polynomial;
+            aRegister->listOfPolynomials[aRegister->sizes[POLYNOMIAL] - 1] = toAdd.any.polynomial;
         }
-    } else if (newObject.type == MATRIX && newObject.any.matrix.name) {
-        Object found = searchObject(aRegister, newObject.any.matrix.name);
+    } else if (toAdd.type == MATRIX && toAdd.any.matrix.name) {
+        Object found = searchObject(aRegister, toAdd.any.matrix.name);
         if (found.type == MATRIX) { //Overwriting current matrix
             for (int i = 0; i < aRegister->sizes[MATRIX]; i++) {
-                if (!shorterString(aRegister->listOfMatrices[i].name, newObject.any.matrix.name)) {
-                    aRegister->listOfMatrices[i] = newObject.any.matrix; break;
+                if (!shorterString(aRegister->listOfMatrices[i].name, toAdd.any.matrix.name)) {
+                    aRegister->listOfMatrices[i] = toAdd.any.matrix; break;
                 }
             }
-            printf("Overwrote matrix %s\n", newObject.any.matrix.name);
+            printf("Overwrote matrix %s\n", toAdd.any.matrix.name);
         } else { //Adding new matrix (and suppressing object with the same name if there is one)
             if (found.type == POLYNOMIAL || found.type == VARIABLE) {
                 deleteFromRegister(aRegister, found);
-                printf("Overwrote object %s\n", newObject.any.matrix.name);
-            } else printf("New matrix %s added\n", newObject.any.matrix.name);
+                printf("Overwrote object %s\n", toAdd.any.matrix.name);
+            } else printf("New matrix %s added\n", toAdd.any.matrix.name);
             aRegister->listOfMatrices = realloc(aRegister->listOfMatrices, ++aRegister->sizes[MATRIX] * sizeof(Matrix));
-            aRegister->listOfMatrices[aRegister->sizes[MATRIX] - 1] = newObject.any.matrix;
+            aRegister->listOfMatrices[aRegister->sizes[MATRIX] - 1] = toAdd.any.matrix;
         }
-    } else if (newObject.type == VARIABLE && newObject.any.variable.name) {
-        Object found = searchObject(aRegister, newObject.any.variable.name);
+    } else if (toAdd.type == VARIABLE && toAdd.any.variable.name) {
+        Object found = searchObject(aRegister, toAdd.any.variable.name);
         if (found.type == VARIABLE) { //Overwriting current variable
             for (int i = 0; i < aRegister->sizes[VARIABLE]; i++) {
-                if (!shorterString(aRegister->listOfVariables[i].name, newObject.any.variable.name)) {
-                    aRegister->listOfVariables[i] = newObject.any.variable; break;
+                if (!shorterString(aRegister->listOfVariables[i].name, toAdd.any.variable.name)) {
+                    aRegister->listOfVariables[i] = toAdd.any.variable; break;
                 }
             }
-            printf("Overwrote variable %s\n", newObject.any.variable.name);
+            printf("Overwrote variable %s\n", toAdd.any.variable.name);
         } else { //Adding new variable (and suppressing object with the same name if there is one)
             if (found.type == POLYNOMIAL || found.type == MATRIX) {
                 deleteFromRegister(aRegister, found);
-                printf("Overwrote object %s\n", newObject.any.variable.name);
-            } else printf("New variable %s added\n", newObject.any.variable.name);
+                printf("Overwrote object %s\n", toAdd.any.variable.name);
+            } else printf("New variable %s added\n", toAdd.any.variable.name);
             aRegister->listOfVariables = realloc(aRegister->listOfVariables, ++aRegister->sizes[VARIABLE] * sizeof(Variable));
-            aRegister->listOfVariables[aRegister->sizes[VARIABLE] - 1] = newObject.any.variable;
+            aRegister->listOfVariables[aRegister->sizes[VARIABLE] - 1] = toAdd.any.variable;
         }
     }
 }

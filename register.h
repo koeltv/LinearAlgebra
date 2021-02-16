@@ -7,7 +7,9 @@
 #define LINEARALGEBRA_REGISTER_H
 
 #include "matrix.h"
-#include "variable.h"
+
+#define newRegister {{0, 0, 0}, NULL, NULL, NULL} ///New empty register
+#define newObject (Object) {-1} ///New empty object
 
 #define UNUSED -1 ///Index used to initialise objects and say that no object were returned
 #define POLYNOMIAL 0 ///Index for polynomials
@@ -51,23 +53,11 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
- * Create a new register
- * @return created register
- */
-Register newRegister();
-
-/**
  * Empty a register
  * This function free the content of a register but doesn't free it
  * @param aRegister - The register to empty
  */
 void freeRegisterContent(Register *aRegister);
-
-/**
- * Create a new object
- * @return created object
- */
-Object newObject();
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -94,9 +84,9 @@ void deleteFromRegister(Register *aRegister, Object toDelete);
  * This function add an object to an existing register
  * @note When we only need to add 1 and not the other, we can put NULL
  * @param aRegister - The destination register
- * @param newObject - The objects to add
+ * @param toAdd - The objects to add
  */
-void addToRegister(Register *aRegister, Object newObject);
+void addToRegister(Register *aRegister, Object toAdd);
 
 /**
  * Print the content of a register

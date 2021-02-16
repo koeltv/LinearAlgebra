@@ -7,6 +7,7 @@
 #define LINEARALGEBRA_POLYNOMIAL_H
 
 #include "stringInteractions.h"
+#include "variable.h"
 
 #define IMAGINARY 12345.54321
 
@@ -159,5 +160,16 @@ Solutions *solve(Polynomial F);
  * @param x - Solutions to print
  */
 void printSolutions(Solutions *x);
+
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Variables interactions
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * Transform a variable into a polynomial
+ * This function returns a polynomial of degree 0 with the variable as coefficient, it is used to make interactions between variables and polynomial easier
+ * @param variable - The variable to convert
+ * @return corresponding polynomial
+ */
+Polynomial variableToPolynomial(Variable variable);
 
 #endif //LINEARALGEBRA_POLYNOMIAL_H

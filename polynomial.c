@@ -290,3 +290,9 @@ void printSolutions(Solutions *x) {
         printf("}\n");
     } else printf("No solutions or some are complex numbers\n");
 }
+
+Polynomial variableToPolynomial(Variable variable) {
+    Polynomial result = newPolynomial(0);
+    result.coefficient[0] = variable.value;
+    return result;
+}

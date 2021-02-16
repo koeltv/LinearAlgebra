@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "chmprstv",
   3: "acdefilmnoprstv",
   4: "acefhilmnprstvw",
-  5: "impuv",
+  5: "imnpuv",
   6: "m"
 };
 

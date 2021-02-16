@@ -16,5 +16,6 @@ var polynomial_8h =
     [ "printSolutions", "polynomial_8h.html#a72d3351ba5806a2be3e8bc08bd5df31f", null ],
     [ "solve", "polynomial_8h.html#a7de977bd783b32c03df11e4bacd579a0", null ],
     [ "stringToPolynomial", "polynomial_8h.html#a311c6f0307007d1933dd5eb9d2f85713", null ],
-    [ "syntheticDivision", "polynomial_8h.html#a24d6234e3b795913c854fd856a9ac641", null ]
+    [ "syntheticDivision", "polynomial_8h.html#a24d6234e3b795913c854fd856a9ac641", null ],
+    [ "variableToPolynomial", "polynomial_8h.html#a57594db3cd414083b721ca40888b98af", null ]
 ];
