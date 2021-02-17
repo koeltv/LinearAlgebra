@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['matrix_278',['MATRIX',['../register_8h.html#af1d98fb728b5c7300f80dd782702d1dd',1,'register.h']]]
+  ['imaginary_288',['IMAGINARY',['../polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3',1,'polynomial.h']]]
 ];

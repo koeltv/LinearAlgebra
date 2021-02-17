@@ -9,10 +9,10 @@
 
 char *readString(FILE *current) {
     int i = 0;
-    char temp, *string = (char*) malloc(20 * sizeof(char)); //We start from a chain of 20 characters
+    char temp, *string = NULL;
     fscanf(current, " %c", &temp);
     while (!feof(current) && temp >= ' ' && temp <= '~'){
-        if (i % 19 == 1 && i > 19) string = realloc (string, (i + 20) * sizeof(char)); //If we go over 20, we add 20 more to the chain
+        string = realloc (string, (i + 2) * sizeof(char));
         string[i] = temp;
         fscanf(current, "%c", &temp);
         i++;
@@ -30,7 +30,7 @@ char *firstWord(const char *string) {
     int firstLetterIndex = 0, k = 0;
     while (string[firstLetterIndex] == ' ') firstLetterIndex++;
     char *word = NULL;
-    for (int i = firstLetterIndex; string[i] && string[i] != ' '; i++, k++) {
+    for (int i = firstLetterIndex; string[i] && string[i] != ' ' && string[i] != '='; i++, k++) {
         word = realloc(word, (i - firstLetterIndex + 1) * sizeof(char));
         word[k] = string[i];
     } word[k] = '\0';
@@ -126,7 +126,7 @@ char operatorWithoutDepth(const char *string) {
     for (int nbOfParenthesis = 0; string[i]; i++) {
         if (string[i] == '(') nbOfParenthesis++;
         else if (string[i] == ')') nbOfParenthesis--;
-        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*')) return 1;
+        else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*' || string[i] == '/')) return 1;
     }
     return 0;
 }
@@ -135,12 +135,11 @@ char operatorWithoutDepth(const char *string) {
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
     if (string[*firstIndex] && string[*firstIndex] != '(') (*firstIndex)++;
-    while (string[*firstIndex] == ' ' || string[*firstIndex] == '+' || string[*firstIndex] == '-') (*firstIndex)++;
     int temp = 0;
     for (int nbOfParenthesis = 0; string[*firstIndex]; (*firstIndex)++) {
         if (string[*firstIndex] == '(') nbOfParenthesis++;
         else if (string[*firstIndex] == ')') nbOfParenthesis--;
-        else if (nbOfParenthesis < 1 && string[*firstIndex] == '*') temp = *firstIndex;
+        else if (nbOfParenthesis < 1 && (string[*firstIndex] == '*' || string[*firstIndex] == '/')) temp = *firstIndex;
         else if (nbOfParenthesis < 1 && (string[*firstIndex] == '+' || string[*firstIndex] == '-')) break;
     }
     if (!string[*firstIndex] && temp) *firstIndex = temp;
@@ -160,12 +159,10 @@ double readDoubleInString(const char *string, int *position) {
     //Search for the sign
     while (*position >= 0 && string[*position] == ' ') (*position)--;
     while (string[*position] && (string[*position] < '0' || string[*position] > '9') && string[*position] != '-') (*position)++;
-
     //Read the sign
     int sign = 1;
     if (string[*position] == '-') sign = -1;
     while (string[*position] == ' ' || string[*position] == '+' || string[*position] == '-') (*position)++;
-
     //Read the value
     double result = 0;
     do {
@@ -190,7 +187,7 @@ void printFileContent(char *link, FILE *output) {
             fscanf(input, "%c", &temp);
             fprintf(output, "%c", temp);
         }
-    } else fprintf(stderr, "File was not found at %s\n", link);
+    } else fprintf(stderr, "File was not found at %s", link);
 }
 
 StringMatrix newStringMatrix(int nbRows, int nbColumns, char *initialValue) {

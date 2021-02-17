@@ -18,6 +18,14 @@ void freeRegisterContent(Register *aRegister) {
     }
 }
 
+Object checkObject(Object input) {
+    if ((input.type == POLYNOMIAL && input.any.polynomial.highestDegree < 0) ||
+        (input.type == MATRIX && (input.any.matrix.rows < 1 || input.any.matrix.columns < 1)) ||
+        (input.type == VARIABLE && input.any.variable.value == IMAGINARY))
+        return newObject;
+    else return input;
+}
+
 Object searchObject(Register *aRegister, const char *name) {
     if (aRegister->listOfPolynomials) {
         for (int i = 0; i < aRegister->sizes[POLYNOMIAL]; i++) {

@@ -3,6 +3,7 @@ var matrix_8c =
     [ "addColumn", "matrix_8c.html#a25b513770cb502145cd2e83d3773d392", null ],
     [ "adjugate", "matrix_8c.html#acb6de552b14705458a4ec02e89c12a54", null ],
     [ "completeOrthogonal", "matrix_8c.html#ae343c71faec82d660e2bc3c466423886", null ],
+    [ "copyMatrix", "matrix_8c.html#aee984bfb5d76558b9af4de1b55bbb9fc", null ],
     [ "det", "matrix_8c.html#a9d5223ddf87f9f1b705440d6ed15c24d", null ],
     [ "eigenValues", "matrix_8c.html#a4b16bf012294bdc7d18f64722c9f5236", null ],
     [ "eigenVectors", "matrix_8c.html#a52af984a585b8e82bf3ef7754a0aa32a", null ],

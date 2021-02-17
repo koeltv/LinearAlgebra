@@ -9,6 +9,8 @@
 #include "stringInteractions.h"
 #include "variable.h"
 
+#define highestCoefficient(F) F.coefficient[F.highestDegree]
+
 #define IMAGINARY 12345.54321
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -29,8 +31,8 @@ typedef struct {
  * Structure representing solutions linked to an equation
  */
 typedef struct {
-    double *values; ///Values contained in array
     int size; ///Number of values contained
+    double *values; ///Values contained in array
 } Solutions;
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -99,6 +101,16 @@ Polynomial pMinus(Polynomial F, Polynomial G);
  * @return F * G
  */
 Polynomial pMultiply(Polynomial F, Polynomial G);
+
+/**
+ * Divide polynomials
+ * This function return the division of 2 polynomials using the long division method
+ * @note If there is a remainder, it will be printed in the terminal but it won't be integrated in the result
+ * @param F - first polynomial
+ * @param G - second polynomial
+ * @return F / G
+ */
+Polynomial pLongDivide(Polynomial numerator, Polynomial denominator);
 
 /**
  * Apply the polynomial for a given value

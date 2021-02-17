@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['newobject_279',['newObject',['../register_8h.html#a71061fc2e92303da93350458b5c10bc1',1,'register.h']]],
-  ['newregister_280',['newRegister',['../register_8h.html#aa9bb0b31dff498de5514a0bbdf143e22',1,'register.h']]]
+  ['matrix_289',['MATRIX',['../register_8h.html#af1d98fb728b5c7300f80dd782702d1dd',1,'register.h']]]
 ];

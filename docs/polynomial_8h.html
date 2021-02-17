@@ -121,6 +121,8 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a957a68be92e588ed6c6e77324375d26c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a957a68be92e588ed6c6e77324375d26c">highestCoefficient</a>(F)&#160;&#160;&#160;F.coefficient[F.highestDegree]</td></tr>
+<tr class="separator:a957a68be92e588ed6c6e77324375d26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa35de4191580967b40efde73bc47b2b3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3">IMAGINARY</a>&#160;&#160;&#160;12345.54321</td></tr>
 <tr class="separator:aa35de4191580967b40efde73bc47b2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -147,6 +149,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae5260d3e8dd97602025200583a6d8745"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#ae5260d3e8dd97602025200583a6d8745">pMultiply</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F, <a class="el" href="struct_polynomial.html">Polynomial</a> G)</td></tr>
 <tr class="memdesc:ae5260d3e8dd97602025200583a6d8745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply polynomials This function return the product of 2 polynomials.  <a href="polynomial_8h.html#ae5260d3e8dd97602025200583a6d8745">More...</a><br /></td></tr>
 <tr class="separator:ae5260d3e8dd97602025200583a6d8745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addda5af784aabb2b9bee22f4b25e6bc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#addda5af784aabb2b9bee22f4b25e6bc0">pLongDivide</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> numerator, <a class="el" href="struct_polynomial.html">Polynomial</a> denominator)</td></tr>
+<tr class="memdesc:addda5af784aabb2b9bee22f4b25e6bc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divide polynomials This function return the division of 2 polynomials using the long division method.  <a href="polynomial_8h.html#addda5af784aabb2b9bee22f4b25e6bc0">More...</a><br /></td></tr>
+<tr class="separator:addda5af784aabb2b9bee22f4b25e6bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a914ab1135dcb9e728016aa9d965d02f3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8h.html#a914ab1135dcb9e728016aa9d965d02f3">apply</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F, double x)</td></tr>
 <tr class="memdesc:a914ab1135dcb9e728016aa9d965d02f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the polynomial for a given value This function apply the given polynomial with the given value.  <a href="polynomial_8h.html#a914ab1135dcb9e728016aa9d965d02f3">More...</a><br /></td></tr>
 <tr class="separator:a914ab1135dcb9e728016aa9d965d02f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -176,6 +181,24 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Header file of <a class="el" href="polynomial_8c.html" title="Functions on polynomial.">polynomial.c</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Valentin Koeltgen </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a957a68be92e588ed6c6e77324375d26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957a68be92e588ed6c6e77324375d26c">&#9670;&nbsp;</a></span>highestCoefficient</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define highestCoefficient</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">F</td><td>)</td>
+          <td>&#160;&#160;&#160;F.coefficient[F.highestDegree]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa35de4191580967b40efde73bc47b2b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa35de4191580967b40efde73bc47b2b3">&#9670;&nbsp;</a></span>IMAGINARY</h2>
 
@@ -417,6 +440,45 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>F + G </dd></dl>
+
+</div>
+</div>
+<a id="addda5af784aabb2b9bee22f4b25e6bc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addda5af784aabb2b9bee22f4b25e6bc0">&#9670;&nbsp;</a></span>pLongDivide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> pLongDivide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td>
+          <td class="paramname"><em>numerator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td>
+          <td class="paramname"><em>denominator</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Divide polynomials This function return the division of 2 polynomials using the long division method. </p>
+<dl class="section note"><dt>Note</dt><dd>If there is a remainder, it will be printed in the terminal but it won't be integrated in the result </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>- first polynomial </td></tr>
+    <tr><td class="paramname">G</td><td>- second polynomial </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>F / G </dd></dl>
 
 </div>
 </div>

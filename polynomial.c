@@ -8,14 +8,12 @@
 #include "polynomial.h"
 
 Polynomial newPolynomial(int degree) {
-    return (Polynomial) {NULL, calloc(degree + 1, sizeof(double)), degree};
+    if (degree < 0) return (Polynomial) {NULL, NULL, degree};
+    else return (Polynomial) {NULL, calloc(degree + 1, sizeof(double)), degree};
 }
 
 void freePolynomial(Polynomial *F) {
-    if (F) {
-        free(F->coefficient); free(F);
-        F = NULL;
-    }
+    if (F) free(F->coefficient);
 }
 
 double apply(Polynomial F, double x) {
@@ -165,6 +163,32 @@ Polynomial pMultiply(Polynomial F, Polynomial G) {
     return output;
 }
 
+char isPolynomialNull(Polynomial F) {
+    char nonNullValue = 0;
+    for (int i = 0; i <= F.highestDegree; i++) {
+        if (F.coefficient[i]) nonNullValue = 1;
+    }
+    if (nonNullValue) return 0;
+    else return 1;
+}
+
+Polynomial pLongDivide(Polynomial numerator, Polynomial denominator) {
+    if (!isPolynomialNull(denominator)) {
+        Polynomial quotient = newPolynomial(0), remainder = numerator;
+        while (!isPolynomialNull(remainder) && remainder.highestDegree >= denominator.highestDegree) {
+            Polynomial temp = newPolynomial(remainder.highestDegree - denominator.highestDegree);
+            highestCoefficient(temp) = highestCoefficient(remainder) / highestCoefficient(denominator);
+            quotient = pAdd(quotient, temp);
+            remainder = pMinus(remainder, pMultiply(temp, denominator));
+        }
+        if (!isPolynomialNull(remainder)) {
+            printf("There is a remainder in the long division : ");
+            printPolynomial(remainder);
+        }
+        return quotient;
+    } else return newPolynomial(-1);
+}
+
 Polynomial next(const char *string, int *start) {
     int firstPosition = *start, nbOfParenthesis = 0;
     while (string[*start] != '\0' && nbOfParenthesis >= 0 && ((string[*start] != '-' && string[*start] != '+') || nbOfParenthesis >= 1)) {
@@ -247,11 +271,10 @@ double newtonMethod(Polynomial F) {
                 x0 = x1;
             }
             //End of the method, free temporary values and return output
-            //freePolynomial(&fPrime);
             if (!solutionFound) return IMAGINARY;
             return x1;
         }
-    } else exit(EXIT_FAILURE);
+    } else return IMAGINARY;
 }
 
 int roundDouble(double value) {
@@ -270,14 +293,17 @@ double roundPreciseDouble(double value) {
 Solutions *solve(Polynomial F) {
     if (F.highestDegree > 0) {
         Solutions *x = malloc(sizeof(Solutions));
-        x->size = F.highestDegree;
-        x->values = malloc(x->size * sizeof(double));
-        Polynomial temp = F;
-        for (int i = 0; i < x->size; i++) {
-            double root = roundPreciseDouble(newtonMethod(temp));
-            if (root == IMAGINARY) return NULL;
-            x->values[i] = root;
-            temp = syntheticDivision(temp, x->values[i]);
+        *x = (Solutions) {F.highestDegree, malloc(F.highestDegree * sizeof(double))};
+        if (F.highestDegree == 1) { //First degree
+            x->values[0] = -F.coefficient[0] / F.coefficient[1];
+        } else { //Higher degree
+            Polynomial temp = F;
+            for (int i = 0; i < x->size; i++) {
+                double root = roundPreciseDouble(newtonMethod(temp));
+                if (root == IMAGINARY) return NULL;
+                x->values[i] = root;
+                temp = syntheticDivision(temp, x->values[i]);
+            }
         }
         return x;
     } else return NULL;

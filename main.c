@@ -11,11 +11,11 @@
 Register aRegister = newRegister, *mainRegister = &aRegister;
 
 void readScriptFile(char *link) {
-    FILE *input = NULL;
-    if ((input = fopen(link, "rb"))) {
+    FILE *input = fopen(link, "rb");
+    if (input) {
         while (!feof(input)) { //Read a line, then execute it
             char *command = readString(input);
-            executeCommand(command);
+            if (command[0]) executeCommand(command);
             free(command);
         }
     } else fprintf(stderr, "Script not found at %s\n", link);
@@ -35,31 +35,37 @@ Object extractObject(char *command) {
     } else { //Search for existing object
         result = searchObject(mainRegister, command);
     }
-    return result;
+    return checkObject(result);
 }
 
 Object applyOperation(Object leftOperand, char operator, Object rightOperand) {
     Object result = newObject;
-    if (rightOperand.type == POLYNOMIAL && leftOperand.type == POLYNOMIAL) { //F(X) +/-/* G(X)
+    if (rightOperand.type == POLYNOMIAL && leftOperand.type == POLYNOMIAL) { //F(X) +,-,*,/ G(X)
         result.type = POLYNOMIAL;
         if (operator == '+') result.any.polynomial = pAdd(leftOperand.any.polynomial, rightOperand.any.polynomial);
         else if (operator == '-') result.any.polynomial = pMinus(leftOperand.any.polynomial, rightOperand.any.polynomial);
         else if (operator == '*') result.any.polynomial = pMultiply(leftOperand.any.polynomial, rightOperand.any.polynomial);
-    } else if (rightOperand.type == 1 && leftOperand.type == 1) { //M +/-/* N
+        else if (operator == '/') result.any.polynomial = pLongDivide(leftOperand.any.polynomial, rightOperand.any.polynomial);
+    } else if (rightOperand.type == MATRIX && leftOperand.type == MATRIX) { //M +,-,* N
         result.type = MATRIX;
         if (operator == '+') result.any.matrix = sum(leftOperand.any.matrix, rightOperand.any.matrix);
         else if (operator == '-') result.any.matrix = minus(leftOperand.any.matrix, rightOperand.any.matrix);
         else if (operator == '*') result.any.matrix = multiply(leftOperand.any.matrix, rightOperand.any.matrix);
-    } else if (rightOperand.type == VARIABLE && leftOperand.type == VARIABLE) { //x +/-/* y
+        else if (operator == '/') result.type = UNUSED;
+    } else if (rightOperand.type == VARIABLE && leftOperand.type == VARIABLE) { //x +,-,*,/ y
         result.type = VARIABLE;
         if (operator == '+') result.any.variable = newVariable(leftOperand.any.variable.value + rightOperand.any.variable.value);
         else if (operator == '-') result.any.variable = newVariable(leftOperand.any.variable.value - rightOperand.any.variable.value);
         else if (operator == '*') result.any.variable = newVariable(leftOperand.any.variable.value * rightOperand.any.variable.value);
+        else if (operator == '/') {
+            if (rightOperand.any.variable.value == 0) return newObject;
+            result.any.variable = newVariable(leftOperand.any.variable.value / rightOperand.any.variable.value);
+        }
     } else if (operator == '*' && ((rightOperand.type == MATRIX && leftOperand.type == VARIABLE) || (rightOperand.type == VARIABLE && leftOperand.type == MATRIX))) { //M * x
         result.type = MATRIX;
         if (leftOperand.type == VARIABLE) result.any.matrix = scalarMultiply(rightOperand.any.matrix, leftOperand.any.variable.value);
         else result.any.matrix = scalarMultiply(leftOperand.any.matrix, rightOperand.any.variable.value);
-    } else if ((rightOperand.type == POLYNOMIAL && leftOperand.type == VARIABLE) || (rightOperand.type == VARIABLE && leftOperand.type == POLYNOMIAL)) { //P(X) +/-/* x
+    } else if ((rightOperand.type == POLYNOMIAL && leftOperand.type == VARIABLE) || (rightOperand.type == VARIABLE && leftOperand.type == POLYNOMIAL)) { //P(X) +,-,*,/ x
         result.type = POLYNOMIAL;
         Polynomial *polynomial; Variable *variable;
         if (rightOperand.type == POLYNOMIAL) {
@@ -74,25 +80,30 @@ Object applyOperation(Object leftOperand, char operator, Object rightOperand) {
         else if (operator == '-') {
             if (rightOperand.type == VARIABLE) result.any.polynomial = pMinus(*polynomial, variableToPolynomial(*variable));
             else result.any.polynomial = pMinus(variableToPolynomial(*variable), *polynomial);
+        } else if (operator == '/') {
+            //Polynomial temp = newPolynomial(polynomial->highestDegree);
+            if (rightOperand.type == VARIABLE) result.any.polynomial = pLongDivide(*polynomial, variableToPolynomial(*variable));
+            else result.any.polynomial = pLongDivide(variableToPolynomial(*variable), *polynomial);
         }
     }
-    return result;
+    return checkObject(result);
 }
 
 Object recursiveCommandDecomposition(char *command) {
     //If we have global parenthesis, we get rid of them
     if (everythingIsBetweenParenthesis(command)) command = extractBetweenChar(command, '(', ')');
 
-    if (containString(command, "=")) {
-        Object result = recursiveCommandDecomposition(extractBetweenChar(command, '=', '\0'));
-        if (result.type != UNUSED) {
-            if (result.type == POLYNOMIAL) result.any.polynomial.name = firstWord(command);
-            else if (result.type == MATRIX) result.any.matrix.name = firstWord(command);
-            else if (result.type == VARIABLE) result.any.variable.name = firstWord(command);
+    if (containString(command, "=")) { //Declaration of an object
+        Object result = checkObject(recursiveCommandDecomposition(extractBetweenChar(command, '=', '\0')));
+        char *name = firstWord(command);
+        if (result.type != UNUSED && shorterString("X", name)) {
+            if (result.type == POLYNOMIAL) result.any.polynomial.name = name;
+            else if (result.type == MATRIX) result.any.matrix.name = name;
+            else if (result.type == VARIABLE) result.any.variable.name = name;
             addToRegister(mainRegister, result);
             return result;
-        }
-    } else if (operatorWithoutDepth(command)) {
+        } else if (!shorterString("X", name)) fprintf(stderr, "Error, can't use 'X' as a variable name\n");
+    } else if (operatorWithoutDepth(command)) { //Mathematical operation
         int firstIndex = 0, secondIndex = 0;
         //We change the indexes to surround the next operand
         nextOperator(command, &firstIndex, &secondIndex);
@@ -107,6 +118,9 @@ Object recursiveCommandDecomposition(char *command) {
         }
         return result;
     //From here the operations are on matrices
+    } else if (containCharInOrder(command, "triangularise()")) {
+        Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
+        if (result.type == MATRIX) return (Object) {MATRIX, .any.matrix = triangularise(result.any.matrix)};
     } else if (containCharInOrder(command, "trans()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) return (Object) {MATRIX, .any.matrix = transpose(result.any.matrix)};
@@ -119,27 +133,24 @@ Object recursiveCommandDecomposition(char *command) {
     } else if (containCharInOrder(command, "eigVectors()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) return (Object) {MATRIX, .any.matrix = eigenVectors(result.any.matrix)};
-    } else if (containCharInOrder(command, "triangularise()")) {
-        Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
-        if (result.type == MATRIX) return (Object) {MATRIX, .any.matrix = triangularise(result.any.matrix)};
     } else if (containCharInOrder(command, "PLambda()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) {
             char *stringForm = detOfStringMatrix(changeToPLambdaForm(toStringMatrix(result.any.matrix)));
-            return (Object) {MATRIX, .any.polynomial = stringToPolynomial(stringForm, 0, length(stringForm))};
+            return (Object) {POLYNOMIAL, .any.polynomial = stringToPolynomial(stringForm, 0, length(stringForm))};
         }
     //From here the operations are on polynomials
     } else if (containCharInOrder(command, "derive()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == POLYNOMIAL || result.type == VARIABLE) {
             if (result.type == POLYNOMIAL) return (Object) {POLYNOMIAL, .any.polynomial = derive(result.any.polynomial)};
-            else if (result.type == VARIABLE) return (Object) {POLYNOMIAL, .any.polynomial = derive(variableToPolynomial(result.any.variable))};
+            else return (Object) {POLYNOMIAL, .any.polynomial = derive(variableToPolynomial(result.any.variable))};
         }
     //From here the operations results are variables
-    } else if (containCharInOrder(command, "trace()")) { //Trace of the matrix
+    } else if (containCharInOrder(command, "trace()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) return (Object) {VARIABLE, .any.variable = newVariable(trace(result.any.matrix))};
-    } else if (containCharInOrder(command, "det()")) { //Determinant of the matrix
+    } else if (containCharInOrder(command, "det()")) {
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) {
             if (result.any.matrix.columns == result.any.matrix.rows) {
@@ -163,14 +174,13 @@ void executeCommand(char *command) {
     } else if (containCharInOrder(command, "readScript()")) {
         char *fileLink = extractBetweenChar(command, '(', ')');
         readScriptFile(fileLink);
-        free(fileLink);
     } else if (containCharInOrder(command, "display()")) {
-        Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
+        Object result = checkObject(recursiveCommandDecomposition(extractBetweenChar(command, '(', ')')));
         if (result.type == UNUSED) fprintf(stderr, "Couldn't calculate %s\n", command);
         else if (result.type == POLYNOMIAL) printPolynomial(result.any.polynomial);
         else if (result.type == MATRIX) printMatrix(result.any.matrix);
         else if (result.type == VARIABLE) printVariable(result.any.variable);
-    } else if (containCharInOrder(command, "eig()")) { //Eigen values
+    } else if (containCharInOrder(command, "eigValues()")) { //Eigen values
         Object result = recursiveCommandDecomposition(extractBetweenChar(command, '(', ')'));
         if (result.type == MATRIX) printSolutions(eigenValues(result.any.matrix));
     } else if (containCharInOrder(command, "solve()")) { //Solve polynomial or matrix

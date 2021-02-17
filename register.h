@@ -63,6 +63,14 @@ void freeRegisterContent(Register *aRegister);
 // Basic operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
+ * Verify if an object respects its format
+ * This function verifies if an object respect its format and return a null object if it doesn't
+ * @param input - Object to check
+ * @return Result of checking
+ */
+Object checkObject(Object input);
+
+/**
  * Search for an object in a register
  * This function returns a corresponding object if it exist in the register and it's name matches. It returns NULL otherwise
  * @param aRegister - The register to analyze

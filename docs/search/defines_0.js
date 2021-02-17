@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['imaginary_277',['IMAGINARY',['../polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3',1,'polynomial.h']]]
+  ['highestcoefficient_287',['highestCoefficient',['../polynomial_8h.html#a957a68be92e588ed6c6e77324375d26c',1,'polynomial.h']]]
 ];

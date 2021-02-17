@@ -28,20 +28,32 @@ Matrix readMatrixInString(char *string) {
 }
 
 Matrix newMatrix(int nbRows, int nbColumns, double initialValue) {
-    Matrix M = {NULL, malloc(nbRows * sizeof(double*)), nbRows, nbColumns};
-    for (int i = 0; i < M.rows; i++) {
-        M.values[i] = malloc(M.columns * sizeof(double));
-        for (int j = 0; j < M.columns; j++) M.values[i][j] = initialValue;
+    if (nbRows < 1 || nbColumns < 1) return (Matrix) {NULL, NULL, nbRows, nbColumns};
+    else {
+        Matrix M = {NULL, malloc(nbRows * sizeof(double *)), nbRows, nbColumns};
+        for (int i = 0; i < M.rows; i++) {
+            M.values[i] = malloc(M.columns * sizeof(double));
+            for (int j = 0; j < M.columns; j++) M.values[i][j] = initialValue;
+        }
+        return M;
     }
-    return M;
 }
 
 void freeMatrix(Matrix *M) {
     if (M) {
         for (int i = 0; i < M->rows; i++) free(M->values[i]);
-        free(M->values); free(M);
-        M = NULL;
+        free(M->values);
     }
+}
+
+Matrix copyMatrix(Matrix M) {
+    Matrix copy = newMatrix(M.rows, M.columns, 0);
+    for (int i = 0; i < M.rows; i++) {
+        for (int j = 0; j < M.columns; j++) {
+            copy.values[i][j] = M.values[i][j];
+        }
+    }
+    return copy;
 }
 
 Matrix removeRow(Matrix M, int rowIndex) {
@@ -90,7 +102,7 @@ Matrix sum(Matrix A, Matrix B) {
             for (int j = 0; j < A.columns; j++) C.values[i][j] = A.values[i][j] + B.values[i][j];
         }
         return C;
-    } else return (Matrix) {NULL, NULL, 0, 0};
+    } else return nullMatrix;
 }
 
 Matrix minus(Matrix A, Matrix B) {
@@ -100,28 +112,29 @@ Matrix minus(Matrix A, Matrix B) {
             for (int j = 0; j < A.columns; j++) C.values[i][j] = A.values[i][j] - B.values[i][j];
         }
         return C;
-    } else return (Matrix) {NULL, NULL, 0, 0};
+    } else return nullMatrix;
 }
 
 Matrix scalarMultiply(Matrix M, double scalar) {
-    for (int i = 0; i < M.rows; i++) {
-        for (int j = 0; j < M.columns; j++) {
-            M.values[i][j] *= scalar;
+    Matrix copy = copyMatrix(M);
+    for (int i = 0; i < copy.rows; i++) {
+        for (int j = 0; j < copy.columns; j++) {
+            copy.values[i][j] *= scalar;
         }
     }
-    return M;
+    return copy;
 }
 
 Matrix multiply(Matrix A, Matrix B) {
     if (A.columns == B.rows) {
-        Matrix C = newMatrix(A.rows, A.columns, 0);
+        Matrix C = newMatrix(A.rows, B.columns, 0);
         for (int i = 0; i < A.rows; i++) {
-            for (int j = 0; j < A.columns; j++) {
+            for (int j = 0; j < B.columns; j++) {
                 for (int k = 0; k < A.columns; k++) C.values[i][j] += A.values[i][k] * B.values[k][j];
             }
         }
         return C;
-    } else return (Matrix) {NULL, NULL, 0, 0};
+    } else return nullMatrix;
 }
 
 Matrix transpose(Matrix M) {
@@ -160,16 +173,21 @@ double det(Matrix M) {
             }
             return result;
         }
-    } else exit(EXIT_FAILURE);
+    } else return IMAGINARY;
 }
 
 Matrix adjugate(Matrix M) {
     Matrix adjM = newMatrix(M.rows, M.columns, 0);
-    for (int i = 0, sign = 1; i < M.rows; i++, sign *= -1) {
-        for (int j = 0; j < M.columns; j++, sign *= -1) {
-            Matrix coFactor = removeColumn(M, j);
-            coFactor = removeRow(coFactor, i);
-            adjM.values[i][j] = sign * det(coFactor);
+    if (M.rows == M.columns) {
+        if (M.rows == 1) adjM.values[0][0] = M.values[0][0];
+        else {
+            for (int i = 0, sign = 1; i < M.rows; i++, sign *= -1) {
+                for (int j = 0; j < M.columns; j++, sign *= -1) {
+                    Matrix coFactor = removeColumn(M, j);
+                    coFactor = removeRow(coFactor, i);
+                    adjM.values[i][j] = sign * det(coFactor);
+                }
+            }
         }
     }
     return adjM;
@@ -178,8 +196,8 @@ Matrix adjugate(Matrix M) {
 Matrix inverse(Matrix M) {
     double determinant = det(M);
     if (determinant != 0 && M.rows == M.columns) {
-        return scalarMultiply(transpose(adjugate(M)), 1 / det(M));
-    } else return (Matrix) {NULL, NULL, 0, 0};
+        return scalarMultiply(transpose(adjugate(M)), 1 / determinant);
+    } else return nullMatrix;
 }
 
 char isRowEmpty(Matrix M, int index) {
@@ -245,14 +263,18 @@ Matrix solveAugmentedMatrix(Matrix M) {
     for (int i = 0; i < M.rows - nbOfEmptyColumns && i < M.rows - nbOfEmptyRows; i++) {
         //Normalise the current row
         double normaliseValue = M.values[i][i + nbOfEmptyColumns];
-        for (int j = i + nbOfEmptyColumns; j < M.columns; j++) {
-            M.values[i][j] /= normaliseValue;
-            if (M.values[i][j] == -0) M.values[i][j] = 0;
+        if (normaliseValue != 0) {
+            for (int j = i + nbOfEmptyColumns; j < M.columns; j++) {
+                M.values[i][j] /= normaliseValue;
+                if (M.values[i][j] == -0) M.values[i][j] = 0;
+            }
         }
         //Subtract the current row to the next ones
         for (int j = i + 1; j < M.rows - nbOfEmptyColumns && j < M.rows - nbOfEmptyRows; j++) {
             double coefficient = -1 * M.values[i][i + nbOfEmptyColumns] * M.values[j][i + nbOfEmptyColumns];
-            for (int k = i + nbOfEmptyColumns; k < M.columns; k++) M.values[j][k] += coefficient * M.values[i][k];
+            for (int k = i + nbOfEmptyColumns; k < M.columns; k++) {
+                M.values[j][k] += coefficient * M.values[i][k];
+            }
         }
     }
     return M;
@@ -299,7 +321,6 @@ Matrix completeOrthogonal(Matrix M) {
 
 Matrix solveForVectors(Matrix M){
     Matrix *v = malloc((M.columns - 1) * sizeof(Matrix));
-
     //If we have an empty column, we move the empty row associated to the unrestricted value to its row
     for (int i = 0; i < M.columns - 1; i++) {
         if (isColumnEmpty(M, i) == 1) {
@@ -310,29 +331,20 @@ Matrix solveForVectors(Matrix M){
             }
         }
     }
-
-//    If a row as only one value, nullify it
-//    for (int i = 0, nbOfZeros = 0; i < M->rows; i++, nbOfZeros = 0) {
-//        for (int j = 0; j < M->columns - 1; j++) if (M->values[i][j] == 0) nbOfZeros++;
-//        if (nbOfZeros >= M->columns-2) for (int j = 0; j < M->columns - 1; j++) M->values[i][j] = 0;
-//    }
-
     //Initialise and search for unrestricted values (only if 0 = 0)
     for (int i = 0; i < M.rows; i++) {
         v[i] = newMatrix(M.columns - 1, 1, 0);
         if (isRowEmpty(M, i) == 1) v[i].values[i][0] = 1;
     }
-
     //Calculate vectors in function of the others
     for (int i = M.rows - 1; i >= 0; i--) {
         if (isRowEmpty(M, i) != 1){
             for (int j = M.columns - 2; j >= 0; j--) {
-                if (j != i) v[i] = minus(v[i], scalarMultiply(v[j], M.values[i][j]));
+                if (j != i) v[i] = minus(v[i], scalarMultiply(copyMatrix(v[j]), M.values[i][j]));
             }
             v[i] = scalarMultiply(v[i], 1 / M.values[i][i]);
         }
     }
-
     //Reforming the matrix by picking the rows
     Matrix output = newMatrix(M.columns - 1, 1, 0);
     int currentIndex = 0;
@@ -354,41 +366,41 @@ Matrix solveForVectors(Matrix M){
 Matrix eigenVectors(Matrix M) {
     if (M.columns == M.rows) {
         Solutions *eigValues = eigenValues(M);
-        Matrix eigenMatrix = newMatrix(M.rows, 1, 0);
-
-        int nbVectors = 0;
-        for (int n = 0; n < eigValues->size; n++) {
-            char sameEigenValue = 0;
-            for (int i = 0; i < n; i++) if (eigValues->values[i] == eigValues->values[n]) sameEigenValue++;
-            if (sameEigenValue < 1) {
-                Matrix toSolve = M;
-                for (int j = 0; j < M.columns; j++) toSolve.values[j][j] -= eigValues->values[n];
-                Matrix vectors = solveForVectors(solveAugmentedMatrix(addColumn(toSolve)));
-                //freeMatrix(&toSolve);
-                for (int i = 0; i < vectors.columns; i++) {
-                    if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
-                    for (int j = 0; j < vectors.rows; j++) eigenMatrix.values[j][nbVectors] = vectors.values[j][i];
-                    printf("Iteration %d of vector %d (%d Columns) :\n", i, n, vectors.columns);
-                    printMatrix(eigenMatrix);
-                    nbVectors++;
+        if (eigValues) {
+            Matrix eigenMatrix = newMatrix(M.rows, 1, 0);
+            int nbVectors = 0;
+            for (int n = 0; n < eigValues->size; n++) {
+                char sameEigenValue = 0;
+                for (int i = 0; i < n; i++) if (eigValues->values[i] == eigValues->values[n]) sameEigenValue++;
+                if (sameEigenValue < 1) {
+                    Matrix toSolve = copyMatrix(M);
+                    for (int j = 0; j < M.columns; j++) toSolve.values[j][j] -= eigValues->values[n];
+                    Matrix vector = solveForVectors(solveAugmentedMatrix(addColumn(toSolve)));
+                    freeMatrix(&toSolve);
+                    for (int i = 0; i < vector.columns; i++) {
+                        if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
+                        for (int j = 0; j < vector.rows; j++) eigenMatrix.values[j][nbVectors] = vector.values[j][i];
+                        printf("Iteration %d of vector %d (%d Columns) :\n", i, n, vector.columns);
+                        printMatrix(eigenMatrix);
+                        nbVectors++;
+                    }
                 }
             }
+            return completeOrthogonal(eigenMatrix);
         }
-        return completeOrthogonal(eigenMatrix);
-    } else return (Matrix) {NULL, NULL, 0, 0};
+    }
+    return nullMatrix;
 }
 
 Matrix triangularise(Matrix M) {
     Matrix PInverse, P = eigenVectors(M);
-    if ((PInverse = inverse(P)).values != NULL) return multiply(multiply(PInverse, M), P);
-    else return (Matrix) {NULL, NULL, 0, 0};
+    PInverse = inverse(P);
+    if (PInverse.values != NULL) return multiply(multiply(PInverse, M), P);
+    else return nullMatrix;
 }
 
 StringMatrix toStringMatrix(Matrix M) {
     StringMatrix toString = {NULL, malloc(M.rows * sizeof(char**)), M.rows, M.columns};
-    //StringMatrix *toString = malloc(sizeof(StringMatrix));
-    //toString->columns = M.columns; toString->rows = M.rows;
-    //toString->values = malloc(toString->rows * sizeof(char**));
     for (int i = 0; i < M.rows; i++) {
         toString.values[i] = malloc(toString.columns * sizeof(char*));
         for (int j = 0; j < M.columns; j++) {

@@ -1,6 +1,7 @@
 var matrix_8h =
 [
     [ "Matrix", "struct_matrix.html", "struct_matrix" ],
+    [ "nullMatrix", "matrix_8h.html#af1901a7dd2c0c560ff2f2ccbaa7a25d8", null ],
     [ "addColumn", "matrix_8h.html#a25b513770cb502145cd2e83d3773d392", null ],
     [ "adjugate", "matrix_8h.html#acb6de552b14705458a4ec02e89c12a54", null ],
     [ "det", "matrix_8h.html#a9d5223ddf87f9f1b705440d6ed15c24d", null ],

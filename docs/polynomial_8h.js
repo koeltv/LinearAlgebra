@@ -2,6 +2,7 @@ var polynomial_8h =
 [
     [ "Polynomial", "struct_polynomial.html", "struct_polynomial" ],
     [ "Solutions", "struct_solutions.html", "struct_solutions" ],
+    [ "highestCoefficient", "polynomial_8h.html#a957a68be92e588ed6c6e77324375d26c", null ],
     [ "IMAGINARY", "polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3", null ],
     [ "apply", "polynomial_8h.html#a914ab1135dcb9e728016aa9d965d02f3", null ],
     [ "degreeOfString", "polynomial_8h.html#a616af06563603812e1b7b0a9ec7599aa", null ],
@@ -10,6 +11,7 @@ var polynomial_8h =
     [ "newPolynomial", "polynomial_8h.html#aec9af71c655bbe54156f0fdb9437049c", null ],
     [ "newtonMethod", "polynomial_8h.html#a52a4ab9077b67e9c9f5f35eaeca2b3c5", null ],
     [ "pAdd", "polynomial_8h.html#ae5b8ec08d7059fd44c3d471f3c9306a9", null ],
+    [ "pLongDivide", "polynomial_8h.html#addda5af784aabb2b9bee22f4b25e6bc0", null ],
     [ "pMinus", "polynomial_8h.html#abce0590d24a6fecbb226d27eab436dcd", null ],
     [ "pMultiply", "polynomial_8h.html#ae5260d3e8dd97602025200583a6d8745", null ],
     [ "printPolynomial", "polynomial_8h.html#a965b68e19a9066e8b2c5e3af63e2f07b", null ],

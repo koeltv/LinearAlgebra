@@ -110,6 +110,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8c.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">freeRegisterContent</a> (<a class="el" href="struct_register.html">Register</a> *<a class="el" href="main_8c.html#ad7547994e68752257b97cce3bee81f1d">aRegister</a>)</td></tr>
 <tr class="memdesc:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty a register This function free the content of a register but doesn't free it.  <a href="register_8c.html#a02a6b0ebae6a6f54eabeeda7a2c868d4">More...</a><br /></td></tr>
 <tr class="separator:a02a6b0ebae6a6f54eabeeda7a2c868d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8b0d7e5d27fc70b2c196a8b2e460ac9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8c.html#aa8b0d7e5d27fc70b2c196a8b2e460ac9">checkObject</a> (<a class="el" href="struct_object.html">Object</a> input)</td></tr>
+<tr class="memdesc:aa8b0d7e5d27fc70b2c196a8b2e460ac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if an object respects its format This function verifies if an object respect its format and return a null object if it doesn't.  <a href="register_8c.html#aa8b0d7e5d27fc70b2c196a8b2e460ac9">More...</a><br /></td></tr>
+<tr class="separator:aa8b0d7e5d27fc70b2c196a8b2e460ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82ee96281ef797197ecfdecc6da0378b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="register_8c.html#a82ee96281ef797197ecfdecc6da0378b">searchObject</a> (<a class="el" href="struct_register.html">Register</a> *<a class="el" href="main_8c.html#ad7547994e68752257b97cce3bee81f1d">aRegister</a>, const char *name)</td></tr>
 <tr class="memdesc:a82ee96281ef797197ecfdecc6da0378b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for an object in a register This function returns a corresponding object if it exist in the register and it's name matches.  <a href="register_8c.html#a82ee96281ef797197ecfdecc6da0378b">More...</a><br /></td></tr>
 <tr class="separator:a82ee96281ef797197ecfdecc6da0378b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +166,33 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="aa8b0d7e5d27fc70b2c196a8b2e460ac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b0d7e5d27fc70b2c196a8b2e460ac9">&#9670;&nbsp;</a></span>checkObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_object.html">Object</a> checkObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_object.html">Object</a>&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verify if an object respects its format This function verifies if an object respect its format and return a null object if it doesn't. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>- <a class="el" href="struct_object.html" title="Structure representing any type of object.">Object</a> to check </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Result of checking </dd></dl>
 
 </div>
 </div>

@@ -35,6 +35,7 @@ The following commands are not final, they can be used recursively
 `<operation1> + <operation2>` This command return the sum of `<operation1>` and `<operation2>` if they are of the same type (or a polynomial with a variable)  
 `<operation1> - <operation2>` This command return the difference of `<operation1>` and `<operation2>` if they are of the same type (or a polynomial with a variable)  
 `<operation1> * <operation2>` This command return the product of `<operation1>` and `<operation2>` if they are of the same type (or a polynomial/matrix with a variable)  
+`<operation1> / <operation2>` This command return the quotient of `<operation1>` and `<operation2>` if they are of the same type (or a polynomial with a variable)  
 `trans(<operation>)` This command return the transposed of `<operation>`, `<operation>` must be a matrix  
 `adj(<operation>)` This command return the adjugate of `<operation>`, `<operation>` must be a matrix  
 `inv(<operation>)` This command return the inverse of `<operation>`, `<operation>` must be a matrix  

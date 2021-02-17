@@ -21,7 +21,7 @@ void readScriptFile(char *link);
 
 /**
  * Apply a mathematical operation
- * This function apply a simple mathematical operation (sum, difference, multiplication) on 2 objects (polynomial, matrix or variable)
+ * This function apply a simple mathematical operation (sum, difference, multiplication, division) on 2 objects (polynomial, matrix or variable)
  * @param leftOperand - Left part of the operation
  * @param rightOperand - Right part of the operation
  * @param operator - The operation to apply
