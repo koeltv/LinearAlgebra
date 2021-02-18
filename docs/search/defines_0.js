@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['highestcoefficient_287',['highestCoefficient',['../polynomial_8h.html#a957a68be92e588ed6c6e77324375d26c',1,'polynomial.h']]]
+  ['absolute_288',['absolute',['../polynomial_8h.html#a3735c8874502245f418ea1f2afc80019',1,'polynomial.h']]]
 ];

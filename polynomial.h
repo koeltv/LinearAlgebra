@@ -10,6 +10,7 @@
 #include "variable.h"
 
 #define highestCoefficient(F) F.coefficient[F.highestDegree]
+#define absolute(X) (X < 0 ? -X : X)
 
 #define IMAGINARY 12345.54321
 

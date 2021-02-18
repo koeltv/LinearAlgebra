@@ -239,10 +239,10 @@ Polynomial stringToPolynomial(const char *string, int start, int end) {
 
 Polynomial syntheticDivision(Polynomial F, double root) {
     Polynomial quotient = newPolynomial(F.highestDegree - 1);
-    double temp = F.coefficient[F.highestDegree];
+    double temp = highestCoefficient(F);
     
     for (int i = 0, j = 0; i < F.highestDegree; i++) {
-        if (i == 0) quotient.coefficient[quotient.highestDegree - j++] = F.coefficient[F.highestDegree];
+        if (i == 0) quotient.coefficient[quotient.highestDegree - j++] = highestCoefficient(F);
         else {
             temp = temp * root + F.coefficient[F.highestDegree - i];
             quotient.coefficient[quotient.highestDegree - j++] = temp;
@@ -253,27 +253,23 @@ Polynomial syntheticDivision(Polynomial F, double root) {
 
 double newtonMethod(Polynomial F) {
     if (F.highestDegree > 0) {
-        //If the maximum degree is 1, the root is easy to find
-        if (F.highestDegree == 1) return -F.coefficient[0] / F.coefficient[1];
-        else {
-            //Initialisation
-            double x0 = 1, x1, tolerance = 1e-9, epsilon = 1e-15;
-            Polynomial fPrime = derive(F);
-            int maxIterations = 100; char solutionFound = 0;
-            //Application of the method until precision or number of iterations is reached
-            for (int i = 1; i < maxIterations; i++) {
-                double y = apply(F, x0), yPrime = apply(fPrime, x0);
-                if ((yPrime < 0 ? -yPrime : yPrime) < epsilon) break;
-                x1 = x0 - y / yPrime;
-                if ((x1 - x0 < 0 ? -(x1 - x0) : x1 - x0) <= tolerance) {
-                    solutionFound = 1; break;
-                }
-                x0 = x1;
+        //Initialisation
+        double x0 = 1, x1, tolerance = 1e-9, epsilon = 1e-15;
+        Polynomial fPrime = derive(F);
+        char maxIterations = 100, solutionFound = 0;
+        //Application of the method until precision or number of iterations is reached
+        for (int i = 1; i < maxIterations; i++) {
+            double y = apply(F, x0), yPrime = apply(fPrime, x0);
+            if (absolute(yPrime) < epsilon) break;
+            x1 = x0 - y / yPrime;
+            if (absolute(x1 - x0) <= tolerance) {
+                solutionFound = 1; break;
             }
-            //End of the method, free temporary values and return output
-            if (!solutionFound) return IMAGINARY;
-            return x1;
+            x0 = x1;
         }
+        //End of the method, free temporary values and return output
+        if (!solutionFound) return IMAGINARY;
+        return x1;
     } else return IMAGINARY;
 }
 
@@ -284,9 +280,7 @@ int roundDouble(double value) {
 }
 
 double roundPreciseDouble(double value) {
-    double difference = (roundDouble(value)) - value;
-    if (difference < 0) difference *= -1;
-    if (difference < 1e-9) return roundDouble(value);
+    if (absolute((roundDouble(value)) - value) < 1e-9) return roundDouble(value);
     else return value;
 }
 
@@ -294,16 +288,23 @@ Solutions *solve(Polynomial F) {
     if (F.highestDegree > 0) {
         Solutions *x = malloc(sizeof(Solutions));
         *x = (Solutions) {F.highestDegree, malloc(F.highestDegree * sizeof(double))};
-        if (F.highestDegree == 1) { //First degree
-            x->values[0] = -F.coefficient[0] / F.coefficient[1];
-        } else { //Higher degree
-            Polynomial temp = F;
-            for (int i = 0; i < x->size; i++) {
-                double root = roundPreciseDouble(newtonMethod(temp));
-                if (root == IMAGINARY) return NULL;
-                x->values[i] = root;
-                temp = syntheticDivision(temp, x->values[i]);
+        Polynomial temp = F;
+        for (int i = 0; i < x->size; i++) {
+            double root, delta;
+            if (temp.highestDegree == 1) {
+                root = -temp.coefficient[0] / temp.coefficient[1];
+            } else if (temp.highestDegree == 2 && (delta = temp.coefficient[1] * temp.coefficient[1] - 4 * temp.coefficient[2] * temp.coefficient[0]) <= 0) {
+                if (delta == 0) root = (-temp.coefficient[1])/(2 * temp.coefficient[2]);
+                else return NULL;
+            } else {
+                if (apply(temp, 1) == 0) root = 1;
+                else if (apply(temp, -1) == 0) root = -1;
+                else {
+                    root = roundPreciseDouble(newtonMethod(temp));
+                    if (root == IMAGINARY) return NULL;
+                }
             }
+            temp = syntheticDivision(temp, x->values[i] = root);
         }
         return x;
     } else return NULL;
