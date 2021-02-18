@@ -240,7 +240,6 @@ Polynomial stringToPolynomial(const char *string, int start, int end) {
 Polynomial syntheticDivision(Polynomial F, double root) {
     Polynomial quotient = newPolynomial(F.highestDegree - 1);
     double temp = highestCoefficient(F);
-    
     for (int i = 0, j = 0; i < F.highestDegree; i++) {
         if (i == 0) quotient.coefficient[quotient.highestDegree - j++] = highestCoefficient(F);
         else {
@@ -251,12 +250,38 @@ Polynomial syntheticDivision(Polynomial F, double root) {
     return quotient;
 }
 
+double searchNull(Polynomial F) {
+    double leftIndex = 0, rightIndex = 0, temp;
+    Polynomial fPrime = derive(F);
+    for (int i = 0; absolute(apply(fPrime, leftIndex)) < 1000 && absolute(apply(fPrime, rightIndex)) < 1000; i++) {
+        //Search on the left side
+        temp = leftIndex;
+        //Move the index to the left
+        if (apply(fPrime, leftIndex) < 0) leftIndex += apply(fPrime, leftIndex);
+        else leftIndex--;
+        //Verify if 0 is in the interval
+        if (apply(F, leftIndex) == 0) return leftIndex;
+        else if (apply(F, temp) == 0) return temp;
+        else if (apply(F, leftIndex) * apply(F, temp) < 0) return (leftIndex - temp) / 2;
+        //Search on the right side
+        temp = rightIndex;
+        //Move the index to the right
+        if (apply(fPrime, rightIndex) > 0) leftIndex += apply(fPrime, rightIndex);
+        else rightIndex++;
+        //Verify if 0 is in the interval
+        if (apply(F, rightIndex) == 0) return rightIndex;
+        else if (apply(F, temp) == 0) return temp;
+        else if (apply(F, rightIndex) * apply(F, temp) < 0) return (rightIndex - temp) / 2;
+    }
+    return 1;
+}
+
 double newtonMethod(Polynomial F) {
     if (F.highestDegree > 0) {
         //Initialisation
-        double x0 = 1, x1, tolerance = 1e-9, epsilon = 1e-15;
+        double x0 = searchNull(F), x1, tolerance = 1e-9, epsilon = 1e-15;
         Polynomial fPrime = derive(F);
-        char maxIterations = 100, solutionFound = 0;
+        char maxIterations = 50, solutionFound = 0;
         //Application of the method until precision or number of iterations is reached
         for (int i = 1; i < maxIterations; i++) {
             double y = apply(F, x0), yPrime = apply(fPrime, x0);
@@ -268,20 +293,10 @@ double newtonMethod(Polynomial F) {
             x0 = x1;
         }
         //End of the method, free temporary values and return output
-        if (!solutionFound) return IMAGINARY;
-        return x1;
-    } else return IMAGINARY;
-}
-
-int roundDouble(double value) {
-    int intPart = (int) value;
-    if (value >= intPart + 0.5) return intPart + 1;
-    else return intPart;
-}
-
-double roundPreciseDouble(double value) {
-    if (absolute((roundDouble(value)) - value) < 1e-9) return roundDouble(value);
-    else return value;
+        freePolynomial(&fPrime);
+        if (solutionFound) return x1;
+    }
+    return IMAGINARY;
 }
 
 Solutions *solve(Polynomial F) {
@@ -291,20 +306,26 @@ Solutions *solve(Polynomial F) {
         Polynomial temp = F;
         for (int i = 0; i < x->size; i++) {
             double root, delta;
-            if (temp.highestDegree == 1) {
+            if (i > 0 && absolute(apply(temp, x->values[i-1])) < 1e-5) { //If there is at least 2 times the same root
+                root = x->values[i-1];
+            } else if (temp.highestDegree == 1) { //x0 = -c/b
                 root = -temp.coefficient[0] / temp.coefficient[1];
-            } else if (temp.highestDegree == 2 && (delta = temp.coefficient[1] * temp.coefficient[1] - 4 * temp.coefficient[2] * temp.coefficient[0]) <= 0) {
-                if (delta == 0) root = (-temp.coefficient[1])/(2 * temp.coefficient[2]);
-                else return NULL;
-            } else {
-                if (apply(temp, 1) == 0) root = 1;
-                else if (apply(temp, -1) == 0) root = -1;
+            } else if (temp.highestDegree == 2) { //x = (-b^2 +/- sqrt(delta))/(2a)
+                delta = temp.coefficient[1] * temp.coefficient[1] - 4 * temp.coefficient[2] * temp.coefficient[0];
+                if (delta < 0) return NULL;
+                else if (delta == 0) root = (-temp.coefficient[1])/(2 * temp.coefficient[2]);
                 else {
-                    root = roundPreciseDouble(newtonMethod(temp));
-                    if (root == IMAGINARY) return NULL;
+                    double squareRoot= roundPreciseDouble(sqrt(delta));
+                    x->values[i] = (-temp.coefficient[1] - squareRoot) / (2 * temp.coefficient[2]);
+                    root = (-temp.coefficient[1] + squareRoot) / (2 * temp.coefficient[2]);
+                    temp = syntheticDivision(temp, x->values[i]); i++;
                 }
+            } else { //Degree higher than 2
+                root = newtonMethod(temp);
+                if (root == IMAGINARY) return NULL;
             }
-            temp = syntheticDivision(temp, x->values[i] = root);
+            x->values[i] = roundPreciseDouble(root);
+            temp = syntheticDivision(temp, root);
         }
         return x;
     } else return NULL;
@@ -313,7 +334,7 @@ Solutions *solve(Polynomial F) {
 void printSolutions(Solutions *x) {
     if (x && x->size > 0) {
         printf("{%1.2lf", x->values[0]);
-        for (int i = 1; i < x->size; i++) printf(", %1.2lf", x->values[1]);
+        for (int i = 1; i < x->size; i++) printf(", %1.2lf", x->values[i]);
         printf("}\n");
     } else printf("No solutions or some are complex numbers\n");
 }

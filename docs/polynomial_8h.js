@@ -2,7 +2,6 @@ var polynomial_8h =
 [
     [ "Polynomial", "struct_polynomial.html", "struct_polynomial" ],
     [ "Solutions", "struct_solutions.html", "struct_solutions" ],
-    [ "absolute", "polynomial_8h.html#a3735c8874502245f418ea1f2afc80019", null ],
     [ "highestCoefficient", "polynomial_8h.html#a957a68be92e588ed6c6e77324375d26c", null ],
     [ "IMAGINARY", "polynomial_8h.html#aa35de4191580967b40efde73bc47b2b3", null ],
     [ "apply", "polynomial_8h.html#a914ab1135dcb9e728016aa9d965d02f3", null ],

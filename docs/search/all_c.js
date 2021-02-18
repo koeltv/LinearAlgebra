@@ -15,7 +15,7 @@ var searchData=
   ['removerow_109',['removeRow',['../matrix_8c.html#a035ffa3b4669203f9602c70fbd41ce45',1,'removeRow(Matrix M, int rowIndex):&#160;matrix.c'],['../matrix_8h.html#a035ffa3b4669203f9602c70fbd41ce45',1,'removeRow(Matrix M, int rowIndex):&#160;matrix.c']]],
   ['removescolumn_110',['removeSColumn',['../string_interactions_8c.html#a373ccb2f633f2a129b8a51b0053e9851',1,'removeSColumn(StringMatrix M, int columnIndex):&#160;stringInteractions.c'],['../string_interactions_8h.html#a373ccb2f633f2a129b8a51b0053e9851',1,'removeSColumn(StringMatrix M, int columnIndex):&#160;stringInteractions.c']]],
   ['removesrow_111',['removeSRow',['../string_interactions_8c.html#a4c69f9c4dea670968f283dbcc80d3c5b',1,'removeSRow(StringMatrix M, int rowIndex):&#160;stringInteractions.c'],['../string_interactions_8h.html#a4c69f9c4dea670968f283dbcc80d3c5b',1,'removeSRow(StringMatrix M, int rowIndex):&#160;stringInteractions.c']]],
-  ['rounddouble_112',['roundDouble',['../polynomial_8c.html#ab13aeade21a0390dd19a271f59821d3b',1,'polynomial.c']]],
-  ['roundprecisedouble_113',['roundPreciseDouble',['../polynomial_8c.html#adfc67226e5a94920949f739f91e9b2f0',1,'polynomial.c']]],
+  ['rounddouble_112',['roundDouble',['../variable_8c.html#ab13aeade21a0390dd19a271f59821d3b',1,'roundDouble(double value):&#160;variable.c'],['../variable_8h.html#ab13aeade21a0390dd19a271f59821d3b',1,'roundDouble(double value):&#160;variable.c']]],
+  ['roundprecisedouble_113',['roundPreciseDouble',['../variable_8c.html#adfc67226e5a94920949f739f91e9b2f0',1,'roundPreciseDouble(double value):&#160;variable.c'],['../variable_8h.html#adfc67226e5a94920949f739f91e9b2f0',1,'roundPreciseDouble(double value):&#160;variable.c']]],
   ['rows_114',['rows',['../struct_matrix.html#a061459acc9e078fa4699e0e349887215',1,'Matrix::rows()'],['../struct_string_matrix.html#a061459acc9e078fa4699e0e349887215',1,'StringMatrix::rows()']]]
 ];

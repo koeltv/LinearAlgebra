@@ -47,4 +47,36 @@ void freeVariable(Variable *toFree);
  */
 void printVariable(Variable variable);
 
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// Basic mathematical operators
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * Absolute value
+ * @param x - Input value
+ * @return |x|
+ */
+double absolute(double x);
+
+/**
+ * Square root
+ * @param x - Input value
+ * @return Square root of x
+ */
+double sqrt(double x);
+
+/**
+ * Round double to integer
+ * @param value - Value to round
+ * @return rounded value
+ */
+int roundDouble(double value);
+
+/**
+ * Reduce precision of a double
+ * This function take a double and round it up to a lower precision (1e-9)
+ * @param value - Value to round
+ * @return rounded double
+ */
+double roundPreciseDouble(double value);
+
 #endif //LINEARALGEBRA_VARIABLE_H

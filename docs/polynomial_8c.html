@@ -151,13 +151,11 @@ Functions</h2></td></tr>
 <tr class="memitem:a24d6234e3b795913c854fd856a9ac641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a24d6234e3b795913c854fd856a9ac641">syntheticDivision</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F, double root)</td></tr>
 <tr class="memdesc:a24d6234e3b795913c854fd856a9ac641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synthetic division of a polynomial This function return a polynomial with 1 degree less than the given polynomial by dividing it by "X - &lt;root&gt;".  <a href="polynomial_8c.html#a24d6234e3b795913c854fd856a9ac641">More...</a><br /></td></tr>
 <tr class="separator:a24d6234e3b795913c854fd856a9ac641"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a218b543ad49241734abebfa4ebe42bb1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a218b543ad49241734abebfa4ebe42bb1">searchNull</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
+<tr class="separator:a218b543ad49241734abebfa4ebe42bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a52a4ab9077b67e9c9f5f35eaeca2b3c5">newtonMethod</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
 <tr class="memdesc:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application of the Newton Method This function apply the Newton Method to find a root of the given polynomial.  <a href="polynomial_8c.html#a52a4ab9077b67e9c9f5f35eaeca2b3c5">More...</a><br /></td></tr>
 <tr class="separator:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab13aeade21a0390dd19a271f59821d3b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#ab13aeade21a0390dd19a271f59821d3b">roundDouble</a> (double <a class="el" href="help_8txt.html#a00abc769984d5660a45f53633415d0f8">value</a>)</td></tr>
-<tr class="separator:ab13aeade21a0390dd19a271f59821d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfc67226e5a94920949f739f91e9b2f0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#adfc67226e5a94920949f739f91e9b2f0">roundPreciseDouble</a> (double <a class="el" href="help_8txt.html#a00abc769984d5660a45f53633415d0f8">value</a>)</td></tr>
-<tr class="separator:adfc67226e5a94920949f739f91e9b2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7de977bd783b32c03df11e4bacd579a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a7de977bd783b32c03df11e4bacd579a0">solve</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
 <tr class="memdesc:a7de977bd783b32c03df11e4bacd579a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the roots of a polynomial This function return the roots of a given polynomial of any degree.  <a href="polynomial_8c.html#a7de977bd783b32c03df11e4bacd579a0">More...</a><br /></td></tr>
 <tr class="separator:a7de977bd783b32c03df11e4bacd579a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -661,35 +659,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab13aeade21a0390dd19a271f59821d3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab13aeade21a0390dd19a271f59821d3b">&#9670;&nbsp;</a></span>roundDouble()</h2>
+<a id="a218b543ad49241734abebfa4ebe42bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218b543ad49241734abebfa4ebe42bb1">&#9670;&nbsp;</a></span>searchNull()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int roundDouble </td>
+          <td class="memname">double searchNull </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adfc67226e5a94920949f739f91e9b2f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfc67226e5a94920949f739f91e9b2f0">&#9670;&nbsp;</a></span>roundPreciseDouble()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double roundPreciseDouble </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td>
+          <td class="paramname"><em>F</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

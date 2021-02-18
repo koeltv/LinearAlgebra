@@ -380,8 +380,8 @@ Matrix eigenVectors(Matrix M) {
                     for (int i = 0; i < vector.columns; i++) {
                         if (nbVectors != 0) eigenMatrix = addColumn(eigenMatrix);
                         for (int j = 0; j < vector.rows; j++) eigenMatrix.values[j][nbVectors] = vector.values[j][i];
-                        printf("Iteration %d of vector %d (%d Columns) :\n", i, n, vector.columns);
-                        printMatrix(eigenMatrix);
+                        //printf("Iteration %d of vector %d (%d Columns) :\n", i, n, vector.columns);
+                        //printMatrix(eigenMatrix);
                         nbVectors++;
                     }
                 }
