@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_0',['a',['../help_8txt.html#ae3e7a579c88b8ec7217edb86611d7666',1,'help.txt']]],
+  ['a_0',['a',['../help_8txt.html#a57e05cac98da3234d8aabb37d6559953',1,'help.txt']]],
   ['absolute_1',['absolute',['../variable_8c.html#a2d35ae1367c850c6de9605ad1e8d32c3',1,'absolute(double x):&#160;variable.c'],['../variable_8h.html#a2d35ae1367c850c6de9605ad1e8d32c3',1,'absolute(double x):&#160;variable.c']]],
   ['addcolumn_2',['addColumn',['../matrix_8c.html#a25b513770cb502145cd2e83d3773d392',1,'addColumn(Matrix M):&#160;matrix.c'],['../matrix_8h.html#a25b513770cb502145cd2e83d3773d392',1,'addColumn(Matrix M):&#160;matrix.c']]],
   ['addtoregister_3',['addToRegister',['../register_8c.html#a7e8fae92938ca70f54f0be03c216a0d5',1,'addToRegister(Register *aRegister, Object toAdd):&#160;register.c'],['../register_8h.html#a7e8fae92938ca70f54f0be03c216a0d5',1,'addToRegister(Register *aRegister, Object toAdd):&#160;register.c']]],

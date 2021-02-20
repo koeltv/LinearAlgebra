@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['polynomial_151',['Polynomial',['../struct_polynomial.html',1,'']]]
+  ['polynomial_154',['Polynomial',['../struct_polynomial.html',1,'']]]
 ];

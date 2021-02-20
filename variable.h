@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define IMAGINARY 12345.54321
+
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -56,6 +58,14 @@ void printVariable(Variable variable);
  * @return |x|
  */
 double absolute(double x);
+
+/**
+ * Double multiplied to a certain power
+ * @param x - Value to multiply to the power
+ * @param power - Power to apply
+ * @return x^power
+ */
+double power(double x, int power);
 
 /**
  * Square root

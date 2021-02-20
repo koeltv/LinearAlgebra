@@ -116,11 +116,18 @@ char operatorWithoutDepth(const char *string);
 void nextOperator(const char *string, int *firstIndex, int *secondIndex);
 
 /**
- * Verify if the string contain a number
+ * Verify if the string only contain a number
  * @param string - String to scan
  * @return result of the scan
  */
-char containValue(const char *string);
+char onlyContainValue(const char *string);
+
+/**
+ * Verify if the string only contain a valid polynomial coefficient
+ * @param string - String to scan
+ * @return result of the scan
+ */
+char isValidPolynomial(const char *string);
 
 /**
  * Verify if everything is between parenthesis
@@ -149,7 +156,7 @@ double readDoubleInString(const char *string, int *position);
  * @param link - Link of the file to read
  * @param output - Buffer where the content while be outputted
  */
-void printFileContent(char *link, FILE *output);
+void printFileContent(const char *link, FILE *output);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Matrix interactions
@@ -170,10 +177,9 @@ typedef struct {
  * This function create a matrix with strings as values, this is used to handle matrix with variables
  * @param nbRows - number of rows of the matrix
  * @param nbColumns - number of columns of the matrix
- * @param initialValue - values to initialise the element to
  * @return created string matrix
  */
-StringMatrix newStringMatrix(int nbRows, int nbColumns, char *initialValue);
+StringMatrix newStringMatrix(int nbRows, int nbColumns);
 
 /**
  * Remove a row in a string matrix

@@ -141,19 +141,22 @@ void printRegister(Register *aRegister) {
     if (aRegister->listOfPolynomials) {
         printf("===============Polynomials================\n");
         for (int i = 0; i < aRegister->sizes[POLYNOMIAL]; i++) {
-            printPolynomial(aRegister->listOfPolynomials[i]); printf("\n");
+            if (i != 0) printf("\n");
+            printPolynomial(aRegister->listOfPolynomials[i]);
         }
     }
     if (aRegister->listOfMatrices) {
         printf("=================Matrices=================\n");
         for (int i = 0; i < aRegister->sizes[MATRIX]; i++) {
-            printMatrix(aRegister->listOfMatrices[i]); printf("\n");
+            if (i != 0) printf("\n");
+            printMatrix(aRegister->listOfMatrices[i]);
         }
     }
     if (aRegister->listOfVariables) {
         printf("=================Variables=================\n");
         for (int i = 0; i < aRegister->sizes[VARIABLE]; i++) {
-            printVariable(aRegister->listOfVariables[i]); printf("\n");
+            if (i != 0) printf("\n");
+            printVariable(aRegister->listOfVariables[i]);
         }
     }
     if (!aRegister->listOfPolynomials && !aRegister->listOfMatrices && !aRegister->listOfVariables) printf("The register is empty\n");

@@ -5,18 +5,15 @@ var matrix_8c =
     [ "completeOrthogonal", "matrix_8c.html#ae343c71faec82d660e2bc3c466423886", null ],
     [ "copyMatrix", "matrix_8c.html#aee984bfb5d76558b9af4de1b55bbb9fc", null ],
     [ "det", "matrix_8c.html#a9d5223ddf87f9f1b705440d6ed15c24d", null ],
-    [ "eigenValues", "matrix_8c.html#a4b16bf012294bdc7d18f64722c9f5236", null ],
-    [ "eigenVectors", "matrix_8c.html#a52af984a585b8e82bf3ef7754a0aa32a", null ],
     [ "freeMatrix", "matrix_8c.html#a8eb3a32f94e337a2b85e9a7639f8cd62", null ],
     [ "inverse", "matrix_8c.html#a30852f21947f6f4b473acb94a47d9a85", null ],
     [ "isColumnEmpty", "matrix_8c.html#afc141ace3c9f6e0236fd11cf5188f998", null ],
     [ "isRowEmpty", "matrix_8c.html#ab6d28d0b9ac752c4191e04b5ba784620", null ],
     [ "minus", "matrix_8c.html#a4f07f63887d523d414a451f40f4bf8ea", null ],
     [ "multiply", "matrix_8c.html#a8db58b03611ec258a066a220a2b521c9", null ],
-    [ "newMatrix", "matrix_8c.html#a44f5bc65602dd850d62f95e60b67d2e6", null ],
+    [ "newMatrix", "matrix_8c.html#a4f7335f996977365e415c1bd11b3d941", null ],
     [ "orthogonal", "matrix_8c.html#a4dec2c6dab80abe835a09931bb53e8ee", null ],
     [ "printMatrix", "matrix_8c.html#a633fc3d6a82e7907b9c5c9af5bf4f9f3", null ],
-    [ "readMatrixInString", "matrix_8c.html#a51383ad449f9626b6e02a2c74d7c4bb5", null ],
     [ "removeColumn", "matrix_8c.html#a6100e24d7ff4874cf71b4799a1261e85", null ],
     [ "removeRow", "matrix_8c.html#a035ffa3b4669203f9602c70fbd41ce45", null ],
     [ "scalarMultiply", "matrix_8c.html#aef583c32e01f5ba72a5501605b0356b3", null ],
@@ -27,6 +24,5 @@ var matrix_8c =
     [ "swapRows", "matrix_8c.html#a5740ba36f3c94882a15e9f0e64b81c5e", null ],
     [ "toStringMatrix", "matrix_8c.html#a8c78aec1c71fd7635ebfa9b079c08df2", null ],
     [ "trace", "matrix_8c.html#a871b9d454d0dd1b5c48e0bfa1dc925c9", null ],
-    [ "transpose", "matrix_8c.html#a9357d0c916abe0ee385a4bf54a034a80", null ],
-    [ "triangularise", "matrix_8c.html#a8b3ead8b46289c66e358b16557781a12", null ]
+    [ "transpose", "matrix_8c.html#a9357d0c916abe0ee385a4bf54a034a80", null ]
 ];

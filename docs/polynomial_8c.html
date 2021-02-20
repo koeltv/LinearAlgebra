@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Linear Algebra Solver
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">v1.2</span>
    </div>
    <div id="projectbrief">Simple command line program to interact with matrix and functions</div>
   </td>
@@ -110,6 +110,11 @@ Functions</h2></td></tr>
 <tr class="memitem:aec9af71c655bbe54156f0fdb9437049c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#aec9af71c655bbe54156f0fdb9437049c">newPolynomial</a> (int degree)</td></tr>
 <tr class="memdesc:aec9af71c655bbe54156f0fdb9437049c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty polynomial of the given degree.  <a href="polynomial_8c.html#aec9af71c655bbe54156f0fdb9437049c">More...</a><br /></td></tr>
 <tr class="separator:aec9af71c655bbe54156f0fdb9437049c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25857c4f6855412061a48716a0b08087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a25857c4f6855412061a48716a0b08087">stringToPolynomial</a> (const char *string)</td></tr>
+<tr class="memdesc:a25857c4f6855412061a48716a0b08087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to a polynomial This function return a polynomial created from a string.  <a href="polynomial_8c.html#a25857c4f6855412061a48716a0b08087">More...</a><br /></td></tr>
+<tr class="separator:a25857c4f6855412061a48716a0b08087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484e0b9ecdeea485336f2caf79c5ccd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a484e0b9ecdeea485336f2caf79c5ccd0">copyPolynomial</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
+<tr class="separator:a484e0b9ecdeea485336f2caf79c5ccd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae70a1fbf38c3b877137c4e90f4368a9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#ae70a1fbf38c3b877137c4e90f4368a9a">freePolynomial</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F)</td></tr>
 <tr class="memdesc:ae70a1fbf38c3b877137c4e90f4368a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free an existing polynomial This function free an existing polynomial and change its pointer to NULL if it worked successfully.  <a href="polynomial_8c.html#ae70a1fbf38c3b877137c4e90f4368a9a">More...</a><br /></td></tr>
 <tr class="separator:ae70a1fbf38c3b877137c4e90f4368a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,9 +127,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a965b68e19a9066e8b2c5e3af63e2f07b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a965b68e19a9066e8b2c5e3af63e2f07b">printPolynomial</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
 <tr class="memdesc:a965b68e19a9066e8b2c5e3af63e2f07b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a polynomial Print a given polynomial in the terminal.  <a href="polynomial_8c.html#a965b68e19a9066e8b2c5e3af63e2f07b">More...</a><br /></td></tr>
 <tr class="separator:a965b68e19a9066e8b2c5e3af63e2f07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a616af06563603812e1b7b0a9ec7599aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a616af06563603812e1b7b0a9ec7599aa">degreeOfString</a> (const char *string, int start, int end)</td></tr>
-<tr class="memdesc:a616af06563603812e1b7b0a9ec7599aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Degree of a polynomial in string format This function return the degree of a polynomial in string format.  <a href="polynomial_8c.html#a616af06563603812e1b7b0a9ec7599aa">More...</a><br /></td></tr>
-<tr class="separator:a616af06563603812e1b7b0a9ec7599aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa651d720e89ac85df1a2f6b0f09c7105"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#aa651d720e89ac85df1a2f6b0f09c7105">eliminateNullCoefficients</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> *F)</td></tr>
 <tr class="separator:aa651d720e89ac85df1a2f6b0f09c7105"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5b8ec08d7059fd44c3d471f3c9306a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#ae5b8ec08d7059fd44c3d471f3c9306a9">pAdd</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F, <a class="el" href="struct_polynomial.html">Polynomial</a> G)</td></tr>
@@ -141,13 +143,6 @@ Functions</h2></td></tr>
 <tr class="memitem:addda5af784aabb2b9bee22f4b25e6bc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#addda5af784aabb2b9bee22f4b25e6bc0">pLongDivide</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> numerator, <a class="el" href="struct_polynomial.html">Polynomial</a> denominator)</td></tr>
 <tr class="memdesc:addda5af784aabb2b9bee22f4b25e6bc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divide polynomials This function return the division of 2 polynomials using the long division method.  <a href="polynomial_8c.html#addda5af784aabb2b9bee22f4b25e6bc0">More...</a><br /></td></tr>
 <tr class="separator:addda5af784aabb2b9bee22f4b25e6bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca5a9ef03885e09a0fbf96fc8b349e6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#aca5a9ef03885e09a0fbf96fc8b349e6a">next</a> (const char *string, int *start)</td></tr>
-<tr class="separator:aca5a9ef03885e09a0fbf96fc8b349e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f48a11fd65fbd60ccb934933af5bb80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a4f48a11fd65fbd60ccb934933af5bb80">readFirstCoefficient</a> (const char *string, int *start)</td></tr>
-<tr class="separator:a4f48a11fd65fbd60ccb934933af5bb80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a311c6f0307007d1933dd5eb9d2f85713"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a311c6f0307007d1933dd5eb9d2f85713">stringToPolynomial</a> (const char *string, int start, int end)</td></tr>
-<tr class="memdesc:a311c6f0307007d1933dd5eb9d2f85713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a string to a polynomial This function return a polynomial created from a string.  <a href="polynomial_8c.html#a311c6f0307007d1933dd5eb9d2f85713">More...</a><br /></td></tr>
-<tr class="separator:a311c6f0307007d1933dd5eb9d2f85713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24d6234e3b795913c854fd856a9ac641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a24d6234e3b795913c854fd856a9ac641">syntheticDivision</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F, double root)</td></tr>
 <tr class="memdesc:a24d6234e3b795913c854fd856a9ac641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synthetic division of a polynomial This function return a polynomial with 1 degree less than the given polynomial by dividing it by "X - &lt;root&gt;".  <a href="polynomial_8c.html#a24d6234e3b795913c854fd856a9ac641">More...</a><br /></td></tr>
 <tr class="separator:a24d6234e3b795913c854fd856a9ac641"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,6 +151,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a52a4ab9077b67e9c9f5f35eaeca2b3c5">newtonMethod</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
 <tr class="memdesc:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application of the Newton Method This function apply the Newton Method to find a root of the given polynomial.  <a href="polynomial_8c.html#a52a4ab9077b67e9c9f5f35eaeca2b3c5">More...</a><br /></td></tr>
 <tr class="separator:a52a4ab9077b67e9c9f5f35eaeca2b3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc54a5f4b68112d02b3590a63bc3373f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#abc54a5f4b68112d02b3590a63bc3373f">depress</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
+<tr class="separator:abc54a5f4b68112d02b3590a63bc3373f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7de977bd783b32c03df11e4bacd579a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="polynomial_8c.html#a7de977bd783b32c03df11e4bacd579a0">solve</a> (<a class="el" href="struct_polynomial.html">Polynomial</a> F)</td></tr>
 <tr class="memdesc:a7de977bd783b32c03df11e4bacd579a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the roots of a polynomial This function return the roots of a given polynomial of any degree.  <a href="polynomial_8c.html#a7de977bd783b32c03df11e4bacd579a0">More...</a><br /></td></tr>
 <tr class="separator:a7de977bd783b32c03df11e4bacd579a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,48 +206,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a616af06563603812e1b7b0a9ec7599aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a616af06563603812e1b7b0a9ec7599aa">&#9670;&nbsp;</a></span>degreeOfString()</h2>
+<a id="a484e0b9ecdeea485336f2caf79c5ccd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a484e0b9ecdeea485336f2caf79c5ccd0">&#9670;&nbsp;</a></span>copyPolynomial()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int degreeOfString </td>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> copyPolynomial </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td>
+          <td class="paramname"><em>F</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>end</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Degree of a polynomial in string format This function return the degree of a polynomial in string format. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">string</td><td>- The polynomial in string format </td></tr>
-    <tr><td class="paramname">start</td><td>- The starting index of the string </td></tr>
-    <tr><td class="paramname">end</td><td>- The end index of the string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>degree of the polynomial </dd></dl>
+</div>
+</div>
+<a id="abc54a5f4b68112d02b3590a63bc3373f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc54a5f4b68112d02b3590a63bc3373f">&#9670;&nbsp;</a></span>depress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> depress </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_polynomial.html">Polynomial</a>&#160;</td>
+          <td class="paramname"><em>F</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -398,34 +386,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aca5a9ef03885e09a0fbf96fc8b349e6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca5a9ef03885e09a0fbf96fc8b349e6a">&#9670;&nbsp;</a></span>next()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> next </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>start</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="ae5b8ec08d7059fd44c3d471f3c9306a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5b8ec08d7059fd44c3d471f3c9306a9">&#9670;&nbsp;</a></span>pAdd()</h2>
 
@@ -494,12 +454,12 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>If there is a remainder, it will be printed in the terminal but it won't be integrated in the result </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">F</td><td>- first polynomial </td></tr>
-    <tr><td class="paramname">G</td><td>- second polynomial </td></tr>
+    <tr><td class="paramname">numerator</td><td>- first polynomial </td></tr>
+    <tr><td class="paramname">denominator</td><td>- second polynomial </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>F / G </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>numerator / denominator </dd></dl>
 
 </div>
 </div>
@@ -631,34 +591,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4f48a11fd65fbd60ccb934933af5bb80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f48a11fd65fbd60ccb934933af5bb80">&#9670;&nbsp;</a></span>readFirstCoefficient()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> readFirstCoefficient </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>start</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a218b543ad49241734abebfa4ebe42bb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a218b543ad49241734abebfa4ebe42bb1">&#9670;&nbsp;</a></span>searchNull()</h2>
 
@@ -705,8 +637,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a311c6f0307007d1933dd5eb9d2f85713"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a311c6f0307007d1933dd5eb9d2f85713">&#9670;&nbsp;</a></span>stringToPolynomial()</h2>
+<a id="a25857c4f6855412061a48716a0b08087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25857c4f6855412061a48716a0b08087">&#9670;&nbsp;</a></span>stringToPolynomial()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -715,24 +647,8 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="struct_polynomial.html">Polynomial</a> stringToPolynomial </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>string</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>end</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

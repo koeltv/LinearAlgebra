@@ -28,22 +28,13 @@ typedef struct {
 // Construction functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 /**
- * Current read a matrix in string
- * This function read a matrix in a string given a specific format and return a matrix structure made from it
- * @param link
- * @return matrix formed from the file
- */
-Matrix readMatrixInString(char *string);
-
-/**
  * Create a simple matrix
- * This function create a simple matrix with the given number of columns and rows and with it's values initialized with the given value
+ * This function create a simple matrix with the given number of columns and rows
  * @param nbRows - number of rows of the matrix to create
  * @param nbColumns - number of columns of the matrix to create
- * @param initialValue - initial value for each element of the matrix
- * @return initialized matrix
+ * @return New matrix
  */
-Matrix newMatrix(int nbRows, int nbColumns, double initialValue);
+Matrix newMatrix(int nbRows, int nbColumns);
 
 /**
  * Free an existing matrix
@@ -97,6 +88,14 @@ Matrix subMat(Matrix M, int r1, int r2, int c1, int c2);
  * @return
  */
 StringMatrix toStringMatrix(Matrix M);
+
+/**
+ * Copy a matrix
+ * This function returns a copy of a given matrix
+ * @param M - The matrix to copy
+ * @return The copy of the given matrix
+ */
+Matrix copyMatrix(Matrix M);
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
@@ -192,35 +191,27 @@ Matrix adjugate(Matrix M);
 Matrix inverse(Matrix M);
 
 /**
- * (WIP) Resolution of an augmented matrix
+ * Resolution of an augmented matrix
  * This function return the given augmented matrix in a solvable format
  * @param M - the given augmented matrix
- * @return solvable augmented matrix
+ * @return Solvable augmented matrix
  */
 Matrix solveAugmentedMatrix(Matrix M);
 
 /**
- * Eigen values of a matrix
- * This function return the eigen values of a given matrix
- * @param M  - the given matrix
- * @return eigen values of M
+ * Find eigen vectors of a given matrix
+ * This function returns a basis of eigen vectors of a given matrix in matrix form
+ * @param M - The given matrix
+ * @return Basis of eigen vectors
  */
-Solutions *eigenValues(Matrix M);
+Matrix solveForVectors(Matrix M);
 
 /**
- * Eigen vectors of a matrix
- * This function return the eigen vectors of a given matrix in a matrix form
- * @param M - the given matrix
- * @return eigen vectors in matrix form
+ * Complete a basis of vector
+ * This function complete a matrix containing vectors so that all vectors are orthogonal
+ * @param M - The basis of vector (in matrix form)
+ * @return Completed basis
  */
-Matrix eigenVectors(Matrix M);
-
-/**
- * Triangularise a matrix
- * This function triangularise (or diagonalise) a given matrix
- * @param M - the given matrix
- * @return triangularised M
- */
-Matrix triangularise(Matrix M);
+Matrix completeOrthogonal(Matrix M);
 
 #endif //LINEARALGEBRA_MATRIX_H

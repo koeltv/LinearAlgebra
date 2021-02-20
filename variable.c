@@ -24,14 +24,25 @@ double absolute(double x) {
     return x >= 0 ? x : -x;
 }
 
+double power(double x, int power) {
+    if (power == 0) return 1;
+    else if (power < 0) {
+        x = 1 / x; power *= -1;
+    }
+    double result = x;
+    for (int i = 1; i < power; i++) result *= x;
+    return result;
+}
+
 double sqrt(double x) {
-    if (x > 0) {
-        double squareRoot = x, precision = 1e-9;
-        for (int i = 0; i < 1000 && absolute(x - squareRoot * squareRoot) > precision; i++) {
-            squareRoot = (squareRoot + x / squareRoot) / 2;
-        }
+    if (x < 0) {
+        return IMAGINARY;
+    } else {
+        if (x == 0 || x == 1) return x;
+        double squareRoot = x;
+        for (int i = 0; i < 100 && absolute(x - power(squareRoot, 2)) >= 1e-9; i++) squareRoot = (squareRoot + x / squareRoot) / 2;
         return squareRoot;
-    } else return x;
+    }
 }
 
 int roundDouble(double value) {

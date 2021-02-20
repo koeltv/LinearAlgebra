@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Linear Algebra Solver
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">v1.2</span>
    </div>
    <div id="projectbrief">Simple command line program to interact with matrix and functions</div>
   </td>
@@ -108,21 +108,33 @@ $(document).ready(function(){initNavTree('main_8c.html',''); initResizable(); })
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af11e4a0a47699eb2cbdb493b5ff403db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af11e4a0a47699eb2cbdb493b5ff403db">readScriptFile</a> (char *link)</td></tr>
-<tr class="memdesc:af11e4a0a47699eb2cbdb493b5ff403db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read and apply a script file This function read a given file and apply the commands in it line by line.  <a href="main_8c.html#af11e4a0a47699eb2cbdb493b5ff403db">More...</a><br /></td></tr>
-<tr class="separator:af11e4a0a47699eb2cbdb493b5ff403db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6064948dc8fbf3fd17db244a1714136"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ae6064948dc8fbf3fd17db244a1714136">extractObject</a> (char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
-<tr class="memdesc:ae6064948dc8fbf3fd17db244a1714136"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a basic object from a string This function recuperate a basic object (existing or created)  <a href="main_8c.html#ae6064948dc8fbf3fd17db244a1714136">More...</a><br /></td></tr>
-<tr class="separator:ae6064948dc8fbf3fd17db244a1714136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64bda4a29dd98357f512115139569eb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a64bda4a29dd98357f512115139569eb8">readMatrixInString</a> (const char *string)</td></tr>
+<tr class="memdesc:a64bda4a29dd98357f512115139569eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a matrix in a string This function read a matrix in a string given a specific format and return a matrix structure made from it.  <a href="main_8c.html#a64bda4a29dd98357f512115139569eb8">More...</a><br /></td></tr>
+<tr class="separator:a64bda4a29dd98357f512115139569eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b16bf012294bdc7d18f64722c9f5236"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_solutions.html">Solutions</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4b16bf012294bdc7d18f64722c9f5236">eigenValues</a> (<a class="el" href="struct_matrix.html">Matrix</a> <a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a4b16bf012294bdc7d18f64722c9f5236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eigen values of a matrix This function return the eigen values of a given matrix.  <a href="main_8c.html#a4b16bf012294bdc7d18f64722c9f5236">More...</a><br /></td></tr>
+<tr class="separator:a4b16bf012294bdc7d18f64722c9f5236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52af984a585b8e82bf3ef7754a0aa32a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a52af984a585b8e82bf3ef7754a0aa32a">eigenVectors</a> (<a class="el" href="struct_matrix.html">Matrix</a> <a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a52af984a585b8e82bf3ef7754a0aa32a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eigen vectors of a matrix This function return the eigen vectors of a given matrix in a matrix form.  <a href="main_8c.html#a52af984a585b8e82bf3ef7754a0aa32a">More...</a><br /></td></tr>
+<tr class="separator:a52af984a585b8e82bf3ef7754a0aa32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3ead8b46289c66e358b16557781a12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a8b3ead8b46289c66e358b16557781a12">triangularise</a> (<a class="el" href="struct_matrix.html">Matrix</a> <a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>)</td></tr>
+<tr class="memdesc:a8b3ead8b46289c66e358b16557781a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triangularise a matrix This function triangularise (or diagonalise if possible) a given matrix.  <a href="main_8c.html#a8b3ead8b46289c66e358b16557781a12">More...</a><br /></td></tr>
+<tr class="separator:a8b3ead8b46289c66e358b16557781a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4135ebf083da07879cea7b99feef2bf1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a4135ebf083da07879cea7b99feef2bf1">readScriptFile</a> (const char *link)</td></tr>
+<tr class="memdesc:a4135ebf083da07879cea7b99feef2bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read and apply a script file This function read a given file and apply the commands in it line by line.  <a href="main_8c.html#a4135ebf083da07879cea7b99feef2bf1">More...</a><br /></td></tr>
+<tr class="separator:a4135ebf083da07879cea7b99feef2bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67f251c5eca68d2125ed9f309a34ebf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af67f251c5eca68d2125ed9f309a34ebf">extractObject</a> (const char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:af67f251c5eca68d2125ed9f309a34ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a basic object from a string This function recuperate a basic object (existing or created)  <a href="main_8c.html#af67f251c5eca68d2125ed9f309a34ebf">More...</a><br /></td></tr>
+<tr class="separator:af67f251c5eca68d2125ed9f309a34ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff48c4de2fb009928915b84bf52aa45a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aff48c4de2fb009928915b84bf52aa45a">applyOperation</a> (<a class="el" href="struct_object.html">Object</a> leftOperand, char operator, <a class="el" href="struct_object.html">Object</a> rightOperand)</td></tr>
 <tr class="memdesc:aff48c4de2fb009928915b84bf52aa45a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a mathematical operation This function apply a simple mathematical operation (sum, difference, multiplication, division) on 2 objects (polynomial, matrix or variable)  <a href="main_8c.html#aff48c4de2fb009928915b84bf52aa45a">More...</a><br /></td></tr>
 <tr class="separator:aff48c4de2fb009928915b84bf52aa45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38bd93dddac0b6ac0222a8c6e77929b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a38bd93dddac0b6ac0222a8c6e77929b2">recursiveCommandDecomposition</a> (char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
-<tr class="memdesc:a38bd93dddac0b6ac0222a8c6e77929b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a composite command recursively This function apply a command by reducing to basic object and combining them.  <a href="main_8c.html#a38bd93dddac0b6ac0222a8c6e77929b2">More...</a><br /></td></tr>
-<tr class="separator:a38bd93dddac0b6ac0222a8c6e77929b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abeaefb1b358eb82b41078068de7d387d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#abeaefb1b358eb82b41078068de7d387d">executeCommand</a> (char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
-<tr class="memdesc:abeaefb1b358eb82b41078068de7d387d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply any command This function is the first called when reading a command, it can take simple and composite commands, see <a class="el" href="readme_8md.html">readme.md</a> for more details.  <a href="main_8c.html#abeaefb1b358eb82b41078068de7d387d">More...</a><br /></td></tr>
-<tr class="separator:abeaefb1b358eb82b41078068de7d387d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b68f3072c233d7c5092fef14303eb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_object.html">Object</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ac1b68f3072c233d7c5092fef14303eb6">recursiveCommandDecomposition</a> (const char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:ac1b68f3072c233d7c5092fef14303eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a composite command recursively This function apply a command by reducing to basic object and combining them.  <a href="main_8c.html#ac1b68f3072c233d7c5092fef14303eb6">More...</a><br /></td></tr>
+<tr class="separator:ac1b68f3072c233d7c5092fef14303eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0fec7d60451f134467720a44b311b5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aa0fec7d60451f134467720a44b311b5b">executeCommand</a> (const char *<a class="el" href="help_8txt.html#acccf2b3a8edcecdfaf252851d51c6c2f">command</a>)</td></tr>
+<tr class="memdesc:aa0fec7d60451f134467720a44b311b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply any command This function is the first called when reading a command, it can take simple and composite commands, see <a class="el" href="readme_8md.html">readme.md</a> for more details.  <a href="main_8c.html#aa0fec7d60451f134467720a44b311b5b">More...</a><br /></td></tr>
+<tr class="separator:aa0fec7d60451f134467720a44b311b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
 <tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function the main function is the first function to launch upon starting the program, it makes the link between all the components of the program.  <a href="main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,8 +196,62 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="abeaefb1b358eb82b41078068de7d387d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abeaefb1b358eb82b41078068de7d387d">&#9670;&nbsp;</a></span>executeCommand()</h2>
+<a id="a4b16bf012294bdc7d18f64722c9f5236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b16bf012294bdc7d18f64722c9f5236">&#9670;&nbsp;</a></span>eigenValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_solutions.html">Solutions</a>* eigenValues </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Eigen values of a matrix This function return the eigen values of a given matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>eigen values of M </dd></dl>
+
+</div>
+</div>
+<a id="a52af984a585b8e82bf3ef7754a0aa32a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52af984a585b8e82bf3ef7754a0aa32a">&#9670;&nbsp;</a></span>eigenVectors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a> eigenVectors </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Eigen vectors of a matrix This function return the eigen vectors of a given matrix in a matrix form. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>eigen vectors in matrix form </dd></dl>
+
+</div>
+</div>
+<a id="aa0fec7d60451f134467720a44b311b5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0fec7d60451f134467720a44b311b5b">&#9670;&nbsp;</a></span>executeCommand()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +259,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void executeCommand </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -210,8 +276,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae6064948dc8fbf3fd17db244a1714136"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6064948dc8fbf3fd17db244a1714136">&#9670;&nbsp;</a></span>extractObject()</h2>
+<a id="af67f251c5eca68d2125ed9f309a34ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67f251c5eca68d2125ed9f309a34ebf">&#9670;&nbsp;</a></span>extractObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +285,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_object.html">Object</a> extractObject </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -257,8 +323,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="af11e4a0a47699eb2cbdb493b5ff403db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af11e4a0a47699eb2cbdb493b5ff403db">&#9670;&nbsp;</a></span>readScriptFile()</h2>
+<a id="a64bda4a29dd98357f512115139569eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64bda4a29dd98357f512115139569eb8">&#9670;&nbsp;</a></span>readMatrixInString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a> readMatrixInString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a matrix in a string This function read a matrix in a string given a specific format and return a matrix structure made from it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>- String to scan for a matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>matrix formed from the string </dd></dl>
+
+</div>
+</div>
+<a id="a4135ebf083da07879cea7b99feef2bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4135ebf083da07879cea7b99feef2bf1">&#9670;&nbsp;</a></span>readScriptFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +359,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void readScriptFile </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>link</em></td><td>)</td>
           <td></td>
         </tr>
@@ -283,8 +376,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a38bd93dddac0b6ac0222a8c6e77929b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38bd93dddac0b6ac0222a8c6e77929b2">&#9670;&nbsp;</a></span>recursiveCommandDecomposition()</h2>
+<a id="ac1b68f3072c233d7c5092fef14303eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1b68f3072c233d7c5092fef14303eb6">&#9670;&nbsp;</a></span>recursiveCommandDecomposition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,7 +385,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_object.html">Object</a> recursiveCommandDecomposition </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -307,6 +400,33 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>object containing the result of the command </dd></dl>
+
+</div>
+</div>
+<a id="a8b3ead8b46289c66e358b16557781a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b3ead8b46289c66e358b16557781a12">&#9670;&nbsp;</a></span>triangularise()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_matrix.html">Matrix</a> triangularise </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_matrix.html">Matrix</a>&#160;</td>
+          <td class="paramname"><em>M</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Triangularise a matrix This function triangularise (or diagonalise if possible) a given matrix. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>- the given matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>triangularised M </dd></dl>
 
 </div>
 </div>

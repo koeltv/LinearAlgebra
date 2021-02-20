@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Linear Algebra Solver
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">v1.2</span>
    </div>
    <div id="projectbrief">Simple command line program to interact with matrix and functions</div>
   </td>
@@ -150,21 +150,24 @@ Functions</h2></td></tr>
 <tr class="memitem:aa491a23fbb096881422333e8c0bb0b0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#aa491a23fbb096881422333e8c0bb0b0b">nextOperator</a> (const char *string, int *firstIndex, int *secondIndex)</td></tr>
 <tr class="memdesc:aa491a23fbb096881422333e8c0bb0b0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find next operand in string This functions update to indexes to surround the next operand in a string.  <a href="string_interactions_8h.html#aa491a23fbb096881422333e8c0bb0b0b">More...</a><br /></td></tr>
 <tr class="separator:aa491a23fbb096881422333e8c0bb0b0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5631bcccaeffa0f48f74f221088b3ec"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ad5631bcccaeffa0f48f74f221088b3ec">containValue</a> (const char *string)</td></tr>
-<tr class="memdesc:ad5631bcccaeffa0f48f74f221088b3ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if the string contain a number.  <a href="string_interactions_8h.html#ad5631bcccaeffa0f48f74f221088b3ec">More...</a><br /></td></tr>
-<tr class="separator:ad5631bcccaeffa0f48f74f221088b3ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85314dc65ad34a3db175c92f7db0b148"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a85314dc65ad34a3db175c92f7db0b148">onlyContainValue</a> (const char *string)</td></tr>
+<tr class="memdesc:a85314dc65ad34a3db175c92f7db0b148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if the string only contain a number.  <a href="string_interactions_8h.html#a85314dc65ad34a3db175c92f7db0b148">More...</a><br /></td></tr>
+<tr class="separator:a85314dc65ad34a3db175c92f7db0b148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bce3e758fa9ed2a568845d36e5bdf28"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a7bce3e758fa9ed2a568845d36e5bdf28">isValidPolynomial</a> (const char *string)</td></tr>
+<tr class="memdesc:a7bce3e758fa9ed2a568845d36e5bdf28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if the string only contain a valid polynomial coefficient.  <a href="string_interactions_8h.html#a7bce3e758fa9ed2a568845d36e5bdf28">More...</a><br /></td></tr>
+<tr class="separator:a7bce3e758fa9ed2a568845d36e5bdf28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ba464433174960c3d74833a649a90e9"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a8ba464433174960c3d74833a649a90e9">everythingIsBetweenParenthesis</a> (const char *string)</td></tr>
 <tr class="memdesc:a8ba464433174960c3d74833a649a90e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify if everything is between parenthesis.  <a href="string_interactions_8h.html#a8ba464433174960c3d74833a649a90e9">More...</a><br /></td></tr>
 <tr class="separator:a8ba464433174960c3d74833a649a90e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81441345d450a38905b001d12832bf8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">readDoubleInString</a> (const char *string, int *position)</td></tr>
 <tr class="memdesc:ae81441345d450a38905b001d12832bf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a double in a string This function return a double read from a string.  <a href="string_interactions_8h.html#ae81441345d450a38905b001d12832bf8">More...</a><br /></td></tr>
 <tr class="separator:ae81441345d450a38905b001d12832bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa699299b10d57547ab6d578738c662f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#aa699299b10d57547ab6d578738c662f4">printFileContent</a> (char *link, FILE *output)</td></tr>
-<tr class="memdesc:aa699299b10d57547ab6d578738c662f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it.  <a href="string_interactions_8h.html#aa699299b10d57547ab6d578738c662f4">More...</a><br /></td></tr>
-<tr class="separator:aa699299b10d57547ab6d578738c662f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a695ade7c5d175a79f23faaa3d0d15f1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a695ade7c5d175a79f23faaa3d0d15f1e">newStringMatrix</a> (int nbRows, int nbColumns, char *initialValue)</td></tr>
-<tr class="memdesc:a695ade7c5d175a79f23faaa3d0d15f1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create string matrix This function create a matrix with strings as values, this is used to handle matrix with variables.  <a href="string_interactions_8h.html#a695ade7c5d175a79f23faaa3d0d15f1e">More...</a><br /></td></tr>
-<tr class="separator:a695ade7c5d175a79f23faaa3d0d15f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3743819f27faf3c4429ed8876b411457"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a3743819f27faf3c4429ed8876b411457">printFileContent</a> (const char *link, FILE *output)</td></tr>
+<tr class="memdesc:a3743819f27faf3c4429ed8876b411457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print the content of a file in a buffer This function print the content of the file at the given link in the output buffer without modifying it.  <a href="string_interactions_8h.html#a3743819f27faf3c4429ed8876b411457">More...</a><br /></td></tr>
+<tr class="separator:a3743819f27faf3c4429ed8876b411457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3952dead9f276b139fcfae6cb5f7a640"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a3952dead9f276b139fcfae6cb5f7a640">newStringMatrix</a> (int nbRows, int nbColumns)</td></tr>
+<tr class="memdesc:a3952dead9f276b139fcfae6cb5f7a640"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create string matrix This function create a matrix with strings as values, this is used to handle matrix with variables.  <a href="string_interactions_8h.html#a3952dead9f276b139fcfae6cb5f7a640">More...</a><br /></td></tr>
+<tr class="separator:a3952dead9f276b139fcfae6cb5f7a640"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c69f9c4dea670968f283dbcc80d3c5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_string_matrix.html">StringMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string_interactions_8h.html#a4c69f9c4dea670968f283dbcc80d3c5b">removeSRow</a> (<a class="el" href="struct_string_matrix.html">StringMatrix</a> <a class="el" href="test_file_8txt.html#aad05f78187c942f9dd521605fa81f1ba">M</a>, int rowIndex)</td></tr>
 <tr class="memdesc:a4c69f9c4dea670968f283dbcc80d3c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a row in a string matrix This function return a string matrix created by removing a row of a given string matrix.  <a href="string_interactions_8h.html#a4c69f9c4dea670968f283dbcc80d3c5b">More...</a><br /></td></tr>
 <tr class="separator:a4c69f9c4dea670968f283dbcc80d3c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -282,33 +285,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>result of search </dd></dl>
-
-</div>
-</div>
-<a id="ad5631bcccaeffa0f48f74f221088b3ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5631bcccaeffa0f48f74f221088b3ec">&#9670;&nbsp;</a></span>containValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char containValue </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>string</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Verify if the string contain a number. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">string</td><td>- String to scan </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>result of the scan </dd></dl>
 
 </div>
 </div>
@@ -522,6 +498,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7bce3e758fa9ed2a568845d36e5bdf28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bce3e758fa9ed2a568845d36e5bdf28">&#9670;&nbsp;</a></span>isValidPolynomial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char isValidPolynomial </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verify if the string only contain a valid polynomial coefficient. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>- String to scan </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result of the scan </dd></dl>
+
+</div>
+</div>
 <a id="a5e6c13b6b96060a3c07e87c3cd623fa6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e6c13b6b96060a3c07e87c3cd623fa6">&#9670;&nbsp;</a></span>length()</h2>
 
@@ -550,8 +553,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a695ade7c5d175a79f23faaa3d0d15f1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a695ade7c5d175a79f23faaa3d0d15f1e">&#9670;&nbsp;</a></span>newStringMatrix()</h2>
+<a id="a3952dead9f276b139fcfae6cb5f7a640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3952dead9f276b139fcfae6cb5f7a640">&#9670;&nbsp;</a></span>newStringMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -566,13 +569,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nbColumns</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>initialValue</em>&#160;</td>
+          <td class="paramname"><em>nbColumns</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -587,7 +584,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">nbRows</td><td>- number of rows of the matrix </td></tr>
     <tr><td class="paramname">nbColumns</td><td>- number of columns of the matrix </td></tr>
-    <tr><td class="paramname">initialValue</td><td>- values to initialise the element to </td></tr>
   </table>
   </dd>
 </dl>
@@ -640,6 +636,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a85314dc65ad34a3db175c92f7db0b148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85314dc65ad34a3db175c92f7db0b148">&#9670;&nbsp;</a></span>onlyContainValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char onlyContainValue </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verify if the string only contain a number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>- String to scan </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>result of the scan </dd></dl>
+
+</div>
+</div>
 <a id="aad6ce867722498732dc94c0daaeb294a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad6ce867722498732dc94c0daaeb294a">&#9670;&nbsp;</a></span>operatorWithoutDepth()</h2>
 
@@ -667,8 +690,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa699299b10d57547ab6d578738c662f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa699299b10d57547ab6d578738c662f4">&#9670;&nbsp;</a></span>printFileContent()</h2>
+<a id="a3743819f27faf3c4429ed8876b411457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3743819f27faf3c4429ed8876b411457">&#9670;&nbsp;</a></span>printFileContent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -676,7 +699,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void printFileContent </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>link</em>, </td>
         </tr>
         <tr>

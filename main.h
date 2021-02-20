@@ -11,13 +11,44 @@
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Commands interactions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/**
+ * Read a matrix in a string
+ * This function read a matrix in a string given a specific format and return a matrix structure made from it
+ * @param string - String to scan for a matrix
+ * @return matrix formed from the string
+ */
+Matrix readMatrixInString(const char *string);
+
+/**
+ * Eigen values of a matrix
+ * This function return the eigen values of a given matrix
+ * @param M  - the given matrix
+ * @return eigen values of M
+ */
+Solutions *eigenValues(Matrix M);
+
+/**
+ * Eigen vectors of a matrix
+ * This function return the eigen vectors of a given matrix in a matrix form
+ * @param M - the given matrix
+ * @return eigen vectors in matrix form
+ */
+Matrix eigenVectors(Matrix M);
+
+/**
+ * Triangularise a matrix
+ * This function triangularise (or diagonalise if possible) a given matrix
+ * @param M - the given matrix
+ * @return triangularised M
+ */
+Matrix triangularise(Matrix M);
 
 /**
  * Read and apply a script file
  * This function read a given file and apply the commands in it line by line
  * @param link - link of the file in string format
  */
-void readScriptFile(char *link);
+void readScriptFile(const char *link);
 
 /**
  * Apply a mathematical operation
@@ -35,7 +66,7 @@ Object applyOperation(Object leftOperand, char operator, Object rightOperand);
  * @param command - object in string format
  * @return object containing the object
  */
-Object extractObject(char *command);
+Object extractObject(const char *command);
 
 /**
  * Apply a composite command recursively
@@ -43,13 +74,13 @@ Object extractObject(char *command);
  * @param command - command in string form
  * @return object containing the result of the command
  */
-Object recursiveCommandDecomposition(char *command);
+Object recursiveCommandDecomposition(const char *command);
 
 /**
  * Apply any command
  * This function is the first called when reading a command, it can take simple and composite commands, see readme.md for more details
  * @param command - The command to execute
  */
-void executeCommand(char *command);
+void executeCommand(const char *command);
 
 #endif //LINEARALGEBRA_MAIN_H

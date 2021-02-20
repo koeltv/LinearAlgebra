@@ -32,7 +32,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Linear Algebra Solver
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">v1.2</span>
    </div>
    <div id="projectbrief">Simple command line program to interact with matrix and functions</div>
   </td>
@@ -148,7 +148,7 @@ Composite operations</h2>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Basic object</h2>
 <p>The following arguments can be used as fundamentals to create or call objects</p>
-<p><code>&lt;objectName&gt;</code> This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but can only be the size of one word, no space accepted <br  />
+<p><code>&lt;objectName&gt;</code> This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but cannot be <code>X</code>, contain <code>[</code> or <code>]</code> and can only be the size of one word, no space accepted <br  />
  <code>[&lt;matrixFormat&gt;]</code> This will create a matrix object. The format used to create a matrix is the following :</p><ul>
 <li>all values in a row are separated by a <code>,</code></li>
 <li>all rows are separated by a <code>;</code>, the last one doesn't need it</li>
@@ -156,15 +156,14 @@ Basic object</h2>
 <p><em>Example :</em> <code>[1,2,3;4,5,6;7,8,9]</code> is a correct 3x3 matrix, <code>[1,2;3,4,5]</code> is not correct since the 2nd row has more values than the first <br  />
 </p>
 <p><code>&lt;polynomialFormat&gt;</code> This will create a polynomial object. The format used to create a polynomial is the following :</p><ul>
-<li>to write coefficient, one must use the format <code>&lt;coefficient&gt;X^&lt;power&gt;</code> with &lt;coefficient&gt; any real value and &lt;power&gt; an integer<ul>
+<li>to write coefficient, one must use the format <code>&lt;coefficient&gt;X^&lt;power&gt;</code> with &lt;coefficient&gt; any real value and &lt;power&gt; a positive integer<ul>
 <li>if &lt;power&gt; is 1, the coefficient can be written as <code>&lt;coefficient&gt;X</code></li>
 <li>if &lt;power&gt; is 0, the coefficient can be written as <code>&lt;coefficient&gt;</code></li>
+<li>if &lt;coefficient&gt; is 1, it can be omitted</li>
 </ul>
 </li>
-<li>every coefficient must have an explicit value, for example <code>X^3</code> is not accepted but <code>1X^3</code> is. <br  />
-</li>
 </ul>
-<p><em>Example :</em> <code>2X + 1X^2 * (2X + 2)</code> is correct an will create the polynomial <code>2X^3 + 2X^2 + 2X + 0</code>, <code>X + 2X^1.5</code> is not correct because the first X doesn't have a coefficient and the power of the second is not an integer </p>
+<p><em>Example :</em> <code>2X + X^2 * (2X + 2)</code> is correct an will create the polynomial <code>2X^3 + 2X^2 + 2X + 0</code>, <code>X + 2X^-1.5</code> is not correct because the power of the second is not a positive integer </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

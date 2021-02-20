@@ -8,8 +8,33 @@
 #include "polynomial.h"
 
 Polynomial newPolynomial(int degree) {
-    if (degree < 0) return (Polynomial) {NULL, NULL, degree};
+    if (degree < 0) return nullPolynomial;
     else return (Polynomial) {NULL, calloc(degree + 1, sizeof(double)), degree};
+}
+
+Polynomial stringToPolynomial(const char *string) {
+    Polynomial output; int index = 0; double coefficient = 1;
+    while (string[index] && string[index] == ' ') index++;
+    //If there is a numerical coefficient read it
+    if (string[index] && string[index] != 'X') coefficient = readDoubleInString(string, &index);
+    if (string[index] && string[index == 'X']) {
+        if (string[++index] != '^') {
+            output = newPolynomial(1);
+            output.coefficient[1] = coefficient;
+        } else {
+            int degree = (int) readDoubleInString(string, &index);
+            if (degree < 0) return newPolynomial(-1);
+            output = newPolynomial(degree);
+            output.coefficient[degree] = coefficient;
+        }
+        return output;
+    } else return newPolynomial(-1);
+}
+
+Polynomial copyPolynomial(Polynomial F) {
+    Polynomial copy = newPolynomial(F.highestDegree);
+    for (int i = 0; i <= F.highestDegree; i++) copy.coefficient[i] = F.coefficient[i];
+    return copy;
 }
 
 void freePolynomial(Polynomial *F) {
@@ -17,10 +42,10 @@ void freePolynomial(Polynomial *F) {
 }
 
 double apply(Polynomial F, double x) {
-    double result = F.coefficient[0];
+    double result = F.coefficient[0], powerOfX = x;
     for (int i = 1; i <= F.highestDegree; i++) {
-        result += F.coefficient[i] * x;
-        x *= x;
+        result += F.coefficient[i] * powerOfX;
+        powerOfX *= x;
     }
     return result;
 }
@@ -39,7 +64,7 @@ Polynomial derive(Polynomial F) {
 
 void printPolynomial(Polynomial F) {
     if (F.name) printf("%s(X) = ", F.name);
-    if (F.highestDegree == 0 && F.coefficient[0] == 0) printf("%1.1lf", F.coefficient[0]);
+    if (F.highestDegree == 0 && F.coefficient[0] == 0) printf("0");
     else {
         for (int i = F.highestDegree; i >= 0; i--) {
             if (F.coefficient[i]) {
@@ -53,57 +78,17 @@ void printPolynomial(Polynomial F) {
                 }
                 //Print the value with the power of X
                 if (i == 0) printf("%1.1lf", F.coefficient[i] * sign);
-                else if (i == 1) printf("%1.1lfX", F.coefficient[i] * sign);
-                else printf("%1.1lfX^%d", F.coefficient[i] * sign, i);
-            }
-        }
-    }
-    printf("\n");
-}
-
-int degreeOfString(const char *string, int start, int end) {
-    int degree = 0;
-    for (int i = start; string[i] != '\0' && i <= end; i++) {
-        //Count in parenthesis
-        if (string[i] == '(') {
-            //Search for end of parenthesis
-            int partialEnd = i, counter = 1;
-            do {
-                partialEnd++;
-                if (string[partialEnd] == '(') counter++;
-                else if (string[partialEnd] == ')') counter--;
-            } while (counter > 0);
-            //degree of the parenthesis
-            int localDegree = degreeOfString(string, i + 1, partialEnd - 1);
-            if (localDegree > degree) degree = localDegree;
-            i = partialEnd;
-        } else if (string[i] == '*'){
-            //Case of multiplication
-            while (string[i] != '(') i++;
-            //Search for end of parenthesis
-            int partialEnd = i, counter = 1;
-            do {
-                partialEnd++;
-                if (string[partialEnd] == '(') counter++;
-                else if (string[partialEnd] == ')') counter--;
-            } while (counter > 0);
-            //degree of the parenthesis
-            degree += degreeOfString(string, i + 1, partialEnd - 1);
-            i = partialEnd;
-        } else {
-            //If power > actual change for the new
-            if (string[i] == 'X'){
-                if (string[i+1] == '^') {
-                    if (string[i+2] >= '1' && string[i+2] <= '9' && string[i+2] - '0' > degree) {
-                        degree = string[i+2] - '0'; i += 2;
-                    }
-                } else if (degree < 1) {
-                    degree = 1; i++;
+                else if (i == 1) {
+                    if (F.coefficient[i] == 1) printf("X");
+                    else printf("%1.1lfX", F.coefficient[i] * sign);
+                } else {
+                    if (F.coefficient[i] == 1) printf("X^%d", i);
+                    else printf("%1.1lfX^%d", F.coefficient[i] * sign, i);
                 }
             }
         }
     }
-    return degree;
+    printf("\n");
 }
 
 void eliminateNullCoefficients(Polynomial *F) {
@@ -189,54 +174,6 @@ Polynomial pLongDivide(Polynomial numerator, Polynomial denominator) {
     } else return newPolynomial(-1);
 }
 
-Polynomial next(const char *string, int *start) {
-    int firstPosition = *start, nbOfParenthesis = 0;
-    while (string[*start] != '\0' && nbOfParenthesis >= 0 && ((string[*start] != '-' && string[*start] != '+') || nbOfParenthesis >= 1)) {
-        if (string[*start] == '(') nbOfParenthesis++;
-        else if (string[*start] == ')') nbOfParenthesis--;
-        (*start)++;
-    }
-    return stringToPolynomial(string, firstPosition, *start - 1);
-}
-
-Polynomial readFirstCoefficient(const char *string, int *start) {
-    double value = readDoubleInString(string, start);
-    int index = -1;
-    //If there is no X after the value
-    if (string[*start] != 'X') index = 0;
-    else {
-        //If there is no power after the X
-        if (string[*start + 1] != '^') {
-            index = 1; (*start)++;
-        }
-        //If there is a power after the X
-        else if (string[*start + 1] == '^' && string[*start + 2] >= '0' && string[*start + 2] <= '9') {
-            index = (int) readDoubleInString(string, start);
-        }
-    }
-    Polynomial output = newPolynomial(index);
-    output.coefficient[index] += value;
-    return output;
-}
-
-Polynomial stringToPolynomial(const char *string, int start, int end) {
-    //Recuperation of the first coefficient
-    Polynomial F = readFirstCoefficient(string, &start);
-    //Recuperation of the rest
-    for (int currentSign = start; string[currentSign] != '\0' && currentSign < end;) {
-        while (string[currentSign] != '\0' && string[currentSign] != '-' && string[currentSign] != '+' && string[currentSign] != '*') currentSign++;
-        currentSign++;
-        if (string[currentSign-1] != '\0' && string[currentSign-1] != ')') {
-            if (string[currentSign-1] == '-' || string[currentSign-1] == '+') {
-                F = pAdd(F, next(string, &currentSign));
-            } else {
-                F = pMultiply(F, next(string, &currentSign));
-            }
-        }
-    }
-    return F;
-}
-
 Polynomial syntheticDivision(Polynomial F, double root) {
     Polynomial quotient = newPolynomial(F.highestDegree - 1);
     double temp = highestCoefficient(F);
@@ -299,33 +236,72 @@ double newtonMethod(Polynomial F) {
     return IMAGINARY;
 }
 
+Polynomial depress(Polynomial F) {
+    if (F.highestDegree == 4) {
+        Polynomial depressedForm = copyPolynomial(F);
+        double A = depressedForm.coefficient[4], B = depressedForm.coefficient[3], C = depressedForm.coefficient[2], D = depressedForm.coefficient[1], E = depressedForm.coefficient[0];
+        depressedForm.coefficient[4] = 1;
+        depressedForm.coefficient[3] = 0;
+        depressedForm.coefficient[2] = (-3 * power(B, 2)) / (8 * power(A, 2)) + C / A;
+        depressedForm.coefficient[1] = power(B, 3) / (8 * power(A, 3)) - (B * C) / (2 * power(A, 2)) + D / A;
+        depressedForm.coefficient[0] = (-3 * power(B, 4)) / (256 * power(A, 4)) + (C * power(B, 2)) / (16 * power(A, 3)) - (B * D) / (4 * power(A, 2)) + E / A;
+        return depressedForm;
+    } else return F;
+}
+
 Solutions *solve(Polynomial F) {
     if (F.highestDegree > 0) {
         Solutions *x = malloc(sizeof(Solutions));
         *x = (Solutions) {F.highestDegree, malloc(F.highestDegree * sizeof(double))};
         Polynomial temp = F;
         for (int i = 0; i < x->size; i++) {
-            double root, delta;
-            if (i > 0 && absolute(apply(temp, x->values[i-1])) < 1e-5) { //If there is at least 2 times the same root
+            double root = IMAGINARY, delta;
+            if (temp.coefficient[0] == 0) { //If the lowest coefficient is 0, it is a root of the polynomial
+                root = 0;
+            } else if (i > 0 && absolute(apply(temp, x->values[i-1])) < 1e-5) { //If a root as a multiplicity > 1
                 root = x->values[i-1];
-            } else if (temp.highestDegree == 1) { //x0 = -c/b
+            } else if (temp.highestDegree == 1) { //x = -c/b
                 root = -temp.coefficient[0] / temp.coefficient[1];
             } else if (temp.highestDegree == 2) { //x = (-b^2 +/- sqrt(delta))/(2a)
-                delta = temp.coefficient[1] * temp.coefficient[1] - 4 * temp.coefficient[2] * temp.coefficient[0];
-                if (delta < 0) return NULL;
-                else if (delta == 0) root = (-temp.coefficient[1])/(2 * temp.coefficient[2]);
-                else {
-                    double squareRoot= roundPreciseDouble(sqrt(delta));
-                    x->values[i] = (-temp.coefficient[1] - squareRoot) / (2 * temp.coefficient[2]);
-                    root = (-temp.coefficient[1] + squareRoot) / (2 * temp.coefficient[2]);
+                //delta = b^2 - 4ac
+                delta = power(temp.coefficient[1], 2) - 4 * temp.coefficient[2] * temp.coefficient[0];
+                if (delta == 0) root = -temp.coefficient[1]/(2 * temp.coefficient[2]);
+                else if (delta > 0) {
+                    double rootOfDelta = roundPreciseDouble(sqrt(delta));
+                    x->values[i] = (-temp.coefficient[1] - rootOfDelta) / (2 * temp.coefficient[2]);
+                    root = (-temp.coefficient[1] + rootOfDelta) / (2 * temp.coefficient[2]);
                     temp = syntheticDivision(temp, x->values[i]); i++;
                 }
-            } else { //Degree higher than 2
+            } else if (temp.highestDegree == 4) {
+                double a0 = temp.coefficient[4], a1 = temp.coefficient[3], a2 = temp.coefficient[2], a3 = temp.coefficient[1], a4 = temp.coefficient[0];
+                //Evident roots: 1 and −1 and −k
+                if (a0 + a1 + a2 + a3 + a4 == 0) root = 1;
+                else if (a0 + a2 + a4 == a1 + a2) root = -1;
+                else if (a4 == a3 * (a1 / a0)) root = -a1 / a0;
+                //Biquadratic equations
+                else if (a3 == a1 == 0) {
+                    Polynomial biquadraticForm = {NULL, (double[]) {a4, a2, a0}, 2};
+                    Solutions *biquadraticSolutions = solve(biquadraticForm);
+                    if (biquadraticSolutions) {
+                        x->values[i] = biquadraticSolutions->values[0];
+                        root = biquadraticSolutions->values[1];
+                        temp = syntheticDivision(temp, x->values[i]); i++;
+                    }
+                //Converting to a depressed quartic
+                } else if (a3 != 0) {
+                    Solutions *depressedSolutions = solve(depress(temp));
+                    if (depressedSolutions) {
+                        //We use reverse substitution
+                        for (int j = 0; j < depressedSolutions->size; j++) depressedSolutions->values[i] -= a1 / (4 * a0);
+                        return depressedSolutions;
+                    }
+                } else root = newtonMethod(temp);
+            } else { //Degree higher than 4
                 root = newtonMethod(temp);
-                if (root == IMAGINARY) return NULL;
             }
+            if (root == IMAGINARY) return NULL;
             x->values[i] = roundPreciseDouble(root);
-            temp = syntheticDivision(temp, root);
+            if (temp.highestDegree > 1) temp = syntheticDivision(temp, root);
         }
         return x;
     } else return NULL;

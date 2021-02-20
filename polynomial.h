@@ -9,9 +9,8 @@
 #include "stringInteractions.h"
 #include "variable.h"
 
+#define nullPolynomial (Polynomial) {NULL, NULL, -1} ///New null polynomial
 #define highestCoefficient(F) F.coefficient[F.highestDegree]
-
-#define IMAGINARY 12345.54321
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Structures
@@ -53,7 +52,7 @@ Polynomial newPolynomial(int degree);
  * @param string - The given string
  * @return polynomial created from the string
  */
-Polynomial stringToPolynomial(const char *string, int start, int end);
+Polynomial stringToPolynomial(const char *string);
 
 /**
  * Free an existing polynomial
@@ -65,16 +64,6 @@ void freePolynomial(Polynomial *F);
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 // Basic operator functions
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/**
- * Degree of a polynomial in string format
- * This function return the degree of a polynomial in string format
- * @param string - The polynomial in string format
- * @param start - The starting index of the string
- * @param end - The end index of the string
- * @return degree of the polynomial
- */
-int degreeOfString(const char *string, int start, int end);
-
 /**
  * Sum polynomials
  * This function return the sum of 2 polynomials
@@ -106,9 +95,9 @@ Polynomial pMultiply(Polynomial F, Polynomial G);
  * Divide polynomials
  * This function return the division of 2 polynomials using the long division method
  * @note If there is a remainder, it will be printed in the terminal but it won't be integrated in the result
- * @param F - first polynomial
- * @param G - second polynomial
- * @return F / G
+ * @param numerator - first polynomial
+ * @param denominator - second polynomial
+ * @return numerator / denominator
  */
 Polynomial pLongDivide(Polynomial numerator, Polynomial denominator);
 

@@ -104,9 +104,23 @@ char *extractBetweenIndexes(const char *string, int first, int last) {
     } else return NULL;
 }
 
-char containValue(const char *string) {
-    for (int i = 0; string[i] != '\0'; i++) {
-        if (string[i] >= '0' && string[i] <= '9') return 1;
+char onlyContainValue(const char *string) {
+    for (int i = 0; string[i]; i++) {
+        if (string[i] != '+' && string[i] != '-' && string[i] != '.' && string[i] != ' ' &&
+            (string[i] < '0' || string[i] > '9'))
+            return 0;
+    }
+    return 1;
+}
+
+char isValidPolynomial(const char *string) {
+    int index = 0;
+    while (string[index] && string[index] != 'X') index++;
+    if (string[index] == 'X') {
+        if ((string[index + 1] == '^' && string[index + 2] >= '0' && string[index + 2] <= '9') ||
+            (!string[index + 1] || string[index + 1] == ' ')) {
+            return 1;
+        }
     }
     return 0;
 }
@@ -124,8 +138,8 @@ char operatorWithoutDepth(const char *string) {
     int i = 0;
     while (string[i] == ' ' || string[i] == '+' || string[i] == '-') i++;
     for (int nbOfParenthesis = 0; string[i]; i++) {
-        if (string[i] == '(') nbOfParenthesis++;
-        else if (string[i] == ')') nbOfParenthesis--;
+        if (string[i] == '(' || string[i] == '[') nbOfParenthesis++;
+        else if (string[i] == ')' || string[i] == ']') nbOfParenthesis--;
         else if (nbOfParenthesis < 1 && (string[i] == '+' || string[i] == '-' || string[i] == '*' || string[i] == '/')) return 1;
     }
     return 0;
@@ -135,12 +149,15 @@ char operatorWithoutDepth(const char *string) {
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
     if (string[*firstIndex] && string[*firstIndex] != '(') (*firstIndex)++;
-    int temp = 0;
+    int temp = 0, firstNonWhiteSpace = 0;
+    while (string[firstNonWhiteSpace] && string[firstNonWhiteSpace] == ' ') firstNonWhiteSpace++;
     for (int nbOfParenthesis = 0; string[*firstIndex]; (*firstIndex)++) {
         if (string[*firstIndex] == '(') nbOfParenthesis++;
         else if (string[*firstIndex] == ')') nbOfParenthesis--;
-        else if (nbOfParenthesis < 1 && (string[*firstIndex] == '*' || string[*firstIndex] == '/')) temp = *firstIndex;
-        else if (nbOfParenthesis < 1 && (string[*firstIndex] == '+' || string[*firstIndex] == '-')) break;
+        else if (nbOfParenthesis < 1 && *firstIndex > firstNonWhiteSpace) {
+            if (string[*firstIndex] == '*' || string[*firstIndex] == '/') temp = *firstIndex;
+            else if (string[*firstIndex] == '+' || string[*firstIndex] == '-') break;
+        }
     }
     if (!string[*firstIndex] && temp) *firstIndex = temp;
 
@@ -156,6 +173,8 @@ void nextOperator(const char *string, int *firstIndex, int *secondIndex) {
 }
 
 double readDoubleInString(const char *string, int *position) {
+    int temp = 0;
+    if (!position) position = &temp;
     //Search for the sign
     while (*position >= 0 && string[*position] == ' ') (*position)--;
     while (string[*position] && (string[*position] < '0' || string[*position] > '9') && string[*position] != '-') (*position)++;
@@ -179,28 +198,25 @@ double readDoubleInString(const char *string, int *position) {
 }
 #pragma clang diagnostic pop
 
-void printFileContent(char *link, FILE *output) {
-    FILE *input = NULL;
-    if ((input = fopen(link, "rb"))) {
-        char temp;
-        while (!feof(input)) {
-            fscanf(input, "%c", &temp);
-            fprintf(output, "%c", temp);
-        }
+void printFileContent(const char *link, FILE *output) {
+    FILE *input = fopen(link, "rb");
+    if (input) {
+        while (!feof(input)) fprintf(output, "%c", getc(input));
+        fclose(input);
     } else fprintf(stderr, "File was not found at %s", link);
 }
 
-StringMatrix newStringMatrix(int nbRows, int nbColumns, char *initialValue) {
+StringMatrix newStringMatrix(int nbRows, int nbColumns) {
     StringMatrix M = {NULL, malloc(nbRows * sizeof(char**)), nbRows, nbColumns};
     for (int i = 0; i < M.rows; i++) {
         M.values[i] = malloc(M.columns * sizeof(char*));
-        for (int j = 0; j < M.columns; j++) M.values[i][j] = initialValue;
+        for (int j = 0; j < M.columns; j++) M.values[i][j] = NULL;
     }
     return M;
 }
 
 StringMatrix removeSRow(StringMatrix M, int rowIndex) {
-    StringMatrix smallerM = newStringMatrix(M.rows - 1, M.columns, 0);
+    StringMatrix smallerM = newStringMatrix(M.rows - 1, M.columns);
     for (int i = 0; i < M.rows; i++) {
         for (int j = 0; j < M.columns; j++) {
             if (i != rowIndex) smallerM.values[i > rowIndex ? i - 1 : i][j] = M.values[i][j];
@@ -210,7 +226,7 @@ StringMatrix removeSRow(StringMatrix M, int rowIndex) {
 }
 
 StringMatrix removeSColumn(StringMatrix M, int columnIndex) {
-    StringMatrix smallerM = newStringMatrix(M.rows, M.columns - 1, 0);
+    StringMatrix smallerM = newStringMatrix(M.rows, M.columns - 1);
     for (int i = 0; i < M.rows; i++) {
         for (int j = 0; j < M.columns; j++) {
             if (j != columnIndex) smallerM.values[i][j > columnIndex ? j - 1 : j] = M.values[i][j];
@@ -229,31 +245,30 @@ StringMatrix changeToPLambdaForm(StringMatrix M) {
 char *detOfStringMatrix(StringMatrix M) {
     if (M.rows == 1 && M.columns == 1) return M.values[0][0];
     else {
-        char *result = calloc(1, sizeof(char));
-        for (int i = 0, sign = 1; i < M.rows; i++, sign*=-1) {
-            StringMatrix subDet = removeSRow(removeSColumn(M, 0), i);
-            char *detOfSubDet = detOfStringMatrix(subDet);
+        char *result = NULL;
+        for (int i = 0, sign = 1; i < M.rows; i++, sign *= -1) {
+            char *detOfSubDet = detOfStringMatrix(removeSRow(removeSColumn(M, 0), i));
             int totalSize = length(M.values[i][0]) + length(detOfSubDet);
-
-            if (sign == -1) {
-                if (length(result) < 1) {
-                    totalSize += 14;
-                    result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) * (-1) * (%s)", M.values[i][0], detOfSubDet);
-                } else {
-                    totalSize += 21 + length(result);
-                    result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (-1) * (%s))", result, M.values[i][0], detOfSubDet);
-                }
-            } else {
-                if (length(result) < 1) {
-                    totalSize += 7;
+            
+            if (!result) {
+                if (sign == 1) {
+                    totalSize += 8;
                     result = realloc(result, totalSize * sizeof(char));
                     snprintf(result, totalSize * sizeof(char), "(%s) * (%s)", M.values[i][0], detOfSubDet);
                 } else {
+                    totalSize += 14;
+                    result = realloc(result, totalSize * sizeof(char));
+                    snprintf(result, totalSize * sizeof(char), "(%s) * (-1) * (%s)", M.values[i][0], detOfSubDet);
+                }
+            } else {
+                if (sign == 1) {
                     totalSize += 14 + length(result);
                     result = realloc(result, totalSize * sizeof(char));
-                    snprintf(result, totalSize * sizeof(char), "(%s) + ((%s) * (%s))", result, M.values[i][0], detOfSubDet);
+                    snprintf(result, totalSize * sizeof(char), "%s + (%s) * (%s)", result, M.values[i][0], detOfSubDet);
+                } else {
+                    totalSize += 21 + length(result);
+                    result = realloc(result, totalSize * sizeof(char));
+                    snprintf(result, totalSize * sizeof(char), "%s + (%s) * (-1) * (%s)", result, M.values[i][0], detOfSubDet);
                 }
             }
         }

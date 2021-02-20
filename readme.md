@@ -49,7 +49,7 @@ The following commands are not final, they can be used recursively
 ## Basic object
 The following arguments can be used as fundamentals to create or call objects
 
-`<objectName>` This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but can only be the size of one word, no space accepted  
+`<objectName>` This will refer to the object with the same name, it must have been created beforehand. An object name can take any ASCII character but cannot be `X`, contain `[` or `]` and can only be the size of one word, no space accepted  
 `[<matrixFormat>]` This will create a matrix object. The format used to create a matrix is the following :
 - all values in a row are separated by a `,`
 - all rows are separated by a `;`, the last one doesn't need it
@@ -57,9 +57,9 @@ The following arguments can be used as fundamentals to create or call objects
 _Example :_ `[1,2,3;4,5,6;7,8,9]` is a correct 3x3 matrix, `[1,2;3,4,5]` is not correct since the 2nd row has more values than the first  
 
 `<polynomialFormat>` This will create a polynomial object. The format used to create a polynomial is the following :
-- to write coefficient, one must use the format `<coefficient>X^<power>` with \<coefficient> any real value and \<power> an integer
+- to write coefficient, one must use the format `<coefficient>X^<power>` with \<coefficient> any real value and \<power> a positive integer
     - if \<power> is 1, the coefficient can be written as `<coefficient>X`
     - if \<power> is 0, the coefficient can be written as `<coefficient>`
-- every coefficient must have an explicit value, for example `X^3` is not accepted but `1X^3` is.  
+    - if \<coefficient> is 1, it can be omitted
 
-_Example :_ `2X + 1X^2 * (2X + 2)` is correct an will create the polynomial `2X^3 + 2X^2 + 2X + 0`, `X + 2X^1.5` is not correct because the first X doesn't have a coefficient and the power of the second is not an integer
+_Example :_ `2X + X^2 * (2X + 2)` is correct an will create the polynomial `2X^3 + 2X^2 + 2X + 0`, `X + 2X^-1.5` is not correct because the power of the second is not a positive integer

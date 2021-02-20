@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['object_80',['Object',['../struct_object.html',1,'']]],
-  ['operatorwithoutdepth_81',['operatorWithoutDepth',['../string_interactions_8c.html#aad6ce867722498732dc94c0daaeb294a',1,'operatorWithoutDepth(const char *string):&#160;stringInteractions.c'],['../string_interactions_8h.html#aad6ce867722498732dc94c0daaeb294a',1,'operatorWithoutDepth(const char *string):&#160;stringInteractions.c']]],
-  ['orthogonal_82',['orthogonal',['../matrix_8c.html#a4dec2c6dab80abe835a09931bb53e8ee',1,'matrix.c']]]
+  ['object_81',['Object',['../struct_object.html',1,'']]],
+  ['onlycontainvalue_82',['onlyContainValue',['../string_interactions_8c.html#a85314dc65ad34a3db175c92f7db0b148',1,'onlyContainValue(const char *string):&#160;stringInteractions.c'],['../string_interactions_8h.html#a85314dc65ad34a3db175c92f7db0b148',1,'onlyContainValue(const char *string):&#160;stringInteractions.c']]],
+  ['operatorwithoutdepth_83',['operatorWithoutDepth',['../string_interactions_8c.html#aad6ce867722498732dc94c0daaeb294a',1,'operatorWithoutDepth(const char *string):&#160;stringInteractions.c'],['../string_interactions_8h.html#aad6ce867722498732dc94c0daaeb294a',1,'operatorWithoutDepth(const char *string):&#160;stringInteractions.c']]],
+  ['orthogonal_84',['orthogonal',['../matrix_8c.html#a4dec2c6dab80abe835a09931bb53e8ee',1,'matrix.c']]]
 ];
